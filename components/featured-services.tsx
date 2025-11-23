@@ -69,7 +69,7 @@ export default function FeaturedServices() {
             return (
               <Link key={service.id} href={`/resources?category=${encodeURIComponent(service.category)}`}>
                 <button className="w-full flex flex-col items-center gap-3 p-6 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition cursor-pointer group h-full bg-white">
-                  <div className="p-3">
+                  <div className="flex items-center justify-center w-12 h-12 bg-slate-200 rounded-full group-hover:bg-slate-700 transition">
                     <Icon className="w-6 h-6 text-slate-900 group-hover:text-white transition" />
                   </div>
                   <div className="text-center w-full">

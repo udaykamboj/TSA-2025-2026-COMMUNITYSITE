@@ -13,7 +13,7 @@ export default function BenefitProgramsSection() {
   }
 
   return (
-    <section className="py-12 px-4 md:px-8 bg-white border-t-2 border-b-2 border-slate-300">
+    <section className="py-12 px-4 md:px-8 bg-white border-slate-300">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-slate-900 mb-2">Benefit Programs for You</h2>

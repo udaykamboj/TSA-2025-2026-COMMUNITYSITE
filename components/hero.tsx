@@ -45,7 +45,7 @@ export default function Hero() {
                 </div>
                 <Button
                   type="submit"
-                  className="bg-slate-700 hover:bg-slate-600 text-white font-bold px-8 py-3 border-2 border-slate-700"
+                  className="bg-slate-700 hover:bg-slate-600 text-white font-bold px-8 border-2 border-slate-700 h-auto"
                 >
                   Search
                 </Button>
@@ -76,9 +76,9 @@ export default function Hero() {
           {/* Right side - Simple box */}
           <div className="hidden lg:flex items-center justify-center">
             <div className="w-full border-4 border-slate-700 bg-slate-800 p-12 text-center">
-              <div className="text-6xl mb-6">📋</div>
-              <p className="text-2xl font-bold mb-2">Community Resources</p>
-              <p className="text-gray-300">Supporting residents with essential services</p>
+              <div className="text-6xl mb-6">IMAGE HERE</div>
+              <p className="text-2xl font-bold mb-2">cool image here</p>
+              <p className="text-gray-300">i love the images here</p>
             </div>
           </div>
         </div>

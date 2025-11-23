@@ -33,9 +33,10 @@ export default function StatisticsSection() {
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3 text-center">Our Community Impact</h2>
-          <p className="text-gray-600 text-center text-lg">Making a difference through accessible resources</p>
+        
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Our Community Impact</h2>
+          <p className="text-slate-700">Making a difference through accessible resources</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

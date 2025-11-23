@@ -109,6 +109,22 @@ export default function FeaturedCarousel() {
         </div>
 
         <div className="relative">
+          {/* Navigation Buttons - Outside */}
+          <button
+            onClick={prev}
+            className="absolute -left-16 top-1/2 -translate-y-1/2 bg-slate-900 text-white p-3 hover:bg-slate-800 transition z-10 hidden md:flex items-center justify-center border-2 border-slate-900"
+            aria-label="Previous featured resource"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute -right-16 top-1/2 -translate-y-1/2 bg-slate-900 text-white p-3 hover:bg-slate-800 transition z-10 hidden md:flex items-center justify-center border-2 border-slate-900"
+            aria-label="Next featured resource"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
           <div className="bg-white border-4 border-slate-900 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 min-h-96">
               {/* Image Side */}
@@ -181,22 +197,6 @@ export default function FeaturedCarousel() {
               </div>
             </div>
           </div>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={prev}
-            className="absolute -left-6 md:left-4 top-1/2 -translate-y-1/2 bg-slate-900 text-white p-3 hover:bg-slate-800 transition z-10 hidden md:flex items-center justify-center border-2 border-slate-900"
-            aria-label="Previous featured resource"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={next}
-            className="absolute -right-6 md:right-4 top-1/2 -translate-y-1/2 bg-slate-900 text-white p-3 hover:bg-slate-800 transition z-10 hidden md:flex items-center justify-center border-2 border-slate-900"
-            aria-label="Next featured resource"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
 
           {/* Indicator Dots */}
           <div className="flex justify-center gap-3 mt-8">

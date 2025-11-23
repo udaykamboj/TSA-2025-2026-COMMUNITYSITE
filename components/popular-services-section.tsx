@@ -2,18 +2,22 @@
 
 import { popularServices } from "@/lib/sample-data"
 import Link from "next/link"
+import { Button } from "./ui/button"
 
 export default function PopularServicesSection() {
   return (
     <section className="bg-white py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-12">
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900">Popular Services</h2>
-            <p className="text-slate-700 mt-2">Quick access to most-used city services</p>
-          </div>
+        
+        <div className="flex justify-between items-center">
+          <div className="mb-12">
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Popular Services</h2>
+          <p className="text-slate-700">Quick access to most-used city services</p>
+        </div>
           <Link href="/services">
-            <button className="box-button-view-all">View All Services</button>
+            <Button variant="link" className="text-slate-900 p-0 font-semibold hover:underline">
+              See All Services
+            </Button>
           </Link>
         </div>
 

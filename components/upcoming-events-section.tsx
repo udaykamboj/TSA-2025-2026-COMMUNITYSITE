@@ -4,6 +4,7 @@ import { upcomingEvents } from "@/lib/sample-data"
 import Link from "next/link"
 import { Calendar, MapPin, Clock } from "lucide-react"
 import { useState } from "react"
+import { Button } from "./ui/button"
 
 export default function UpcomingEventsSection() {
   const [selectedDate, setSelectedDate] = useState(new Date(2025, 10, 22))
@@ -23,10 +24,15 @@ export default function UpcomingEventsSection() {
   return (
     <section className="bg-white py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-slate-900">Upcoming Events</h2>
-          <Link href="/events">
-            <button className="box-button-view-all">View all events</button>
+        <div className="flex justify-between items-center">
+          <div className="mb-12">
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Latest Events</h2>
+          <p className="text-slate-700">asdasdasdasdasdasdasdawsd.</p>
+        </div>
+          <Link href="/news">
+            <Button variant="link" className="text-slate-900 p-0 font-semibold hover:underline">
+              See all Events
+            </Button>
           </Link>
         </div>
 

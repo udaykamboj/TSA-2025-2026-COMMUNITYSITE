@@ -96,13 +96,19 @@ export default function Header() {
         },
       ],
     },
+    /*
     {
       label: "Events",
       href: "/events",
     },
+    */
     {
-      label: "Submit Resource",
+      label: "Submit Resource FORM",
       href: "/submit",
+    },
+    {
+      label: "Resource PAGE",
+      href: "/resources",
     },
   ]
 
@@ -144,13 +150,22 @@ export default function Header() {
               <nav className="hidden lg:flex items-center gap-0" ref={dropdownRef}>
                 {navLinks.map((link) => (
                   <div key={link.label} className="relative group">
-                    <button
-                      onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
-                      className="text-slate-900 font-semibold px-4 py-3 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition flex items-center gap-2 whitespace-nowrap"
-                    >
-                      {link.label}
-                      {link.submenu && <ChevronDown className="w-4 h-4" />}
-                    </button>
+                    {link.submenu ? (
+                      <button
+                        onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                        className="text-slate-900 font-semibold px-4 py-3 hover:bg-slate-900 hover:text-white transition flex items-center gap-2 whitespace-nowrap"
+                      >
+                        {link.label}
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-slate-900 font-semibold px-4 py-3 hover:bg-slate-900 hover:text-white transition flex items-center gap-2 whitespace-nowrap"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
 
                     {link.submenu && openDropdown === link.label && (
                       <div className="absolute top-full left-0 mt-0 bg-white border-2 border-slate-900 shadow-lg z-50 w-full lg:w-[900px]">
@@ -197,7 +212,7 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden border-2 border-slate-900 p-2 bg-white hover:bg-slate-900 hover:text-white transition"
+              className="lg:hidden p-2 bg-white hover:bg-slate-900 hover:text-white transition"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -213,7 +228,7 @@ export default function Header() {
                     <>
                       <button
                         onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
-                        className="w-full text-left text-slate-900 font-semibold px-4 py-3 border-2 border-slate-900 bg-white hover:bg-slate-900 hover:text-white transition flex items-center justify-between"
+                        className="w-full text-left text-slate-900 font-semibold px-4 py-3 bg-white hover:bg-slate-900 hover:text-white transition flex items-center justify-between"
                       >
                         {link.label}
                         <ChevronDown
@@ -246,7 +261,7 @@ export default function Header() {
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-slate-900 font-semibold px-4 py-3 border-2 border-slate-900 bg-white hover:bg-slate-900 hover:text-white transition block"
+                      className="text-slate-900 font-semibold px-4 py-3 bg-white hover:bg-slate-900 hover:text-white transition block"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {link.label}

@@ -17,11 +17,14 @@ export default function LatestNewsSection() {
   return (
     <section className="bg-white py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-foreground">Latest News</h2>
+        <div className="flex justify-between items-center">
+          <div className="mb-12">
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Latest News</h2>
+          <p className="text-slate-700">asdasdasdasdasdasdasdawsd.</p>
+        </div>
           <Link href="/news">
             <Button variant="link" className="text-slate-900 p-0 font-semibold hover:underline">
-              See all news →
+              See all News
             </Button>
           </Link>
         </div>
