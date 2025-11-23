@@ -101,7 +101,7 @@ export default function FeaturedCarousel() {
   const current = featuredResources[currentIndex]
 
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-16 px-4 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-2">Featured Resources</h2>
@@ -109,22 +109,6 @@ export default function FeaturedCarousel() {
         </div>
 
         <div className="relative">
-          {/* Navigation Buttons - Outside */}
-          <button
-            onClick={prev}
-            className="absolute -left-16 top-1/2 -translate-y-1/2 bg-slate-900 text-white p-3 hover:bg-slate-800 transition z-10 hidden md:flex items-center justify-center border-2 border-slate-900"
-            aria-label="Previous featured resource"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={next}
-            className="absolute -right-16 top-1/2 -translate-y-1/2 bg-slate-900 text-white p-3 hover:bg-slate-800 transition z-10 hidden md:flex items-center justify-center border-2 border-slate-900"
-            aria-label="Next featured resource"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
           <div className="bg-white border-4 border-slate-900 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 min-h-96">
               {/* Image Side */}
@@ -198,23 +182,45 @@ export default function FeaturedCarousel() {
             </div>
           </div>
 
-          {/* Indicator Dots */}
-          <div className="flex justify-center gap-3 mt-8">
-            {featuredResources.map((_, idx) => (
+          {/* Indicator Dots and Bottom Navigation */}
+          <div className="flex flex-col items-center gap-4 mt-8">
+            {/* Navigation Buttons at Bottom */}
+            <div className="flex items-center gap-4">
               <button
-                key={idx}
-                onClick={() => {
-                  setCurrentIndex(idx)
-                  setAutoPlay(false)
-                }}
-                className={`transition-all duration-300 ${
-                  idx === currentIndex
-                    ? "w-8 h-3 bg-slate-900 border-2 border-slate-900"
-                    : "w-3 h-3 bg-gray-300 hover:bg-gray-400 border border-gray-400"
-                }`}
-                aria-label={`Go to featured resource ${idx + 1}`}
-              />
-            ))}
+                onClick={prev}
+                className="bg-slate-900 text-white p-3 hover:bg-slate-800 transition flex items-center justify-center border-2 border-slate-900"
+                aria-label="Previous featured resource"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              
+              {/* Dots in the middle */}
+              <div className="flex gap-3">
+                {featuredResources.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setCurrentIndex(idx)
+                      setAutoPlay(false)
+                    }}
+                    className={`transition-all duration-300 ${
+                      idx === currentIndex
+                        ? "w-8 h-3 bg-slate-900 border-2 border-slate-900"
+                        : "w-3 h-3 bg-gray-300 hover:bg-gray-400 border border-gray-400"
+                    }`}
+                    aria-label={`Go to featured resource ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={next}
+                className="bg-slate-900 text-white p-3 hover:bg-slate-800 transition flex items-center justify-center border-2 border-slate-900"
+                aria-label="Next featured resource"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Auto-play Resume Hint */}

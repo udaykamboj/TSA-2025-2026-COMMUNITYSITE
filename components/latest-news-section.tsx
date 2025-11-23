@@ -15,7 +15,7 @@ export default function LatestNewsSection() {
   const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + totalArticles) % totalArticles)
 
   return (
-    <section className="bg-white py-12 px-4 md:px-8">
+    <section className="bg-gray-50 py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
           <div className="mb-12">

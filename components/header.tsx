@@ -1,13 +1,36 @@
 "use client"
 
 import Link from "next/link"
-import { Search, Menu, X, ChevronDown } from "lucide-react"
+import { Search, Menu, X, ChevronDown, Globe, Type } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [isLangModalOpen, setIsLangModalOpen] = useState(false)
+  const [currentLang, setCurrentLang] = useState("English")
+  const [isLargeFont, setIsLargeFont] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const languages = [
+    { code: "en", label: "English", nativeName: "English" },
+    { code: "es", label: "Español", nativeName: "Spanish" },
+    { code: "zh-CN", label: "简体中文", nativeName: "Chinese (Simplified)" },
+    { code: "zh-TW", label: "繁體中文", nativeName: "Chinese (Traditional)" },
+    { code: "vi", label: "Tiếng Việt", nativeName: "Vietnamese" },
+    { code: "tl", label: "Tagalog", nativeName: "Tagalog" },
+    { code: "ko", label: "한국어", nativeName: "Korean" },
+    { code: "ru", label: "Русский", nativeName: "Russian" },
+    { code: "ar", label: "العربية", nativeName: "Arabic" },
+    { code: "fr", label: "Français", nativeName: "French" },
+    { code: "de", label: "Deutsch", nativeName: "German" },
+    { code: "pt", label: "Português", nativeName: "Portuguese" },
+    { code: "ja", label: "日本語", nativeName: "Japanese" },
+    { code: "hi", label: "हिन्दी", nativeName: "Hindi" },
+    { code: "bn", label: "বাংলা", nativeName: "Bengali" },
+    { code: "pl", label: "Polski", nativeName: "Polish" },
+    { code: "ur", label: "اردو", nativeName: "Urdu" },
+  ]
 
   const navLinks = [
     {
@@ -123,16 +146,188 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
+  useEffect(() => {
+    // Add Google Translate script only once
+    if (!(window as any).googleTranslateInit) {
+      const script = document.createElement("script")
+      script.type = "text/javascript"
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      
+      ;(window as any).googleTranslateElementInit = function () {
+        new (window as any).google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,es,zh-CN,zh-TW,vi,tl,ko,ru,ar,fr,de,pt,ja,hi,bn,pl,ur",
+            layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element",
+        )
+      }
+      
+      document.body.appendChild(script)
+      ;(window as any).googleTranslateInit = true
+    }
+
+    // Check current language from cookie
+    const cookies = document.cookie.split(";")
+    const googtransCookie = cookies.find((c) => c.trim().startsWith("googtrans="))
+    if (googtransCookie) {
+      const langCode = googtransCookie.split("/")[2]
+      const lang = languages.find((l) => l.code === langCode)
+      if (lang) {
+        setCurrentLang(lang.label)
+      }
+    }
+
+    // Check if large font is enabled from localStorage
+    const largeFontEnabled = localStorage.getItem("largeFontEnabled") === "true"
+    setIsLargeFont(largeFontEnabled)
+    if (largeFontEnabled) {
+      document.documentElement.classList.add("large-font")
+    }
+  }, [])
+
+  const toggleLargeFont = () => {
+    const newValue = !isLargeFont
+    setIsLargeFont(newValue)
+    
+    if (newValue) {
+      document.documentElement.classList.add("large-font")
+      localStorage.setItem("largeFontEnabled", "true")
+    } else {
+      document.documentElement.classList.remove("large-font")
+      localStorage.setItem("largeFontEnabled", "false")
+    }
+  }
+
+  const changeLanguage = (langCode: string, langLabel: string) => {
+    setCurrentLang(langLabel)
+    setIsLangModalOpen(false)
+    
+    // Set the cookie directly - this is the most reliable cross-browser method
+    if (langCode === "en") {
+      // Clear the translation cookie to return to English
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    } else {
+      // Set the translation cookie
+      document.cookie = `googtrans=/en/${langCode}; path=/; domain=` + window.location.hostname
+      document.cookie = `googtrans=/en/${langCode}; path=/`
+    }
+    
+    // Also try to trigger the select if it exists
+    const selectElement = document.querySelector(".goog-te-combo") as HTMLSelectElement
+    if (selectElement) {
+      selectElement.value = langCode
+      selectElement.dispatchEvent(new Event("change"))
+    }
+    
+    // Reload to apply translation immediately
+    window.location.reload()
+  }
+
   return (
     <header className="w-full bg-white border-b-4 border-slate-900">
+      {/* Hidden Google Translate Element - Must be visible in DOM */}
+      <div style={{ position: 'absolute', left: '-9999px', top: 0, width: '1px', height: '1px', overflow: 'hidden' }}>
+        <div id="google_translate_element"></div>
+      </div>
+
+      {/* Language Modal */}
+      {isLangModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20">
+          <div className="bg-white w-full max-w-2xl mx-4 border-4 border-slate-900 shadow-2xl max-h-[80vh] overflow-hidden flex flex-col">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b-2 border-slate-900">
+              <div className="flex items-center gap-3">
+                <Globe className="w-6 h-6 text-slate-900" />
+                <h2 className="text-2xl font-bold text-slate-900">Select Language</h2>
+              </div>
+              <button
+                onClick={() => setIsLangModalOpen(false)}
+                className="p-2 hover:bg-slate-100 transition"
+              >
+                <X className="w-6 h-6 text-slate-900" />
+              </button>
+            </div>
+
+            {/* Languages Grid */}
+            <div className="overflow-y-auto p-6">
+              <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wide">Top languages</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang.code, lang.label)}
+                    className={`flex items-center gap-3 p-4 border-2 transition text-left ${
+                      currentLang === lang.label
+                        ? "border-blue-600 bg-blue-50"
+                        : "border-slate-300 hover:border-slate-900 hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      currentLang === lang.label ? "border-blue-600" : "border-slate-400"
+                    }`}>
+                      {currentLang === lang.label && (
+                        <div className="w-3 h-3 rounded-full bg-blue-600"></div>
+                      )}
+                    </div>
+                    <div>
+                      <span className="font-bold text-slate-900">{lang.label}</span>
+                      <span className="text-slate-600 ml-2">• {lang.nativeName}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top banner */}
       <div className="bg-slate-900 text-white text-sm py-3 px-4 border-b-2 border-slate-800">
-        <p>
-          An official community resource portal.{" "}
-          <a href="#" className="underline hover:text-gray-300">
-            Learn how to identify official government sites.
-          </a>
-        </p>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <p className="hidden md:block">
+            An official community resource portal.{" "}
+            <a href="#" className="underline hover:text-gray-300">
+              Learn how to identify official government sites.
+            </a>
+          </p>
+          <p className="md:hidden text-xs">Official community resource portal</p>
+          
+          {/* Accessibility and Language Buttons */}
+          <div className="flex items-center gap-3">
+            {/* Large Font Toggle Switch */}
+            <div className="flex items-center gap-2">
+              <span className="text-white text-xs font-semibold hidden md:inline">Large Text</span>
+              <button
+                onClick={toggleLargeFont}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border-2 ${
+                  isLargeFont 
+                    ? "bg-blue-600 border-blue-600" 
+                    : "bg-slate-700 border-slate-600"
+                }`}
+                aria-label="Toggle large font"
+                title="Toggle large font for better readability"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    isLargeFont ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Language Button */}
+            <button
+              onClick={() => setIsLangModalOpen(true)}
+              className="flex items-center gap-2 bg-slate-800 text-white px-3 py-1.5 hover:bg-slate-700 transition font-semibold text-xs border-2 border-slate-700"
+            >
+              <Globe className="w-4 h-4" />
+              <span className="hidden sm:inline">{currentLang}</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Main header */}
