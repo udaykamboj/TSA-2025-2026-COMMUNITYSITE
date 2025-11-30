@@ -20,7 +20,7 @@ export default function LatestNewsSection() {
         <div className="flex justify-between items-center">
           <div className="mb-12">
           <h2 className="text-3xl font-bold text-slate-900 mb-2">Latest News</h2>
-          <p className="text-slate-700">asdasdasdasdasdasdasdawsd.</p>
+          <p className="text-slate-700">News Publishes Fair and Balanced Reporting</p>
         </div>
           <Link href="/news">
             <Button variant="link" className="text-slate-900 p-0 font-semibold hover:underline">

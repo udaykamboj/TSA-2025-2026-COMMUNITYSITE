@@ -3,6 +3,19 @@
 import { popularServices } from "@/lib/sample-data"
 import Link from "next/link"
 import { Button } from "./ui/button"
+import { ClipboardList, AlertTriangle, CreditCard, Calendar, MapPin, Briefcase, CalendarDays, Scale } from "lucide-react"
+
+// Icon mapping
+const iconMap = {
+  ClipboardList,
+  AlertTriangle,
+  CreditCard,
+  Calendar,
+  MapPin,
+  Briefcase,
+  CalendarDays,
+  Scale,
+} as const
 
 export default function PopularServicesSection() {
   return (
@@ -21,19 +34,25 @@ export default function PopularServicesSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {popularServices.map((service) => (
             <button
               key={service.id}
-              className="bg-white p-6 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-all text-left group"
+              className="bg-white border-2 border-slate-900 hover:bg-slate-900 transition-all overflow-hidden group flex flex-col"
             >
-              <div className="text-4xl mb-3">{service.icon}</div>
-              <h3 className="font-bold text-sm text-slate-900 group-hover:text-white transition-colors">
-                {service.name}
-              </h3>
-              <p className="text-xs text-slate-600 mt-1 group-hover:text-gray-200 transition-colors">
-                {service.description}
-              </p>
+              {/* Teal header bar */}
+              <div className="bg-blue-600 h-3 w-full group-hover:bg-blue-500 transition-colors"></div>
+              
+              {/* Content */}
+              <div className="p-6 flex flex-col items-center text-center flex-1">
+                {(() => {
+                  const Icon = iconMap[service.icon as keyof typeof iconMap]
+                  return Icon ? <Icon className="w-12 h-12 mb-4 text-blue-600 group-hover:text-white transition-colors" /> : null
+                })()}
+                <h3 className="font-bold text-sm text-slate-900 group-hover:text-white leading-tight transition-colors">
+                  {service.name}
+                </h3>
+              </div>
             </button>
           ))}
         </div>

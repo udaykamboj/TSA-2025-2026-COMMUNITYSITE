@@ -1,71 +1,91 @@
 "use client"
-import { ArrowRight } from "react-feather"
+import { Users, Droplet, TreePine, Dog } from "lucide-react"
 import Link from "next/link"
 
 const stats = [
   {
-    number: "100+",
-    label: "Resources Listed",
-    description: "Comprehensive directory of vetted community services",
-    icon: "📋",
+    number: "737,000+",
+    label: "residents in the city as of 2020",
+    description: "View demographics",
+    icon: "Users",
+    link: "/demographics",
   },
   {
-    number: "8",
-    label: "Service Categories",
-    description: "From food to employment assistance",
-    icon: "🏷️",
+    number: "over 45 billion",
+    label: "gallons of drinking water treated per year",
+    description: "Learn about water quality",
+    icon: "Droplet",
+    link: "/water-quality",
   },
   {
-    number: "50+",
-    label: "Community Partners",
-    description: "Organizations dedicated to serving residents",
-    icon: "🤝",
+    number: "Over 485 parks",
+    label: "managed by Parks and Recreation",
+    description: "Find a park",
+    icon: "TreePine",
+    link: "/parks",
   },
   {
-    number: "24/7",
-    label: "Support Available",
-    description: "Crisis services and emergency assistance anytime",
-    icon: "⏰",
+    number: "Over 5,000 animals",
+    label: "served annually by the Animal Shelter",
+    description: "Visit an animal shelter",
+    icon: "Dog",
+    link: "/animal-shelter",
   },
 ]
+
+const iconMap: { [key: string]: any } = {
+  Users: Users,
+  Droplet: Droplet,
+  TreePine: TreePine,
+  Dog: Dog,
+}
 
 export default function StatisticsSection() {
   return (
     <section className="py-20 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Our Community Impact</h2>
-          <p className="text-slate-700">Making a difference through accessible resources</p>
+        <div className="flex justify-between items-center">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Our Community Impact</h2>
+            <p className="text-slate-700">Making a difference through accessible resources</p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="relative bg-white border-2 border-slate-300 overflow-hidden p-8 hover:border-slate-500 transition"
-            >
-              <div className="relative">
-                <div className="text-4xl mb-4">{stat.icon}</div>
-                <div className="mb-3">
-                  <div className="text-4xl font-bold text-foreground">{stat.number}</div>
-                  <p className="text-sm font-semibold text-slate-700 mt-1 uppercase tracking-wide border-b-2 border-slate-300 pb-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, idx) => {
+            const IconComponent = iconMap[stat.icon]
+            return (
+              <div
+                key={idx}
+                className="bg-white border-2 border-slate-300 p-8 text-center hover:border-slate-500 transition-colors"
+              >
+                <div className="flex justify-center mb-4">
+                  <IconComponent className="w-16 h-16 text-slate-700" strokeWidth={1.5} />
+                </div>
+                <div className="mb-2">
+                  <div className="text-3xl font-bold text-slate-900 mb-1">{stat.number}</div>
+                  <p className="text-base text-slate-700 mb-3">
                     {stat.label}
                   </p>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">{stat.description}</p>
+                <Link 
+                  href={stat.link}
+                  className="inline-block bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-2 transition text-sm border-2 border-slate-900"
+                >
+                  {stat.description}
+                </Link>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
-          <p className="text-gray-600 mb-6">Ready to find the resources you need?</p>
+          <p className="text-slate-600 mb-6">Ready to find the resources you need?</p>
           <Link href="/resources">
             <button className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 font-semibold transition border-2 border-slate-900">
               Explore All Resources
-              <ArrowRight className="w-4 h-4" />
             </button>
           </Link>
         </div>

@@ -4,75 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-interface FeaturedResource {
-  id: string
-  name: string
-  category: string
-  description: string
-  shortDescription: string
-  address: string
-  phone: string
-  website: string
-  image: string
-  tags: string[]
-  ageGroups: string[]
-  hours: string
-  whyImportant: string
-}
-
-const featuredResources: FeaturedResource[] = [
-  {
-    id: "1",
-    name: "Downtown Community Center",
-    category: "Youth Programs",
-    description: "Offering comprehensive after-school programs, sports, arts, and mentoring for youth ages 6-18.",
-    shortDescription: "Resource of the Month",
-    address: "123 Main Street, Downtown",
-    phone: "(206) 555-0100",
-    website: "www.dtcc.org",
-    image: "/placeholder.svg?key=carousel1",
-    tags: ["Youth", "Sports", "Arts", "Free"],
-    ageGroups: ["Teens", "Families"],
-    hours: "Mon-Fri 3pm-8pm, Sat 10am-6pm",
-    whyImportant:
-      "This center serves over 500 youth annually, providing safe spaces for learning, recreation, and community building. They focus on underserved neighborhoods.",
-  },
-  {
-    id: "2",
-    name: "City Food Bank",
-    category: "Food",
-    description:
-      "Emergency food assistance and nutrition programs providing fresh groceries and meal support for residents in need.",
-    shortDescription: "Featured Organization",
-    address: "456 Oak Avenue",
-    phone: "(206) 555-0101",
-    website: "www.cityfoodbank.org",
-    image: "/placeholder.svg?key=carousel2",
-    tags: ["Food", "Free", "Emergency"],
-    ageGroups: ["Families", "Seniors"],
-    hours: "Mon-Sat 9am-5pm",
-    whyImportant:
-      "Distributed over 2 million meals last year and serves as a critical resource for food-insecure families in our community.",
-  },
-  {
-    id: "3",
-    name: "Community Mental Health Services",
-    category: "Mental Health",
-    description:
-      "Professional counseling, therapy, and crisis support services available for all ages with sliding scale fees.",
-    shortDescription: "Upcoming Event Highlight",
-    address: "789 Pine Street",
-    phone: "(206) 555-0102",
-    website: "www.cmhs.org",
-    image: "/placeholder.svg?key=carousel3",
-    tags: ["Mental Health", "Counseling", "Support"],
-    ageGroups: ["Teens", "Families", "Seniors"],
-    hours: "Mon-Fri 8am-6pm, Sat 10am-4pm",
-    whyImportant:
-      "Expanded their services this year to include peer support groups and crisis hotline available 24/7 for emergencies.",
-  },
-]
+import { featuredCarouselResources } from "@/lib/sample-data"
 
 export default function FeaturedCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -82,23 +14,23 @@ export default function FeaturedCarousel() {
     if (!autoPlay) return
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % featuredResources.length)
+      setCurrentIndex((prev) => (prev + 1) % featuredCarouselResources.length)
     }, 8000)
 
     return () => clearInterval(interval)
   }, [autoPlay])
 
   const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % featuredResources.length)
+    setCurrentIndex((prev) => (prev + 1) % featuredCarouselResources.length)
     setAutoPlay(false)
   }
 
   const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + featuredResources.length) % featuredResources.length)
+    setCurrentIndex((prev) => (prev - 1 + featuredCarouselResources.length) % featuredCarouselResources.length)
     setAutoPlay(false)
   }
 
-  const current = featuredResources[currentIndex]
+  const current = featuredCarouselResources[currentIndex]
 
   return (
     <section className="py-16 px-4 bg-gray-50 overflow-hidden">
@@ -196,7 +128,7 @@ export default function FeaturedCarousel() {
               
               {/* Dots in the middle */}
               <div className="flex gap-3">
-                {featuredResources.map((_, idx) => (
+                {featuredCarouselResources.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => {

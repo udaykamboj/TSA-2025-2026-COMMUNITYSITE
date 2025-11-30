@@ -56,32 +56,26 @@ const services = [
 
 export default function FeaturedServices() {
   return (
-    <section className="py-16 px-4 bg-gray-50">
+    <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Browse by Category</h2>
-          <p className="text-slate-700">Find resources in your area of need</p>
+        <div className="flex justify-between items-center">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Browse by Category</h2>
+            <p className="text-slate-700">Find resources in your area of need</p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {services.map((service) => {
             const Icon = service.icon
             return (
               <Link key={service.id} href={`/resources?category=${encodeURIComponent(service.category)}`}>
-                <button className="w-full flex flex-col items-center gap-3 p-6 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition cursor-pointer group h-full bg-white">
-                  <div className="flex items-center justify-center w-12 h-12 bg-slate-200 rounded-full group-hover:bg-slate-700 transition">
-                    <Icon className="w-6 h-6 text-slate-900 group-hover:text-white transition" />
-                  </div>
-                  <div className="text-center w-full">
-                    <p className="text-sm font-bold text-slate-900 group-hover:text-white transition">{service.name}</p>
-                    <p className="text-xs text-slate-600 mt-1 group-hover:text-gray-200 transition">
-                      {service.description}
-                    </p>
-                    <p className="text-xs text-slate-900 font-semibold mt-2 group-hover:text-white transition">
-                      {service.count}
-                    </p>
-                  </div>
-                </button>
+                <div className="flex flex-col items-center text-center p-6 border-2 border-slate-900 hover:bg-slate-900 transition-all cursor-pointer bg-white group">
+                  <Icon className="w-14 h-14 text-blue-600 group-hover:text-white mb-3 transition-colors" strokeWidth={1.5} />
+                  <p className="text-sm font-semibold text-slate-900 group-hover:text-white mb-1 transition-colors">{service.name}</p>
+                  <p className="text-xs text-slate-600 group-hover:text-gray-200 mb-2 transition-colors">{service.description}</p>
+                  <p className="text-xs text-blue-600 group-hover:text-white font-medium transition-colors">{service.count}</p>
+                </div>
               </Link>
             )
           })}

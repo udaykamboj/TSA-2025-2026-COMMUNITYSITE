@@ -33,6 +33,7 @@ export default function Header() {
   ]
 
   const navLinks = [
+    /*
     {
       label: "Services",
       href: "/services",
@@ -65,6 +66,8 @@ export default function Header() {
         },
       ],
     },
+    */
+    /*
     {
       label: "Benefits",
       href: "/benefits",
@@ -96,14 +99,15 @@ export default function Header() {
         },
       ],
     },
+    */
     {
-      label: "Resources",
+      label: "Dropdown",
       href: "/resources",
       submenu: [
         {
           column: "Browse Resources",
           items: [
-            { label: "All Resources", href: "/resources" },
+            { label: "All Resources", href: "/resource" },
             { label: "Featured", href: "/resources?featured=true" },
             { label: "Emergency Services", href: "/resources?category=emergency" },
             { label: "Legal Resources", href: "/resources?category=legal" },
@@ -126,11 +130,11 @@ export default function Header() {
     },
     */
     {
-      label: "Submit Resource FORM",
+      label: "Submit Resource",
       href: "/submit",
     },
     {
-      label: "Resource PAGE",
+      label: "Resource",
       href: "/resources",
     },
   ]
@@ -235,46 +239,44 @@ export default function Header() {
 
       {/* Language Modal */}
       {isLangModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20">
-          <div className="bg-white w-full max-w-2xl mx-4 border-4 border-slate-900 shadow-2xl max-h-[80vh] overflow-hidden flex flex-col">
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-start justify-center pt-20">
+          <div className="bg-white w-full max-w-2xl mx-4 border-2 border-gray-400 shadow-lg max-h-[80vh] overflow-hidden flex flex-col">
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b-2 border-slate-900">
-              <div className="flex items-center gap-3">
-                <Globe className="w-6 h-6 text-slate-900" />
-                <h2 className="text-2xl font-bold text-slate-900">Select Language</h2>
+            <div className="flex items-center justify-between p-4 border-b border-gray-300 bg-gray-50">
+              <div className="flex items-center gap-2">
+                <Globe className="w-5 h-5 text-gray-700" />
+                <h2 className="text-lg font-semibold text-gray-900">Select Language</h2>
               </div>
               <button
                 onClick={() => setIsLangModalOpen(false)}
-                className="p-2 hover:bg-slate-100 transition"
+                className="p-1 hover:bg-gray-200 transition"
               >
-                <X className="w-6 h-6 text-slate-900" />
+                <X className="w-5 h-5 text-gray-700" />
               </button>
             </div>
 
-            {/* Languages Grid */}
-            <div className="overflow-y-auto p-6">
-              <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wide">Top languages</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {/* Languages List */}
+            <div className="overflow-y-auto p-4">
+              <div className="space-y-1">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => changeLanguage(lang.code, lang.label)}
-                    className={`flex items-center gap-3 p-4 border-2 transition text-left ${
+                    className={`w-full flex items-center gap-3 p-3 border transition text-left ${
                       currentLang === lang.label
                         ? "border-blue-600 bg-blue-50"
-                        : "border-slate-300 hover:border-slate-900 hover:bg-slate-50"
+                        : "border-gray-300 hover:bg-gray-100"
                     }`}
                   >
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                      currentLang === lang.label ? "border-blue-600" : "border-slate-400"
-                    }`}>
-                      {currentLang === lang.label && (
-                        <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                      )}
-                    </div>
-                    <div>
-                      <span className="font-bold text-slate-900">{lang.label}</span>
-                      <span className="text-slate-600 ml-2">• {lang.nativeName}</span>
+                    <input
+                      type="radio"
+                      checked={currentLang === lang.label}
+                      readOnly
+                      className="w-4 h-4"
+                    />
+                    <div className="flex-1">
+                      <span className="font-medium text-gray-900">{lang.label}</span>
+                      <span className="text-gray-600 text-sm ml-2">({lang.nativeName})</span>
                     </div>
                   </button>
                 ))}
@@ -289,42 +291,32 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <p className="hidden md:block">
             An official community resource portal.{" "}
-            <a href="#" className="underline hover:text-gray-300">
-              Learn how to identify official government sites.
-            </a>
           </p>
-          <p className="md:hidden text-xs">Official community resource portal</p>
           
           {/* Accessibility and Language Buttons */}
           <div className="flex items-center gap-3">
-            {/* Large Font Toggle Switch */}
-            <div className="flex items-center gap-2">
-              <span className="text-white text-xs font-semibold hidden md:inline">Large Text</span>
-              <button
-                onClick={toggleLargeFont}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border-2 ${
-                  isLargeFont 
-                    ? "bg-blue-600 border-blue-600" 
-                    : "bg-slate-700 border-slate-600"
-                }`}
-                aria-label="Toggle large font"
-                title="Toggle large font for better readability"
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    isLargeFont ? "translate-x-6" : "translate-x-1"
-                  }`}
-                />
-              </button>
-            </div>
+            {/* Large Font Toggle Button */}
+            <button
+              onClick={toggleLargeFont}
+              className="flex items-center gap-2 bg-blue-700 text-white px-3 py-1.5 hover:bg-blue-800 transition font-medium text-sm border-2 border-blue-700"
+              aria-label="Toggle large font"
+              title="Toggle large font for better readability"
+            >
+              <Type className="w-4 h-4" />
+              <span className="hidden sm:inline">Large Text</span>
+              {isLargeFont && <span className="text-xs">✓</span>}
+            </button>
 
             {/* Language Button */}
             <button
               onClick={() => setIsLangModalOpen(true)}
-              className="flex items-center gap-2 bg-slate-800 text-white px-3 py-1.5 hover:bg-slate-700 transition font-semibold text-xs border-2 border-slate-700"
+              className="flex items-center gap-2 bg-blue-700 text-white px-3 py-1.5 hover:bg-blue-800 transition font-medium text-sm border-2 border-blue-700"
             >
-              <Globe className="w-4 h-4" />
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+              </svg>
               <span className="hidden sm:inline">{currentLang}</span>
+              <ChevronDown className="w-4 h-4" />
             </button>
           </div>
         </div>

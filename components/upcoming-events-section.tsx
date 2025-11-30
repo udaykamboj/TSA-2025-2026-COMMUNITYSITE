@@ -2,108 +2,351 @@
 
 import { upcomingEvents } from "@/lib/sample-data"
 import Link from "next/link"
-import { Calendar, MapPin, Clock } from "lucide-react"
-import { useState } from "react"
+import { Calendar, MapPin, Clock, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "./ui/button"
+import { useState, useMemo, useEffect } from "react"
 
 export default function UpcomingEventsSection() {
-  const [selectedDate, setSelectedDate] = useState(new Date(2025, 10, 22))
+  const [selectedMonth, setSelectedMonth] = useState("November")
+  const [selectedYear, setSelectedYear] = useState(2025)
+  const [calendarKey, setCalendarKey] = useState(0)
 
-  const getDaysInMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
+  // Get unique months from events
+  const availableMonths = useMemo(() => {
+    const months = upcomingEvents.map(event => ({ month: event.month, year: event.year }))
+    return Array.from(new Set(months.map(m => `${m.month} ${m.year}`)))
+      .map(str => {
+        const [month, year] = str.split(' ')
+        return { month, year: parseInt(year) }
+      })
+      .sort((a, b) => {
+        if (a.year !== b.year) return a.year - b.year
+        const monthOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        return monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month)
+      })
+  }, [])
+
+  const currentMonthIndex = availableMonths.findIndex(
+    m => m.month === selectedMonth && m.year === selectedYear
+  )
+
+  const goToPreviousMonth = () => {
+    if (currentMonthIndex > 0) {
+      const prev = availableMonths[currentMonthIndex - 1]
+      setSelectedMonth(prev.month)
+      setSelectedYear(prev.year)
+      setCalendarKey(prev => prev + 1)
+    }
   }
 
-  const getFirstDayOfMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay()
+  const goToNextMonth = () => {
+    if (currentMonthIndex < availableMonths.length - 1) {
+      const next = availableMonths[currentMonthIndex + 1]
+      setSelectedMonth(next.month)
+      setSelectedYear(next.year)
+      setCalendarKey(prev => prev + 1)
+    }
   }
 
-  const days = Array.from({ length: getDaysInMonth(selectedDate) }, (_, i) => i + 1)
-  const firstDay = getFirstDayOfMonth(selectedDate)
-  const emptyDays = Array.from({ length: firstDay }, (_, i) => null)
+  // Filter events by selected month
+  const filteredEvents = useMemo(() => {
+    return upcomingEvents.filter(
+      event => event.month === selectedMonth && event.year === selectedYear
+    ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  }, [selectedMonth, selectedYear])
+
+  // Format date for display
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('en-US', { 
+      weekday: 'long',
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    })
+  }
+
+  // Function to add event to Google Calendar
+  const addToGoogleCalendar = (event: typeof upcomingEvents[0]) => {
+    const startDate = new Date(event.date)
+    const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000) // 2 hours duration
+    
+    const formatGoogleDate = (date: Date) => {
+      return date.toISOString().replace(/-|:|\.\d\d\d/g, "")
+    }
+
+    const googleCalendarUrl = new URL("https://www.google.com/calendar/render")
+    googleCalendarUrl.searchParams.append("action", "TEMPLATE")
+    googleCalendarUrl.searchParams.append("text", event.title)
+    googleCalendarUrl.searchParams.append("details", event.description)
+    googleCalendarUrl.searchParams.append("location", event.location)
+    googleCalendarUrl.searchParams.append("dates", `${formatGoogleDate(startDate)}/${formatGoogleDate(endDate)}`)
+    
+    window.open(googleCalendarUrl.toString(), "_blank")
+  }
+
+  // Create calendar URL that updates based on selected month
+  const createCalendarUrl = () => {
+    const monthNumber = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(selectedMonth) + 1
+    const monthStr = monthNumber.toString().padStart(2, '0')
+    const yearStr = selectedYear.toString()
+    
+    // Create calendar ICS data URL with our events
+    const eventsForCalendar = filteredEvents.map(event => {
+      const startDate = new Date(event.date)
+      const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000)
+      return {
+        title: event.title,
+        start: startDate.toISOString().replace(/-|:|\.\d\d\d/g, ""),
+        end: endDate.toISOString().replace(/-|:|\.\d\d\d/g, ""),
+        description: event.description,
+        location: event.location
+      }
+    }).map(e => 
+      `&text=${encodeURIComponent(e.title)}&dates=${e.start}/${e.end}&details=${encodeURIComponent(e.description)}&location=${encodeURIComponent(e.location)}`
+    ).join('')
+    
+    const baseUrl = "https://calendar.google.com/calendar/embed"
+    const params = new URLSearchParams({
+      height: "600",
+      wkst: "1",
+      ctz: "America/New_York",
+      bgcolor: "#ffffff",
+      src: "en.usa%23holiday%40group.v.calendar.google.com",
+      color: "%23B1440E",
+      showTitle: "0",
+      showNav: "1",
+      showDate: "1",
+      showPrint: "0",
+      showTabs: "0",
+      showCalendars: "0",
+      mode: "MONTH",
+      dates: `${yearStr}${monthStr}01`
+    })
+
+    return `${baseUrl}?${params.toString()}`
+  }
+
+  // Listen for calendar navigation from iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // This would handle messages from the calendar iframe if Google supported it
+      // Currently Google Calendar embed doesn't send navigation events
+    }
+    
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [])
 
   return (
     <section className="bg-white py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center">
-          <div className="mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Latest Events</h2>
-          <p className="text-slate-700">asdasdasdasdasdasdasdawsd.</p>
-        </div>
-          <Link href="/news">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Community Events Calendar</h2>
+            <p className="text-slate-700">View upcoming events and add them to your calendar</p>
+          </div>
+          <Link href="/events">
             <Button variant="link" className="text-slate-900 p-0 font-semibold hover:underline">
-              See all Events
+              See All Events
             </Button>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1 border-2 border-slate-900 p-4">
-            <div className="text-center mb-4">
-              <h3 className="font-bold text-sm text-slate-900">
-                {selectedDate.toLocaleString("default", { month: "long", year: "numeric" })}
-              </h3>
-            </div>
-            <div className="grid grid-cols-7 gap-1 mb-4">
-              {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-                <div key={day} className="text-center text-xs font-bold text-slate-900 py-2">
-                  {day}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Side - Custom Calendar with Events */}
+          <div className="lg:col-span-1">
+            <div className="border-2 border-slate-900 overflow-hidden bg-white sticky top-4">
+              <div className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between">
+                <h3 className="font-bold text-sm flex items-center gap-2">
+                  <Calendar size={16} />
+                  {selectedMonth} {selectedYear}
+                </h3>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={goToPreviousMonth}
+                    disabled={currentMonthIndex === 0}
+                    className="p-1 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition rounded"
+                    aria-label="Previous month"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button
+                    onClick={goToNextMonth}
+                    disabled={currentMonthIndex === availableMonths.length - 1}
+                    className="p-1 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition rounded"
+                    aria-label="Next month"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
                 </div>
-              ))}
-              {emptyDays.map((_, i) => (
-                <div key={`empty-${i}`}></div>
-              ))}
-              {days.map((day) => (
-                <button
-                  key={day}
-                  onClick={() => setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day))}
-                  className={`text-center py-2 text-sm font-semibold cursor-pointer border transition ${
-                    day === selectedDate.getDate()
-                      ? "bg-slate-900 text-white border-2 border-slate-900"
-                      : "hover:border-2 hover:border-slate-900 text-slate-900 border border-gray-300"
-                  }`}
-                >
-                  {day}
-                </button>
-              ))}
+              </div>
+              
+              {/* Custom Calendar Grid */}
+              <div className="p-4 bg-white">
+                <div className="grid grid-cols-7 gap-1 mb-2">
+                  {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+                    <div key={day} className="text-center text-xs font-bold text-slate-600 py-1">
+                      {day}
+                    </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-7 gap-1">
+                  {(() => {
+                    const monthNumber = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(selectedMonth)
+                    const firstDay = new Date(selectedYear, monthNumber, 1).getDay()
+                    const daysInMonth = new Date(selectedYear, monthNumber + 1, 0).getDate()
+                    const days = []
+                    
+                    // Empty cells for days before month starts
+                    for (let i = 0; i < firstDay; i++) {
+                      days.push(<div key={`empty-${i}`} className="aspect-square"></div>)
+                    }
+                    
+                    // Days of the month
+                    for (let day = 1; day <= daysInMonth; day++) {
+                      const dateStr = `${selectedYear}-${(monthNumber + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
+                      const hasEvent = upcomingEvents.some(e => e.date === dateStr)
+                      const isToday = new Date().toDateString() === new Date(dateStr).toDateString()
+                      
+                      days.push(
+                        <div
+                          key={day}
+                          className={`aspect-square flex items-center justify-center text-sm border transition ${
+                            isToday 
+                              ? "bg-blue-600 text-white font-bold border-blue-700" 
+                              : hasEvent
+                              ? "bg-blue-50 text-blue-900 font-semibold border-blue-200 cursor-pointer hover:bg-blue-100"
+                              : "text-slate-700 border-slate-200 hover:bg-slate-50"
+                          }`}
+                        >
+                          {day}
+                        </div>
+                      )
+                    }
+                    
+                    return days
+                  })()}
+                </div>
+                
+                {/* Legend */}
+                <div className="mt-4 pt-4 border-t border-slate-200 space-y-2 text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-blue-50 border border-blue-200"></div>
+                    <span className="text-slate-600">Has Events</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-blue-600 border border-blue-700"></div>
+                    <span className="text-slate-600">Today</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Events grid */}
-          <div className="md:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {upcomingEvents.map((event) => (
-                <div key={event.id} className="border-2 border-slate-900 p-4 hover:bg-slate-50 transition">
-                  <h3 className="font-bold text-slate-900 mb-2 text-sm">{event.title}</h3>
-                  <p className="text-xs text-slate-700 mb-3 line-clamp-2">{event.description}</p>
+          {/* Right Side - Upcoming Events List */}
+          <div className="lg:col-span-2">
+            <div className="mb-6 pb-4 border-b-2 border-slate-300 flex items-center justify-between">
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 mb-1">
+                  {selectedMonth} {selectedYear} Events
+                </h3>
+                <p className="text-sm text-slate-600">
+                  {filteredEvents.length} {filteredEvents.length === 1 ? 'event' : 'events'} this month
+                </p>
+              </div>
+              
+              {/* Month Navigation */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={goToPreviousMonth}
+                  disabled={currentMonthIndex === 0}
+                  className="p-2 bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition border-2 border-slate-900"
+                  aria-label="Previous month"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={goToNextMonth}
+                  disabled={currentMonthIndex === availableMonths.length - 1}
+                  className="p-2 bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition border-2 border-slate-900"
+                  aria-label="Next month"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+            
+            {filteredEvents.length === 0 ? (
+              <div className="text-center py-12 border-2 border-slate-300 bg-slate-50">
+                <Calendar size={48} className="mx-auto mb-4 text-slate-400" />
+                <p className="text-slate-600 font-medium">No events scheduled for {selectedMonth} {selectedYear}</p>
+                <p className="text-sm text-slate-500 mt-2">Check back soon for upcoming events!</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {filteredEvents.map((event) => (
+                <div 
+                  key={event.id} 
+                  className="border-2 border-slate-900 bg-white hover:bg-slate-50 transition-colors"
+                >
+                  <div className="p-6">
+                    <div className="flex flex-col md:flex-row md:items-start gap-4">
+                      {/* Event Image */}
+                      <div className="w-full md:w-32 h-32 flex-shrink-0 bg-slate-200 border-2 border-slate-300 overflow-hidden">
+                        <img
+                          src={event.image || "/placeholder.svg"}
+                          alt={event.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
 
-                  <div className="space-y-2 text-xs text-slate-700 mb-3">
-                    <div className="flex items-start gap-2">
-                      <Calendar size={14} className="flex-shrink-0 mt-0.5" />
-                      <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <Clock size={14} className="flex-shrink-0 mt-0.5" />
-                      <span>{event.time}</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <MapPin size={14} className="flex-shrink-0 mt-0.5" />
-                      <span>{event.location}</span>
+                      {/* Event Details */}
+                      <div className="flex-1">
+                        <h4 className="font-bold text-slate-900 mb-2 text-lg">{event.title}</h4>
+                        <p className="text-sm text-slate-700 mb-3">{event.description}</p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-700 mb-3">
+                          <div className="flex items-start gap-2">
+                            <Calendar size={16} className="flex-shrink-0 mt-0.5 text-blue-600" />
+                            <span className="font-medium">{formatDate(event.date)}</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Clock size={16} className="flex-shrink-0 mt-0.5 text-blue-600" />
+                            <span>{event.time}</span>
+                          </div>
+                          <div className="flex items-start gap-2 md:col-span-2">
+                            <MapPin size={16} className="flex-shrink-0 mt-0.5 text-blue-600" />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          <button
+                            onClick={() => addToGoogleCalendar(event)}
+                            className="flex items-center justify-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-colors border-2 border-blue-600"
+                            title="Add to Google Calendar"
+                          >
+                            <Calendar size={16} />
+                            Add to Google Calendar
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {event.tags.map((tag) => (
-                      <span key={tag} className="tag-badge">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Link href={`/events/${event.id}`}>
-                    <button className="box-button-primary w-full">Learn More</button>
-                  </Link>
                 </div>
               ))}
+            </div>
+            )}
+
+            {/* View All Events CTA */}
+            <div className="mt-8 text-center">
+              <Link href="/events">
+                <Button className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 font-semibold border-2 border-slate-900">
+                  View Full Events Calendar
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -3,7 +3,6 @@ import Hero from "@/components/hero"
 import FeaturedServices from "@/components/featured-services"
 import PopularServicesSection from "@/components/popular-services-section"
 import FeaturedCarousel from "@/components/featured-carousel"
-import HighlightedResources from "@/components/highlighted-resources"
 import LatestNewsSection from "@/components/latest-news-section"
 import UpcomingEventsSection from "@/components/upcoming-events-section"
 import BenefitProgramsSection from "@/components/benefit-programs-section"
@@ -31,7 +30,6 @@ export default function Home() {
       <FeaturedServices />
       <PopularServicesSection />
       <FeaturedCarousel />
-      <HighlightedResources />
       <LatestNewsSection />
       <UpcomingEventsSection />
       <BenefitProgramsSection />
