@@ -1,13 +1,11 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
 import FeaturedServices from "@/components/featured-services"
-import PopularServicesSection from "@/components/popular-services-section"
 import FeaturedCarousel from "@/components/featured-carousel"
+import EventsCarousel from "@/components/events-carousel"
 import LatestNewsSection from "@/components/latest-news-section"
-import UpcomingEventsSection from "@/components/upcoming-events-section"
 import BenefitProgramsSection from "@/components/benefit-programs-section"
 import CTASection from "@/components/cta-section"
-import StatisticsSection from "@/components/statistics-section"
 import Footer from "@/components/footer"
 
 export const metadata = {
@@ -28,13 +26,11 @@ export default function Home() {
       <Header />
       <Hero />
       <FeaturedServices />
-      <PopularServicesSection />
       <FeaturedCarousel />
+      <EventsCarousel />
       <LatestNewsSection />
-      <UpcomingEventsSection />
       <BenefitProgramsSection />
       <CTASection />
-      <StatisticsSection />
       <Footer />
     </main>
   )

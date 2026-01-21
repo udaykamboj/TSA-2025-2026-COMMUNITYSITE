@@ -120,6 +120,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
   }
 
   html {
@@ -133,6 +135,8 @@
 
   h1 {
     @apply text-4xl font-bold;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 900;
   }
 
   h2 {
@@ -163,19 +167,27 @@
   /* Unified button styles */
   .box-button {
     @apply border-2 border-slate-900 bg-white text-slate-900 font-semibold px-6 py-3 hover:bg-slate-900 hover:text-white transition;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
   }
 
   .box-button-primary {
     @apply border-2 border-slate-900 bg-slate-900 text-white font-semibold px-6 py-3 hover:bg-slate-800 transition;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
   }
 
   /* Consistent "View All" button style */
   .view-all-btn {
     @apply border-2 border-slate-900 bg-white text-slate-900 font-semibold px-6 py-3 hover:bg-slate-900 hover:text-white transition inline-block;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
   }
 
   .box-input {
     @apply border-2 border-slate-900 bg-white text-slate-900 px-4 py-3 focus:ring-2 focus:ring-slate-900;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
   }
 
   /* Unified form elements */
@@ -197,10 +209,53 @@
 
   .section-heading {
     @apply text-3xl font-bold text-slate-900 mb-2;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 900;
   }
 
   .section-subheading {
     @apply text-lg text-slate-700;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
+  }
+
+  /* Global button sizing and weight for UI elements */
+  button,
+  input[type="button"],
+  input[type="submit"] {
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
+  }
+
+  /* Ensure UI elements inside cards inherit the requested UI size/weight */
+  .box-card button,
+  .box-card .box-button,
+  .box-card .box-button-primary,
+  .box-card .view-all-btn,
+  .box-card .box-input,
+  .box-card .section-subheading {
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
+  }
+
+  /* Role-based overrides for Tailwind utility headings used across components */
+  .text-3xl.font-bold,
+  .text-4xl.font-bold,
+  h2.text-3xl,
+  h1.text-4xl,
+  .section-heading {
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 900;
+  }
+
+  /* Subheadings / UI smaller headings */
+  .text-xl.font-bold,
+  .text-lg.font-bold,
+  h3.font-bold,
+  h4.font-bold,
+  .section-subheading {
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
   }
 
   .tag-badge {

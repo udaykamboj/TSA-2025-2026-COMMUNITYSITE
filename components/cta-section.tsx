@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { Users, FileText, Building2 } from "lucide-react"
+import SectionTitle from '@/components/section-title'
 
 const stats = [
   {
@@ -35,15 +36,10 @@ const iconMap: { [key: string]: any } = {
 
 export default function CTASection() {
   return (
-    <section className="py-20 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
-        
-        <div className="flex justify-between items-center">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">How We Support the Community</h2>
-            <p className="text-slate-700">Helping residents and organizations access essential resources.</p>
-          </div>
-        </div>
+    
+        <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionTitle title="How We Support the Community" linkText="Learn More" linkHref="/main/services" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {stats.map((stat, idx) => {
@@ -73,6 +69,6 @@ export default function CTASection() {
           })}
         </div>
       </div>
-    </section>
+      </section>
   )
 }

@@ -4,7 +4,9 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Calendar } from "lucide-react"
+import Widget from "./widget"
+import Dither from "./Dither"
 import { Button } from "@/components/ui/button"
 
 export default function Hero() {
@@ -17,36 +19,69 @@ export default function Hero() {
     }
   }
 
+  // Simple JSON-driven widget configuration
+  const widgetData: any = {
+    date: 'Monday, January 19, 2026',
+    highlightLink: { text: 'Martin Luther King Jr. Day service changes', href: '#' },
+    showSelect: true,
+    items: [
+      { icon: 'Car', title: 'Alternate side parking', status: 'Suspended', color: 'blue', showBadge: true },
+      { icon: 'Trash2', title: 'Trash, recycling, and compost collection', status: 'Suspended', color: 'blue', showBadge: true },
+      { icon: 'BookOpen', title: 'Public schools', status: 'Closed', color: 'blue', showBadge: true },
+      { icon: 'Bus', title: 'Check transit alerts', status: null, color: 'black', showBadge: false },
+    ],
+  }
+
   return (
-    <section className="bg-slate-900 text-white py-16 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative bg-slate-900 text-white py-16 px-4 min-h-[520px]">
+      <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, zIndex: 0 }} className="pointer-events-none">
+        {/* <Dither
+          waveColor={[0.5, 0.5, 0.5]}
+          disableAnimation={false}
+          enableMouseInteraction
+          mouseRadius={0.3}
+          colorNum={4}
+          waveAmplitude={0.3}
+          waveFrequency={3}
+          waveSpeed={0.05}
+        /> */}
+      </div>
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Content */}
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-balance">
-              Find the Community Resources You Need
+            <h1
+              className=" mb-6 leading-tight text-balance text-[3rem] font-extra-bold italic"
+              style={{
+                textShadow: '2px 2px 10px rgba(0,0,0,0.6)'
+              }}
+            >
+              Reach Your Community on Resource Hub
             </h1>
 
-            <p className="text-lg text-gray-200 mb-8 leading-relaxed">
-              Access comprehensive information about local services, programs, and support. From food assistance to
-              youth programs, job training to housing support—find what you need.
-            </p>
-
             <form onSubmit={handleSearch} className="mb-8">
-              <div className="flex items-stretch">
-                <div className="bg-white px-6 py-3.5 border-2 border-r-0 border-gray-300 flex items-center">
+              <div
+                className="bg-white rounded-[20px] overflow-hidden border border-gray-200 flex"
+                style={{
+                  boxShadow: '4px 4px 12px 0px rgba(0, 0, 0, 0.2)',
+                  borderColor: '#ddd',
+                }}
+              >
+                <div className="px-6 py-3.5 flex items-center bg-white">
                   <span className="text-gray-800 font-semibold text-base whitespace-nowrap">Find Resources</span>
                 </div>
+
                 <input
                   type="text"
                   placeholder="Search for..."
-                  className="flex-1 px-4 py-3.5 border-2 border-l-0 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-gray-300 text-base shadow-sm"
+                  className="flex-1 px-4 py-3.5 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none text-base"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
+
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-3.5 transition text-base shadow-sm"
+                  className="bg-[#103fef] hover:bg-blue-700 text-white font-bold px-6 sm:px-10 py-3.5 transition text-base flex items-center justify-center"
                 >
                   Go!
                 </button>
@@ -73,15 +108,9 @@ export default function Hero() {
             </div> */}
           </div> 
 
-          {/* Right side - Image */}
-          <div className="hidden lg:flex items-center justify-center">
-            <div className="w-full h-[500px] overflow-hidden relative">
-              <img 
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1932&auto=format&fit=crop"
-                alt="Community helping hands together"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Right side - Status Widget */}
+          <div className="flex items-center justify-center">
+            <Widget {...widgetData} />
           </div>
         </div>
       </div>

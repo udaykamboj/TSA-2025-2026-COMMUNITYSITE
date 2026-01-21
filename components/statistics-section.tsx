@@ -1,6 +1,7 @@
 "use client"
 import { Users, Droplet, TreePine, Dog } from "lucide-react"
 import Link from "next/link"
+import SectionTitle from '@/components/section-title'
 
 const stats = [
   {
@@ -42,15 +43,10 @@ const iconMap: { [key: string]: any } = {
 
 export default function StatisticsSection() {
   return (
-    <section className="py-20 px-4 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        
-        <div className="flex justify-between items-center">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">Our Community Impact</h2>
-            <p className="text-slate-700">Making a difference through accessible resources</p>
-          </div>
-        </div>
+
+        <section className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionTitle title="Our Community Impact" linkText="View all services" linkHref="/main/services" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, idx) => {
@@ -89,7 +85,7 @@ export default function StatisticsSection() {
             </button>
           </Link>
         </div>
-      </div>
+        </div>
     </section>
   )
 }

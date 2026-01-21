@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+/* Nunito Sans is loaded via <link> in app/layout.tsx */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -75,7 +76,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
+  --font-sans: 'Nunito Sans', 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -121,5 +122,32 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+  }
+
+  button,
+  input[type="button"],
+  input[type="submit"] {
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
+  }
+
+  .text-3xl.font-bold,
+  .text-4xl.font-bold,
+  h2.text-3xl,
+  h1.text-4xl,
+  .section-heading {
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 900;
+  }
+
+  .text-xl.font-bold,
+  .text-lg.font-bold,
+  h3.font-bold,
+  h4.font-bold,
+  .section-subheading {
+    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-weight: 700;
   }
 }

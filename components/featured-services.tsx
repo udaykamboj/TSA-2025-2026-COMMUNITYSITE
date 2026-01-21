@@ -1,86 +1,124 @@
 "use client"
 
-import Link from "next/link"
-import { Users, Home, DollarSign, Heart, BookOpen, Briefcase } from "lucide-react"
+import React from 'react';
+import SectionTitle from '@/components/section-title'
+import { ChevronRight, Car, Volume2, Trash2, AlertCircle, Home, FileText, DollarSign, ShoppingBag } from 'lucide-react';
 
 const services = [
   {
-    id: 1,
-    name: "Food Assistance",
-    icon: Users,
-    description: "Emergency meals & groceries",
-    category: "Food",
-    count: "12 resources",
+    title: 'Parking or camera tickets',
+    href: '#',
+    icon: Car
   },
   {
-    id: 2,
-    name: "Housing Support",
-    icon: Home,
-    description: "Affordable housing & rentals",
-    category: "Housing",
-    count: "8 resources",
+    title: 'Noise complaint',
+    href: '#',
+    icon: Volume2
   },
   {
-    id: 3,
-    name: "Financial Aid",
-    icon: DollarSign,
-    description: "Emergency assistance & bills",
-    category: "Financial Aid",
-    count: "6 resources",
+    title: 'Get rid of waste',
+    href: '#',
+    icon: Trash2
   },
   {
-    id: 4,
-    name: "Mental Health",
-    icon: Heart,
-    description: "Counseling & support services",
-    category: "Mental Health",
-    count: "9 resources",
+    title: 'Illegal parking complaint',
+    href: '#',
+    icon: AlertCircle
   },
   {
-    id: 5,
-    name: "Education",
-    icon: BookOpen,
-    description: "Learning & skill development",
-    category: "Education",
-    count: "10 resources",
+    title: 'Apartment complaint',
+    href: '#',
+    icon: Home
   },
   {
-    id: 6,
-    name: "Employment",
-    icon: Briefcase,
-    description: "Jobs & training programs",
-    category: "Employment",
-    count: "7 resources",
+    title: 'Birth certificates',
+    href: '#',
+    icon: FileText
   },
-]
+  {
+    title: 'Rent increase help',
+    href: '#',
+    icon: DollarSign
+  },
+  {
+    title: 'SNAP benefits',
+    href: '#',
+    icon: ShoppingBag
+  }
+];
 
-export default function FeaturedServices() {
+export default function PopularServices() {
   return (
-    <section className="py-20 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">Browse by Category</h2>
-            <p className="text-slate-700">Find resources in your area of need</p>
-          </div>
-        </div>
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionTitle title="Popular services" linkText="View all services" linkHref="/main/services" />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {services.map((service) => {
-            const Icon = service.icon
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {services.map((service, index) => {
+            const IconComponent = service.icon;
             return (
-              <Link key={service.id} href={`/resources?category=${encodeURIComponent(service.category)}`}>
-                <div className="flex flex-col items-center text-center p-6 border-2 border-slate-900 hover:bg-slate-900 transition-all cursor-pointer bg-white group">
-                  <Icon className="w-14 h-14 text-blue-600 group-hover:text-white mb-3 transition-colors" strokeWidth={1.5} />
-                  <p className="text-sm font-semibold text-slate-900 group-hover:text-white mb-1 transition-colors">{service.name}</p>
-                  <p className="text-xs text-slate-600 group-hover:text-gray-200 mb-2 transition-colors">{service.description}</p>
-                  <p className="text-xs text-blue-600 group-hover:text-white font-medium transition-colors">{service.count}</p>
+              <a
+                key={index}
+                href={service.href}
+                className="group block"
+                style={{ textDecoration: 'none' }}
+              >
+                <div 
+                  className="h-full flex flex-col backdrop-blur-[12.5px] border-2 transition-all duration-300"
+                  style={{
+                    backgroundColor: 'hsla(0, 0%, 100%, 0.749)',
+                    borderColor: '#ddd',
+                    borderRadius: '8px',
+                    padding: '16px',
+                    boxShadow: '4px 4px 12px 0px rgba(0, 0, 0, 0.2)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#fff';
+                    e.currentTarget.style.borderColor = '#555';
+                    e.currentTarget.style.borderRadius = '16px';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'hsla(0, 0%, 100%, 0.749)';
+                    e.currentTarget.style.borderColor = '#ddd';
+                    e.currentTarget.style.borderRadius = '8px';
+                  }}
+                >
+                  <div className="mb-4 flex justify-center">
+                    <div className="rounded-full p-3" style={{ backgroundColor: '#f0f0f0' }}>
+                      <IconComponent 
+                        style={{ 
+                          width: '40px', 
+                          height: '40px', 
+                          strokeWidth: 1.5,
+                          color: '#051adb'
+                        }} 
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 flex-1">
+                    <h3 
+                      className="clash-grotesk font-medium leading-[1.25]" 
+                      style={{ 
+                        fontSize: '22px',
+                        letterSpacing: '0.01em',
+                        wordBreak: 'break-word',
+                        hyphens: 'auto'
+                      }}
+                    >
+                      {service.title}
+                    </h3>
+                    <ChevronRight 
+                      className="flex-shrink-0" 
+                      style={{ width: '24px', height: '24px', strokeWidth: 2 }}
+                    />
+                  </div>
                 </div>
-              </Link>
-            )
+              </a>
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
