@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button"
 import SectionTitle from '@/components/section-title'
 
 export default function BenefitProgramsSection() {
-  const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [expandedId, setExpandedId] = useState<number | null>(null)
 
-  const toggleExpand = (id: string) => {
+  const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id)
   }
 
@@ -65,7 +65,7 @@ export default function BenefitProgramsSection() {
                     onClick={() => toggleExpand(program.id)}
                     className="w-full px-6 py-4 flex items-center justify-between text-left bg-white"
                   >
-                    <span className="font-medium text-[1.25rem] justify-between]" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>{program.title}</span>
+                    <span className="font-medium text-[1.25rem]" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>{program.title}</span>
                     <ChevronDown className={`w-5 h-5 transition-transform ${expandedId === program.id ? 'rotate-180' : ''}`} />
                   </button>
 
