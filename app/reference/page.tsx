@@ -54,8 +54,14 @@ export default function ReferencePage() {
     { name: '@vercel/analytics', href: 'https://vercel.com/docs/analytics' },
     { name: 'next-themes', href: 'https://github.com/pacocoursey/next-themes' },
     { name: 'sonner', href: 'https://github.com/sonner-ui/sonner' },
+  
   ]
 
+    const referance = [
+    { name: 'https://www.bothellwa.gov/', href: 'https://www.bothellwa.gov/' },
+    { name: 'https://millcreekwa.gov/home', href: 'https://millcreekwa.gov/home' },
+    { name: 'http://seattle.gov', href: 'http://seattle.gov' },
+  ]
   const externalExampleImages = [
     'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
     'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=600&fit=crop',
@@ -85,11 +91,22 @@ export default function ReferencePage() {
               </ul>
             </div>
 
-            {/* Single big card: Libraries (synced to package.json) */}
             <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
               <h3 className="text-xl font-semibold mb-3">Libraries & Packages (project dependencies)</h3>
               <ul className="list-disc pl-5 space-y-2">
                 {libraries.map((lib) => (
+                  <li key={lib.name}>
+                    <a  target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{lib.name}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            
+            <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
+              <h3 className="text-xl font-semibold mb-3">Referance Sites</h3>
+              <ul className="list-disc pl-5 space-y-2">
+                {referance.map((lib) => (
                   <li key={lib.name}>
                     <a  target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{lib.name}</a>
                   </li>
