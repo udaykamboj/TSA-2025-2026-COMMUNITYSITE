@@ -79,7 +79,7 @@ export default function ReferencePage() {
               <ul className="list-disc pl-5 space-y-2">
                 {sources.map((s) => (
                   <li key={s.title} className="text-sm">
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{s.title}</a>
+                    <a  target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{s.title}</a>
                   </li>
                 ))}
               </ul>
@@ -91,7 +91,7 @@ export default function ReferencePage() {
               <ul className="list-disc pl-5 space-y-2">
                 {libraries.map((lib) => (
                   <li key={lib.name}>
-                    <a href={lib.href} target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{lib.name}</a>
+                    <a  target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{lib.name}</a>
                   </li>
                 ))}
               </ul>
