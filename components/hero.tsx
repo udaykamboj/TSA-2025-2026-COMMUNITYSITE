@@ -61,7 +61,7 @@ export default function Hero() {
                 textShadow: '2px 2px 10px rgba(0,0,0,0.6)'
               }}
             >
-              Reach Your Community on Resource Hub
+              Reach Your Community on Community Hub
             </h1>
 
             <form onSubmit={handleSearch} className="mb-8">

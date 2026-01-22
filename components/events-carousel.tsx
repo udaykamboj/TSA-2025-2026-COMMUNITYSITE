@@ -64,10 +64,32 @@ export default function EventsCarousel() {
               <li
                 className="flex-none w-[340px] flex-shrink-0 box-border snap-start h-[420px] flex items-center justify-center mx-0"
                 key={ev.id}
+
+                
               >
-                <div className="group w-full flex flex-col relative transition-all duration-300 ease-in-out min-h-[360px] h-auto text-black">
-                  <div className="w-full bg-white rounded-md shadow-sm border border-slate-100 p-4 h-[360px] flex flex-col justify-between gap-2 overflow-hidden transition-all duration-300 ease-in-out">
-                    <div className="flex flex-col h-full justify-between">
+                <div className="group w-full flex flex-col relative transition-all duration-300 ease-in-out min-h-[360px] h-auto text-black" >
+                  <div 
+                    className="w-full bg-white rounded-md shadow-sm border border-slate-100 p-4 h-[360px] flex flex-col justify-between gap-2 overflow-hidden transition-all duration-300 ease-in-out"
+                    style={{
+                      backgroundColor: 'hsla(0, 0%, 100%, 0.749)',
+                      borderColor: '#ddd',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      borderWidth: '2px',
+                      boxShadow: '4px 4px 12px 0px rgba(0, 0, 0, 0.2)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#fff';
+                      e.currentTarget.style.borderColor = '#555';
+                      e.currentTarget.style.borderRadius = '16px';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'hsla(0, 0%, 100%, 0.749)';
+                      e.currentTarget.style.borderColor = '#ddd';
+                      e.currentTarget.style.borderRadius = '8px';
+                    }}
+                  >
+                    <div className="flex flex-col h-full justify-between" >
                       <div>
                         <h3 
                           className="clash-grotesk font-bold mb-3 break-words"

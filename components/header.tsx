@@ -3,6 +3,13 @@
 import { Search, Menu, X, ChevronDown, Globe, Type } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 
+declare global {
+  interface Window {
+    google: any
+    googleTranslateElementInit: () => void
+  }
+}
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
@@ -10,6 +17,7 @@ export default function Header() {
   const [currentLang, setCurrentLang] = useState("English")
   const [isLargeFont, setIsLargeFont] = useState(false)
   const dropdownRef = useRef(null)
+  const googleScriptRef = useRef(null)
 
   const languages = [
     { code: "en", label: "English", nativeName: "English" },
@@ -57,15 +65,113 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
+  useEffect(() => {
+    // Function to update current language based on hash
+    const updateCurrentLang = () => {
+      if (window.location.hash === '#googtrans/en/en' || window.location.hash === '' || !window.location.hash.startsWith('#googtrans/en/')) {
+        setCurrentLang("English");
+        // Remove Google Translate script if present
+        if (googleScriptRef.current && document.body.contains(googleScriptRef.current)) {
+          document.body.removeChild(googleScriptRef.current);
+          googleScriptRef.current = null;
+        }
+        // Remove Google Translate widget if present
+        const widget = document.getElementById('google_translate_element');
+        if (widget) widget.innerHTML = '';
+      } else {
+        const langCode = window.location.hash.split('/')[2];
+        const lang = languages.find(l => l.code === langCode);
+        if (lang) {
+          setCurrentLang(lang.label);
+        }
+        // Only add script if not already present
+        if (!googleScriptRef.current) {
+          const script = document.createElement("script");
+          script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+          script.async = true;
+          document.body.appendChild(script);
+          googleScriptRef.current = script;
+          window.googleTranslateElementInit = () => {
+            new window.google.translate.TranslateElement(
+              {
+                pageLanguage: "en",
+                includedLanguages: languages.map(lang => lang.code).join(','),
+                layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+              },
+              "google_translate_element"
+            );
+          };
+        }
+      }
+    };
+
+    // Initial check
+    updateCurrentLang();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', updateCurrentLang);
+
+    return () => {
+      window.removeEventListener('hashchange', updateCurrentLang);
+      if (googleScriptRef.current && document.body.contains(googleScriptRef.current)) {
+        document.body.removeChild(googleScriptRef.current);
+        googleScriptRef.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // Clear hash on navigation
+    const currentPath = window.location.pathname
+    const handleNavigation = () => {
+      if (window.location.pathname !== currentPath) {
+        window.location.hash = ''
+      }
+    }
+    window.addEventListener('popstate', handleNavigation)
+    // For Next.js navigation
+    const originalPushState = history.pushState
+    history.pushState = function(...args) {
+      originalPushState.apply(this, args)
+      handleNavigation()
+    }
+    return () => {
+      window.removeEventListener('popstate', handleNavigation)
+      history.pushState = originalPushState
+    }
+  }, [])
+
+  useEffect(() => {
+    // Apply large font scaling
+    document.documentElement.style.fontSize = isLargeFont ? '120%' : '100%'
+  }, [isLargeFont])
+
   const toggleLargeFont = () => {
     const newValue = !isLargeFont
     setIsLargeFont(newValue)
   }
 
   const changeLanguage = (langCode, langLabel) => {
-    setCurrentLang(langLabel)
-    setIsLangModalOpen(false)
-  }
+    setCurrentLang(langLabel);
+    setIsLangModalOpen(false);
+    if (langCode === 'en') {
+      // Reset to English: remove hash, remove script, clear widget
+      window.location.hash = '';
+      if (googleScriptRef.current && document.body.contains(googleScriptRef.current)) {
+        document.body.removeChild(googleScriptRef.current);
+        googleScriptRef.current = null;
+      }
+      const widget = document.getElementById('google_translate_element');
+      if (widget) widget.innerHTML = '';
+      // Optionally reload to fully reset
+      window.location.reload();
+    } else {
+      // Use hash to trigger Google Translate
+      window.location.hash = `googtrans/en/${langCode}`;
+      // Optionally reload to trigger translation
+      window.location.reload();
+    }
+  };
 
   return (
     <>
@@ -78,13 +184,13 @@ export default function Header() {
       <header className="w-full bg-white border-b-4 border-slate-900">
         {/* Language Modal */}
         {isLangModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-start justify-center pt-20">
-            <div className="bg-white w-full max-w-2xl mx-4 border border-gray-400 max-h-[80vh] overflow-hidden flex flex-col">
+          <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-start justify-center pt-20 notranslate" translate="no">
+            <div className="bg-white w-full max-w-2xl mx-4 border border-gray-400 max-h-[80vh] overflow-hidden flex flex-col notranslate" translate="no">
               {/* Modal Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-300 bg-white">
                 <h2 className="text-lg font-semibold text-black">Select Language</h2>
                 <button
-                  onClick={() => setIsLangModalOpen(false)}
+                  onClick={() => { setIsLangModalOpen(false); window.location.hash = '' }}
                   className="p-1 hover:bg-gray-200 transition"
                 >
                   <X className="w-5 h-5" />
@@ -150,6 +256,9 @@ export default function Header() {
               >
                 <Type className="w-5 h-5" />
               </button>
+
+              {/* Google Translate Widget */}
+              <div id="google_translate_element" style={{ display: 'none' }} />
 
               {/* Language Button */}
               <button

@@ -51,7 +51,27 @@ export default function LatestNewsSection() {
 
         <div className="flex flex-col md:flex-row gap-8 items-stretch">
           <div className="w-full md:w-1/2 flex-shrink-0 h-auto md:h-auto">
-            <div className="bg-white rounded-md shadow-sm border border-slate-100 transition-all duration-300 h-full overflow-hidden">
+            <div 
+              className="bg-white rounded-md shadow-sm border border-slate-100 transition-all duration-300 h-full overflow-hidden"
+                  style={{
+                    backgroundColor: 'hsla(0, 0%, 100%, 0.749)',
+                    borderColor: '#ddd',
+                    borderRadius: '8px',
+                    padding: '0px',
+                    borderWidth: '2.5px',
+                    boxShadow: '4px 4px 12px 0px rgba(0, 0, 0, 0.2)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#fff';
+                    e.currentTarget.style.borderColor = '#555';
+                    e.currentTarget.style.borderRadius = '16px';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'hsla(0, 0%, 100%, 0.749)';
+                    e.currentTarget.style.borderColor = '#ddd';
+                    e.currentTarget.style.borderRadius = '8px';
+                  }}
+            >
               <div className="w-full h-full overflow-hidden min-h-[150px] max-h-[350px]">
                 <img
                   src={currentArticle.image}
