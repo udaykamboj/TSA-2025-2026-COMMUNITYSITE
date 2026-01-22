@@ -68,7 +68,7 @@ export default function ReferencePage() {
 
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle title="Reference Page" />
+        <SectionTitle title="Reference Page" linkText="" linkHref="" />
 
           <div className="space-y-6">
             <div className="text-slate-700">This page lists sources, permissions, and required forms used to create the website. </div>
