@@ -21,7 +21,12 @@ export default function Hero() {
 
   // Simple JSON-driven widget configuration
   const widgetData: any = {
-    date: 'Monday, January 19, 2026',
+    date: new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(new Date()),
     highlightLink: { text: 'Martin Luther King Jr. Day service changes', href: '#' },
     showSelect: true,
     items: [
