@@ -38,13 +38,13 @@ export default function ResourceFilters({
     selectedOperatingHours !== "all"
 
   return (
-    <div className="bg-white border-2 border-slate-900 p-6">
+    <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
       <div className="flex justify-between items-center mb-6">
         <h3 className="font-bold text-lg text-slate-900">Filters</h3>
         {hasActiveFilters && (
           <button
             onClick={onReset}
-            className="text-slate-900 hover:bg-slate-100 px-3 py-1 border-2 border-slate-900 font-semibold transition"
+            className="text-slate-900 hover:bg-slate-100 px-3 py-1 border border-slate-100 font-semibold transition rounded-md"
           >
             Reset All
           </button>

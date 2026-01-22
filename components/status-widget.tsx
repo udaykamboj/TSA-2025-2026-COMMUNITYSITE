@@ -27,18 +27,21 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 }
 
 export default function NYCStatusWidget({
-  date = "Saturday, January 17, 2026", 
+  date, 
   highlightLink = null,
   showSelect = true,
   items = [],
 }: WidgetProps) {
+  const today = new Date()
+  const weekdayText = today.toLocaleDateString(undefined, { weekday: 'long' })
+  const restText = today.toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })
   return (
     <div className="flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-[540px] rounded-[20px] p-6 sm:p-8 text-slate-900 font-normal shadow-sm">
         <div className="flex items-start justify-between mb-6">
           <h3 className="flex flex-col leading-tight">
-            <span className="text-[1.75rem] font-bold">{date.split(',')[0] ?? 'Saturday'},</span>
-            <span className="text-[1.75rem] font-bold mt-1">{date.split(',')[1]?.trim() ?? date}</span>
+            <span className="text-[1.75rem] font-bold">{weekdayText},</span>
+            <span className="text-[1.75rem] font-bold mt-1">{restText}</span>
           </h3>
 
           {showSelect && (

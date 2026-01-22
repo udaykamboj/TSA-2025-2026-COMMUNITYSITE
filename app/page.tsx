@@ -1,7 +1,6 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
 import FeaturedServices from "@/components/featured-services"
-import FeaturedCarousel from "@/components/featured-carousel"
 import EventsCarousel from "@/components/events-carousel"
 import LatestNewsSection from "@/components/latest-news-section"
 import BenefitProgramsSection from "@/components/benefit-programs-section"
@@ -26,7 +25,6 @@ export default function Home() {
       <Header />
       <Hero />
       <FeaturedServices />
-      <FeaturedCarousel />
       <EventsCarousel />
       <LatestNewsSection />
       <BenefitProgramsSection />

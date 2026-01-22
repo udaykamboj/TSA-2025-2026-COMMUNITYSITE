@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon'
+import { MenuToggleIcon } from './menu-toggle-icon'
 import { createPortal } from 'react-dom'
 import {
 	NavigationMenu,
@@ -12,7 +12,7 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
+} from './navigation-menu'
 import { LucideIcon } from 'lucide-react'
 import {
 	CodeIcon,

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Users, FileText, Building2 } from "lucide-react"
+import { Users, FileText, Building2, ChevronRight } from "lucide-react"
 import SectionTitle from '@/components/section-title'
 
 const stats = [
@@ -36,39 +36,94 @@ const iconMap: { [key: string]: any } = {
 
 export default function CTASection() {
   return (
-    
-        <section className="py-20 bg-white">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle title="How We Support the Community" linkText="Learn More" linkHref="/main/services" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat, idx) => {
             const IconComponent = iconMap[stat.icon]
             return (
               <div
                 key={idx}
-                className="bg-white border-2 border-slate-300 p-8 text-center hover:border-slate-500 transition-colors"
+                className="h-full flex flex-col backdrop-blur-[12.5px] border-2 transition-all duration-300"
+                style={{
+                  backgroundColor: 'hsla(0, 0%, 100%, 0.749)',
+                  borderColor: '#ddd',
+                  borderRadius: '8px',
+                  padding: '22px',
+                  boxShadow: '4px 4px 12px 0px rgba(0, 0, 0, 0.2)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#fff'
+                  e.currentTarget.style.borderColor = '#555'
+                  e.currentTarget.style.borderRadius = '16px'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'hsla(0, 0%, 100%, 0.749)'
+                  e.currentTarget.style.borderColor = '#ddd'
+                  e.currentTarget.style.borderRadius = '8px'
+                }}
               >
-                <div className="flex justify-center mb-4">
-                  <IconComponent className="w-16 h-16 text-slate-700" strokeWidth={1.5} />
+                <div className="mb-4 flex justify-center">
+                  <div className="rounded-full p-3" style={{ backgroundColor: '#f0f0f0' }}>
+                    <IconComponent 
+                      style={{ 
+                        width: '40px', 
+                        height: '40px', 
+                        strokeWidth: 1.5,
+                        color: '#051adb'
+                      }} 
+                    />
+                  </div>
                 </div>
-                <div className="mb-2">
-                  <div className="text-3xl font-bold text-slate-900 mb-1">{stat.number}</div>
-                  <p className="text-base text-slate-700 mb-3">
-                    {stat.label}
-                  </p>
+                <div className="flex-1 flex flex-col items-center text-center">
+                  <h3 
+                    className="clash-grotesk font-medium leading-[1.25] mb-4" 
+                    style={{ 
+                      fontSize: '22px',
+                      letterSpacing: '0.01em',
+                      wordBreak: 'break-word',
+                      hyphens: 'auto'
+                    }}
+                  >
+                    {stat.number}
+                  </h3>
+                  <a 
+                    href={stat.link}
+                    className="inline-flex items-center justify-center gap-2 transition-all duration-200 rounded-full"
+                    style={{ 
+                      textDecoration: 'none',
+                      fontSize: '16px',
+                      fontWeight: '700',
+                      backgroundColor: '#0d28ff',
+                      color: '#ffffff',
+                      padding: '14px 32px',
+                      border: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#0a1fd9'
+                      e.currentTarget.style.transform = 'translateY(-1px)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#0d28ff'
+                      e.currentTarget.style.transform = 'translateY(0)'
+                    }}
+                  >
+                    {stat.description}
+                  </a>
                 </div>
-                <Link 
-                  href={stat.link}
-                  className="inline-block bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-2 transition text-sm border-2 border-slate-900"
-                >
-                  {stat.description}
-                </Link>
               </div>
             )
           })}
         </div>
       </div>
-      </section>
+
+      <style jsx global>{`
+        .clash-grotesk {
+          font-family: "Clash Grotesk", sans-serif;
+        }
+      `}</style>
+    </section>
   )
 }

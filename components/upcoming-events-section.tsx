@@ -156,7 +156,7 @@ export default function UpcomingEventsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Side - Custom Calendar with Events */}
           <div className="lg:col-span-1">
-            <div className="border-2 border-slate-900 overflow-hidden bg-white sticky top-4">
+            <div className="overflow-hidden bg-white sticky top-4 rounded-md shadow-sm border border-slate-100">
               <div className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between">
                 <h3 className="font-bold text-sm flex items-center gap-2">
                   <Calendar size={16} />
@@ -261,7 +261,7 @@ export default function UpcomingEventsSection() {
                 <button
                   onClick={goToPreviousMonth}
                   disabled={currentMonthIndex === 0}
-                  className="p-2 bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition border-2 border-slate-900"
+                  className="p-2 bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition rounded-md"
                   aria-label="Previous month"
                 >
                   <ChevronLeft size={20} />
@@ -269,7 +269,7 @@ export default function UpcomingEventsSection() {
                 <button
                   onClick={goToNextMonth}
                   disabled={currentMonthIndex === availableMonths.length - 1}
-                  className="p-2 bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition border-2 border-slate-900"
+                  className="p-2 bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition rounded-md"
                   aria-label="Next month"
                 >
                   <ChevronRight size={20} />
@@ -278,7 +278,7 @@ export default function UpcomingEventsSection() {
             </div>
             
             {filteredEvents.length === 0 ? (
-              <div className="text-center py-12 border-2 border-slate-300 bg-slate-50">
+              <div className="text-center py-12 bg-slate-50 rounded-md border border-slate-100">
                 <Calendar size={48} className="mx-auto mb-4 text-slate-400" />
                 <p className="text-slate-600 font-medium">No events scheduled for {selectedMonth} {selectedYear}</p>
                 <p className="text-sm text-slate-500 mt-2">Check back soon for upcoming events!</p>
@@ -286,14 +286,14 @@ export default function UpcomingEventsSection() {
             ) : (
               <div className="space-y-4">
                 {filteredEvents.map((event) => (
-                <div 
-                  key={event.id} 
-                  className="border-2 border-slate-900 bg-white hover:bg-slate-50 transition-colors"
+                <div
+                  key={event.id}
+                  className="bg-white rounded-md shadow-sm border border-slate-100 hover:bg-slate-50 transition-colors"
                 >
                   <div className="p-6">
                     <div className="flex flex-col md:flex-row md:items-start gap-4">
                       {/* Event Image */}
-                      <div className="w-full md:w-32 h-32 flex-shrink-0 bg-slate-200 border-2 border-slate-300 overflow-hidden">
+                      <div className="w-full md:w-32 h-32 flex-shrink-0 bg-slate-200 border border-slate-100 overflow-hidden rounded-md">
                         <img
                           src={event.image || "/placeholder.svg"}
                           alt={event.title}
@@ -325,7 +325,7 @@ export default function UpcomingEventsSection() {
                         <div className="flex flex-wrap gap-2 mt-4">
                           <button
                             onClick={() => addToGoogleCalendar(event)}
-                            className="flex items-center justify-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-colors border-2 border-blue-600"
+                            className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-colors rounded-md"
                             title="Add to Google Calendar"
                           >
                             <Calendar size={16} />
@@ -343,7 +343,7 @@ export default function UpcomingEventsSection() {
             {/* View All Events CTA */}
             <div className="mt-8 text-center">
               <Link href="/events">
-                <Button className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 font-semibold border-2 border-slate-900">
+                <Button className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 font-semibold rounded-md">
                   View Full Events Calendar
                 </Button>
               </Link>

@@ -54,7 +54,7 @@ export default function StatisticsSection() {
             return (
               <div
                 key={idx}
-                className="bg-white border-2 border-slate-300 p-8 text-center hover:border-slate-500 transition-colors"
+                className="bg-white rounded-md shadow-sm border border-slate-100 p-8 text-center hover:shadow-md transition-all"
               >
                 <div className="flex justify-center mb-4">
                   <IconComponent className="w-16 h-16 text-slate-700" strokeWidth={1.5} />
@@ -67,7 +67,7 @@ export default function StatisticsSection() {
                 </div>
                 <Link 
                   href={stat.link}
-                  className="inline-block bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-2 transition text-sm border-2 border-slate-900"
+                  className="inline-block bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-2 transition text-sm rounded-md"
                 >
                   {stat.description}
                 </Link>
@@ -80,7 +80,7 @@ export default function StatisticsSection() {
         <div className="mt-16 text-center">
           <p className="text-slate-600 mb-6">Ready to find the resources you need?</p>
           <Link href="/resources">
-            <button className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 font-semibold transition border-2 border-slate-900">
+            <button className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 font-semibold transition rounded-md">
               Explore All Resources
             </button>
           </Link>

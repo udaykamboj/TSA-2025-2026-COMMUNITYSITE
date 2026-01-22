@@ -228,7 +228,7 @@ export default function ResourcesPage() {
       <Header />
 
       <div className="flex-1">
-        <div className="container-page py-12">
+        <div className="w-full max-w-7xl mx-auto px-4 py-12">
           <div className="mb-12">
             <h1 className="text-4xl font-bold text-slate-900 mb-2">Find Resources</h1>
             <p className="text-lg text-slate-700">Search and filter community resources available to you</p>
@@ -274,7 +274,7 @@ export default function ResourcesPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 border-2 border-slate-900 text-sm font-semibold focus:outline-none focus:bg-slate-50"
+                  className="px-4 py-2 border border-slate-100 rounded-md text-sm font-semibold focus:outline-none focus:bg-slate-50"
                 >
                   <option value="distance">Closest First</option>
                   <option value="name">Name (A-Z)</option>
@@ -285,21 +285,21 @@ export default function ResourcesPage() {
               <div className="space-y-6">
                 {filtered.length > 0 ? (
                   filtered.map((resource) => (
-                    <div key={resource.id} className="border-2 border-slate-900 bg-white">
+                    <div key={resource.id} className="bg-white rounded-md shadow-sm border border-slate-100">
                       <div className="p-6">
                         {/* Header */}
                         <div className="flex justify-between items-start mb-4">
                           <div className="flex-1">
-                            <h3 className="text-xl font-bold text-slate-900 mb-1">{resource.name}</h3>
-                            <p className="text-sm font-semibold text-slate-700">{resource.category}</p>
+                            <h3 className="text-2xl font-semibold text-slate-900 mb-1">{resource.name}</h3>
+                            <p className="text-sm text-slate-500">{resource.category}</p>
                           </div>
                           <div className="flex gap-2 ml-4">
                             <button
                               onClick={() => toggleSaveResource(resource.id)}
-                              className={`p-2 border-2 transition ${
+                              className={`p-2 rounded border transition ${
                                 savedResources.includes(resource.id)
-                                  ? "border-slate-900 bg-slate-900 text-white"
-                                  : "border-slate-900 bg-white text-slate-900 hover:bg-slate-50"
+                                  ? "border-slate-200 bg-slate-900 text-white"
+                                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                               }`}
                               title="Save resource"
                             >
@@ -317,7 +317,7 @@ export default function ResourcesPage() {
                                   url: window.location.href,
                                 }) || navigator.clipboard.writeText(text)
                               }}
-                              className="p-2 border-2 border-slate-900 bg-white text-slate-900 hover:bg-slate-50 transition"
+                              className="p-2 rounded border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition"
                               title="Share resource"
                             >
                               <Share2 className="w-5 h-5" />
@@ -338,33 +338,33 @@ export default function ResourcesPage() {
                         </div>
 
                         {/* Contact Info Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 border-t-2 border-slate-300">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 border-t border-slate-100">
                           <div className="flex items-start gap-3">
-                            <MapPin className="w-5 h-5 text-slate-900 flex-shrink-0 mt-0.5 font-bold" />
+                            <MapPin className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" />
                             <div>
                               <p className="text-sm font-semibold text-slate-900">Address</p>
                               <a
                                 href={getMapLink(resource.address)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-sm text-slate-900 hover:underline font-semibold flex items-center gap-1"
+                                className="text-sm text-slate-700 hover:underline flex items-center gap-1"
                               >
                                 {resource.address}
                                 <ExternalLink className="w-3 h-3" />
                               </a>
                               {resource.distance !== undefined && resource.distance > 0 && (
-                                <p className="text-xs text-slate-600 mt-1">{resource.distance} miles away</p>
+                                <p className="text-xs text-slate-500 mt-1">{resource.distance} miles away</p>
                               )}
                             </div>
                           </div>
 
                           <div className="flex items-start gap-3">
-                            <Phone className="w-5 h-5 text-slate-900 flex-shrink-0 mt-0.5 font-bold" />
+                            <Phone className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" />
                             <div>
                               <p className="text-sm font-semibold text-slate-900">Phone</p>
                               <a
                                 href={`tel:${resource.phone}`}
-                                className="text-sm text-slate-900 hover:underline font-semibold"
+                                className="text-sm text-slate-700 hover:underline"
                               >
                                 {resource.phone}
                               </a>
@@ -372,12 +372,12 @@ export default function ResourcesPage() {
                           </div>
 
                           <div className="flex items-start gap-3">
-                            <Mail className="w-5 h-5 text-slate-900 flex-shrink-0 mt-0.5 font-bold" />
+                            <Mail className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" />
                             <div>
                               <p className="text-sm font-semibold text-slate-900">Email</p>
                               <a
                                 href={`mailto:${resource.email}`}
-                                className="text-sm text-slate-900 hover:underline font-semibold break-all"
+                                className="text-sm text-slate-700 hover:underline break-all"
                               >
                                 {resource.email}
                               </a>
@@ -393,7 +393,7 @@ export default function ResourcesPage() {
                         {/* View Details Button */}
                         <div className="mt-6 flex gap-3">
                           <Button
-                            className="flex-1 bg-slate-900 hover:bg-slate-800 text-white border-2 border-slate-900 font-semibold py-3"
+                            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white rounded px-4 py-3 font-semibold"
                             onClick={() => {
                               window.location.href = `/resources/${resource.id}`
                             }}
@@ -401,7 +401,7 @@ export default function ResourcesPage() {
                             View Full Details
                           </Button>
                           <Button
-                            className="flex-1 border-2 border-slate-900 bg-white text-slate-900 hover:bg-slate-50 font-semibold py-3"
+                            className="flex-1 border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-semibold rounded px-4 py-3"
                             onClick={() => window.open(resource.website)}
                           >
                             Visit Website
@@ -411,12 +411,12 @@ export default function ResourcesPage() {
                     </div>
                   ))
                 ) : (
-                  <div className="border-2 border-slate-900 bg-white p-12 text-center">
+                  <div className="bg-white rounded-md border border-slate-100 p-12 text-center shadow-sm">
                     <p className="text-slate-700 text-lg mb-2">No resources found matching your criteria.</p>
                     <p className="text-slate-600 text-sm">Try adjusting your filters or search terms.</p>
                     <Button
                       onClick={handleReset}
-                      className="mt-4 bg-white text-slate-900 border-2 border-slate-900 hover:bg-slate-50 font-semibold"
+                      className="mt-4 bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 font-semibold rounded px-4 py-2"
                     >
                       Reset Filters
                     </Button>

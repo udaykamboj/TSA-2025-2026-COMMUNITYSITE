@@ -4,9 +4,9 @@ import type { Resource } from "@/lib/sample-resources"
 
 export default function ResourceCard({ resource }: { resource: Resource }) {
   return (
-    <div className="bg-white border-2 border-slate-300 overflow-hidden">
+    <div className="bg-white rounded-md shadow-sm border border-slate-100 overflow-hidden">
       {/* Header with logo */}
-      <div className="bg-slate-900 p-6 flex items-center justify-between">
+      <div className="bg-slate-900 p-6 flex items-center justify-between rounded-t-md">
         <div className="text-5xl">{resource.logo}</div>
         <div className="flex gap-2">
           <button className="p-2 hover:bg-slate-800 transition text-white">
@@ -21,7 +21,7 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
       {/* Content */}
       <div className="p-6">
         <h3 className="text-xl font-bold text-slate-900 mb-2">{resource.name}</h3>
-        <p className="text-sm text-slate-700 font-medium mb-3 inline-block bg-slate-100 px-3 py-1 border border-slate-300">
+        <p className="text-sm text-slate-700 font-medium mb-3 inline-block bg-slate-100 px-3 py-1 border border-slate-100">
           {resource.category}
         </p>
 
@@ -30,14 +30,14 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           {resource.tags.map((tag) => (
-            <span key={tag} className="text-xs bg-slate-50 text-slate-700 px-2 py-1 border border-slate-300">
+            <span key={tag} className="text-xs bg-slate-50 text-slate-700 px-2 py-1 border border-slate-100 rounded-md">
               {tag}
             </span>
           ))}
         </div>
 
         {/* Contact Info */}
-        <div className="space-y-2 mb-4 pb-4 border-b-2 border-slate-300 text-sm">
+        <div className="space-y-2 mb-4 pb-4 border-b border-slate-100 text-sm">
           <div className="flex items-start gap-3">
             <MapPin className="w-4 h-4 text-slate-700 flex-shrink-0 mt-0.5" />
             <span className="text-gray-700">{resource.address}</span>
@@ -67,7 +67,7 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
         {/* View Button */}
         <Link
           href={`/resources/${resource.id}`}
-          className="w-full inline-block text-center px-4 py-2 bg-slate-900 text-white font-medium hover:bg-slate-800 transition border-2 border-slate-900"
+          className="w-full inline-block text-center px-4 py-2 bg-blue-600 text-white font-medium hover:bg-blue-700 transition rounded-md"
         >
           View Full Details
         </Link>
