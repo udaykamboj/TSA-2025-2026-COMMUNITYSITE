@@ -1,39 +1,20 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import SectionTitle from '@/components/section-title'
+import SectionTitle from "@/components/section-title"
+import { newsConfig } from "@/lib/content/news-config"
 
-// Sample data with real images
-const latestNews = [
-  {
-    id: 1,
-    title: "City Council Approves New Infrastructure Plan",
-    excerpt: "The city council has unanimously approved a comprehensive infrastructure improvement plan that will modernize key public facilities and improve transportation networks.",
-    date: "January 15, 2026",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
-    tags: ["Infrastructure", "Development"],
-    link: "#"
-  },
-  {
-    id: 2,
-    title: "New Public Transit Routes Announced for Spring",
-    excerpt: "Enhanced public transportation services will connect underserved neighborhoods starting next month, with three new bus routes and extended service hours.",
-    date: "January 12, 2026",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=600&fit=crop",
-    tags: ["Transit", "Community"],
-    link: "#"
-  },
-  {
-    id: 3,
-    title: "Community Health Initiative Launches Citywide",
-    excerpt: "A new health and wellness program aims to improve access to healthcare services for all residents through mobile clinics and telemedicine options.",
-    date: "January 10, 2026",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop",
-    tags: ["Health", "Services"],
-    link: "#"
-  }
-]
+const latestNews = newsConfig.map((article, index) => ({
+  id: index + 1,
+  slug: article.slug,
+  title: article.title,
+  excerpt: article.excerpt,
+  date: article.date,
+  image: article.heroImage ?? "",
+  tags: article.tags,
+}))
 
 
 export default function LatestNewsSection() {
@@ -47,7 +28,7 @@ export default function LatestNewsSection() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle title="Latest News" linkText="See all News" linkHref="/main/services" />
+        <SectionTitle title="Latest News" linkText="See all News" linkHref="/main/news" />
 
         <div className="flex flex-col md:flex-row gap-8 items-stretch">
           <div className="w-full md:w-1/2 flex-shrink-0 h-auto md:h-auto">
@@ -118,12 +99,12 @@ export default function LatestNewsSection() {
               )}
 
               <div className="flex items-center gap-3 mb-6">
-                  <a
-                    href={currentArticle.link}
+                  <Link
+                    href={`/main/news/${currentArticle.slug}`}
                     className="inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
                   >
                     Read press release
-                  </a>
+                  </Link>
               </div>
 
               <div className="flex items-center gap-3">

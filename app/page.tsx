@@ -1,11 +1,11 @@
-import Header from "@/components/header"
-import Hero from "@/components/hero"
-import FeaturedServices from "@/components/featured-services"
-import EventsCarousel from "@/components/events-carousel"
-import LatestNewsSection from "@/components/latest-news-section"
-import BenefitProgramsSection from "@/components/benefit-programs-section"
-import CTASection from "@/components/cta-section"
-import Footer from "@/components/footer"
+import Header from "@/components/layout/header"
+import Footer from "@/components/layout/footer"
+import Hero from "@/components/layout/hero"
+import BenefitProgramsSection from "@/components/sections/benefit-programs-section"
+import CTASection from "@/components/sections/cta-section"
+import EventsCarousel from "@/components/sections/events-carousel"
+import FeaturedServices from "@/components/sections/featured-services"
+import LatestNewsSection from "@/components/sections/latest-news-section"
 
 export const metadata = {
   title: "City Community Resource Hub - Find Local Services & Support",

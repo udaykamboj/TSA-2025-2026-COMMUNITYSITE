@@ -3,11 +3,27 @@
 import Link from "next/link"
 import { useState } from "react"
 
+type FooterLink = string | { label: string; href: string }
+
+function getLinkHref(link: FooterLink): string {
+  return typeof link === "string" ? "#" : link.href
+}
+
+function getLinkLabel(link: FooterLink): string {
+  return typeof link === "string" ? link : link.label
+}
+
 export default function Footer() {
-  const columns: { title: string; items: string[] }[] = [
+  const columns: { title: string; items: FooterLink[] }[] = [
     {
       title: "Explore",
-      items: ["Browse resources", "Submit a resource", "Featured services", "Events", "Latest news"],
+      items: [
+        { label: "Browse resources", href: "/resources" },
+        { label: "Submit a resource", href: "/submit" },
+        { label: "Featured services", href: "/main/services" },
+        { label: "Events", href: "#" },
+        { label: "Latest news", href: "#" },
+      ],
     },
     {
       title: "Get Involved",
@@ -37,9 +53,9 @@ export default function Footer() {
                 <ul key={i} className="space-y-2">
                   <li className="text-sm font-semibold text-gray-100 pb-1">{col.title}</li>
                   {col.items.map((link) => (
-                    <li key={link}>
-                      <Link href="#" className="text-sm font-normal text-gray-200 hover:text-white">
-                        {link}
+                    <li key={getLinkLabel(link)}>
+                      <Link href={getLinkHref(link)} className="text-sm font-normal text-gray-200 hover:text-white">
+                        {getLinkLabel(link)}
                       </Link>
                     </li>
                   ))}
@@ -64,9 +80,9 @@ export default function Footer() {
                   {openIndex === i && (
                     <ul className="mt-2 space-y-1">
                       {col.items.map((link) => (
-                        <li key={link}>
-                          <Link href="#" className="block py-2 text-sm font-normal text-gray-200">
-                            {link}
+                        <li key={getLinkLabel(link)}>
+                          <Link href={getLinkHref(link)} className="block py-2 text-sm font-normal text-gray-200">
+                            {getLinkLabel(link)}
                           </Link>
                         </li>
                       ))}

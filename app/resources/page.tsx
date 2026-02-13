@@ -1,10 +1,10 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import SearchAutocomplete from "@/components/search-autocomplete"
-import ResourceFilters from "@/components/resource-filters"
+import Header from "@/components/layout/header"
+import Footer from "@/components/layout/footer"
+import SearchAutocomplete from "@/components/resources/search-autocomplete"
+import ResourceFilters from "@/components/resources/resource-filters"
 import { MapPin, Phone, Mail, Heart, Share2, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 

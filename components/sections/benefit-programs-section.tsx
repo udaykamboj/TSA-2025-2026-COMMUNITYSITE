@@ -3,8 +3,9 @@
     "use client"
 
     import { useState } from "react"
+    import Link from "next/link"
     import { ChevronDown, ChevronRight } from "lucide-react"
-    import SectionTitle from '@/components/section-title'
+    import SectionTitle from "@/components/section-title"
 
     // Sample data
     const benefitPrograms = [
@@ -106,8 +107,8 @@
                   </div>
 
                     <div className="mt-4">
-                    <a 
-                      href="#"
+                    <Link 
+                      href="/main/services"
                       className="inline-flex items-center justify-center gap-2 transition-all duration-200 rounded-full"
                       style={{ 
                           textDecoration: 'none',
@@ -128,7 +129,7 @@
                       }}
                     >
                       Ask A Question
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </aside>
@@ -196,8 +197,8 @@
                           >
                             {program.description}
                           </p>
-                          <a 
-                            href="#"
+                          <Link 
+                            href="/main/services"
                             className="inline-flex items-center justify-center gap-2 transition-all duration-200 rounded-full"
                             style={{ 
                               textDecoration: 'none',
@@ -218,7 +219,7 @@
                             }}
                           >
                             Check Eligibility
-                          </a>
+                          </Link>
                         </div>
                       )}
                     </div>

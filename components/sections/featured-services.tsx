@@ -1,51 +1,48 @@
 "use client"
 
 import React from 'react';
-import SectionTitle from '@/components/section-title'
-import { ChevronRight, Car, Volume2, Trash2, AlertCircle, Home, FileText, DollarSign, ShoppingBag } from 'lucide-react';
+import Link from 'next/link';
+import SectionTitle from "@/components/section-title"
+import { ChevronRight, Car, Volume2, Trash2, AlertCircle, Home, FileText, DollarSign, ShoppingBag, Vote, Construction } from 'lucide-react';
+import { pagesConfig } from '@/lib/content/pages-config';
+import type { LucideIcon } from 'lucide-react';
 
-const services = [
-  {
-    title: 'Parking or camera tickets',
-    href: '#',
-    icon: Car
-  },
-  {
-    title: 'Noise complaint',
-    href: '#',
-    icon: Volume2
-  },
-  {
-    title: 'Get rid of waste',
-    href: '#',
-    icon: Trash2
-  },
-  {
-    title: 'Illegal parking complaint',
-    href: '#',
-    icon: AlertCircle
-  },
-  {
-    title: 'Apartment complaint',
-    href: '#',
-    icon: Home
-  },
-  {
-    title: 'Birth certificates',
-    href: '#',
-    icon: FileText
-  },
-  {
-    title: 'Rent increase help',
-    href: '#',
-    icon: DollarSign
-  },
-  {
-    title: 'SNAP benefits',
-    href: '#',
-    icon: ShoppingBag
-  }
+const slugToIcon: Record<string, LucideIcon> = {
+  'parking-or-camera-tickets': Car,
+  'noise-complaint': Volume2,
+  'get-rid-of-waste': Trash2,
+  'illegal-parking-complaint': AlertCircle,
+  'apartment-complaint': Home,
+  'birth-certificates': FileText,
+  'rent-increase-help': DollarSign,
+  'snap-benefits': ShoppingBag,
+  'voter-registration': Vote,
+  'report-pothole-or-street-issue': Construction,
+};
+
+/** Slugs to show on the home page (8 = two full rows, max 4 per row); rest via "View all services". */
+const FEATURED_SERVICE_SLUGS = [
+  'parking-or-camera-tickets',
+  'snap-benefits',
+  'birth-certificates',
+  'voter-registration',
+  'get-rid-of-waste',
+  'apartment-complaint',
+  'rent-increase-help',
+  'report-pothole-or-street-issue',
 ];
+
+const allServices = pagesConfig.map((page) => ({
+  title: page.title,
+  description: page.description,
+  href: `/main/${page.slug}`,
+  icon: slugToIcon[page.slug] ?? FileText,
+}));
+
+const services = allServices.filter((s) => {
+  const slug = s.href.replace('/main/', '')
+  return FEATURED_SERVICE_SLUGS.includes(slug)
+});
 
 export default function PopularServices() {
   return (
@@ -58,7 +55,7 @@ export default function PopularServices() {
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <a
+              <Link
                 key={index}
                 href={service.href}
                 className="group block"
@@ -97,24 +94,34 @@ export default function PopularServices() {
                     </div>
                   </div>
                   <div className="flex items-center justify-between gap-3 flex-1">
-                    <h3 
-                      className="clash-grotesk font-medium leading-[1.25]" 
-                      style={{ 
-                        fontSize: '22px',
-                        letterSpacing: '0.01em',
-                        wordBreak: 'break-word',
-                        hyphens: 'auto'
-                      }}
-                    >
-                      {service.title}
-                    </h3>
+                    <div className="min-w-0 flex-1">
+                      <h3 
+                        className="clash-grotesk font-medium leading-[1.25]" 
+                        style={{ 
+                          fontSize: '22px',
+                          letterSpacing: '0.01em',
+                          wordBreak: 'break-word',
+                          hyphens: 'auto'
+                        }}
+                      >
+                        {service.title}
+                      </h3>
+                      {service.description && (
+                        <p 
+                          className="mt-2 text-slate-600 leading-snug line-clamp-2" 
+                          style={{ fontSize: '14px' }}
+                        >
+                          {service.description}
+                        </p>
+                      )}
+                    </div>
                     <ChevronRight 
                       className="flex-shrink-0" 
                       style={{ width: '24px', height: '24px', strokeWidth: 2 }}
                     />
                   </div>
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>

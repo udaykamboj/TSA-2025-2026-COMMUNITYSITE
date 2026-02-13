@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useRef } from "react"
+import Link from "next/link"
 import { upcomingEvents } from "@/lib/sample-data"
-import SectionTitle from '@/components/section-title'
+import SectionTitle from "@/components/section-title"
 
 export default function EventsCarousel() {
   const listRef = useRef<HTMLOListElement | null>(null)
@@ -64,8 +65,6 @@ export default function EventsCarousel() {
               <li
                 className="flex-none w-[340px] flex-shrink-0 box-border snap-start h-[420px] flex items-center justify-center mx-0"
                 key={ev.id}
-
-                
               >
                 <div className="group w-full flex flex-col relative transition-all duration-300 ease-in-out min-h-[360px] h-auto text-black" >
                   <div 
@@ -101,9 +100,9 @@ export default function EventsCarousel() {
                             wordBreak: 'break-word'
                           }}
                         >
-                          <a href={`#event-${ev.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <Link href={`/main/events/${ev.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             {ev.title}
-                          </a>
+                          </Link>
                         </h3>
                         <p className="break-words" style={{ 
                           fontSize: '16px', 

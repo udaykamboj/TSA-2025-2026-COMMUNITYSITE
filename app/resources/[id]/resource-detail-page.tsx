@@ -1,12 +1,23 @@
 "use client"
 
-import { useState } from "react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import { MapPin, Phone, Mail, Globe, Clock, Users, Heart, Share2, ArrowLeft, ExternalLink } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useParams } from "next/navigation"
+import { useState } from "react"
+import {
+  ArrowLeft,
+  Clock,
+  ExternalLink,
+  Globe,
+  Heart,
+  Mail,
+  MapPin,
+  Phone,
+  Share2,
+  Users,
+} from "lucide-react"
+import Header from "@/components/layout/header"
+import Footer from "@/components/layout/footer"
+import { Button } from "@/components/ui/button"
 
 // Sample resources data - in production this would come from a database
 const resourcesData = {
@@ -250,7 +261,7 @@ export default function ResourceDetailPage() {
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-foreground mb-2">Resource Not Found</h1>
-            <p className="text-gray-600 mb-6">We couldn't find the resource you're looking for.</p>
+            <p className="text-gray-600 mb-6">We couldn&apos;t find the resource you&apos;re looking for.</p>
             <Link href="/resources">
               <Button className="bg-teal-600 hover:bg-teal-700">Back to Directory</Button>
             </Link>

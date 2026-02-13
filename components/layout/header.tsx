@@ -179,6 +179,18 @@ export default function Header() {
         .clash-grotesk {
           font-family: "Clash Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
+        .brand-title {
+          background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #0f172a 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: background-position 0.5s ease, filter 0.3s ease;
+        }
+        .brand-title:hover {
+          background-position: 100% center;
+          filter: brightness(1.15);
+        }
       `}</style>
       
       <header className="w-full bg-white border-b-4 border-slate-900">
@@ -296,7 +308,7 @@ export default function Header() {
               <div className="flex items-center gap-8 flex-1">
                 <a
                   href="/"
-                  className="clash-grotesk text-xl font-bold text-slate-900 whitespace-nowrap"
+                  className="clash-grotesk brand-title text-xl font-bold whitespace-nowrap inline-block"
                   style={{ textDecoration: 'none' }}
                 >
                   Community Hub

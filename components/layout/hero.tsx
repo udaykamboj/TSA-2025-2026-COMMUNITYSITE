@@ -1,13 +1,13 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
 import { ArrowRight, Calendar } from "lucide-react"
-import Widget from "./widget"
-import Dither from "./Dither"
+import Dither from "@/components/Dither"
+import Widget from "@/components/widget"
 import { Button } from "@/components/ui/button"
+import { upcomingEvents, latestNews } from "@/lib/sample-data"
 
 export default function Hero() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -19,38 +19,56 @@ export default function Hero() {
     }
   }
 
-  // Simple JSON-driven widget configuration
-  const widgetData: any = {
-    date: new Intl.DateTimeFormat('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(new Date()),
-    highlightLink: { text: 'Martin Luther King Jr. Day service changes', href: '#' },
-    showSelect: true,
-    items: [
-      { icon: 'Car', title: 'Alternate side parking', status: 'Suspended', color: 'blue', showBadge: true },
-      { icon: 'Trash2', title: 'Trash, recycling, and compost collection', status: 'Suspended', color: 'blue', showBadge: true },
-      { icon: 'BookOpen', title: 'Public schools', status: 'Closed', color: 'blue', showBadge: true },
-      { icon: 'Bus', title: 'Check transit alerts', status: null, color: 'black', showBadge: false },
-    ],
-  }
+  const widgetData = useMemo(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    const upcoming = upcomingEvents
+      .filter((ev) => {
+        const d = new Date(ev.date)
+        d.setHours(0, 0, 0, 0)
+        return d >= today
+      })
+      .slice(0, 5)
+      .map((ev) => ({
+        id: String(ev.id),
+        icon: "CalendarDays" as const,
+        title: ev.title,
+        status: ev.date ? new Date(ev.date).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : null,
+        color: "blue" as const,
+        showBadge: true,
+        href: `/main/events/${ev.slug}`,
+      }))
+
+    const highlight = latestNews[0]
+    return {
+      date: new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(new Date()),
+      highlightLink: highlight ? { text: highlight.title, href: highlight.link } : null,
+      showSelect: true,
+      items: upcoming,
+    }
+  }, [])
 
   return (
-    <section className="relative bg-slate-900 text-white py-16 px-4 min-h-[520px]">
-      <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, zIndex: 0 }} className="pointer-events-none">
-        {/* <Dither
-          waveColor={[0.5, 0.5, 0.5]}
-          disableAnimation={false}
-          enableMouseInteraction
-          mouseRadius={0.3}
-          colorNum={4}
-          waveAmplitude={0.3}
-          waveFrequency={3}
-          waveSpeed={0.05}
-        /> */}
-      </div>
+    <section className="relative text-white py-16 px-4 min-h-[520px] overflow-hidden">
+      {/* City of Mill Creek background image */}
+      <div
+        aria-hidden
+        className="absolute inset-0 z-0 bg-slate-900 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/mill-creek.png)',
+        }}
+      />
+      {/* Blue overlay - semi-translucent so the image shows through */}
+      <div
+        aria-hidden
+        className="absolute inset-0 z-[1] bg-slate-900/50"
+      />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Content */}

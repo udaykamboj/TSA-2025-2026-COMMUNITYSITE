@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Users, FileText, Building2, ChevronRight } from "lucide-react"
-import SectionTitle from '@/components/section-title'
+import { Users, FileText, Building2 } from "lucide-react"
+import SectionTitle from "@/components/section-title"
 
 const stats = [
   {
@@ -24,7 +24,7 @@ const stats = [
     label: "Understand how we connect the community with vital resources",
     description: "Learn More",
     icon: "FileText",
-    link: "#",
+    link: "/main/services",
   },
 ]
 
@@ -89,7 +89,7 @@ export default function CTASection() {
                   >
                     {stat.number}
                   </h3>
-                  <a 
+                  <Link 
                     href={stat.link}
                     className="inline-flex items-center justify-center gap-2 transition-all duration-200 rounded-full"
                     style={{ 
@@ -111,7 +111,7 @@ export default function CTASection() {
                     }}
                   >
                     {stat.description}
-                  </a>
+                  </Link>
                 </div>
               </div>
             )
