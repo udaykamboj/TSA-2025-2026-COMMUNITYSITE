@@ -18,6 +18,7 @@ export type WidgetProps = {
   date?: string
   highlightLink?: { text: string; href?: string } | null
   showSelect?: boolean
+  onSelectDateClick?: () => void
   items: Item[]
 }
 
@@ -33,6 +34,7 @@ export default function Widget({
   date = "Saturday, January 17, 2026",
   highlightLink = null,
   showSelect = true,
+  onSelectDateClick,
   items = [],
 }: WidgetProps) {
   return (
@@ -45,13 +47,24 @@ export default function Widget({
           </h3>
 
           {showSelect && (
-            <Link
-              href="/main/events/calendar"
-              className="text-white rounded-full flex items-center flex-shrink-0 bg-[#103fef] px-4 py-2 sm:px-5 sm:py-3 text-base font-semibold hover:bg-[#0a2fd1] transition-colors"
-            >
-              <Calendar className="w-5 h-5" />
-              <span className="ml-2 text-[1.25rem] font-bold">Select date</span>
-            </Link>
+            onSelectDateClick ? (
+              <button
+                type="button"
+                onClick={onSelectDateClick}
+                className="text-white rounded-full flex items-center flex-shrink-0 bg-[#103fef] px-4 py-2 sm:px-5 sm:py-3 text-base font-semibold hover:bg-[#0a2fd1] transition-colors"
+              >
+                <Calendar className="w-5 h-5" />
+                <span className="ml-2 text-[1.25rem] font-bold">Select date</span>
+              </button>
+            ) : (
+              <Link
+                href="/main/events/calendar"
+                className="text-white rounded-full flex items-center flex-shrink-0 bg-[#103fef] px-4 py-2 sm:px-5 sm:py-3 text-base font-semibold hover:bg-[#0a2fd1] transition-colors"
+              >
+                <Calendar className="w-5 h-5" />
+                <span className="ml-2 text-[1.25rem] font-bold">Select date</span>
+              </Link>
+            )
           )}
         </div>
 

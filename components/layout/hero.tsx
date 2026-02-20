@@ -9,7 +9,11 @@ import Widget from "@/components/widget"
 import { Button } from "@/components/ui/button"
 import { upcomingEvents, latestNews } from "@/lib/sample-data"
 
-export default function Hero() {
+type HeroProps = {
+  onSelectDateClick?: () => void
+}
+
+export default function Hero({ onSelectDateClick }: HeroProps = {}) {
   const [searchTerm, setSearchTerm] = useState("")
 
   const handleSearch = (e: React.FormEvent) => {
@@ -50,9 +54,10 @@ export default function Hero() {
       }).format(new Date()),
       highlightLink: highlight ? { text: highlight.title, href: highlight.link } : null,
       showSelect: true,
+      onSelectDateClick,
       items: upcoming,
     }
-  }, [])
+  }, [onSelectDateClick])
 
   return (
     <section className="relative text-white py-16 px-4 min-h-[520px] overflow-hidden">

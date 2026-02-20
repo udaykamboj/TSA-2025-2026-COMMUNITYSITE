@@ -3,28 +3,34 @@
 import { upcomingEvents } from "@/lib/sample-data"
 import Link from "next/link"
 import { Calendar, MapPin, Clock, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "./ui/button"
-import { useState, useMemo, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { useState, useMemo, useEffect, type ReactNode } from "react"
+
+const MONTH_ORDER = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+function getInitialMonthYear() {
+  const now = new Date()
+  return { month: MONTH_ORDER[now.getMonth()], year: now.getFullYear() }
+}
 
 export default function UpcomingEventsSection() {
-  const [selectedMonth, setSelectedMonth] = useState("November")
-  const [selectedYear, setSelectedYear] = useState(2025)
+  const initial = useMemo(() => getInitialMonthYear(), [])
+  const [selectedMonth, setSelectedMonth] = useState(initial.month)
+  const [selectedYear, setSelectedYear] = useState(initial.year)
   const [calendarKey, setCalendarKey] = useState(0)
 
-  // Get unique months from events
+  // All months in a range (current year - 1 through current year + 1) so every month is navigable
   const availableMonths = useMemo(() => {
-    const months = upcomingEvents.map(event => ({ month: event.month, year: event.year }))
-    return Array.from(new Set(months.map(m => `${m.month} ${m.year}`)))
-      .map(str => {
-        const [month, year] = str.split(' ')
-        return { month, year: parseInt(year) }
-      })
-      .sort((a, b) => {
-        if (a.year !== b.year) return a.year - b.year
-        const monthOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        return monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month)
-      })
-  }, [])
+    const startYear = initial.year - 1
+    const endYear = initial.year + 1
+    const months: { month: string; year: number }[] = []
+    for (let y = startYear; y <= endYear; y++) {
+      for (const month of MONTH_ORDER) {
+        months.push({ month, year: y })
+      }
+    }
+    return months
+  }, [initial.year])
 
   const currentMonthIndex = availableMonths.findIndex(
     m => m.month === selectedMonth && m.year === selectedYear
@@ -87,7 +93,7 @@ export default function UpcomingEventsSection() {
 
   // Create calendar URL that updates based on selected month
   const createCalendarUrl = () => {
-    const monthNumber = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(selectedMonth) + 1
+    const monthNumber = MONTH_ORDER.indexOf(selectedMonth) + 1
     const monthStr = monthNumber.toString().padStart(2, '0')
     const yearStr = selectedYear.toString()
     
@@ -153,9 +159,9 @@ export default function UpcomingEventsSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Left Side - Custom Calendar with Events */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <div className="overflow-hidden bg-white sticky top-4 rounded-md shadow-sm border border-slate-100">
               <div className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between">
                 <h3 className="font-bold text-sm flex items-center gap-2">
@@ -183,38 +189,42 @@ export default function UpcomingEventsSection() {
               </div>
               
               {/* Custom Calendar Grid */}
-              <div className="p-4 bg-white">
-                <div className="grid grid-cols-7 gap-1 mb-2">
+              <div className="p-5 bg-white flex flex-col">
+                <div className="grid grid-cols-7 gap-2 mb-2">
                   {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-                    <div key={day} className="text-center text-xs font-bold text-slate-600 py-1">
+                    <div key={day} className="text-center text-sm font-bold text-slate-600 py-1">
                       {day}
                     </div>
                   ))}
                 </div>
-                <div className="grid grid-cols-7 gap-1">
+                {/* Fixed-height area: grid (complete shape only) + spacer below */}
+                <div className="flex flex-col h-[240px] flex-shrink-0">
                   {(() => {
-                    const monthNumber = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(selectedMonth)
+                    const monthNumber = MONTH_ORDER.indexOf(selectedMonth)
                     const firstDay = new Date(selectedYear, monthNumber, 1).getDay()
                     const daysInMonth = new Date(selectedYear, monthNumber + 1, 0).getDate()
-                    const days = []
-                    
+                    const totalCells = firstDay + daysInMonth
+                    const numRows = Math.ceil(totalCells / 7)
+                    const rowHeight = 40
+                    const days: ReactNode[] = []
+
                     // Empty cells for days before month starts
                     for (let i = 0; i < firstDay; i++) {
-                      days.push(<div key={`empty-${i}`} className="aspect-square"></div>)
+                      days.push(<div key={`empty-${i}`} className="flex items-center justify-center border border-transparent" />)
                     }
-                    
-                    // Days of the month
+
+                    // Days of the month (no filler cells — grid ends after last day)
                     for (let day = 1; day <= daysInMonth; day++) {
                       const dateStr = `${selectedYear}-${(monthNumber + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
                       const hasEvent = upcomingEvents.some(e => e.date === dateStr)
                       const isToday = new Date().toDateString() === new Date(dateStr).toDateString()
-                      
+
                       days.push(
                         <div
                           key={day}
-                          className={`aspect-square flex items-center justify-center text-sm border transition ${
-                            isToday 
-                              ? "bg-blue-600 text-white font-bold border-blue-700" 
+                          className={`flex items-center justify-center text-sm border transition ${
+                            isToday
+                              ? "bg-blue-600 text-white font-bold border-blue-700"
                               : hasEvent
                               ? "bg-blue-50 text-blue-900 font-semibold border-blue-200 cursor-pointer hover:bg-blue-100"
                               : "text-slate-700 border-slate-200 hover:bg-slate-50"
@@ -224,13 +234,24 @@ export default function UpcomingEventsSection() {
                         </div>
                       )
                     }
-                    
-                    return days
+
+                    return (
+                      <>
+                        <div
+                          className="grid grid-cols-7 gap-2 flex-shrink-0"
+                          style={{ gridTemplateRows: `repeat(${numRows}, ${rowHeight}px)` }}
+                        >
+                          {days}
+                        </div>
+                        {/* Spacer below grid so card height stays consistent */}
+                        <div className="flex-1 min-h-0 w-full" aria-hidden />
+                      </>
+                    )
                   })()}
                 </div>
-                
-                {/* Legend */}
-                <div className="mt-4 pt-4 border-t border-slate-200 space-y-2 text-xs">
+
+                {/* Legend — below the calendar shape and spacer */}
+                <div className="mt-8 pt-5 border-t border-slate-200 space-y-2 text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-blue-50 border border-blue-200"></div>
                     <span className="text-slate-600">Has Events</span>
@@ -245,7 +266,7 @@ export default function UpcomingEventsSection() {
           </div>
 
           {/* Right Side - Upcoming Events List */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <div className="mb-6 pb-4 border-b-2 border-slate-300 flex items-center justify-between">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 mb-1">

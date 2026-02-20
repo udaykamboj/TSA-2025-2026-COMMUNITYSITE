@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
-import Hero from "@/components/layout/hero"
+import HeroWithEvents from "@/components/layout/hero-with-events"
 import BenefitProgramsSection from "@/components/sections/benefit-programs-section"
 import CTASection from "@/components/sections/cta-section"
 import EventsCarousel from "@/components/sections/events-carousel"
@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className="overflow-x-hidden w-full">
       <Header />
-      <Hero />
+      <HeroWithEvents />
       <FeaturedServices />
       <EventsCarousel />
       <LatestNewsSection />
