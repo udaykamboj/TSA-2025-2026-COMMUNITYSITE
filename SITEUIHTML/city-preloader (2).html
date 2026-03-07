@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City Preloader</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .preloader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  svg { display: block; }
+</style>
+</head>
+<body>
+
+<div class="preloader">
+
+  <!--
+    Clean straight-line polygon traced from the original SVG.
+    All bezier curves replaced with their endpoints → sharp architectural edges.
+    ViewBox="0 95 276 215" crops to just the skyline zone.
+    Displayed at 280×85px.
+  -->
+  <svg xmlns="http://www.w3.org/2000/svg"
+    width="280" height="85"
+    viewBox="0 95 276 215"
+    style="overflow:hidden; display:block;">
+    <defs>
+      <clipPath id="wipe">
+        <rect x="0" y="0" width="0" height="400">
+          <animate
+            attributeName="width"
+            values="0; 276; 276; 0"
+            keyTimes="0; 0.52; 0.76; 1"
+            keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1"
+            calcMode="spline"
+            dur="2.8s"
+            repeatCount="indefinite"
+          />
+        </rect>
+      </clipPath>
+    </defs>
+
+    <!-- Ghost silhouette -->
+    <polygon fill="#e4e4e4" points="
+      0,307 0,181 6,181
+      21,181 21,150
+      29,150 29,133
+      34,132 34,104
+      36,104 36,132
+      39,133 40,151
+      48,151 48,181
+      65,181
+      67,268 74,268
+      77,229 86,216 91,212 99,203 110,192
+      125,176
+      129,222 130,222 136,222 136,225
+      156,225 156,222
+      163,222 163,235
+      169,235 169,246
+      206,246 206,203
+      202,198 220,198 220,191
+      231,191 232,152
+      236,191 248,191 248,198
+      266,198 266,203
+      269,231 272,231
+      276,307
+    "/>
+
+    <!-- Revealed black, swept left→right -->
+    <polygon fill="#111" clip-path="url(#wipe)" points="
+      0,307 0,181 6,181
+      21,181 21,150
+      29,150 29,133
+      34,132 34,104
+      36,104 36,132
+      39,133 40,151
+      48,151 48,181
+      65,181
+      67,268 74,268
+      77,229 86,216 91,212 99,203 110,192
+      125,176
+      129,222 130,222 136,222 136,225
+      156,225 156,222
+      163,222 163,235
+      169,235 169,246
+      206,246 206,203
+      202,198 220,198 220,191
+      231,191 232,152
+      236,191 248,191 248,198
+      266,198 266,203
+      269,231 272,231
+      276,307
+    "/>
+  </svg>
+
+  <!-- Progress bar, same timing -->
+  <svg width="280" height="2" viewBox="0 0 280 2">
+    <rect x="0" y="0" width="280" height="2" fill="#ebebeb"/>
+    <rect x="0" y="0" height="2" fill="#111">
+      <animate
+        attributeName="width"
+        values="0; 280; 280; 0"
+        keyTimes="0; 0.52; 0.76; 1"
+        keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1"
+        calcMode="spline"
+        dur="2.8s"
+        repeatCount="indefinite"
+      />
+    </rect>
+  </svg>
+
+</div>
+</body>
+</html>

@@ -36,94 +36,48 @@ const iconMap: { [key: string]: any } = {
 
 export default function CTASection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-24 bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle title="How We Support the Community" linkText="Learn More" linkHref="/main/services" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-slate-200 bg-slate-200 shadow-sm mt-12">
           {stats.map((stat, idx) => {
             const IconComponent = iconMap[stat.icon]
             return (
               <div
                 key={idx}
-                className="h-full flex flex-col backdrop-blur-[12.5px] border-2 transition-all duration-300"
-                style={{
-                  backgroundColor: 'hsla(0, 0%, 100%, 0.749)',
-                  borderColor: '#ddd',
-                  borderRadius: '8px',
-                  padding: '22px',
-                  boxShadow: '4px 4px 12px 0px rgba(0, 0, 0, 0.2)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#fff'
-                  e.currentTarget.style.borderColor = '#555'
-                  e.currentTarget.style.borderRadius = '16px'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'hsla(0, 0%, 100%, 0.749)'
-                  e.currentTarget.style.borderColor = '#ddd'
-                  e.currentTarget.style.borderRadius = '8px'
-                }}
+                className="h-full flex flex-col bg-white hover:bg-card transition-colors duration-300 p-10 lg:p-14 border border-transparent hover:border-slate-200 group"
               >
-                <div className="mb-4 flex justify-center">
-                  <div className="rounded-full p-3" style={{ backgroundColor: '#f0f0f0' }}>
-                    <IconComponent 
-                      style={{ 
-                        width: '40px', 
-                        height: '40px', 
-                        strokeWidth: 1.5,
-                        color: '#051adb'
-                      }} 
-                    />
-                  </div>
+                <div className="mb-8 flex justify-center text-primary">
+                  <IconComponent
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      strokeWidth: 1.5,
+                    }}
+                  />
                 </div>
                 <div className="flex-1 flex flex-col items-center text-center">
-                  <h3 
-                    className="clash-grotesk font-medium leading-[1.25] mb-4" 
-                    style={{ 
-                      fontSize: '22px',
-                      letterSpacing: '0.01em',
-                      wordBreak: 'break-word',
-                      hyphens: 'auto'
-                    }}
-                  >
+                  <h3 className="font-playfair font-bold text-2xl text-secondary mb-4 leading-snug">
                     {stat.number}
                   </h3>
-                  <Link 
-                    href={stat.link}
-                    className="inline-flex items-center justify-center gap-2 transition-all duration-200 rounded-full"
-                    style={{ 
-                      textDecoration: 'none',
-                      fontSize: '16px',
-                      fontWeight: '700',
-                      backgroundColor: '#0d28ff',
-                      color: '#ffffff',
-                      padding: '14px 32px',
-                      border: 'none'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#0a1fd9'
-                      e.currentTarget.style.transform = 'translateY(-1px)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#0d28ff'
-                      e.currentTarget.style.transform = 'translateY(0)'
-                    }}
-                  >
-                    {stat.description}
-                  </Link>
+                  <p className="font-poppins text-gray-500 font-light mb-10">
+                    {stat.label}
+                  </p>
+                  <div className="mt-auto w-full">
+                    <Link
+                      href={stat.link}
+                      className="box-button w-full block text-sm tracking-widest font-bold text-center"
+                    >
+                      {stat.description}
+                    </Link>
+                  </div>
                 </div>
               </div>
             )
           })}
         </div>
       </div>
-
-      <style jsx global>{`
-        .clash-grotesk {
-          font-family: "Clash Grotesk", sans-serif;
-        }
-      `}</style>
     </section>
   )
 }

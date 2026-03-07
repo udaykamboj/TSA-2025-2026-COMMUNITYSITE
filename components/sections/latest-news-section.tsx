@@ -26,71 +26,39 @@ export default function LatestNewsSection() {
   const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + totalArticles) % totalArticles)
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-14 bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle title="Latest News" linkText="See all News" linkHref="/main/news" />
 
-        <div className="flex flex-col md:flex-row gap-8 items-stretch">
-          <div className="w-full md:w-1/2 flex-shrink-0 h-auto md:h-auto">
-            <div 
-              className="bg-white rounded-md shadow-sm border border-slate-100 transition-all duration-300 h-full overflow-hidden"
-                  style={{
-                    backgroundColor: 'hsla(0, 0%, 100%, 0.749)',
-                    borderColor: '#ddd',
-                    borderRadius: '8px',
-                    padding: '0px',
-                    borderWidth: '2.5px',
-                    boxShadow: '4px 4px 12px 0px rgba(0, 0, 0, 0.2)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#fff';
-                    e.currentTarget.style.borderColor = '#555';
-                    e.currentTarget.style.borderRadius = '16px';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'hsla(0, 0%, 100%, 0.749)';
-                    e.currentTarget.style.borderColor = '#ddd';
-                    e.currentTarget.style.borderRadius = '8px';
-                  }}
-            >
-              <div className="w-full h-full overflow-hidden min-h-[150px] max-h-[350px]">
-                <img
-                  src={currentArticle.image}
-                  alt={currentArticle.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+        <div className="flex flex-col md:flex-row gap-12 items-stretch mt-12">
+          <div className="w-full md:w-1/2 flex-shrink-0">
+            <div className="w-full h-full overflow-hidden relative group">
+              <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/0 transition-colors duration-500 z-10" />
+              <img
+                src={currentArticle.image}
+                alt={currentArticle.title}
+                className="w-full h-full object-cover min-h-[300px] md:min-h-[350px] transform group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
             </div>
           </div>
 
           {/* Content on right */}
-          <div className="w-full md:w-1/2">
-            <div className="p-0 md:px-6 md:py-0 h-full">
-              <p className="text-gray-600 mb-4" style={{ fontSize: '16px', fontWeight: '400' }}>
+          <div className="w-full md:w-1/2 flex flex-col justify-center py-6 px-6 lg:px-8">
+            <div>
+              <p className="font-poppins text-primary font-semibold tracking-widest uppercase text-sm mb-4">
                 {currentArticle.date}
               </p>
-              
-              <h3 
-                className="clash-grotesk font-semibold mb-6"
-                style={{ 
-                  fontSize: 'clamp(1.5rem, 1.3rem + 1vw, 2rem)',
-                  letterSpacing: '-0.02em',
-                  lineHeight: '1.2',
-                  wordBreak: 'break-word',
-                  hyphens: 'auto',
-                  color: '#1a1a1a'
-                }}
-              >
+
+              <h3 className="font-playfair font-bold text-3xl md:text-4xl text-secondary leading-tight mb-6">
                 {currentArticle.title}
               </h3>
 
               {currentArticle.tags && currentArticle.tags.length > 0 && (
-                <div className="inline-flex gap-2 mb-6">
+                <div className="inline-flex gap-3 mb-8">
                   {currentArticle.tags.map((tag) => (
-                    <span 
-                      key={tag} 
-                      className="bg-[#ddd] rounded-[4px] text-black inline-block font-bold px-[9px] py-[4px]"
-                      style={{ fontSize: '15px' }}
+                    <span
+                      key={tag}
+                      className="bg-muted border border-slate-200 text-secondary text-xs uppercase tracking-widest font-semibold px-3 py-1 font-poppins"
                     >
                       {tag}
                     </span>
@@ -98,46 +66,40 @@ export default function LatestNewsSection() {
                 </div>
               )}
 
-              <div className="flex items-center gap-3 mb-6">
-                  <Link
-                    href={`/main/news/${currentArticle.slug}`}
-                    className="inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
-                  >
-                    Read press release
-                  </Link>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
+                <Link
+                  href={`/main/news/${currentArticle.slug}`}
+                  className="box-button-primary"
+                >
+                  Read press release
+                </Link>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-6 mt-auto pt-8 border-t border-slate-200">
                 <button
                   onClick={handlePrev}
-                  className="rounded-full border border-slate-200 flex items-center justify-center w-12 h-12 text-slate-600 hover:bg-slate-50 transition"
+                  className="w-12 h-12 flex items-center justify-center border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors duration-300"
                   aria-label="Previous article"
                 >
-                  <ChevronLeft size={20} strokeWidth={2.5} />
+                  <ChevronLeft size={24} strokeWidth={1.5} />
                 </button>
 
-                <div className="text-gray-900 font-medium" style={{ fontSize: '16px' }}>
-                  {currentIndex + 1} of {totalArticles}
+                <div className="font-poppins text-secondary font-semibold tracking-widest uppercase text-sm">
+                  {currentIndex + 1} / {totalArticles}
                 </div>
 
                 <button
                   onClick={handleNext}
-                  className="rounded-full bg-blue-600 flex items-center justify-center w-12 h-12 text-white hover:bg-blue-700 transition"
+                  className="w-12 h-12 flex items-center justify-center bg-primary text-white hover:bg-[#325607] transition-colors duration-300"
                   aria-label="Next article"
                 >
-                  <ChevronRight size={20} strokeWidth={2.5} />
+                  <ChevronRight size={24} strokeWidth={1.5} />
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        .clash-grotesk {
-          font-family: "Clash Grotesk", sans-serif;
-        }
-      `}</style>
     </section>
   )
 }

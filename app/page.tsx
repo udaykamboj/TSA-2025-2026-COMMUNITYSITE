@@ -21,7 +21,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden w-full">
+    <main className="w-full">
       <Header />
       <HeroWithEvents />
       <FeaturedServices />

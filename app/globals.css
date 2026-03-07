@@ -5,30 +5,34 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #222222;
   --border: #e2e8f0;
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --card: #f9f9f9;
+  --card-foreground: #222222;
+  --popover: #ffffff;
+  --popover-foreground: #222222;
+  --primary: #4a7c0d;
+  /* Forest Green */
+  --primary-foreground: #ffffff;
+  --secondary: #222222;
+  /* Charcoal */
+  --secondary-foreground: #ffffff;
+  --muted: #f4f4f4;
+  --muted-foreground: #555555;
+  --accent: #8b2332;
+  /* Maroon Accent */
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --input: #e2e8f0;
+  --ring: #4a7c0d;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
+  --radius: 0rem;
+  /* Sharp corners */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -120,6 +124,7 @@
     height: 0;
     opacity: 0;
   }
+
   to {
     height: var(--radix-accordion-content-height);
     opacity: 1;
@@ -131,6 +136,7 @@
     height: var(--radix-accordion-content-height);
     opacity: 1;
   }
+
   to {
     height: 0;
     opacity: 0;
@@ -141,33 +147,35 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
+    font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+    font-weight: 400;
   }
 
   html {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
   }
 
   h1 {
-    @apply text-4xl font-bold;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 900;
+    @apply text-5xl md:text-6xl font-black tracking-tight;
+    font-family: var(--font-playfair), serif;
   }
 
   h2 {
-    @apply text-3xl font-bold;
+    @apply text-4xl md:text-5xl font-bold tracking-tight;
+    font-family: var(--font-playfair), serif;
   }
 
   h3 {
-    @apply text-xl font-semibold;
+    @apply text-2xl font-bold;
+    font-family: var(--font-playfair), serif;
   }
 
   p {
@@ -177,85 +185,113 @@
   section {
     @apply py-12 px-4;
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 }
 
 @layer components {
+
   /* Hide scrollbar visually while keeping overflow scroll (e.g. Jump to section list) */
   .scrollbar-hide {
     scrollbar-width: none;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 
   /* Unified border standard for all boxes */
   .box-card {
-    @apply bg-white p-6 rounded-md shadow-sm border border-slate-100;
+    @apply bg-white p-6 md:p-10 shadow-sm border border-slate-200 transition-all duration-300;
+    border-radius: 0;
+  }
+
+  .box-card:hover {
+    @apply shadow-md border-slate-300;
   }
 
   /* Unified button styles */
   .box-button {
-    @apply bg-white text-slate-900 font-semibold px-6 py-3 hover:bg-slate-900 hover:text-white transition rounded-md border border-slate-100;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    @apply bg-white text-secondary font-semibold px-8 py-4 hover:bg-secondary hover:text-white transition-all border border-secondary;
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .box-button-primary {
-    @apply bg-slate-900 text-white font-semibold px-6 py-3 hover:bg-slate-800 transition rounded-md border border-slate-900/0;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    @apply bg-primary text-white font-semibold px-8 py-4 hover:bg-[#386109] transition-all;
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   /* Consistent "View All" button style */
   .view-all-btn {
-    @apply bg-white text-slate-900 font-semibold px-6 py-3 hover:bg-slate-900 hover:text-white transition inline-block rounded-md border border-slate-100;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    @apply bg-white text-secondary font-semibold px-8 py-4 hover:bg-secondary hover:text-white transition-all inline-block border border-secondary;
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .box-input {
-    @apply bg-white text-slate-900 px-4 py-3 focus:ring-2 focus:ring-slate-900 border border-slate-100;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    @apply bg-white text-secondary px-6 py-4 focus:ring-2 focus:ring-primary border border-slate-200;
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    border-radius: 0;
   }
 
   /* Unified form elements */
   .form-select {
-    @apply w-full px-4 py-3 text-slate-900 bg-white font-normal focus:ring-2 focus:ring-slate-900 border border-slate-100 rounded-md;
+    @apply w-full px-6 py-4 text-secondary bg-white font-normal focus:ring-2 focus:ring-primary border border-slate-200 rounded-none;
+    font-family: var(--font-poppins), system-ui, sans-serif;
   }
 
   .form-checkbox {
-    @apply border border-slate-100 text-slate-900;
+    @apply border border-slate-200 text-primary rounded-none;
   }
 
   .form-label {
-    @apply block text-sm font-semibold text-slate-900 mb-2;
+    @apply block text-sm font-semibold text-secondary mb-2 uppercase tracking-wide;
+    font-family: var(--font-poppins), system-ui, sans-serif;
   }
 
   .form-error {
-    @apply text-red-600 text-sm mt-1;
+    @apply text-destructive text-sm mt-1;
   }
 
-  .section-heading {
-    @apply text-3xl font-bold text-slate-900 mb-2;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 900;
+  .seattle-section-header {
+    @apply flex items-center justify-center text-center my-12 relative w-full overflow-hidden;
+  }
+
+  .seattle-section-header::before,
+  .seattle-section-header::after {
+    content: '';
+    @apply block border-b border-gray-300 flex-1 mx-4 sm:mx-8;
+  }
+
+  .seattle-section-header h2 {
+    @apply text-3xl md:text-4xl text-secondary m-0 px-2 uppercase tracking-widest break-words text-center;
+    font-family: var(--font-playfair), serif;
+  }
+
+  .seattle-section-header a {
+    @apply absolute right-0 text-sm font-semibold uppercase tracking-wider text-primary border-b-2 border-transparent hover:border-primary transition-colors pb-1 hidden md:block;
   }
 
   .section-subheading {
-    @apply text-lg text-slate-700;
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    @apply text-xl text-muted-foreground mt-4 text-center max-w-3xl mx-auto;
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 400;
   }
 
   /* Global button sizing and weight for UI elements */
   button,
   input[type="button"],
   input[type="submit"] {
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
   }
 
   /* Ensure UI elements inside cards inherit the requested UI size/weight */
@@ -265,8 +301,7 @@
   .box-card .view-all-btn,
   .box-card .box-input,
   .box-card .section-subheading {
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    font-family: var(--font-poppins), system-ui, sans-serif;
   }
 
   /* Role-based overrides for Tailwind utility headings used across components */
@@ -275,8 +310,7 @@
   h2.text-3xl,
   h1.text-4xl,
   .section-heading {
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 900;
+    font-family: var(--font-playfair), serif;
   }
 
   /* Subheadings / UI smaller headings */
@@ -285,12 +319,11 @@
   h3.font-bold,
   h4.font-bold,
   .section-subheading {
-    font-family: 'Nunito Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    font-weight: 700;
+    font-family: var(--font-poppins), system-ui, sans-serif;
   }
 
   .tag-badge {
-    @apply inline-block bg-slate-200 text-slate-900 px-3 py-1 text-xs font-semibold border border-slate-100 rounded-md;
+    @apply inline-block bg-muted text-secondary px-3 py-1 text-xs font-semibold rounded-none tracking-widest uppercase;
   }
 
   .container-page {
@@ -340,7 +373,7 @@
   }
 
   /* Hide the translate bar that appears at top */
-  body > .skiptranslate {
+  body>.skiptranslate {
     display: none !important;
   }
 

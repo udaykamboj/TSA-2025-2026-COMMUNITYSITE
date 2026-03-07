@@ -5,7 +5,7 @@ import { PortalDashboard } from "@/components/portal-dashboard"
 
 export default function PortalPage() {
     return (
-        <main className="overflow-x-hidden w-full">
+        <main className="w-full">
             <Header />
             <PortalDashboard />
         </main>
