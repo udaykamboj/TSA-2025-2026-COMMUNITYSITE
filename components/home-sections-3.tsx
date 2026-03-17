@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useRef } from "react"
 import Link from "next/link"
 
 export function NeighborhoodCarousel() {
@@ -31,7 +31,7 @@ export function NeighborhoodCarousel() {
           </div>
           <div className="nbhd-scroll">
             {neighborhoods.map((n) => (
-              <Link href="/" key={n.name} className="nbhd-card">
+              <Link href="/neighborhoods" key={n.name} className="nbhd-card">
                 <img src={`https://picsum.photos/seed/${n.img}/210/290`} alt={n.name} />
                 <div className="nbhd-overlay">
                   <div className="nbhd-name">{n.name}</div>
@@ -47,6 +47,20 @@ export function NeighborhoodCarousel() {
 }
 
 export function CommunityNews() {
+  const newsGridRef = useRef<HTMLDivElement>(null)
+
+  const scrollLeft = () => {
+    if (newsGridRef.current) {
+      newsGridRef.current.scrollBy({ left: -350, behavior: "smooth" })
+    }
+  }
+
+  const scrollRight = () => {
+    if (newsGridRef.current) {
+      newsGridRef.current.scrollBy({ left: 350, behavior: "smooth" })
+    }
+  }
+
   return (
     <>
       <hr className="rule" />
@@ -55,38 +69,40 @@ export function CommunityNews() {
           <div className="sec-divider">
             <span className="sec-divider-text">Latest News</span>
           </div>
-          <div className="news-grid">
+          <div className="news-grid" ref={newsGridRef}>
             <article className="news-card">
               <div className="news-card-img"><img src="https://picsum.photos/seed/affordable-housing/450/300" alt="Affordable housing Seattle" /></div>
               <p className="photo-credit">Photo: Seattle DCI</p>
               <p className="news-cat">Housing</p>
-              <h3 className="news-title"><Link href="/">Seattle Approves $45M for Affordable Housing Construction in 5 Neighborhoods</Link></h3>
-              <p className="news-excerpt">The city council approved a major funding package aimed at accelerating affordable housing development across Capitol Hill, Rainier Valley, Beacon Hill, Ballard, and Central District.</p>
-              <Link href="/" className="more">More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
+              <h3 className="news-title"><Link href="/news">Seattle Approves $45M for Affordable Housing Construction in 5 Neighborhoods</Link></h3>
+              <p className="news-excerpt">The City Council unanimously voted to fund new multi-family housing projects in Aurora Licton Springs, Rainer Beach, and three others...</p>
+              <Link href="/news" className="more">More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
             </article>
             <article className="news-card">
               <div className="news-card-img"><img src="https://picsum.photos/seed/light-rail/450/300" alt="Ballard Light Rail" /></div>
               <p className="photo-credit">Photo: Sound Transit</p>
               <p className="news-cat">Transit</p>
-              <h3 className="news-title"><Link href="/">New Light Rail Extension: What Ballard Residents Need to Know</Link></h3>
-              <p className="news-excerpt">Construction timelines, station locations, and disruptions to local streets — your guide to the Ballard Link Extension as work ramps up this spring.</p>
-              <Link href="/" className="more">More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
+              <h3 className="news-title"><Link href="/news">New Light Rail Extension: What Ballard Residents Need to Know</Link></h3>
+              <p className="news-excerpt">As construction begins on the new Sound Transit extension, here are the expected impacts on local traffic, parking, and business access.</p>
+              <Link href="/news" className="more">More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
             </article>
             <article className="news-card">
               <div className="news-card-img"><img src="https://picsum.photos/seed/community-fridge/450/300" alt="Community Fridges Network" /></div>
               <p className="photo-credit">Photo: Seattle Food Network</p>
               <p className="news-cat">Food Access</p>
-              <h3 className="news-title"><Link href="/">Community Fridges Network Expands to 12 New Locations Citywide</Link></h3>
-              <p className="news-excerpt">The grassroots community fridge initiative now reaches 28 neighborhoods, ensuring more residents have access to free fresh food seven days a week.</p>
-              <Link href="/" className="more">More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
+              <h3 className="news-title"><Link href="/news">Community Fridges Network Expands to 12 New Locations Citywide</Link></h3>
+              <p className="news-excerpt">Local volunteers and food rescue programs launch a dozen new 24/7 free food access points across the city to combat food insecurity.</p>
+              <Link href="/news" className="more">More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
             </article>
           </div>
-          <div className="carousel-nav">
-            <button className="carousel-nav-btn">&lt;&lt; Previous</button>
-            <button className="carousel-nav-btn">Next &gt;&gt;</button>
+          <div className="news-actions">
+            <div className="news-nav">
+              <button className="news-nav-btn" onClick={scrollLeft}>&lt;&lt; PREVIOUS</button>
+              <button className="news-nav-btn" onClick={scrollRight}>NEXT &gt;&gt;</button>
+            </div>
           </div>
           <div style={{ textAlign: "center", marginTop: "28px" }}>
-            <Link href="/" className="btn btn-ghost-dark">Browse More News →</Link>
+            <Link href="/news" className="btn btn-ghost-dark">Browse More News →</Link>
           </div>
         </div>
       </section>
@@ -105,13 +121,13 @@ export function BenefitPrograms() {
               <span className="eyebrow">Available to You</span>
               <h2 className="sec-title">Benefit Programs For You</h2>
             </div>
-            <Link href="/" className="more">See More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
+            <Link href="/services" className="more">See More <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></Link>
           </div>
           <div className="benefit-grid">
-            <Link href="/" className="benefit-card"><div className="benefit-icon">🍽️</div><div className="benefit-title">Food Assistance</div><p className="benefit-desc">SNAP benefits, food banks, and emergency food pantries in your zip code.</p></Link>
-            <Link href="/" className="benefit-card"><div className="benefit-icon">🏠</div><div className="benefit-title">Housing Support</div><p className="benefit-desc">Rental assistance, eviction prevention, and affordable housing applications.</p></Link>
-            <Link href="/" className="benefit-card"><div className="benefit-icon">🩺</div><div className="benefit-title">Healthcare Services</div><p className="benefit-desc">Low-cost clinics, Medicaid enrollment help, and mental health resources.</p></Link>
-            <Link href="/" className="benefit-card"><div className="benefit-icon">👧</div><div className="benefit-title">Youth Programs</div><p className="benefit-desc">After-school programs, summer camps, tutoring, and mentorship opportunities.</p></Link>
+            <Link href="/services" className="benefit-card"><div className="benefit-icon">🍽️</div><div className="benefit-title">Food Assistance</div><p className="benefit-desc">SNAP benefits, food banks, and emergency food pantries in your zip code.</p></Link>
+            <Link href="/services" className="benefit-card"><div className="benefit-icon">🏠</div><div className="benefit-title">Housing Support</div><p className="benefit-desc">Rental assistance, eviction prevention, and affordable housing applications.</p></Link>
+            <Link href="/services" className="benefit-card"><div className="benefit-icon">🩺</div><div className="benefit-title">Healthcare Services</div><p className="benefit-desc">Low-cost clinics, Medicaid enrollment help, and mental health resources.</p></Link>
+            <Link href="/services" className="benefit-card"><div className="benefit-icon">👧</div><div className="benefit-title">Youth Programs</div><p className="benefit-desc">After-school programs, summer camps, tutoring, and mentorship opportunities.</p></Link>
           </div>
         </div>
       </section>
@@ -133,7 +149,7 @@ export function PromoBlock() {
               <span className="eyebrow">Featured Program</span>
               <h2>Seattle Parks Summer Youth Programs — Registration Now Open</h2>
               <p>Free and subsidized summer programs for youth ages 6–18 at 60+ parks citywide. Swimming lessons, sports leagues, arts workshops, and leadership camps available. Income-based fee assistance guaranteed.</p>
-              <Link href="/" className="btn btn-solid" style={{ width: "fit-content" }}>Register Now →</Link>
+              <Link href="/services" className="btn btn-solid" style={{ width: "fit-content" }}>Register Now →</Link>
             </div>
           </div>
         </div>
@@ -177,7 +193,7 @@ export function NewsletterAndSocial() {
       <div className="questions">
         <h2>Still Have Questions?</h2>
         <p>Our community navigators can help you find the right resource, program, or service — in your language.</p>
-        <Link href="/" className="btn btn-ghost-white">Ask a Question →</Link>
+        <Link href="/services#help" className="btn btn-ghost-white">Ask a Question →</Link>
       </div>
     </>
   )

@@ -26,7 +26,7 @@ export function AlertBar() {
     <div className="alert-bar" role="alert">
       <span className="alert-label">Community Notice</span>
       <p>Community input needed: Seattle Parks 2025 Master Plan — Public comment period open through April 15.</p>
-      <Link href="/">Learn More →</Link>
+      <Link href="/news">Learn More →</Link>
     </div>
   )
 }
@@ -40,20 +40,27 @@ export function PopularServices() {
             <span className="eyebrow">Quick Access</span>
             <h2 className="sec-title">Popular Services</h2>
           </div>
-          <Link href="/" className="more">
+          <Link href="/services" className="more">
             View All Services
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
           </Link>
         </div>
         <div className="services-grid">
-          <Link href="/" className="svc-chip"><div className="svc-icon">🅿️</div><span className="svc-label">Parking or Camera Tickets</span></Link>
-          <Link href="/" className="svc-chip"><div className="svc-icon">🔇</div><span className="svc-label">Noise Complaint</span></Link>
-          <Link href="/" className="svc-chip"><div className="svc-icon">♻️</div><span className="svc-label">Get Rid of Waste</span></Link>
-          <Link href="/" className="svc-chip"><div className="svc-icon">🚗</div><span className="svc-label">Illegal Parking Complaint</span></Link>
-          <Link href="/" className="svc-chip"><div className="svc-icon">🏠</div><span className="svc-label">Apartment Complaint</span></Link>
-          <Link href="/" className="svc-chip"><div className="svc-icon">📄</div><span className="svc-label">Birth Certificates</span></Link>
-          <Link href="/" className="svc-chip"><div className="svc-icon">📈</div><span className="svc-label">Rent Increase Help</span></Link>
-          <Link href="/" className="svc-chip"><div className="svc-icon">🍎</div><span className="svc-label">SNAP Benefits</span></Link>
+          {[
+            { icon: '🅿️', name: 'Parking or Camera Tickets', href: '#' },
+            { icon: '🔇', name: 'Noise Complaint', href: '#' },
+            { icon: '♻️', name: 'Get Rid of Waste', href: '#' },
+            { icon: '🚗', name: 'Illegal Parking Complaint', href: '#' },
+            { icon: '🏠', name: 'Apartment Complaint', href: '#' },
+            { icon: '📄', name: 'Birth Certificates', href: '#' },
+            { icon: '📈', name: 'Rent Increase Help', href: '#' },
+            { icon: '🍎', name: 'SNAP Benefits', href: '#' },
+          ].map((svc) => (
+            <Link href={svc.href} key={svc.name} className="svc-chip">
+              <div className="svc-icon">{svc.icon}</div>
+              <span className="svc-label">{svc.name}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
@@ -74,7 +81,7 @@ export function FeaturedSpotlight() {
               <span className="eyebrow">Featured Story</span>
               <h2>Seattle&apos;s 2025 Community Budget: What It Means for Your Neighborhood</h2>
               <p>The city council approved a landmark $1.9 billion budget this year, with significant investments directed toward affordable housing, transit expansion, and community health services across all 37 neighborhoods. Here&apos;s what&apos;s changing in your zip code.</p>
-              <Link href="/" className="more">
+              <Link href="/news" className="more">
                 Read More
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
               </Link>
@@ -96,7 +103,7 @@ export function PlanYourResources() {
             <span className="sec-divider-text">Plan Your Resources</span>
           </div>
           <div className="plan-grid">
-            <Link href="/" className="plan-card">
+            <Link href="#" className="plan-card">
               <img src="https://picsum.photos/seed/city-hall-svc/450/300" alt="City Services" className="plan-card-img" />
               <div className="plan-card-body">
                 <div className="plan-card-title">City Services Directory</div>
@@ -108,7 +115,7 @@ export function PlanYourResources() {
               </div>
             </Link>
 
-            <Link href="/" className="plan-card">
+            <Link href="/services" className="plan-card">
               <img src="https://picsum.photos/seed/seattle-transit/450/300" alt="Getting Around" className="plan-card-img" />
               <div className="plan-card-body">
                 <div className="plan-card-title">Getting Around</div>
@@ -120,7 +127,7 @@ export function PlanYourResources() {
               </div>
             </Link>
 
-            <Link href="/" className="plan-card">
+            <Link href="#" className="plan-card">
               <img src="https://picsum.photos/seed/health-community/450/300" alt="Health and Wellness" className="plan-card-img" />
               <div className="plan-card-body">
                 <div className="plan-card-title">Health &amp; Wellness</div>
@@ -132,7 +139,7 @@ export function PlanYourResources() {
               </div>
             </Link>
 
-            <Link href="/" className="plan-card">
+            <Link href="#" className="plan-card">
               <img src="https://picsum.photos/seed/seattle-maps/450/300" alt="Maps and Guides" className="plan-card-img" />
               <div className="plan-card-body">
                 <div className="plan-card-title">Maps &amp; Guides</div>
