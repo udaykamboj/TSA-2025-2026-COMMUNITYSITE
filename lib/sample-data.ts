@@ -1,5 +1,7 @@
 // Sample data for all homepage sections
 
+import { getUpcomingEvents } from "@/lib/content/events-config"
+
 export const latestNews = [
   {
     id: 1,
@@ -42,120 +44,7 @@ export const popularServices = [
   { id: 8, name: "Get Legal Help", icon: "Scale", description: "Free consultations available" },
 ]
 
-export const upcomingEvents = [
-  // November 2025
-  {
-    id: 1,
-    title: "Thanksgiving Food Drive",
-    date: "2025-11-23",
-    time: "9:00 AM - 5:00 PM",
-    location: "City Food Bank",
-    image: "/thanksgiving-food-drive.jpg",
-    description: "Help distribute Thanksgiving meals to families in need.",
-    tags: [],
-    month: "November",
-    year: 2025,
-  },
-  {
-    id: 2,
-    title: "Community Health Fair",
-    date: "2025-11-30",
-    time: "10:00 AM - 4:00 PM",
-    location: "Downtown Community Center",
-    image: "/health-fair.jpg",
-    description: "Free health screenings and flu shots for all ages.",
-    tags: [],
-    month: "November",
-    year: 2025,
-  },
-  // December 2025
-  {
-    id: 3,
-    title: "Winter Coat Distribution",
-    date: "2025-12-01",
-    time: "10:00 AM - 6:00 PM",
-    location: "Multiple locations citywide",
-    image: "/winter-coat-giveaway.jpg",
-    description: "Free warm coats for families in need.",
-    tags: ["Done"],
-    month: "December",
-    year: 2025,
-  },
-  {
-    id: 4,
-    title: "Community Job Fair",
-    date: "2025-12-05",
-    time: "9:00 AM - 3:00 PM",
-    location: "Central Community Center",
-    image: "/job-fair-event.jpg",
-    description: "Meet with 50+ employers hiring now.",
-    tags: ["Free"],
-    month: "December",
-    year: 2025,
-  },
-  {
-    id: 5,
-    title: "Holiday Celebration",
-    date: "2025-12-15",
-    time: "2:00 PM - 6:00 PM",
-    location: "City Park",
-    image: "/holiday-celebration.jpg",
-    description: "Family celebration with crafts, music, and hot chocolate.",
-    tags: ["Free"],
-    month: "December",
-    year: 2025,
-  },
-  // January 2026
-  {
-    id: 6,
-    title: "New Year Resource Fair",
-    date: "2026-01-10",
-    time: "10:00 AM - 2:00 PM",
-    location: "Central Library",
-    image: "/resource-fair.jpg",
-    description: "Learn about available community resources.",
-    tags: [],
-    month: "January",
-    year: 2026,
-  },
-  {
-    id: 7,
-    title: "Tax Preparation Help",
-    date: "2026-01-25",
-    time: "9:00 AM - 5:00 PM",
-    location: "Community Center",
-    image: "/tax-help.jpg",
-    description: "Free tax preparation assistance for families.",
-    tags: ["Free"],
-    month: "January",
-    year: 2026,
-  },
-  // February 2026
-  {
-    id: 8,
-    title: "Heart Health Day",
-    date: "2026-02-14",
-    time: "9:00 AM - 3:00 PM",
-    location: "Health Center",
-    image: "/heart-health.jpg",
-    description: "Free heart health screenings and wellness education.",
-    tags: ["Free"],
-    month: "February",
-    year: 2026,
-  },
-  {
-    id: 9,
-    title: "Job Skills Training",
-    date: "2026-02-20",
-    time: "6:00 PM - 8:00 PM",
-    location: "Employment Center",
-    image: "/job-training.jpg",
-    description: "Resume building and interview skills workshop.",
-    tags: ["Free"],
-    month: "February",
-    year: 2026,
-  },
-]
+export const upcomingEvents = getUpcomingEvents()
 
 export const governmentUpdates = [
   {

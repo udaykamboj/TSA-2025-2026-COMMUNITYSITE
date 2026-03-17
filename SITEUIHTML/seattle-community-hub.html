@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seattle Community Hub — Your City, Your Neighbors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-primary: #3b5c1e;
+    --color-primary-dark: #2b4316;
+    --color-primary-light: #4d7427;
+    --color-accent: #c8392b;
+    --color-bg: #edeae4;
+    --color-bg-white: #ffffff;
+    --color-bg-light: #f3f2ef;
+    --color-text: #2d2d2d;
+    --color-text-body: #40464d;
+    --color-text-muted: #767676;
+    --color-text-light: #999;
+    --color-border: #d6d3cc;
+    --color-nav-dark: #1e2e10;
+    --color-utility-bg: #f7f5f0;
+    --font-heading: 'Barlow Condensed', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+    --max-width: 1200px;
+    --section-pad: 64px;
+    --card-gap: 28px;
+    --block-gap: 1.5rem;
+    --radius-pill: 9999px;
+    --shadow-none: none;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-body);
+    background: var(--color-bg);
+  }
+
+  img { height: auto; max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── UTILITY BAR ── */
+  .utility-bar {
+    background: var(--color-utility-bg);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 12px;
+    font-family: var(--font-body);
+  }
+  .utility-bar .container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .utility-bar a {
+    color: var(--color-text-muted);
+    padding: 0 12px;
+    border-right: 1px solid var(--color-border);
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    transition: color 0.2s;
+  }
+  .utility-bar a:last-child { border-right: none; }
+  .utility-bar a:hover { color: var(--color-primary); }
+
+  /* ── MAIN NAV ── */
+  .main-nav {
+    background: var(--color-nav-dark);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .main-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 64px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .nav-logo-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--color-primary-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: white;
+    font-size: 18px;
+    letter-spacing: -1px;
+  }
+  .nav-logo-text {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 20px;
+    color: white;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  .nav-logo-text span { display: block; font-size: 10px; font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    height: 100%;
+  }
+  .nav-links > li {
+    position: relative;
+    height: 64px;
+    display: flex;
+    align-items: center;
+  }
+  .nav-links > li > a {
+    color: rgba(255,255,255,0.88);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 0 14px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-links > li > a:hover,
+  .nav-links > li:hover > a {
+    color: white;
+    border-bottom-color: var(--color-primary-light);
+  }
+  .nav-links > li > a .caret {
+    font-size: 9px;
+    margin-left: 4px;
+    opacity: 0.6;
+  }
+
+  /* Dropdowns */
+  .nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    border-top: 3px solid var(--color-primary);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.2s ease;
+    z-index: 200;
+  }
+  .nav-links > li:hover .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-dropdown li a {
+    display: block;
+    padding: 10px 18px;
+    font-size: 13px;
+    color: var(--color-text-body);
+    font-weight: 400;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-dropdown li:last-child a { border-bottom: none; }
+  .nav-dropdown li a:hover { background: #f7f7f5; color: var(--color-primary); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    transition: all 0.3s;
+  }
+
+  /* ── ALERT BAR ── */
+  .alert-bar {
+    background: var(--color-bg-white);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+    padding: 14px 24px;
+  }
+  .alert-bar .alert-label {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-right: 10px;
+  }
+  .alert-bar p {
+    display: inline;
+    font-size: 14px;
+    color: var(--color-text-body);
+    line-height: 1.5;
+  }
+  .alert-bar a.alert-link {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: underline;
+    font-size: 14px;
+    margin-left: 6px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--color-nav-dark);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://picsum.photos/seed/seattle-skyline/1400/600');
+    background-size: cover;
+    background-position: center 40%;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(27,46,14,0.75) 0%, rgba(20,35,10,0.55) 60%, rgba(0,0,0,0.4) 100%);
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    max-width: 760px;
+    padding: 0 24px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 16px;
+  }
+  .hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 6vw, 68px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  }
+  .hero-content h1 em {
+    font-style: normal;
+    color: #a8d06e;
+  }
+  .hero-content .hero-sub {
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 36px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+  .btn-primary:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+  .btn-outline-white {
+    background: transparent;
+    color: white;
+    border-color: rgba(255,255,255,0.7);
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: white; }
+  .btn-outline-green {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    font-size: 13px;
+    padding: 10px 22px;
+  }
+  .btn-outline-green:hover { background: var(--color-primary); color: white; }
+
+  /* ── SECTION LAYOUT ── */
+  section { padding: var(--section-pad) 0; }
+  section.bg-white { background: var(--color-bg-white); }
+  section.bg-light { background: var(--color-bg-light); }
+  section.bg-dark { background: var(--color-nav-dark); }
+  section.bg-main { background: var(--color-bg); }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .section-header.left { text-align: left; }
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+  .section-divider-title {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .eyebrow {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .section-subtitle {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-header.left .section-subtitle { margin-left: 0; }
+
+  .more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: gap 0.2s;
+    margin-top: 8px;
+  }
+  .more-link:hover { gap: 10px; }
+  .more-link .arrow { font-size: 16px; }
+
+  /* ── POPULAR SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .service-chip {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--color-text-body);
+  }
+  .service-chip:hover {
+    border-color: var(--color-primary);
+    background: #f5f8f1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59,92,30,0.12);
+  }
+  .service-chip-icon {
+    width: 42px;
+    height: 42px;
+    background: #e8f0de;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .service-chip-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+
+  /* ── FEATURED SPOTLIGHT ── */
+  .spotlight {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  .spotlight-image {
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+  }
+  .spotlight-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .spotlight:hover .spotlight-image img { transform: scale(1.03); }
+  .spotlight-body {
+    padding: 52px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .spotlight-body .eyebrow { margin-bottom: 14px; }
+  .spotlight-body h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-text);
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .spotlight-body p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-body);
+    margin-bottom: 28px;
+  }
+
+  /* ── QUICK LINKS GRID ── */
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--card-gap);
+  }
+  .quick-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .quick-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  }
+  .quick-card-img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    display: block;
+  }
+  .quick-card-body { padding: 20px 20px 24px; }
+  .quick-card-title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .quick-card-desc {
+    font-size: 14px;
+    color: var(--color-text-body);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  /* ── EVENTS ── */
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 var(--card-gap);
+  }
+  .event-item {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 0 16px;
+  }
+  .event-icon {
+    width: 44px;
+    height: 44px;
+    background: #e8f0de;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .event-content {}
+  .event-date {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+  }
+  .event-title {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .event-title a { color: inherit; }
+  .event-title a:hover { text-decoration: underline; }
+  .event-location {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+  }
+  .event-desc {
+    font-size: 13px;
+    color: var(--color-text-body);
+    line-height: 1.55;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .event-tag {
+    display: inline-block;
+    background: #e8f0de;
+    color: var(--color-primary-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  .event-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--color-primary);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--color-primary);
+    padding: 6px 14px;
+    border-radius: 3px;
+    font-family: var(--font-heading);
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .event-link:hover { background: var(--color-primary); color: white; }
+  .event-link svg { width: 12px; height: 12px; }
+
+  .view-all-wrap { text-align: center; margin-top: 44px; }
+
+  /* ── NEIGHBORHOOD CAROUSEL ── */
+  .neighborhood-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+  }
+  .neighborhood-scroll::-webkit-scrollbar { display: none; }
+  .neighborhood-card {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .neighborhood-card img {
+    width: 220px;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+  .neighborhood-card:hover img { transform: scale(1.06); }
+  .neighborhood-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20,40,8,0.8) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 16px;
+  }
+  .neighborhood-name {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  .neighborhood-tagline {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 4px;
+  }
+
+  /* ── CARD GRID (News/Blog) ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--card-gap);
+  }
+  .news-card {
+    background: transparent;
+    border: none;
+    overflow: hidden;
+  }
+  .news-card-img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/2;
+    margin-bottom: 0;
+  }
+  .news-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .news-card:hover .news-card-img-wrap img { transform: scale(1.04); }
+  .photo-credit {
+    font-size: 11px;
+    color: var(--color-text-light);
+    font-style: italic;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .news-card-tag {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 6px;
+  }
+  .news-card-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .news-card-title a { color: inherit; }
+  .news-card-title a:hover { text-decoration: underline; }
+  .news-card-excerpt {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-text-body);
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Pagination nav */
+  .carousel-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .carousel-btn {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 0;
+  }
+  .carousel-btn:hover { background: var(--color-primary-dark); }
+
+  /* ── BENEFIT PROGRAMS ── */
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .benefit-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    padding: 32px 24px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-color: var(--color-primary);
+  }
+  .benefit-icon {
+    font-size: 36px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .benefit-title {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .benefit-desc {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  /* ── PROMO BLOCK ── */
+  .promo-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  .promo-image {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+  }
+  .promo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .promo-body {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .promo-body .eyebrow { margin-bottom: 10px; }
+  .promo-body h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 2.8vw, 34px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .promo-body p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--color-text-body);
+    margin-bottom: 24px;
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter-section {
+    background: var(--color-nav-dark);
+    padding: var(--section-pad) 0;
+  }
+  .newsletter-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+  }
+  .newsletter-inner .eyebrow { color: #a8d06e; margin-bottom: 10px; }
+  .newsletter-inner h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .newsletter-inner p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 32px;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .newsletter-form input {
+    flex: 1 1 200px;
+    min-width: 0;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-family: var(--font-body);
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: var(--radius-pill);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.5); }
+  .newsletter-form input:focus { border-color: #a8d06e; }
+  .newsletter-form .btn-subscribe {
+    background: var(--color-primary-light);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .newsletter-form .btn-subscribe:hover { background: var(--color-primary); }
+
+  /* ── SOCIAL CALLOUT ── */
+  .social-section { text-align: center; padding: var(--section-pad) 0; }
+  .social-section .section-title { margin-bottom: 12px; }
+  .social-section p { color: var(--color-text-muted); font-size: 16px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .social-links {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .social-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    font-size: 14px;
+    font-family: var(--font-heading);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .social-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+  .social-pill.instagram { background: #e1306c; color: white; }
+  .social-pill.twitter { background: #1da1f2; color: white; }
+  .social-pill.facebook { background: #1877f2; color: white; }
+  .social-pill.nextdoor { background: #8db600; color: white; }
+
+  /* ── STILL HAVE QUESTIONS ── */
+  .questions-banner {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    text-align: center;
+    padding: 52px 24px;
+  }
+  .questions-banner h2 {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .questions-banner p { font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 28px; }
+  .questions-banner .btn { border-color: white; color: white; }
+  .questions-banner .btn:hover { background: white; color: var(--color-primary); }
+
+  /* ── SUPPORT SECTION ── */
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .support-card {
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+    border: 1px solid var(--color-border);
+  }
+  .support-card:hover { opacity: 0.9; }
+  .support-card:first-child {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+  .support-card:last-child { background: var(--color-bg-white); }
+  .support-card h3 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .support-card p { font-size: 15px; line-height: 1.7; margin-bottom: 24px; opacity: 0.85; }
+  .support-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 2px solid;
+    padding: 11px 24px;
+    border-radius: var(--radius-pill);
+    width: fit-content;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .support-card:first-child .support-btn { border-color: white; color: white; }
+  .support-card:first-child .support-btn:hover { background: white; color: var(--color-primary); }
+  .support-card:last-child .support-btn { border-color: var(--color-primary); color: var(--color-primary); }
+  .support-card:last-child .support-btn:hover { background: var(--color-primary); color: white; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--color-nav-dark);
+    color: rgba(255,255,255,0.75);
+    padding: 64px 0 0;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .footer-brand .nav-logo { margin-bottom: 16px; }
+  .footer-brand p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 20px;
+    max-width: 240px;
+  }
+  .footer-brand address {
+    font-style: normal;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+  .footer-col-title {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 18px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: white; }
+  .footer-bottom {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-acknowledgment {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .footer-legal {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-legal a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    transition: color 0.2s;
+  }
+  .footer-legal a:hover { color: white; }
+
+  /* ── MOBILE NAV ── */
+  @media (max-width: 768px) {
+    .utility-bar { display: none; }
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-nav-dark);
+      flex-direction: column;
+      height: auto;
+      padding: 24px 0;
+      overflow-y: auto;
+      z-index: 999;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links > li { height: auto; }
+    .nav-links > li > a { height: auto; padding: 14px 24px; font-size: 16px; border-bottom: none; }
+    .nav-dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(255,255,255,0.05); border-top: none; display: none; }
+    .nav-links > li.open .nav-dropdown { display: block; }
+    .nav-dropdown li a { color: rgba(255,255,255,0.7); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .hero { min-height: 440px; }
+    .hero-content h1 { font-size: 38px; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .quick-links-grid { grid-template-columns: 1fr 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+    .events-grid { grid-template-columns: 1fr; }
+    .spotlight { grid-template-columns: 1fr; }
+    .spotlight-image { min-height: 280px; }
+    .spotlight-body { padding: 32px 24px; }
+    .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+    .promo-block { grid-template-columns: 1fr; }
+    .promo-image { min-height: 260px; }
+    .promo-body { padding: 32px 24px; }
+    .support-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .quick-links-grid { grid-template-columns: 1fr; }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    :root { --section-pad: 44px; }
+  }
+
+  /* Small utilities */
+  .text-center { text-align: center; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mt-40 { margin-top: 40px; }
+  .divider { height: 1px; background: var(--color-border); margin: 0; border: none; }
+</style>
+</head>
+<body>
+
+<!-- ── UTILITY BAR ── -->
+<div class="utility-bar" role="complementary">
+  <div class="container">
+    <a href="#">City Council</a>
+    <a href="#">Public Services</a>
+    <a href="#">Press</a>
+    <a href="#">Volunteer</a>
+    <a href="#">About</a>
+  </div>
+</div>
+
+<!-- ── MAIN NAVIGATION ── -->
+<header>
+  <nav class="main-nav" aria-label="Main navigation">
+    <div class="container">
+      <a class="nav-logo" href="#" aria-label="Seattle Community Hub Home">
+        <div class="nav-logo-icon">S</div>
+        <div class="nav-logo-text">
+          Seattle Community Hub
+          <span>Emerald City Resources</span>
+        </div>
+      </a>
+
+      <button class="hamburger" aria-label="Toggle navigation" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-links" role="menubar">
+        <li role="none">
+          <a href="#" role="menuitem">News &amp; Updates <span class="caret">▾</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="#">City News</a></li>
+            <li><a href="#">Neighborhood Updates</a></li>
+            <li><a href="#">Public Notices</a></li>
+            <li><a href="#">Emergency Alerts</a></li>
+          </ul>
+        </li>
+        <li role="none">
+          <a href="#" role="menuitem">Community Programs <span class="caret">▾</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="#">Parks &amp; Recreation</a></li>
+            <li><a href="#">Youth Programs</a></li>
+            <li><a href="#">Senior Services</a></li>
+            <li><a href="#">Housing Resources</a></li>
+            <li><a href="#">Health &amp; Wellness</a></li>
+          </ul>
+        </li>
+        <li role="none">
+          <a href="#" role="menuitem">Events <span class="caret">▾</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="#">Community Meetings</a></li>
+            <li><a href="#">Festivals &amp; Gatherings</a></li>
+            <li><a href="#">Volunteer Opportunities</a></li>
+            <li><a href="#">Submit Your Event</a></li>
+          </ul>
+        </li>
+        <li role="none">
+          <a href="#" role="menuitem">Resources <span class="caret">▾</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="#">Public Transit</a></li>
+            <li><a href="#">City Services Directory</a></li>
+            <li><a href="#">Maps &amp; Guides</a></li>
+            <li><a href="#">Permits &amp; Licensing</a></li>
+          </ul>
+        </li>
+        <li role="none">
+          <a href="#" role="menuitem">Neighborhoods</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ── HERO ── -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Welcome to the Emerald City</p>
+    <h1>Your Seattle.<br><em>Your Community.</em></h1>
+    <p class="hero-sub">News, resources, and connections for everyone who calls the Emerald City home.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Explore Resources →</a>
+      <a href="#" class="btn btn-outline-white">Find Your Neighborhood →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── ALERT BAR ── -->
+<div class="alert-bar" role="alert">
+  <span class="alert-label">Community Notice</span>
+  <p>Community input needed: Seattle Parks 2025 Master Plan — Public comment period open through April 15.</p>
+  <a class="alert-link" href="#">Learn More →</a>
+</div>
+
+<!-- ── POPULAR SERVICES ── -->
+<section class="bg-white" aria-labelledby="services-title">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <span class="eyebrow">Quick Access</span>
+        <h2 class="section-title" id="services-title">Popular Services</h2>
+      </div>
+      <a href="#" class="more-link">View All Services <span class="arrow">→</span></a>
+    </div>
+    <div class="services-grid">
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">🅿️</div>
+        <span class="service-chip-label">Parking or Camera Tickets</span>
+      </a>
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">🔇</div>
+        <span class="service-chip-label">Noise Complaint</span>
+      </a>
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">♻️</div>
+        <span class="service-chip-label">Get Rid of Waste</span>
+      </a>
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">🚗</div>
+        <span class="service-chip-label">Illegal Parking Complaint</span>
+      </a>
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">🏠</div>
+        <span class="service-chip-label">Apartment Complaint</span>
+      </a>
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">📄</div>
+        <span class="service-chip-label">Birth Certificates</span>
+      </a>
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">📈</div>
+        <span class="service-chip-label">Rent Increase Help</span>
+      </a>
+      <a href="#" class="service-chip">
+        <div class="service-chip-icon">🍎</div>
+        <span class="service-chip-label">SNAP Benefits</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── FEATURED SPOTLIGHT ── -->
+<section class="bg-main" aria-labelledby="spotlight-title">
+  <div class="container">
+    <div class="spotlight">
+      <div class="spotlight-image">
+        <img src="https://picsum.photos/seed/seattle-budget/700/500" alt="Seattle City Hall aerial view">
+      </div>
+      <div class="spotlight-body">
+        <span class="eyebrow">Featured Story</span>
+        <h2 id="spotlight-title">Seattle's 2025 Community Budget: What It Means for Your Neighborhood</h2>
+        <p>The city council approved a landmark $1.9 billion budget this year, with significant investments directed toward affordable housing, transit expansion, and community health services across all 37 neighborhoods. Here's what's changing in your zip code and how to get involved in upcoming public meetings.</p>
+        <a href="#" class="more-link">Read More <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── QUICK LINKS ── -->
+<section class="bg-white" aria-labelledby="quick-links-title">
+  <div class="container">
+    <div class="section-divider">
+      <span class="section-divider-title">Plan Your Resources</span>
+    </div>
+    <div class="quick-links-grid">
+      <a href="#" class="quick-card">
+        <img src="https://picsum.photos/seed/city-services/450/300" alt="City Services" class="quick-card-img">
+        <div class="quick-card-body">
+          <div class="quick-card-title">City Services Directory</div>
+          <p class="quick-card-desc">Find permits, utilities, local government contacts, and everything you need from the city in one place.</p>
+          <span class="more-link">More <span class="arrow">→</span></span>
+        </div>
+      </a>
+      <a href="#" class="quick-card">
+        <img src="https://picsum.photos/seed/transit/450/300" alt="Getting Around Seattle" class="quick-card-img">
+        <div class="quick-card-body">
+          <div class="quick-card-title">Getting Around</div>
+          <p class="quick-card-desc">Seattle is easy to navigate with transit routes, bike lanes, light rail maps, and parking options.</p>
+          <span class="more-link">More <span class="arrow">→</span></span>
+        </div>
+      </a>
+      <a href="#" class="quick-card">
+        <img src="https://picsum.photos/seed/health-clinic/450/300" alt="Health and Wellness" class="quick-card-img">
+        <div class="quick-card-body">
+          <div class="quick-card-title">Health &amp; Wellness</div>
+          <p class="quick-card-desc">Community clinics, mental health resources, free screenings, and social services across the city.</p>
+          <span class="more-link">More <span class="arrow">→</span></span>
+        </div>
+      </a>
+      <a href="#" class="quick-card">
+        <img src="https://picsum.photos/seed/maps-seattle/450/300" alt="Maps and Guides" class="quick-card-img">
+        <div class="quick-card-body">
+          <div class="quick-card-title">Maps &amp; Guides</div>
+          <p class="quick-card-desc">Your one-stop resource for neighborhood maps, zoning information, and trip planning docs.</p>
+          <span class="more-link">More <span class="arrow">→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── UPCOMING EVENTS ── -->
+<section class="bg-main" aria-labelledby="events-title">
+  <div class="container">
+    <div class="section-divider">
+      <span class="section-divider-title">Upcoming Events</span>
+    </div>
+
+    <div class="events-grid">
+
+      <div class="event-item">
+        <div class="event-icon">📅</div>
+        <div class="event-content">
+          <p class="event-date">November 22 · 9:00 AM – 5:00 PM</p>
+          <h3 class="event-title"><a href="#">Thanksgiving Food Drive</a></h3>
+          <p class="event-location">📍 City Food Bank</p>
+          <p class="event-desc">Help distribute Thanksgiving meals to families in need. All volunteers welcome, no experience needed.</p>
+          <span class="event-tag">Free</span><br>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">🏥</div>
+        <div class="event-content">
+          <p class="event-date">November 29 · 10:00 AM – 4:00 PM</p>
+          <h3 class="event-title"><a href="#">Community Health Fair</a></h3>
+          <p class="event-location">📍 Downtown Community Center</p>
+          <p class="event-desc">Free health screenings and flu shots for all ages. Bring the whole family — no appointment required.</p>
+          <span class="event-tag">Free</span><br>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">🧥</div>
+        <div class="event-content">
+          <p class="event-date">November 30 · 10:00 AM – 6:00 PM</p>
+          <h3 class="event-title"><a href="#">Winter Coat Distribution</a></h3>
+          <p class="event-location">📍 Multiple Locations Citywide</p>
+          <p class="event-desc">Free warm coats for families in need as we head into winter. First come, first served at each location.</p>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">💼</div>
+        <div class="event-content">
+          <p class="event-date">December 4 · 9:00 AM – 3:00 PM</p>
+          <h3 class="event-title"><a href="#">Community Job Fair</a></h3>
+          <p class="event-location">📍 Central Community Center</p>
+          <p class="event-desc">Meet with 50+ employers hiring now across healthcare, tech, construction, and services sectors.</p>
+          <span class="event-tag">Free</span><br>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">🎄</div>
+        <div class="event-content">
+          <p class="event-date">December 14 · 2:00 PM – 6:00 PM</p>
+          <h3 class="event-title"><a href="#">Holiday Family Celebration</a></h3>
+          <p class="event-location">📍 City Park</p>
+          <p class="event-desc">Family celebration with crafts, live music, hot chocolate, and activities for all ages. Neighbors welcome.</p>
+          <span class="event-tag">Free</span><br>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">📚</div>
+        <div class="event-content">
+          <p class="event-date">January 9 · 10:00 AM – 2:00 PM</p>
+          <h3 class="event-title"><a href="#">New Year Resource Fair</a></h3>
+          <p class="event-location">📍 Central Library</p>
+          <p class="event-desc">Learn about available community resources — housing, health, job training, and financial support services.</p>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">💰</div>
+        <div class="event-content">
+          <p class="event-date">January 24 · 9:00 AM – 5:00 PM</p>
+          <h3 class="event-title"><a href="#">Free Tax Preparation Help</a></h3>
+          <p class="event-location">📍 Community Center</p>
+          <p class="event-desc">Free tax preparation assistance for qualifying families. Certified volunteers help you maximize your refund.</p>
+          <span class="event-tag">Free</span><br>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">❤️</div>
+        <div class="event-content">
+          <p class="event-date">February 13 · 9:00 AM – 3:00 PM</p>
+          <h3 class="event-title"><a href="#">Heart Health Day</a></h3>
+          <p class="event-location">📍 Health Center</p>
+          <p class="event-desc">Free heart health screenings, wellness education, and tips from cardiologists serving our community.</p>
+          <span class="event-tag">Free</span><br>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-icon">📝</div>
+        <div class="event-content">
+          <p class="event-date">February 19 · 6:00 PM – 8:00 PM</p>
+          <h3 class="event-title"><a href="#">Job Skills Training Workshop</a></h3>
+          <p class="event-location">📍 Employment Center</p>
+          <p class="event-desc">Resume building and interview skills workshop led by HR professionals. Walk-ins welcome, seating limited.</p>
+          <span class="event-tag">Free</span><br>
+          <a href="#" class="event-link">Event Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="view-all-wrap">
+      <a href="#" class="btn btn-outline-green">View All Upcoming Events 📣</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── NEIGHBORHOOD CAROUSEL ── -->
+<section class="bg-white" aria-labelledby="neighborhoods-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Explore Seattle</span>
+      <h2 class="section-title" id="neighborhoods-title">Your Neighborhood</h2>
+      <p class="section-subtitle">Discover what's happening across Seattle's diverse and vibrant communities.</p>
+    </div>
+    <div class="neighborhood-scroll" role="list">
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/capitol-hill/220/300" alt="Capitol Hill neighborhood">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Capitol Hill</div>
+          <div class="neighborhood-tagline">Arts, culture &amp; community</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/ballard-wa/220/300" alt="Ballard neighborhood">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Ballard</div>
+          <div class="neighborhood-tagline">Nordic roots, thriving now</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/fremont/220/300" alt="Fremont neighborhood">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Fremont</div>
+          <div class="neighborhood-tagline">Center of the universe</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/beacon-hill/220/300" alt="Beacon Hill neighborhood">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Beacon Hill</div>
+          <div class="neighborhood-tagline">Rich history, bright future</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/central-dist/220/300" alt="Central District">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Central District</div>
+          <div class="neighborhood-tagline">Cultural heart of Seattle</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/rainier-valley/220/300" alt="Rainier Valley">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Rainier Valley</div>
+          <div class="neighborhood-tagline">Seattle's most diverse</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/west-seattle/220/300" alt="West Seattle">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">West Seattle</div>
+          <div class="neighborhood-tagline">Views, beaches &amp; community</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/south-lake-union/220/300" alt="South Lake Union">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">South Lake Union</div>
+          <div class="neighborhood-tagline">Innovation meets lakeside</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/queen-anne/220/300" alt="Queen Anne">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Queen Anne</div>
+          <div class="neighborhood-tagline">Hilltop views &amp; history</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/columbia-city/220/300" alt="Columbia City">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Columbia City</div>
+          <div class="neighborhood-tagline">Vibrant village feel</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/georgetown-seattle/220/300" alt="Georgetown">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Georgetown</div>
+          <div class="neighborhood-tagline">Art &amp; industrial grit</div>
+        </div>
+      </a>
+      <a href="#" class="neighborhood-card" role="listitem">
+        <img src="https://picsum.photos/seed/magnolia/220/300" alt="Magnolia">
+        <div class="neighborhood-card-overlay">
+          <div class="neighborhood-name">Magnolia</div>
+          <div class="neighborhood-tagline">Quiet bluff by the water</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── COMMUNITY NEWS ── -->
+<section class="bg-main" aria-labelledby="news-title">
+  <div class="container">
+    <div class="section-divider">
+      <span class="section-divider-title">Latest News</span>
+    </div>
+
+    <div class="card-grid">
+      <article class="news-card">
+        <div class="news-card-img-wrap">
+          <img src="https://picsum.photos/seed/affordable-housing/450/300" alt="Affordable housing construction in Seattle">
+        </div>
+        <p class="photo-credit">Photo: Seattle DCI</p>
+        <p class="news-card-tag">Housing</p>
+        <h3 class="news-card-title"><a href="#">Seattle Approves $45M for Affordable Housing Construction in 5 Neighborhoods</a></h3>
+        <p class="news-card-excerpt">The city council approved a major funding package this week aimed at accelerating affordable housing development across Capitol Hill, Rainier Valley, Beacon Hill, Ballard, and Central District.</p>
+        <a href="#" class="more-link">Read More <span class="arrow">→</span></a>
+      </article>
+
+      <article class="news-card">
+        <div class="news-card-img-wrap">
+          <img src="https://picsum.photos/seed/light-rail/450/300" alt="Ballard Light Rail extension">
+        </div>
+        <p class="photo-credit">Photo: Sound Transit</p>
+        <p class="news-card-tag">Transit</p>
+        <h3 class="news-card-title"><a href="#">New Light Rail Extension: What Ballard Residents Need to Know</a></h3>
+        <p class="news-card-excerpt">Construction timelines, station locations, and disruptions to local streets — here's your guide to the Ballard Link Extension as work ramps up this spring.</p>
+        <a href="#" class="more-link">Read More <span class="arrow">→</span></a>
+      </article>
+
+      <article class="news-card">
+        <div class="news-card-img-wrap">
+          <img src="https://picsum.photos/seed/community-fridge/450/300" alt="Community Fridges Network">
+        </div>
+        <p class="photo-credit">Photo: Seattle Food Network</p>
+        <p class="news-card-tag">Food Access</p>
+        <h3 class="news-card-title"><a href="#">Community Fridges Network Expands to 12 New Locations Citywide</a></h3>
+        <p class="news-card-excerpt">The grassroots community fridge initiative now reaches 28 neighborhoods, ensuring more residents have access to free fresh food seven days a week.</p>
+        <a href="#" class="more-link">Read More <span class="arrow">→</span></a>
+      </article>
+    </div>
+
+    <div class="carousel-nav">
+      <button class="carousel-btn">&lt;&lt; Previous</button>
+      <button class="carousel-btn">Next &gt;&gt;</button>
+    </div>
+
+    <div class="view-all-wrap" style="margin-top:28px;">
+      <a href="#" class="btn btn-outline-green" style="border-radius:0; font-family: var(--font-heading);">See All News →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── BENEFIT PROGRAMS ── -->
+<section class="bg-white" aria-labelledby="benefits-title">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <span class="eyebrow">Available to You</span>
+        <h2 class="section-title" id="benefits-title">Benefit Programs For You</h2>
+      </div>
+      <a href="#" class="more-link">See More <span class="arrow">→</span></a>
+    </div>
+    <div class="benefit-grid">
+      <a href="#" class="benefit-card">
+        <span class="benefit-icon">🍽️</span>
+        <div class="benefit-title">Food Assistance</div>
+        <p class="benefit-desc">SNAP benefits, food banks, and emergency food pantries in your zip code.</p>
+      </a>
+      <a href="#" class="benefit-card">
+        <span class="benefit-icon">🏠</span>
+        <div class="benefit-title">Housing Support</div>
+        <p class="benefit-desc">Rental assistance, eviction prevention, and affordable housing applications.</p>
+      </a>
+      <a href="#" class="benefit-card">
+        <span class="benefit-icon">🩺</span>
+        <div class="benefit-title">Healthcare Services</div>
+        <p class="benefit-desc">Low-cost clinics, Medicaid enrollment help, and mental health resources.</p>
+      </a>
+      <a href="#" class="benefit-card">
+        <span class="benefit-icon">👧</span>
+        <div class="benefit-title">Youth Programs</div>
+        <p class="benefit-desc">After-school programs, summer camps, tutoring, and mentorship opportunities.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── FEATURED PROGRAMS BLOCK ── -->
+<section class="bg-main" aria-labelledby="programs-title">
+  <div class="container">
+    <div class="promo-block">
+      <div class="promo-image">
+        <img src="https://picsum.photos/seed/parks-summer/600/400" alt="Seattle Parks Summer Youth Programs">
+      </div>
+      <div class="promo-body">
+        <span class="eyebrow">Featured Program</span>
+        <h2 id="programs-title">Seattle Parks Summer Youth Programs — Registration Now Open</h2>
+        <p>Free and subsidized summer programs for youth ages 6–18 at 60+ parks citywide. Swimming lessons, sports leagues, arts workshops, and leadership camps available. Income-based fee assistance guaranteed — no child turned away.</p>
+        <a href="#" class="btn btn-primary">Register Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── HOW WE SUPPORT THE COMMUNITY ── -->
+<section class="bg-white" aria-label="How We Support the Community">
+  <div class="container">
+    <div class="support-grid">
+      <a href="#" class="support-card">
+        <h3>For Residents</h3>
+        <p>Find city services, community programs, neighborhood news, and civic resources all in one place — designed for everyone who calls Seattle home.</p>
+        <span class="support-btn">Browse Resources →</span>
+      </a>
+      <a href="#" class="support-card">
+        <h3>For Organizations</h3>
+        <p>Is your nonprofit, neighborhood group, or community organization serving Seattle? List your programs and reach residents who need your support most.</p>
+        <span class="support-btn">Submit Resource →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter-section" aria-labelledby="newsletter-title">
+  <div class="container">
+    <div class="newsletter-inner">
+      <span class="eyebrow">Stay in the Loop</span>
+      <h2 id="newsletter-title">Seattle in Your Inbox</h2>
+      <p>The best community news, events, resources, and neighborhood updates — delivered monthly. No spam, just Seattle.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email address" aria-label="Email address">
+        <input type="text" placeholder="Zip code" aria-label="Zip code" style="max-width:120px; flex: 0 1 120px;">
+        <button class="btn-subscribe">Subscribe →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL CALLOUT ── -->
+<section class="social-section bg-light" aria-labelledby="social-title">
+  <div class="container">
+    <span class="eyebrow">Follow Along</span>
+    <h2 class="section-title" id="social-title">@SeattleCommunity</h2>
+    <p>Follow us for neighborhood stories, city updates, community voices, and real-time local news from all across the Emerald City.</p>
+    <div class="social-links">
+      <a href="#" class="social-pill instagram">📸 Instagram</a>
+      <a href="#" class="social-pill twitter">🐦 Twitter / X</a>
+      <a href="#" class="social-pill facebook">👥 Facebook</a>
+      <a href="#" class="social-pill nextdoor">🏘️ Nextdoor</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── STILL HAVE QUESTIONS ── -->
+<div class="questions-banner">
+  <h2>Still Have Questions?</h2>
+  <p>Our community navigators are here to help you find the right resource, program, or service — in your language.</p>
+  <a href="#" class="btn btn-outline-white">Ask a Question →</a>
+</div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:16px;">
+          <div class="nav-logo-icon">S</div>
+          <div class="nav-logo-text">
+            Seattle Community Hub
+            <span>Emerald City Resources</span>
+          </div>
+        </div>
+        <p>Your unofficial community pulse for Seattle — warm, civic, and deeply local. Connecting neighbors since 2023.</p>
+        <address>
+          Seattle, Washington 98101<br>
+          hello@seattlecommunityhub.org<br>
+          (206) 555-0190
+        </address>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Explore Seattle</p>
+        <ul class="footer-links">
+          <li><a href="#">City News</a></li>
+          <li><a href="#">Upcoming Events</a></li>
+          <li><a href="#">Community Programs</a></li>
+          <li><a href="#">Neighborhoods</a></li>
+          <li><a href="#">Neighborhood Updates</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Resources</p>
+        <ul class="footer-links">
+          <li><a href="#">City Services Directory</a></li>
+          <li><a href="#">Public Transit</a></li>
+          <li><a href="#">Maps &amp; Guides</a></li>
+          <li><a href="#">Permits &amp; Licensing</a></li>
+          <li><a href="#">Emergency Alerts</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Get Involved</p>
+        <ul class="footer-links">
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Community Blog</a></li>
+          <li><a href="#">Newsletter Signup</a></li>
+          <li><a href="#">Submit an Event</a></li>
+          <li><a href="#">Submit a Resource</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">About</p>
+        <ul class="footer-links">
+          <li><a href="#">About This Site</a></li>
+          <li><a href="#">City Council</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-acknowledgment">
+        We acknowledge that Seattle is on the traditional land of the Coast Salish peoples — the Duwamish, Suquamish, Muckleshoot, Snoqualmie, and other Tribes who have cared for this region since time immemorial. We honor their elders, past and present.
+      </p>
+      <div class="footer-legal">
+        <a href="#">© 2025 Seattle Community Hub</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Sitemap</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    const nav = document.getElementById('nav-links');
+    nav.classList.toggle('open');
+  }
+
+  // Close nav when clicking outside
+  document.addEventListener('click', (e) => {
+    const nav = document.getElementById('nav-links');
+    const btn = document.querySelector('.hamburger');
+    if (!nav.contains(e.target) && !btn.contains(e.target)) {
+      nav.classList.remove('open');
+    }
+  });
+
+  // Mobile dropdown toggle
+  if (window.innerWidth <= 768) {
+    document.querySelectorAll('.nav-links > li > a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const dropdown = this.parentElement.querySelector('.nav-dropdown');
+        if (dropdown) {
+          e.preventDefault();
+          this.parentElement.classList.toggle('open');
+        }
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
