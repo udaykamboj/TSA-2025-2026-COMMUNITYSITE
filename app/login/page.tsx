@@ -16,10 +16,7 @@ export default function LoginPage() {
   const [showForgotPassword, setShowForgotPassword] = useState(false)
   const [resetEmail, setResetEmail] = useState('')
   const [resetLoading, setResetLoading] = useState(false)
-  const [showResendConfirmation, setShowResendConfirmation] = useState(false)
-  const [resendEmail, setResendEmail] = useState('')
-  const [resendLoading, setResendLoading] = useState(false)
-  const [resendMessage, setResendMessage] = useState('')
+  const [resetMessage, setResetMessage] = useState('')
 
   const { signIn, signUp, user } = useAuth()
   const router = useRouter()
@@ -63,8 +60,6 @@ export default function LoginPage() {
         // Sign in specific errors
         if (error.includes('Invalid login credentials') || error.includes('Email not found')) {
           userFriendlyError = 'No account found with this email. Would you like to create one?'
-        } else if (error.includes('Email not confirmed') || error.includes('email_not_confirmed')) {
-          userFriendlyError = 'Please check your email and click the confirmation link before signing in.'
         } else if (error.includes('Invalid email')) {
           userFriendlyError = 'Please enter a valid email address.'
         }
@@ -72,36 +67,11 @@ export default function LoginPage() {
 
       setError(userFriendlyError)
     } else if (isSignUp) {
-      setSuccess('Account created successfully! Please check your email and click the confirmation link to activate your account.')
+      router.push('/dashboard')
     } else {
       router.push('/dashboard')
     }
     setLoading(false)
-  }
-
-  const handleResendConfirmation = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setResendMessage('')
-    setResendLoading(true)
-
-    const { error } = await supabase.auth.resend({
-      type: 'signup',
-      email: resendEmail,
-      options: {
-        emailRedirectTo: `${window.location.origin}/confirm-email`,
-      },
-    })
-
-    if (error) {
-      if (error.message.includes('Email rate limit exceeded')) {
-        setResendMessage('Too many emails sent recently. Please wait a few minutes before requesting another confirmation email.')
-      } else {
-        setResendMessage(error.message)
-      }
-    } else {
-      setResendMessage('Confirmation email sent! Please check your inbox.')
-    }
-    setResendLoading(false)
   }
 
   const handleForgotPassword = async (e: React.FormEvent) => {
@@ -152,48 +122,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {showResendConfirmation ? (
-          <form onSubmit={handleResendConfirmation} className="space-y-6">
-            <div>
-              <h3 className="text-lg font-medium text-gray-900">Resend Confirmation Email</h3>
-              <p className="mt-1 text-sm text-gray-600">
-                Enter your email address and we'll send you a new confirmation link.
-              </p>
-            </div>
-            <div>
-              <label htmlFor="resendEmail" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                id="resendEmail"
-                name="resendEmail"
-                type="email"
-                required
-                value={resendEmail}
-                onChange={(e) => setResendEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-            {resendMessage && (
-              <p className={`text-sm ${resendMessage.includes('sent') ? 'text-green-600' : 'text-red-600'}`}>
-                {resendMessage}
-              </p>
-            )}
-            <div className="flex space-x-3">
-              <Button type="submit" disabled={resendLoading} className="flex-1">
-                {resendLoading ? 'Sending...' : 'Resend Email'}
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowResendConfirmation(false)}
-                className="flex-1"
-              >
-                Back to Login
-              </Button>
-            </div>
-          </form>
-        ) : showForgotPassword ? (
+        {showForgotPassword ? (
           <form onSubmit={handleForgotPassword} className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900">Reset Password</h3>
@@ -310,29 +239,6 @@ export default function LoginPage() {
                     Click here to create an account
                   </button>
                 )}
-                {error.includes('check your email') && (
-                  <button
-                    type="button"
-                    onClick={() => setShowResendConfirmation(true)}
-                    className="text-sm text-red-700 underline mt-1 hover:text-red-800"
-                  >
-                    Didn't receive the email? Click here to resend.
-                  </button>
-                )}
-              </div>
-            )}
-            {success && (
-              <div className="bg-green-50 p-3 rounded-md">
-                <p className="text-green-600 text-sm">{success}</p>
-                {success.includes('check your email') && (
-                  <button
-                    type="button"
-                    onClick={() => setShowResendConfirmation(true)}
-                    className="text-sm text-green-700 underline mt-1 hover:text-green-800"
-                  >
-                    Didn't receive the email? Click here to resend.
-                  </button>
-                )}
               </div>
             )}
             <div>
@@ -391,6 +297,66 @@ export default function LoginPage() {
               </button>
             </div>
 
+            {!isSignUp && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="bg-blue-50 p-4 rounded-md">
+                  <h4 className="text-sm font-semibold text-blue-800 mb-2">Want to see the dashboard demo?</h4>
+                  <p className="text-xs text-blue-600 mb-3">
+                    Use our pre-configured demo account to explore the dashboard with populated mock data instead of starting from an empty account.
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={async () => {
+                        setLoading(true)
+                        setError('')
+                        const { error } = await signIn("demo@example.com", "demo123456")
+                        if (error && error.includes('Invalid login credentials')) {
+                          // Create it if it doesn't exist yet
+                          await signUp("demo@example.com", "demo123456")
+                          await signIn("demo@example.com", "demo123456")
+                          router.push('/dashboard')
+                        } else if (error) {
+                          setError(error)
+                          setLoading(false)
+                        } else {
+                          router.push('/dashboard')
+                        }
+                      }}
+                      disabled={loading}
+                      className="w-full bg-blue-100 text-blue-800 hover:bg-blue-200"
+                    >
+                      Login as Demo User (demo@example.com)
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={async () => {
+                        setLoading(true)
+                        setError('')
+                        const { error } = await signIn("admin@example.com", "admin123456")
+                        if (error && error.includes('Invalid login credentials')) {
+                          // Create it if it doesn't exist yet
+                          await signUp("admin@example.com", "admin123456")
+                          await signIn("admin@example.com", "admin123456")
+                          router.push('/admin')
+                        } else if (error) {
+                          setError(error)
+                          setLoading(false)
+                        } else {
+                          router.push('/admin')
+                        }
+                      }}
+                      disabled={loading}
+                      className="w-full bg-indigo-100 text-indigo-800 hover:bg-indigo-200"
+                    >
+                      Login as Demo Admin (admin@example.com)
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
           </form>
         )}
       </div>

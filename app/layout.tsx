@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { Providers } from "@/components/providers"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -63,7 +64,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@700;900&display=swap" rel="stylesheet" />
       </head>
       <body className={`font-sans antialiased`}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         <Analytics />
       </body>
     </html>

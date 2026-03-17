@@ -508,7 +508,7 @@ export default function Header() {
                   </li>
                 ))}
                 <li className="inline-block pr-6">
-                  <a href="/portal" className={`vs-cta${compressed ? " small" : ""}`}>Resident Portal</a>
+                  <a href="/login" className={`vs-cta${compressed ? " small" : ""}`}>Resident Portal</a>
                 </li>
               </ul>
             </nav>
@@ -565,7 +565,7 @@ export default function Header() {
                   {label}
                 </a>
               ))}
-              <a href="/portal" className="text-[#9bc730] font-bold text-lg py-2">Resident Portal</a>
+              <a href="/login" className="text-[#9bc730] font-bold text-lg py-2">Resident Portal</a>
               <div className="flex gap-4 pt-2">
                 <button onClick={toggleLargeFont} className="text-white flex items-center gap-2">
                   <Type size={20} /> Font Size
