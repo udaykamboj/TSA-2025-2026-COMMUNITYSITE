@@ -131,7 +131,7 @@ export function EventsCarousel() {
           </ol>
 
           <div className="view-all">
-            <Link href="/" className="btn btn-ghost-green">View All Upcoming Events 📣</Link>
+            <Link href="/login?redirect=/dashboard/events" className="btn btn-ghost-green">View All Upcoming Events 📣</Link>
           </div>
         </div>
       </section>

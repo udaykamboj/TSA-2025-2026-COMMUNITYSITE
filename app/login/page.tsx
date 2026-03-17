@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabaseClient'
@@ -20,10 +20,12 @@ export default function LoginPage() {
 
   const { signIn, signUp, user } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect') || '/dashboard'
   const supabase = createClient()
 
   if (user) {
-    router.push('/dashboard')
+    router.push(redirectTo)
     return null
   }
 
@@ -67,9 +69,9 @@ export default function LoginPage() {
 
       setError(userFriendlyError)
     } else if (isSignUp) {
-      router.push('/dashboard')
+      router.push(redirectTo)
     } else {
-      router.push('/dashboard')
+      router.push(redirectTo)
     }
     setLoading(false)
   }
@@ -101,7 +103,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/dashboard`,
+        redirectTo: `${window.location.origin}${redirectTo}`,
       },
     })
     if (error) {
@@ -316,12 +318,12 @@ export default function LoginPage() {
                           // Create it if it doesn't exist yet
                           await signUp("demo@example.com", "demo123456")
                           await signIn("demo@example.com", "demo123456")
-                          router.push('/dashboard')
+                          router.push(redirectTo)
                         } else if (error) {
                           setError(error)
                           setLoading(false)
                         } else {
-                          router.push('/dashboard')
+                          router.push(redirectTo)
                         }
                       }}
                       disabled={loading}
