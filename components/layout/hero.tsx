@@ -46,7 +46,6 @@ export default function Hero({ selectedDate: selectedDateProp, onSelectDateClick
         status: ev.date ? new Date(ev.date).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : null,
         color: "blue" as const,
         showBadge: true,
-        href: `/main/events/${ev.slug}`,
       }))
 
     const highlight = newsConfig[0]

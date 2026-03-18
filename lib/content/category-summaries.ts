@@ -1,5 +1,4 @@
 export type CategorySummarySlug =
-  | "city-services"
   | "licenses-permits"
   | "support-resources"
 
@@ -44,78 +43,6 @@ export interface CategorySummary {
 }
 
 export const categorySummaries: Record<CategorySummarySlug, CategorySummary> = {
-  "city-services": {
-    slug: "city-services",
-    title: "City Services",
-    description:
-      "Streets, parking, waste, and more — find what you need for everyday city services.",
-    serviceSlugs: [
-      "street-cleaning-schedule",
-      "parking-or-camera-tickets",
-      "illegal-parking-complaint",
-      "report-pothole-or-street-issue",
-      "get-rid-of-waste",
-      "noise-complaint",
-    ],
-    featuredCallout: {
-      title: "Street & Parking Services",
-      description:
-        "Need to know when street cleaning runs on your block? Got a parking ticket or want to report a pothole? We’ve got you covered—check schedules, pay fines, or report issues online.",
-      image:
-        "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=600&fit=crop",
-      href: "/main/street-cleaning-schedule",
-      imagePosition: "left",
-    },
-    spotlightBlocks: [
-      {
-        title: "Get Rid of Waste",
-        description:
-          "Schedule pickups, learn what goes in each bin, and find out how to dispose of bulk items and hazardous materials safely.",
-        image:
-          "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&h=600&fit=crop",
-        href: "/main/get-rid-of-waste",
-        imagePosition: "right",
-      },
-      {
-        title: "Report Potholes & Street Issues",
-        description:
-          "See a broken sidewalk, pothole, or other street problem? Report it and we’ll add it to the repair queue. Track status and get updates by email.",
-        image:
-          "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop",
-        href: "/main/report-pothole-or-street-issue",
-        imagePosition: "left",
-      },
-    ],
-    imageCards: [
-      {
-        title: "Parking & Streets",
-        description:
-          "Parking tickets, street cleaning, and reporting illegal parking.",
-        image:
-          "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=600&fit=crop",
-        href: "/main/parking-or-camera-tickets",
-        caption: "Street cleaning schedule",
-      },
-      {
-        title: "Waste & Recycling",
-        description:
-          "Trash pickup, recycling rules, and bulk item disposal.",
-        image:
-          "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&h=400&fit=crop",
-        href: "/main/get-rid-of-waste",
-      },
-      {
-        title: "Noise & Complaints",
-        description:
-          "Report noise issues and learn about quiet hours in your neighborhood.",
-        image:
-          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop",
-        href: "/main/noise-complaint",
-      },
-    ],
-    imageLayoutVariant: "asymmetric",
-    sectionOrder: ["image", "featured", "spotlight", "quick", "slider", "grid"],
-  },
   "licenses-permits": {
     slug: "licenses-permits",
     title: "Licenses & Permits",
@@ -248,7 +175,6 @@ export const categorySummaries: Record<CategorySummarySlug, CategorySummary> = {
 }
 
 export const SUMMARY_SLUGS: CategorySummarySlug[] = [
-  "city-services",
   "licenses-permits",
   "support-resources",
 ]

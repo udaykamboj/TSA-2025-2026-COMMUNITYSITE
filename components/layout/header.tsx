@@ -11,19 +11,17 @@ import { slideDownVariants } from "@/lib/animations"
 const servicesItems = [
   { icon: "mapicon", label: "Street Cleaning Schedule", href: "/main/street-cleaning-schedule" },
   { icon: "taxi", label: "Parking or Camera Tickets", href: "/main/parking-or-camera-tickets" },
-  { icon: "heritage", label: "Illegal Parking Complaint", href: "/main/illegal-parking-complaint" },
   { icon: "outdoor", label: "Report Pothole or Street Issue", href: "/main/report-pothole-or-street-issue" },
   { icon: "hoods", label: "Get Rid of Waste", href: "/main/get-rid-of-waste" },
   { icon: "access", label: "Noise Complaint", href: "/main/noise-complaint" },
 ];
 
 const supportItems = [
-  { icon: "families", label: "Child Care Assistance", href: "/main/child-care-assistance" },
   { icon: "coffee", label: "SNAP Benefits", href: "/main/snap-benefits" },
   { icon: "hoods", label: "Apartment Complaint", href: "/main/apartment-complaint" },
   { icon: "globe", label: "Rent Increase Help", href: "/main/rent-increase-help" },
   { icon: "news", label: "Voter Registration", href: "/main/voter-registration" },
-  { icon: "luggage", label: "Public Records Request", href: "/main/public-records-request" },
+  { icon: "luggage", label: "Birth Certificates", href: "/main/birth-certificates" },
 ];
 
 const languagesConfig = [
@@ -255,7 +253,7 @@ export default function Header() {
   const dLeave = () => { timer.current = setTimeout(() => setOpen(null), 140); };
 
   const menus = [
-    { key: "services", label: "City Services", Panel: ServicesPanel, href: "/main/city-services" },
+    { key: "services", label: "City Services", Panel: ServicesPanel, href: "/main/services" },
     { key: "support", label: "Support & Resources", Panel: SupportPanel, href: "/main/support-resources" },
   ];
   const activeMenu = menus.find(m => m.key === open);

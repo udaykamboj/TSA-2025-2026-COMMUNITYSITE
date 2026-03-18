@@ -33,7 +33,7 @@ export default function ContentPageLayout({
     <main className="min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-1 bg-white overflow-x-hidden">
+      <div className="flex-1 bg-white">
         <motion.div
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8"
           variants={staggerContainer}
@@ -59,8 +59,7 @@ export default function ContentPageLayout({
               {callToAction && (
                 <Link
                   href={callToAction.href}
-                  className="inline-flex items-center justify-center rounded-lg font-semibold text-white transition-colors hover:opacity-90 px-5 py-2.5 text-base"
-                  style={{ backgroundColor: "#0d28ff" }}
+                  className="inline-flex items-center justify-center rounded-full font-semibold text-white transition-colors hover:opacity-90 px-6 py-3 text-lg bg-primary"
                 >
                   {callToAction.label}
                 </Link>
@@ -83,7 +82,7 @@ export default function ContentPageLayout({
             <JumpToSection sections={sections} />
 
             {/* Main content - right column */}
-            <motion.div className="flex-1 min-w-0 order-2" variants={staggerItem}>
+            <motion.div className="flex-1 min-w-0 max-w-3xl order-2" variants={staggerItem}>
               <MarkdownContent content={content} />
 
               {infoBox && (

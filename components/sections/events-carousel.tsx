@@ -81,9 +81,7 @@ export default function EventsCarousel() {
                   <div className="flex flex-col h-full justify-end" >
                     <div>
                       <h3 className="font-playfair font-bold mb-4 text-2xl group-hover:text-primary transition-colors leading-tight tracking-wide break-words">
-                        <Link href={`/main/events/${ev.slug}`} className="before:absolute before:inset-0 outline-none">
-                          {ev.title}
-                        </Link>
+                        <span>{ev.title}</span>
                       </h3>
                       <p className="font-poppins text-gray-600 font-light mb-6 break-words line-clamp-3">
                         {ev.description}

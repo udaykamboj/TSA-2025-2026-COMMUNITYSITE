@@ -1,11 +1,29 @@
-## Find your schedule
+## 1. Find your schedule {#find-schedule}
 
-Street cleaning schedules are set by block and side of the street. Enter your address in the city’s street cleaning lookup tool or check the posted signs on your block. Schedules are often weekly or twice monthly and may vary by season or area.
+Street cleaning schedules vary by block and by the side of the street.
+Check your posted signs or look up your specific schedule online.
 
-## Parking rules
+:::custom-button{href="/streets/cleaning-schedule"}
+Lookup Cleaning Schedule
+:::
 
-During posted street cleaning hours, vehicles must be moved off the street or to the side that is not being cleaned. Cars left on the wrong side may be ticketed or towed. Allow time to move your vehicle before the start of cleaning hours.
+## 2. Parking rules {#parking-rules}
 
-## Holidays and exceptions
+Vehicles must be moved off the side of the street being cleaned during posted hours.
+If you do not move your car, you will be ticketed or towed.
 
-Street cleaning may be suspended on certain holidays or after snow events. The city website or 311 will list suspensions. When in doubt, follow the posted signs on your block or check the official schedule before leaving your car.
+:::custom-alert{type="warning" title="Towing Warning"}
+Cars left blocking the sweeper path are strictly enforced and may be towed at the owner's expense.
+:::
+
+## 3. Holidays and exceptions {#holidays}
+
+Street cleaning may be suspended on certain holidays or after major snow events.
+
+:::custom-card{title="Rule Suspensions" buttonText="View Current Suspensions" buttonLink="/streets/suspensions"}
+Check the latest city updates for active street cleaning suspensions.
+:::
+
+:::custom-dropdown{title="What happens on a holiday?"}
+When in doubt, follow the posted physical signs on your block to avoid a ticket.
+:::

@@ -15,6 +15,7 @@ import { extractHeadings } from "@/lib/content/extract-headings"
 import ContentPageLayout from "@/components/content-page/content-page-layout"
 import ServicesPageClient from "@/components/content-page/services-page-client"
 import CategorySummaryPageClient from "@/components/content-page/category-summary-page-client"
+import ServicesHero from "@/components/content-page/services-hero"
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -139,13 +140,8 @@ export default async function MainSlugPage({ params }: PageProps) {
       <main className="min-h-screen flex flex-col">
         <Header />
         <div className="flex-1 bg-white py-12 md:py-16">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
-              Services
-            </h1>
-            <p className="text-slate-700 mb-10">
-              Find information and actions for common city services.
-            </p>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ServicesHero count={services.length} />
             <ServicesPageClient categories={categories} services={services} />
           </div>
         </div>
@@ -153,6 +149,7 @@ export default async function MainSlugPage({ params }: PageProps) {
       </main>
     )
   }
+
 
   const config = getPageBySlug(slug)
   if (!config) notFound()

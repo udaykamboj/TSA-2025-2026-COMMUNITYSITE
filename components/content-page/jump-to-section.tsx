@@ -41,11 +41,11 @@ export default function JumpToSection({ sections }: JumpToSectionProps) {
   return (
     <aside className="md:w-52 lg:w-56 flex-shrink-0 order-1" aria-label="Jump to section sidebar">
       <nav
-        className="sticky top-6 p-4 rounded-lg bg-slate-50 border border-slate-200 overflow-x-hidden min-w-0"
+        className="sticky top-[100px] p-4 rounded-lg bg-slate-50 border border-slate-200 overflow-x-hidden min-w-0"
         aria-label="On this page"
       >
-        <h2 className="font-bold text-slate-900 text-sm mb-3">
-          Jump to section
+        <h2 className="font-bold text-slate-900 text-xl tracking-tight mb-4 border-b border-slate-200 pb-2">
+          Jump to step
         </h2>
         <motion.ul
           className="space-y-1 overflow-y-auto overflow-x-hidden max-h-[calc(100vh-8rem)] pr-1 scrollbar-hide"
@@ -57,17 +57,27 @@ export default function JumpToSection({ sections }: JumpToSectionProps) {
             const isActive = activeId === section.id
             const depth = section.depth ?? 2
             const indent = depth >= 3 ? "pl-3" : ""
+            const match = section.title.match(/^(\d+)\.\s*(.*)/)
+            const isStep = !!match
+            const num = match ? match[1] : ""
+            const titleWithoutNum = match ? match[2] : section.title
+            
             return (
               <motion.li key={section.id} className={indent} variants={staggerItem}>
                 <a
                   href={`#${section.id}`}
-                  className={`text-sm block py-0.5 px-2 -mx-2 rounded ${
+                  className={`text-base flex items-start gap-3 py-2 px-3 tracking-wide rounded-r-lg transition-colors ${
                     isActive
-                      ? "text-blue-700 font-semibold bg-blue-50"
-                      : "text-blue-600 hover:text-blue-700 hover:underline"
+                      ? "text-primary font-bold bg-primary/5 border-l-4 border-primary"
+                      : "text-slate-600 font-medium hover:text-secondary hover:bg-slate-100 border-l-4 border-transparent"
                   }`}
                 >
-                  {section.title}
+                  {isStep && (
+                    <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mt-0.5 ${isActive ? 'bg-primary text-white' : 'bg-secondary text-white'}`}>
+                      {num}
+                    </span>
+                  )}
+                  <span>{titleWithoutNum}</span>
                 </a>
               </motion.li>
             )

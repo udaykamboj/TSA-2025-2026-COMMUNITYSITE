@@ -42,15 +42,7 @@ export const pagesConfig: PageConfig[] = [
       { id: "recycling", title: "Recycling" },
     ],
   },
-  {
-    slug: "illegal-parking-complaint",
-    title: "Illegal parking complaint",
-    breadcrumb: baseBreadcrumb,
-    sections: [
-      { id: "report", title: "Report illegal parking" },
-      { id: "what-to-include", title: "What to include" },
-    ],
-  },
+
   {
     slug: "apartment-complaint",
     title: "Apartment complaint",
@@ -114,18 +106,7 @@ export const pagesConfig: PageConfig[] = [
       body: "Voter registration deadlines vary by state. Check your local election office for the cutoff date before the next election.",
     },
   },
-  {
-    slug: "building-permits",
-    title: "Building permits",
-    breadcrumb: baseBreadcrumb,
-    callToAction: { label: "Apply for a permit", href: "#" },
-    sections: [
-      { id: "apply-for-a-permit", title: "Apply for a permit" },
-      { id: "permit-types", title: "Permit types" },
-      { id: "inspections", title: "Inspections" },
-      { id: "check-permit-status", title: "Check permit status" },
-    ],
-  },
+
   {
     slug: "street-cleaning-schedule",
     title: "Street cleaning schedule",
@@ -136,17 +117,7 @@ export const pagesConfig: PageConfig[] = [
       { id: "holidays-and-exceptions", title: "Holidays and exceptions" },
     ],
   },
-  {
-    slug: "marriage-licenses",
-    title: "Marriage licenses",
-    breadcrumb: baseBreadcrumb,
-    callToAction: { label: "Apply for a license", href: "#" },
-    sections: [
-      { id: "apply-for-a-license", title: "Apply for a license" },
-      { id: "requirements", title: "Requirements" },
-      { id: "fees-and-waiting-period", title: "Fees and waiting period" },
-    ],
-  },
+
   {
     slug: "report-pothole-or-street-issue",
     title: "Report a pothole or street issue",
@@ -159,45 +130,9 @@ export const pagesConfig: PageConfig[] = [
       { id: "track-repair-status", title: "Track repair status" },
     ],
   },
-  {
-    slug: "business-licenses",
-    title: "Business licenses",
-    breadcrumb: baseBreadcrumb,
-    callToAction: { label: "Apply or renew", href: "#" },
-    sections: [
-      { id: "apply-for-a-license", title: "Apply for a license" },
-      { id: "renew-a-license", title: "Renew a license" },
-      { id: "license-types", title: "License types" },
-      { id: "frequently-asked-questions", title: "Frequently asked questions" },
-    ],
-  },
-  {
-    slug: "public-records-request",
-    title: "Public records request",
-    breadcrumb: baseBreadcrumb,
-    callToAction: { label: "Submit a request", href: "#" },
-    sections: [
-      { id: "submit-a-request", title: "Submit a request" },
-      { id: "what-is-available", title: "What is available" },
-      { id: "response-time-and-fees", title: "Response time and fees" },
-    ],
-  },
-  {
-    slug: "child-care-assistance",
-    title: "Child care assistance",
-    breadcrumb: baseBreadcrumb,
-    callToAction: { label: "Apply for assistance", href: "#" },
-    sections: [
-      { id: "apply", title: "Apply" },
-      { id: "eligibility", title: "Eligibility" },
-      { id: "find-approved-providers", title: "Find approved providers" },
-      { id: "frequently-asked-questions", title: "Frequently asked questions" },
-    ],
-    infoBox: {
-      title: "You should know",
-      body: "Child care assistance can cover part or all of the cost of care for eligible families. Income and work or school requirements apply.",
-    },
-  },
+
+
+
 ]
 
 export function getPageBySlug(slug: string): PageConfig | undefined {

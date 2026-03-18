@@ -179,28 +179,24 @@ export function CalendarDatePickerModal({
               <ul className="space-y-3">
                 {eventsOnSelectedDate.map((event) => (
                   <li key={event.id}>
-                    <Link
-                      href={`/main/events/${event.slug}`}
-                      onClick={onClose}
-                      className="block p-4 rounded-lg border border-slate-200 hover:border-[var(--primary)] hover:bg-[var(--primary)]/5 transition-colors group"
-                    >
-                      <h4 className="font-bold text-slate-900 group-hover:text-[var(--primary)] transition-colors">
+                    <div className="block p-4 rounded-xl border border-slate-200 bg-slate-50 shadow-sm relative">
+                      <h4 className="font-bold text-[var(--primary)] text-base">
                         {event.title}
                       </h4>
-                      <p className="text-sm text-slate-600 mt-1 line-clamp-2">
+                      <p className="text-sm text-slate-600 mt-1 line-clamp-3 leading-relaxed">
                         {event.description}
                       </p>
-                      <div className="flex flex-wrap gap-3 mt-3 text-xs text-slate-500">
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5" />
+                      <div className="flex flex-wrap gap-3 mt-4 pt-3 border-t border-slate-200/60 text-xs font-semibold text-slate-700">
+                        <span className="flex items-center gap-1.5 bg-white px-2 py-1 rounded-md border border-slate-200">
+                          <Clock className="w-3.5 h-3.5 text-[var(--primary)]" />
                           {event.time}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5" />
+                        <span className="flex items-center gap-1.5 bg-white px-2 py-1 rounded-md border border-slate-200">
+                          <MapPin className="w-3.5 h-3.5 text-[var(--primary)]" />
                           {event.location}
                         </span>
                       </div>
-                    </Link>
+                    </div>
                   </li>
                 ))}
               </ul>

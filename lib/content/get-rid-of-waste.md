@@ -1,24 +1,30 @@
-## Schedule pickup {#schedule-pickup}
+## 1. Schedule Pickup {#schedule-pickup}
 
-Regular **trash and recycling pickup** is available for residents. Check your **zone and schedule** online on the city’s sanitation or public works website—enter your address to find your collection day and any holiday changes. Place bins at the curb by the listed time on your collection day (e.g., 6 a.m. or the night before if allowed). Bins should be accessible and not blocked by vehicles.
+Check your collection zone and schedule online.
+Place bins at the curb by 6:00 a.m. on your collection day.
 
-**Trash** is typically collected weekly or twice weekly; **recycling** may be weekly or every other week depending on your area. **Yard waste** (leaves, grass, branches) may have a separate schedule or require special bags or containers. Missed pickups can often be reported online or by calling 311; have your address and collection day ready.
+:::custom-button{href="/waste-management/schedule"}
+View Collection Schedule
+:::
 
-## Bulk items {#bulk-items}
+## 2. Bulk items {#bulk-items}
 
-**Large items** (furniture, mattresses, appliances, electronics) often require **special pickup** and may not be collected with regular trash. Schedule a bulk pickup through the online portal or by calling 311. There may be a **fee** for certain items (e.g., mattresses, appliances); the website or operator will explain. Items are usually collected on a designated day; place them at the curb (or as instructed) by the required time. Some items (e.g., refrigerators, TVs) must be recycled or disposed of at a designated facility—check the city’s waste guide for rules.
+Large items like furniture and appliances require special pickup.
+You must schedule these in advance through the online portal or by calling 311.
 
-**Donation** is an alternative for items in good condition; many charities accept furniture, appliances, and clothing and may offer free pickup.
+:::custom-card{title="Donation Alternative" buttonText="Find Donation Centers" buttonLink="/waste-management/donate"}
+Many local charities accept furniture in good condition and offer free pickup. Consider donating before trashing.
+:::
 
-## Recycling {#recycling}
+## 3. Recycling {#recycling}
 
-**Recycling guidelines vary by material and by location.** Common accepted items include:
+Place clean paper, plastic (#1 and #2), metal, and glass in your recycling bin.
+Do not use plastic bags to hold your recyclables.
 
-- **Paper and cardboard** — Newspaper, magazines, office paper, cardboard boxes (flattened). Often no plastic bags or food-soiled paper.
-- **Plastic** — Bottles and containers (check for the resin number; many programs accept #1 and #2). Lids and labels may or may not be accepted—follow local rules.
-- **Metal** — Aluminum and steel cans. Rinse to avoid contamination.
-- **Glass** — Bottles and jars in some areas; others have dropped glass or use separate collection.
+:::custom-alert{type="error" title="Hazardous Waste"}
+Do not throw paint, batteries, or electronics in the trash. Use designated drop-off events.
+:::
 
-**Preparation** matters: rinse containers, remove caps if required, and do not bag recyclables in plastic bags unless your program allows it. **Contamination** (e.g., food, non-recyclables) can cause entire loads to be rejected. Check the **local recycling guide** on the city website for the full list, preparation instructions, and what to keep out of the bin. When in doubt, leave it out or check the guide.
-
-**Hazardous waste** (paint, chemicals, batteries, electronics) usually cannot go in curbside recycling or trash; use designated drop-off events or facilities. Dates and locations are typically posted on the city website.
+:::custom-dropdown{title="What happens if I put the wrong items in recycling?"}
+Contamination can cause entire loads to be rejected and sent to the landfill. When in doubt, leave it out.
+:::

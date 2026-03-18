@@ -50,13 +50,9 @@ export default function EventsCalendarPage() {
   }, [])
 
   const EventComponent = ({ event }: { event: (typeof events)[0] }) => (
-    <Link
-      href={`/main/events/${event.resource.slug}`}
-      className="rbc-event-link"
-      onClick={(e) => e.stopPropagation()}
-    >
+    <div className="rbc-event-link cursor-default px-1 font-medium whitespace-nowrap overflow-hidden text-ellipsis">
       {event.title}
-    </Link>
+    </div>
   )
 
   return (
@@ -66,7 +62,7 @@ export default function EventsCalendarPage() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-slate-900 mb-2">Events Calendar</h1>
           <p className="text-lg text-slate-700">
-            Browse community events by date. Click an event to view details.
+            Browse upcoming community events, health fairs, and city activities by date.
           </p>
         </div>
         <div className="calendar-page-wrapper">
