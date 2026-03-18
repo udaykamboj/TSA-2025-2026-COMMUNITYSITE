@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { createClient } from '@/lib/supabaseClient'
 import { Button } from '@/components/ui/button'
 
@@ -57,7 +58,12 @@ export default function ConfirmEmailPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg text-center">
+      <motion.div
+        className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
         {status === 'loading' && (
           <>
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
@@ -111,7 +117,7 @@ export default function ConfirmEmailPage() {
             </div>
           </>
         )}
-      </div>
+      </motion.div>
     </div>
   )
 }

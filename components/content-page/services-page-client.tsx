@@ -218,10 +218,6 @@ export default function ServicesPageClient({ categories, services }: Props) {
                             style={{ textDecoration: "none" }}
                           >
                             <span className="font-medium">{service.title}</span>
-                            <span className="flex items-center gap-1 text-sm font-medium text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                              Learn more
-                              <ArrowRight className="h-4 w-4" />
-                            </span>
                           </Link>
                         </li>
                       )

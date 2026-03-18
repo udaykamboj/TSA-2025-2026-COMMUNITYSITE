@@ -31,7 +31,7 @@ const resourcesData = {
     address: "123 Main Street, Downtown",
     phone: "(206) 555-0100",
     email: "info@dtcc.org",
-    website: "www.dtcc.org",
+    website: "https://www.ymca.org",
     tags: ["Youth", "Sports", "Arts", "Free"],
     hours: "Mon-Fri 3pm-8pm, Sat 10am-6pm",
     distance: 0.5,
@@ -69,7 +69,7 @@ const resourcesData = {
     address: "456 Oak Avenue",
     phone: "(206) 555-0101",
     email: "help@cityfoodbank.org",
-    website: "www.cityfoodbank.org",
+    website: "https://www.feedingamerica.org",
     tags: ["Food", "Free", "Emergency"],
     hours: "Mon-Sat 9am-5pm",
     distance: 1.2,
@@ -108,7 +108,7 @@ const resourcesData = {
     address: "789 Pine Street",
     phone: "(206) 555-0102",
     email: "support@cmhs.org",
-    website: "www.cmhs.org",
+    website: "https://www.nami.org",
     tags: ["Mental Health", "Counseling", "Support"],
     hours: "Mon-Fri 8am-6pm, Sat 10am-4pm",
     distance: 0.8,
@@ -145,7 +145,7 @@ const resourcesData = {
     address: "321 Elm Street",
     phone: "(206) 555-0103",
     email: "info@seniorhousing.org",
-    website: "www.seniorhousing.org",
+    website: "https://www.hud.gov",
     tags: ["Housing", "Seniors", "Affordable"],
     hours: "Mon-Fri 9am-5pm",
     distance: 2.1,
@@ -182,7 +182,7 @@ const resourcesData = {
     address: "555 Birch Road",
     phone: "(206) 555-0104",
     email: "scholarships@ysf.org",
-    website: "www.ysf.org",
+    website: "https://www.fastweb.com",
     tags: ["Education", "Youth", "Scholarships", "Free"],
     hours: "Mon-Fri 10am-6pm",
     distance: 1.5,
@@ -219,7 +219,7 @@ const resourcesData = {
     address: "Online & Phone",
     phone: "(206) 555-0105",
     email: "aid@emergencyassist.org",
-    website: "www.emergencyassist.org",
+    website: "https://www.211.org",
     tags: ["Financial Aid", "Emergency", "Utilities", "Free"],
     hours: "24/7",
     distance: 0,
@@ -439,7 +439,7 @@ export default function ResourceDetailPage() {
                   <div>
                     <p className="text-sm font-semibold text-foreground">Website</p>
                     <a
-                      href={`https://${resource.website}`}
+                      href={resource.website.startsWith("http") ? resource.website : `https://${resource.website}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-teal-600 hover:underline flex items-center gap-1"

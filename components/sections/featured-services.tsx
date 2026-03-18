@@ -2,7 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from "framer-motion"
 import SectionTitle from "@/components/section-title"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 import { ChevronRight, Car, Volume2, Trash2, AlertCircle, Home, FileText, DollarSign, ShoppingBag, Vote, Construction } from 'lucide-react';
 import { pagesConfig } from '@/lib/content/pages-config';
 import type { LucideIcon } from 'lucide-react';
@@ -51,14 +53,20 @@ export default function PopularServices() {
         <SectionTitle title="Popular services" linkText="View all services" linkHref="/main/services" pbClass="" />
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 shadow-sm mt-12">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 shadow-sm mt-12"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
+              <motion.div key={index} variants={staggerItem} whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
-                key={index}
                 href={service.href}
-                className="group block bg-white hover:bg-primary transition-colors duration-300 ease-in-out relative flex flex-col items-center text-center p-10 h-full"
+                className="group block bg-white hover:bg-primary transition-colors duration-300 ease-in-out relative flex flex-col items-center text-center justify-end p-10 h-full"
               >
                 <div className="mb-6 flex justify-center text-primary group-hover:text-white transition-colors duration-300">
                   <IconComponent
@@ -80,9 +88,10 @@ export default function PopularServices() {
                   </span>
                 </div>*/}
               </Link>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

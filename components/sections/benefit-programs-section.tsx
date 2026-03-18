@@ -4,8 +4,11 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ChevronDown, ChevronRight } from "lucide-react"
+import { motion } from "framer-motion"
+import { ChevronDown } from "lucide-react"
 import SectionTitle from "@/components/section-title"
+import { MotionSection } from "@/components/ui/motion-section"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 
 // Sample data
 const benefitPrograms = [
@@ -40,13 +43,23 @@ export default function BenefitProgramsSection() {
   }
 
   return (
-    <section className="py-24 bg-card">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <MotionSection className="py-24 bg-card">
+      <motion.div
+        className="max-w-7xl mx-auto px-4 md:px-8"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+      >
         <SectionTitle title="Benefit Programs for You" linkText="See More" linkHref="/main/services" pbClass="" />
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left info card */}
-          <aside className="md:col-span-1 border border-slate-200 p-8 md:p-12 shadow-sm bg-white flex flex-col items-center text-center">
+          <motion.aside
+            className="md:col-span-1 border border-slate-200 p-8 md:p-12 shadow-sm bg-white flex flex-col items-center text-center"
+            variants={staggerItem}
+            whileHover={{ y: -4 }}
+          >
             <div className="flex items-center justify-center w-16 h-16 bg-primary text-white font-playfair text-3xl font-bold mb-8">
               ?
             </div>
@@ -67,15 +80,17 @@ export default function BenefitProgramsSection() {
                 Ask A Question
               </Link>
             </div>
-          </aside>
+          </motion.aside>
 
           {/* Right accordion list */}
           <div className="md:col-span-2">
             <div className="space-y-4">
               {benefitPrograms.map((program) => (
-                <div
+                <motion.div
                   key={program.id}
                   className="bg-white border border-slate-200 overflow-hidden transition-all duration-300"
+                  variants={staggerItem}
+                  whileHover={{ y: -2 }}
                 >
                   <button
                     onClick={() => toggleExpand(program.id)}
@@ -107,12 +122,12 @@ export default function BenefitProgramsSection() {
                       Check Eligibility
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </MotionSection>
   )
 }

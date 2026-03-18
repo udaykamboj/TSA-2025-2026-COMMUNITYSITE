@@ -113,7 +113,7 @@ export const organizations: Organization[] = [
   },
   {
     id: "org-2",
-    name: "Maple Wood Robotics Society",
+    name: "Maplewood Robotics Society",
     description: "Supporting local robotics teams and STEM education.",
     contactPerson: "contact@maplewoodrobotics.org",
     status: "pending",

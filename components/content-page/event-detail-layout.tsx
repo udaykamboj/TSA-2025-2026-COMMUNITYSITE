@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { motion } from "framer-motion"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import MarkdownContent from "./markdown-content"
@@ -34,7 +37,12 @@ export default function EventDetailLayout({
       <Header />
 
       <div className="flex-1 bg-white overflow-x-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+        <motion.div
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
           {/* Breadcrumb */}
           <Link
             href="/"
@@ -87,7 +95,7 @@ export default function EventDetailLayout({
               <MarkdownContent content={content} />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <Footer />

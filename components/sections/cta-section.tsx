@@ -1,8 +1,11 @@
 "use client"
 
 import Link from "next/link"
+import { motion } from "framer-motion"
 import { Users, FileText, Building2 } from "lucide-react"
 import SectionTitle from "@/components/section-title"
+import { MotionSection } from "@/components/ui/motion-section"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 
 const stats = [
   {
@@ -36,17 +39,26 @@ const iconMap: { [key: string]: any } = {
 
 export default function CTASection() {
   return (
-    <section className="py-24 bg-white border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <MotionSection className="py-24 bg-white border-t border-slate-200">
+      <motion.div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+      >
         <SectionTitle title="How We Support the Community" linkText="Learn More" linkHref="/main/services" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-slate-200 bg-slate-200 shadow-sm mt-12">
           {stats.map((stat, idx) => {
             const IconComponent = iconMap[stat.icon]
             return (
-              <div
+              <motion.div
                 key={idx}
                 className="h-full flex flex-col bg-white hover:bg-card transition-colors duration-300 p-10 lg:p-14 border border-transparent hover:border-slate-200 group"
+                variants={staggerItem}
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <div className="mb-8 flex justify-center text-primary">
                   <IconComponent
@@ -73,11 +85,11 @@ export default function CTASection() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </MotionSection>
   )
 }

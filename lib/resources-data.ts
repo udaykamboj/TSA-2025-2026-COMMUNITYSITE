@@ -13,10 +13,10 @@ export interface Resource {
   isFree: boolean
   ageGroups: string[]
   featured?: boolean
-  logo?: string
+  image?: string
 }
 
-export const sampleResources: Resource[] = [
+export const allResources: Resource[] = [
   {
     id: "1",
     name: "Downtown Community Center",
@@ -31,8 +31,7 @@ export const sampleResources: Resource[] = [
     distance: 0.5,
     isFree: true,
     ageGroups: ["Teens", "Families"],
-    featured: true,
-    logo: "🏢",
+    image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=800&fit=crop",
   },
   {
     id: "2",
@@ -48,8 +47,7 @@ export const sampleResources: Resource[] = [
     distance: 1.2,
     isFree: true,
     ageGroups: ["Families", "Seniors"],
-    featured: true,
-    logo: "🍎",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=800&fit=crop",
   },
   {
     id: "3",
@@ -65,8 +63,7 @@ export const sampleResources: Resource[] = [
     distance: 0.8,
     isFree: false,
     ageGroups: ["Teens", "Families", "Seniors"],
-    featured: true,
-    logo: "💭",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=800&fit=crop",
   },
   {
     id: "4",
@@ -82,7 +79,7 @@ export const sampleResources: Resource[] = [
     distance: 2.1,
     isFree: false,
     ageGroups: ["Seniors"],
-    logo: "🏠",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=800&fit=crop",
   },
   {
     id: "5",
@@ -93,12 +90,12 @@ export const sampleResources: Resource[] = [
     phone: "(206) 555-0104",
     email: "scholarships@ysf.org",
     website: "https://www.fastweb.com",
-    tags: ["Education", "Youth", "Scholarships"],
+    tags: ["Education", "Youth", "Scholarships", "Free"],
     hours: "Mon-Fri 10am-6pm",
     distance: 1.5,
     isFree: true,
     ageGroups: ["Teens"],
-    logo: "📚",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=800&fit=crop",
   },
   {
     id: "6",
@@ -109,11 +106,59 @@ export const sampleResources: Resource[] = [
     phone: "(206) 555-0105",
     email: "aid@emergencyassist.org",
     website: "https://www.211.org",
-    tags: ["Financial Aid", "Emergency", "Utilities"],
+    tags: ["Financial Aid", "Emergency", "Utilities", "Free"],
     hours: "24/7",
     distance: 0,
     isFree: true,
     ageGroups: ["Families", "Seniors"],
-    logo: "💰",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=800&fit=crop",
+  },
+  {
+    id: "7",
+    name: "Healthcare for All Clinic",
+    category: "Healthcare",
+    description: "Free and low-cost medical services including preventive care and vaccinations.",
+    address: "234 Wellness Lane",
+    phone: "(206) 555-0106",
+    email: "care@healthcareforall.org",
+    website: "https://findahealthcenter.hrsa.gov",
+    tags: ["Healthcare", "Low-cost", "Vaccines"],
+    hours: "Mon-Fri 8am-5pm, Sat 10am-2pm",
+    distance: 0.9,
+    isFree: false,
+    ageGroups: ["Families", "Seniors", "Teens"],
+    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&h=800&fit=crop",
+  },
+  {
+    id: "8",
+    name: "Job Training Academy",
+    category: "Employment",
+    description: "Professional skills training and job placement assistance for all ages.",
+    address: "888 Career Boulevard",
+    phone: "(206) 555-0107",
+    email: "enroll@jobtraining.org",
+    website: "https://www.careeronestop.org",
+    tags: ["Employment", "Training", "Free"],
+    hours: "Mon-Fri 9am-6pm, Sat 10am-3pm",
+    distance: 1.8,
+    isFree: true,
+    ageGroups: ["Teens", "Families"],
+    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=800&fit=crop",
+  },
+  {
+    id: "9",
+    name: "Community Legal Aid",
+    category: "Legal Services",
+    description: "Free legal advice, eviction defense, and assistance with immigration, benefits, and family law.",
+    address: "100 Justice Way",
+    phone: "(206) 555-0108",
+    email: "help@communitylegalaid.org",
+    website: "https://www.lawhelp.org",
+    tags: ["Legal", "Free", "Housing", "Immigration"],
+    hours: "Mon-Fri 9am-5pm",
+    distance: 1.1,
+    isFree: true,
+    ageGroups: ["Families", "Seniors"],
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=800&fit=crop",
   },
 ]

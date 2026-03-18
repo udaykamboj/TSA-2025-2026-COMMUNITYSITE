@@ -1,10 +1,14 @@
+"use client"
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
+import { MotionSection } from '@/components/ui/motion-section';
 
 export default function FeaturedInitiatives() {
     return (
-        <section className="bg-secondary">
+        <MotionSection className="bg-secondary">
             <div className="container-page pb-16">
                 <SectionTitle title="City Initiatives" linkText="All Initiatives" linkHref="/main/news" pbClass="pb-6" />
 
@@ -25,15 +29,15 @@ export default function FeaturedInitiatives() {
                         <p className="text-blue-50 text-lg mb-10 leading-relaxed font-medium">
                             Our new comprehensive climate action plan commits to reducing carbon emissions by 40% over the next decade. Learn about the new zero-waste programs, expanded green spaces, and renewable energy grants available to residents.
                         </p>
-                        <div>
+                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                             <Link href="/main/news" className="box-button !bg-white !text-[var(--primary)] !border-transparent hover:!bg-gray-100 inline-flex items-center gap-3">
                                 Learn about the Climate Plan
                                 <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
                             </Link>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>
-        </section>
+        </MotionSection>
     )
 }

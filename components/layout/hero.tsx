@@ -3,18 +3,20 @@
 import type React from "react"
 import { useState, useMemo } from "react"
 import Link from "next/link"
-import { ArrowRight, Calendar } from "lucide-react"
-import Dither from "@/components/Dither"
+import { motion } from "framer-motion"
 import Widget from "@/components/widget"
-import { Button } from "@/components/ui/button"
-import { upcomingEvents, latestNews } from "@/lib/sample-data"
+import { upcomingEvents } from "@/lib/sample-data"
+import { newsConfig } from "@/lib/content/news-config"
+import { isSameDay, isAfter } from "date-fns"
 
 type HeroProps = {
+  selectedDate?: Date
   onSelectDateClick?: () => void
 }
 
-export default function Hero({ onSelectDateClick }: HeroProps = {}) {
+export default function Hero({ selectedDate: selectedDateProp, onSelectDateClick }: HeroProps = {}) {
   const [searchTerm, setSearchTerm] = useState("")
+  const selectedDate = selectedDateProp ?? new Date()
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,17 +26,20 @@ export default function Hero({ onSelectDateClick }: HeroProps = {}) {
   }
 
   const widgetData = useMemo(() => {
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
+    const sel = new Date(selectedDate)
+    sel.setHours(0, 0, 0, 0)
 
-    const upcoming = upcomingEvents
-      .filter((ev) => {
-        const d = new Date(ev.date)
-        d.setHours(0, 0, 0, 0)
-        return d >= today
-      })
-      .slice(0, 5)
-      .map((ev) => ({
+    // Show events on the selected date first, then upcoming from that date
+    const onSelectedDate = upcomingEvents.filter((ev) =>
+      isSameDay(new Date(ev.date), sel)
+    )
+    const upcomingFromSelected = upcomingEvents
+      .filter((ev) => isAfter(new Date(ev.date), sel))
+      .slice(0, Math.max(0, 5 - onSelectedDate.length))
+
+    const itemsToShow = [...onSelectedDate, ...upcomingFromSelected].slice(0, 5)
+
+    const upcoming = itemsToShow.map((ev) => ({
         id: String(ev.id),
         icon: "CalendarDays" as const,
         title: ev.title,
@@ -44,24 +49,24 @@ export default function Hero({ onSelectDateClick }: HeroProps = {}) {
         href: `/main/events/${ev.slug}`,
       }))
 
-    const highlight = latestNews[0]
+    const highlight = newsConfig[0]
     return {
       date: new Intl.DateTimeFormat("en-US", {
         weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric",
-      }).format(new Date()),
-      highlightLink: highlight ? { text: highlight.title, href: highlight.link } : null,
+      }).format(selectedDate),
+      highlightLink: highlight ? { text: highlight.title, href: `/main/news/${highlight.slug}` } : null,
       showSelect: true,
       onSelectDateClick,
       items: upcoming,
     }
-  }, [onSelectDateClick])
+  }, [selectedDate, onSelectDateClick])
 
   return (
     <section className="relative text-white py-20 lg:py-32 px-4 min-h-[520px] overflow-hidden">
-      {/* City of Mill Creek background image */}
+      {/* Community background image */}
       <div
         aria-hidden
         className="absolute inset-0 z-0 bg-slate-900 bg-cover bg-center bg-no-repeat"
@@ -76,9 +81,14 @@ export default function Hero({ onSelectDateClick }: HeroProps = {}) {
       <div className="container-page relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left side - Content */}
-          <div className="max-w-2xl">
+          <motion.div
+            className="max-w-2xl"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
             <h1 className="mb-8 leading-tight text-white drop-shadow-xl !font-black !text-5xl lg:!text-6xl">
-              Reach Your Community on Community Hub
+              Find Local Services & Support on the Community Hub
             </h1>
 
             <form onSubmit={handleSearch} className="mb-8 max-w-xl">
@@ -93,7 +103,7 @@ export default function Hero({ onSelectDateClick }: HeroProps = {}) {
                 />
                 <button
                   type="submit"
-                  className="box-button-primary !px-8 sm:!px-10 ml-2 shadow-md hover:shadow-lg"
+                  className="box-button-primary !rounded-full !px-8 sm:!px-10 ml-2 shadow-md hover:shadow-lg"
                 >
                   Go!
                 </button>
@@ -102,14 +112,19 @@ export default function Hero({ onSelectDateClick }: HeroProps = {}) {
                 Browse all resources
               </Link>
             </form>
-          </div>
+          </motion.div>
 
           {/* Right side - Status Widget */}
-          <div className="flex items-center justify-center lg:justify-end">
-            <div className="w-full max-w-md shadow-2xl rounded-[var(--radius-xl)] bg-background/95 backdrop-blur-md overflow-hidden text-foreground">
+          <motion.div
+            className="flex items-center justify-center lg:justify-end"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="w-full max-w-md shadow-2xl rounded-[20px] bg-background/95 backdrop-blur-md overflow-hidden text-foreground">
               <Widget {...widgetData} />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

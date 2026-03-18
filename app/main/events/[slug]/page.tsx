@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
   const config = getEventBySlug(slug)
   if (!config) return {}
   return {
-    title: `${config.title} | Maple Wood Community Resource Hub`,
+    title: `${config.title} | Maplewood Community Resource Hub`,
   }
 }
 

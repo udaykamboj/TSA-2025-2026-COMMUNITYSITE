@@ -1,7 +1,9 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Search } from "lucide-react"
+import { dropdownVariants } from "@/lib/animations"
 
 interface SearchAutocompleteProps {
   items: string[]
@@ -58,8 +60,16 @@ export default function SearchAutocomplete({
         <Search className="absolute right-3 top-3.5 w-5 h-5 text-slate-900" />
       </div>
 
+      <AnimatePresence>
       {open && filtered.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-md border border-slate-100 shadow z-50 max-h-60 overflow-y-auto">
+        <motion.div
+          key="search-dropdown"
+          className="absolute top-full left-0 right-0 mt-2 bg-white rounded-md border border-slate-100 shadow z-50 max-h-60 overflow-y-auto"
+          variants={dropdownVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           {filtered.map((item) => (
             <button
               key={item}
@@ -72,8 +82,9 @@ export default function SearchAutocomplete({
               {item}
             </button>
           ))}
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </div>
   )
 }

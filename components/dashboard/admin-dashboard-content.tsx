@@ -1,6 +1,8 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { useAppStore } from "@/lib/store"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 import { Button } from "@/components/dashboard/ui/button"
 import {
   IconUsers,
@@ -77,40 +79,45 @@ export function AdminDashboardContent() {
 
       <div className="p-6 space-y-6">
         {/* Stats Cards */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="bg-white rounded shadow-sm p-4">
+        <motion.div
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-[#4a5568]">Total Users</span>
               <IconUsers className="size-4 text-[#0066b2]" />
             </div>
             <p className="text-2xl font-bold text-[#1a3a5c]">{allUsers.length}</p>
             <p className="text-xs text-[#4a5568]">Registered volunteers</p>
-          </div>
-          <div className="bg-white rounded shadow-sm p-4">
+          </motion.div>
+          <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-[#4a5568]">Organizations</span>
               <IconBuilding className="size-4 text-[#0066b2]" />
             </div>
             <p className="text-2xl font-bold text-[#1a3a5c]">{organizations.length}</p>
             <p className="text-xs text-[#e87722]">{pendingOrgs.length} pending approval</p>
-          </div>
-          <div className="bg-white rounded shadow-sm p-4">
+          </motion.div>
+          <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-[#4a5568]">Applications</span>
               <IconClipboardList className="size-4 text-[#0066b2]" />
             </div>
             <p className="text-2xl font-bold text-[#1a3a5c]">{applications.length}</p>
             <p className="text-xs text-[#e87722]">{pendingApps.length} pending review</p>
-          </div>
-          <div className="bg-white rounded shadow-sm p-4">
+          </motion.div>
+          <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-[#4a5568]">Pending Actions</span>
               <IconShield className="size-4 text-[#e87722]" />
             </div>
             <p className="text-2xl font-bold text-[#e87722]">{pendingOrgs.length + pendingApps.length}</p>
             <p className="text-xs text-[#4a5568]">Items needing attention</p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Pending Organizations */}

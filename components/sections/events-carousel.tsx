@@ -2,8 +2,11 @@
 
 import React, { useRef } from "react"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import { upcomingEvents } from "@/lib/sample-data"
 import SectionTitle from "@/components/section-title"
+import { MotionSection } from "@/components/ui/motion-section"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 
 export default function EventsCarousel() {
   const listRef = useRef<HTMLOListElement | null>(null)
@@ -18,10 +21,10 @@ export default function EventsCarousel() {
   }
 
   return (
-    <section className="py-20 bg-gray-50" style={{ overflow: 'visible' }}>
+    <MotionSection className="py-20 bg-gray-50" style={{ overflow: 'visible' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
-          title="Upcoming Events" pbClass="pb-"
+          title="Upcoming Events" pbClass="pb-8"
           rightNode={(
             <div className="flex items-center gap-3">
               <button
@@ -37,7 +40,7 @@ export default function EventsCarousel() {
               <button
                 aria-label="Next"
                 onClick={() => scrollBySlide("next")}
-                className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors"
+                className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white hover:opacity-90 transition-opacity"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M9 18l6-6-6-6" />
@@ -49,10 +52,14 @@ export default function EventsCarousel() {
 
         {/* Navigation */}
 
-        <ol
+        <motion.ol
           className="carousel-slides flex gap-x-5 pl-0 pr-0 m-0 list-none overflow-x-auto scroll-smooth snap-x snap-mandatory items-start"
           ref={listRef}
           style={{ WebkitOverflowScrolling: "touch" }}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
         >
           {upcomingEvents.map((ev) => {
             const dateObj = ev.date ? new Date(ev.date) : null
@@ -62,12 +69,16 @@ export default function EventsCarousel() {
             const timeText = ev.time ? ev.time : "All day"
 
             return (
-              <li
+              <motion.li
                 className="flex-none w-[340px] flex-shrink-0 box-border snap-start h-[420px] flex items-center justify-center mx-0"
                 key={ev.id}
+                variants={staggerItem}
               >
-                <div className="group w-full flex flex-col relative transition-all duration-300 ease-in-out min-h-[360px] h-auto text-secondary bg-white border border-slate-200 hover:border-primary hover:shadow-lg p-6 rounded-none" >
-                  <div className="flex flex-col h-full justify-between" >
+                <motion.div
+                  className="group w-full flex flex-col relative transition-all duration-300 ease-in-out min-h-[360px] h-full text-secondary bg-white border border-slate-200 hover:border-primary hover:shadow-lg p-6 rounded-none"
+                  whileHover={{ y: -4, boxShadow: "0 10px 40px rgba(0,0,0,0.12)" }}
+                >
+                  <div className="flex flex-col h-full justify-end" >
                     <div>
                       <h3 className="font-playfair font-bold mb-4 text-2xl group-hover:text-primary transition-colors leading-tight tracking-wide break-words">
                         <Link href={`/main/events/${ev.slug}`} className="before:absolute before:inset-0 outline-none">
@@ -104,11 +115,11 @@ export default function EventsCarousel() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
+                </motion.div>
+              </motion.li>
             )
           })}
-        </ol>
+        </motion.ol>
       </div>
 
       <style jsx global>{`
@@ -124,6 +135,6 @@ export default function EventsCarousel() {
           display: none; 
         }
       `}</style>
-    </section>
+    </MotionSection>
   )
 }

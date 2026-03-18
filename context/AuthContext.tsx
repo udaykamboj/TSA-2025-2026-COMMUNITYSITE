@@ -19,14 +19,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
-  const supabase = createClient()
 
   useEffect(() => {
+    const supabase = createClient()
     const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      setSession(session)
-      setUser(session?.user ?? null)
-      setLoading(false)
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        setSession(session)
+        setUser(session?.user ?? null)
+      } finally {
+        setLoading(false)
+      }
     }
 
     getSession()
@@ -40,10 +43,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     )
 
     return () => subscription.unsubscribe()
-  }, [supabase])
+  }, [])
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { error } = await createClient().auth.signUp({
       email,
       password,
     })
@@ -69,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return {}
     }
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await createClient().auth.signInWithPassword({
       email,
       password,
     })
@@ -80,7 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Clear both local mock state and Supabase session
     setUser(null)
     setSession(null)
-    await supabase.auth.signOut()
+    await createClient().auth.signOut()
   }
 
   const value = {

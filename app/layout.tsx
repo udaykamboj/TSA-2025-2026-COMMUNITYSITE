@@ -9,12 +9,12 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Maple Wood Community Resource Hub - Find Local Services & Support",
+  title: "Maplewood Community Resource Hub - Find Local Services & Support",
   description:
     "Discover local community resources, services, and support programs. Food assistance, housing, youth programs, healthcare, and more—all in one place.",
   generator: "v0.app",
   openGraph: {
-    title: "Maple Wood Community Resource Hub",
+    title: "Maplewood Community Resource Hub",
     description:
       "Your gateway to community resources and services. Find support for food, housing, employment, healthcare, and more.",
     type: "website",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Maple Wood Community Resource Hub",
+    title: "Maplewood Community Resource Hub",
     description: "Find local community resources and support services",
   },
   icons: {

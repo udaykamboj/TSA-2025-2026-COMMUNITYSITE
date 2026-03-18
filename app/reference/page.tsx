@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import SectionTitle from '@/components/section-title'
@@ -57,7 +58,7 @@ export default function ReferencePage() {
 
   ]
 
-  const referance = [
+  const reference = [
     { name: 'https://www.bothellwa.gov/', href: 'https://www.bothellwa.gov/' },
     { name: 'https://millcreekwa.gov/home', href: 'https://millcreekwa.gov/home' },
     { name: 'http://maplewood.gov', href: 'http://maplewood.gov' },
@@ -76,11 +77,21 @@ export default function ReferencePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title="Reference Page" linkText="" linkHref="" />
 
-          <div className="space-y-6">
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="text-slate-700">This page lists sources, permissions, and required forms used to create the website. </div>
 
             {/* Single big card: Sources */}
-            <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
+            <motion.div
+              className="bg-white rounded-md shadow-sm border border-slate-100 p-6"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+            >
               <h3 className="text-xl font-semibold mb-3">Sources</h3>
               <ul className="list-disc pl-5 space-y-2">
                 {sources.map((s) => (
@@ -89,9 +100,14 @@ export default function ReferencePage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
+            <motion.div
+              className="bg-white rounded-md shadow-sm border border-slate-100 p-6"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
               <h3 className="text-xl font-semibold mb-3">Libraries & Packages (project dependencies)</h3>
               <ul className="list-disc pl-5 space-y-2">
                 {libraries.map((lib) => (
@@ -100,22 +116,32 @@ export default function ReferencePage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
 
-            <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
-              <h3 className="text-xl font-semibold mb-3">Referance Sites</h3>
+            <motion.div
+              className="bg-white rounded-md shadow-sm border border-slate-100 p-6"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+            >
+              <h3 className="text-xl font-semibold mb-3">Reference Sites</h3>
               <ul className="list-disc pl-5 space-y-2">
-                {referance.map((lib) => (
+                {reference.map((lib) => (
                   <li key={lib.name}>
-                    <a target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{lib.name}</a>
+                    <a href={lib.href} target="_blank" rel="noopener noreferrer" className="font-medium text-slate-900 hover:underline">{lib.name}</a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
             {/* Images section: links to public images and external examples */}
-            <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
+            <motion.div
+              className="bg-white rounded-md shadow-sm border border-slate-100 p-6"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
               <h3 className="text-xl font-semibold mb-3">Images</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
 
@@ -130,10 +156,15 @@ export default function ReferencePage() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Permissions & Required forms remain as a single card */}
-            <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
+            <motion.div
+              className="bg-white rounded-md shadow-sm border border-slate-100 p-6"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+            >
               <h3 className="font-semibold mb-2">Permissions & Copyright</h3>
               <div className="space-y-2 text-sm text-slate-600 mb-4">
                 <p>Images used in this project are Sourced from Unsplash under the <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer" className="text-blue-600">Unsplash License</a>. Any third-party copyrighted text, audio, or other media used are documented here along with written permission where required.</p>
@@ -141,7 +172,7 @@ export default function ReferencePage() {
               </div>
 
 
-            </div>
+            </motion.div>
 
             <div className="bg-white rounded-md shadow-sm border border-slate-100 p-6">
 
@@ -151,7 +182,7 @@ export default function ReferencePage() {
                   <div>
                     <div className="font-medium">Student Copyright Checklist (PDF)</div>
                   </div>
-                  <Link href="/docs/student-copyright-checklist.pdf" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-blue-600 text-white rounded-md">
+                  <Link href="/docs/student-copyright-checklist.pdf" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-[var(--primary)] text-white rounded-md">
                     Open
                   </Link>
                 </li>
@@ -160,14 +191,14 @@ export default function ReferencePage() {
                   <div>
                     <div className="font-medium">Work Log (PDF)</div>
                   </div>
-                  <Link href="/docs/work-log.pdf" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-blue-600 text-white rounded-md">
+                  <Link href="/docs/work-log.pdf" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-[var(--primary)] text-white rounded-md">
                     Open
                   </Link>
                 </li>
               </ul>
             </div>
 
-          </div>
+          </motion.div>
         </div>
       </section>
 

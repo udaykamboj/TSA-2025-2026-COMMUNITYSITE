@@ -1,6 +1,11 @@
+"use client"
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
+import { MotionSection } from '@/components/ui/motion-section';
+import { staggerContainer, staggerItem } from '@/lib/animations';
 
 const highlights = [
     {
@@ -28,13 +33,24 @@ const highlights = [
 
 export default function CityHighlights() {
     return (
-        <section className="bg-white">
-            <div className="container-page pb-16">
+        <MotionSection className="bg-white">
+            <motion.div
+                className="container-page pb-16"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+            >
                 <SectionTitle title="City Highlights" linkText="View all updates" linkHref="/main/news" />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {highlights.map((item, idx) => (
-                        <div key={idx} className="box-card !p-0 overflow-hidden flex flex-col group hover:border-[var(--primary)] transition-colors">
+                        <motion.div
+                            key={idx}
+                            className="box-card !p-0 overflow-hidden flex flex-col group hover:border-[var(--primary)] transition-colors"
+                            variants={staggerItem}
+                            whileHover={{ y: -4 }}
+                        >
                             <div className="relative h-60 overflow-hidden">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
@@ -55,10 +71,10 @@ export default function CityHighlights() {
                                     <ArrowRight strokeWidth={2.5} className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                                 </Link>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
-            </div>
-        </section>
+            </motion.div>
+        </MotionSection>
     )
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { useAuth } from '@/context/AuthContext'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabaseClient'
@@ -112,7 +113,12 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg">
+      <motion.div
+        className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">
             {isSignUp ? 'Create Account' : 'Welcome Back'}
@@ -359,7 +365,7 @@ export default function LoginPage() {
             )}
           </form>
         )}
-      </div>
+      </motion.div>
     </div>
   )
 }

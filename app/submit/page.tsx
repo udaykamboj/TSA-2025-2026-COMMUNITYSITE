@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
+import { motion } from "framer-motion"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import { CheckCircle } from "lucide-react"
@@ -138,7 +139,12 @@ export default function ContactMayorPage() {
       <Header />
 
       <main className="flex-1 flex justify-center py-12 px-4">
-        <div className="w-full max-w-3xl bg-white rounded-md shadow-sm p-6 sm:p-8 border border-slate-100">
+        <motion.div
+          className="w-full max-w-3xl bg-white rounded-md shadow-sm p-6 sm:p-8 border border-slate-100"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Submit a Resource</h1>
           <p className="text-base text-slate-700 mb-4">Help us expand our community resource hub by submitting new organizations and services.</p>
 
@@ -339,7 +345,7 @@ export default function ContactMayorPage() {
               <Button type="reset" onClick={() => window.location.reload()} className="border border-slate-300 bg-white text-slate-900 rounded px-4 py-2">Clear</Button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </main>
 
       <Footer />

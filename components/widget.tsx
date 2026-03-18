@@ -51,7 +51,7 @@ export default function Widget({
               <button
                 type="button"
                 onClick={onSelectDateClick}
-                className="text-white rounded-full flex items-center flex-shrink-0 bg-[#103fef] px-4 py-2 sm:px-5 sm:py-3 text-base font-semibold hover:bg-[#0a2fd1] transition-colors"
+                className="text-white rounded-full flex items-center flex-shrink-0 bg-[var(--primary)] px-4 py-2 sm:px-5 sm:py-3 text-base font-semibold hover:opacity-90 transition-opacity"
               >
                 <Calendar className="w-5 h-5" />
                 <span className="ml-2 text-[1.25rem] font-bold">Select date</span>
@@ -59,7 +59,7 @@ export default function Widget({
             ) : (
               <Link
                 href="/main/events/calendar"
-                className="text-white rounded-full flex items-center flex-shrink-0 bg-[#103fef] px-4 py-2 sm:px-5 sm:py-3 text-base font-semibold hover:bg-[#0a2fd1] transition-colors"
+                className="text-white rounded-full flex items-center flex-shrink-0 bg-[var(--primary)] px-4 py-2 sm:px-5 sm:py-3 text-base font-semibold hover:opacity-90 transition-opacity"
               >
                 <Calendar className="w-5 h-5" />
                 <span className="ml-2 text-[1.25rem] font-bold">Select date</span>
@@ -70,7 +70,7 @@ export default function Widget({
 
         {highlightLink && (
           <div className="bg-gray-100 p-3 rounded-md mb-4">
-            <Link href={highlightLink.href ?? '#'} className="text-[#103fef] underline text-sm leading-snug text-[1rem] font-bold">
+            <Link href={highlightLink.href ?? '#'} className="text-[var(--primary)] underline text-sm leading-snug text-[1rem] font-bold">
               {highlightLink.text}
             </Link>
           </div>
@@ -82,13 +82,13 @@ export default function Widget({
 
               <div className="flex items-center justify-between py-4">
                 <div className="flex items-center gap-3 max-w-[70%]">
-                  <span className={`${item.color === 'blue' ? 'text-[#103fef]' : 'text-slate-700'} flex-shrink-0`}>{ICON_MAP[item.icon ?? 'CalendarDays']}</span>
+                  <span className={`${item.color === 'blue' ? 'text-[var(--primary)]' : 'text-slate-700'} flex-shrink-0`}>{ICON_MAP[item.icon ?? 'CalendarDays']}</span>
                   {item.href ? (
-                    <Link className={`underline ${item.color === 'black' ? 'text-slate-900' : 'text-[#103fef]'} font-bold text-[1.125rem] leading-tight`} href={item.href}>
+                    <Link className={`underline ${item.color === 'black' ? 'text-slate-900' : 'text-[var(--primary)]'} font-bold text-[1.125rem] leading-tight`} href={item.href}>
                       {item.title}
                     </Link>
                   ) : (
-                    <span className={`${item.color === 'black' ? 'text-slate-900' : 'text-[#103fef]'} font-bold text-[1.125rem] leading-tight`}>
+                    <span className={`${item.color === 'black' ? 'text-slate-900' : 'text-[var(--primary)]'} font-bold text-[1.125rem] leading-tight`}>
                       {item.title}
                     </span>
                   )}

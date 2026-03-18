@@ -1,6 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 
 export interface JumpSection {
   id: string
@@ -45,13 +47,18 @@ export default function JumpToSection({ sections }: JumpToSectionProps) {
         <h2 className="font-bold text-slate-900 text-sm mb-3">
           Jump to section
         </h2>
-        <ul className="space-y-1 overflow-y-auto overflow-x-hidden max-h-[calc(100vh-8rem)] pr-1 scrollbar-hide">
+        <motion.ul
+          className="space-y-1 overflow-y-auto overflow-x-hidden max-h-[calc(100vh-8rem)] pr-1 scrollbar-hide"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           {sections.map((section) => {
             const isActive = activeId === section.id
             const depth = section.depth ?? 2
             const indent = depth >= 3 ? "pl-3" : ""
             return (
-              <li key={section.id} className={indent}>
+              <motion.li key={section.id} className={indent} variants={staggerItem}>
                 <a
                   href={`#${section.id}`}
                   className={`text-sm block py-0.5 px-2 -mx-2 rounded ${
@@ -62,10 +69,10 @@ export default function JumpToSection({ sections }: JumpToSectionProps) {
                 >
                   {section.title}
                 </a>
-              </li>
+              </motion.li>
             )
           })}
-        </ul>
+        </motion.ul>
       </nav>
     </aside>
   )

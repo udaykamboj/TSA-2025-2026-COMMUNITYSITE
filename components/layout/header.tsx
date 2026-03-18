@@ -1,32 +1,29 @@
 "use client"
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import { Search, Menu, X, ChevronDown, Globe, Type } from "lucide-react"
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, Menu, X, ChevronDown, Type } from "lucide-react"
+import { slideDownVariants } from "@/lib/animations"
 
 /* ─── DATA & CATEGORIES ────────────────────────────────────────────── */
 const servicesItems = [
-  { icon: "mapicon", label: "Street Cleaning Schedule", href: "/main/services/street-cleaning-schedule" },
-  { icon: "taxi", label: "Parking or Camera Tickets", href: "/main/services/parking-or-camera-tickets" },
-  { icon: "heritage", label: "Illegal Parking Complaint", href: "/main/services/illegal-parking-complaint" },
-  { icon: "outdoor", label: "Report Pothole or Street Issue", href: "/main/services/report-pothole-or-street-issue" },
-  { icon: "hoods", label: "Get Rid of Waste", href: "/main/services/get-rid-of-waste" },
-  { icon: "access", label: "Noise Complaint", href: "/main/services/noise-complaint" },
-];
-
-const licensesItems = [
-  { icon: "services", label: "Birth Certificates", href: "/main/services/birth-certificates" },
-  { icon: "art", label: "Marriage Licenses", href: "/main/services/marriage-licenses" },
-  { icon: "shopping", label: "Business Licenses", href: "/main/services/business-licenses" },
-  { icon: "events", label: "Building Permits", href: "/main/services/building-permits" },
+  { icon: "mapicon", label: "Street Cleaning Schedule", href: "/main/street-cleaning-schedule" },
+  { icon: "taxi", label: "Parking or Camera Tickets", href: "/main/parking-or-camera-tickets" },
+  { icon: "heritage", label: "Illegal Parking Complaint", href: "/main/illegal-parking-complaint" },
+  { icon: "outdoor", label: "Report Pothole or Street Issue", href: "/main/report-pothole-or-street-issue" },
+  { icon: "hoods", label: "Get Rid of Waste", href: "/main/get-rid-of-waste" },
+  { icon: "access", label: "Noise Complaint", href: "/main/noise-complaint" },
 ];
 
 const supportItems = [
-  { icon: "families", label: "Child Care Assistance", href: "/main/services/child-care-assistance" },
-  { icon: "coffee", label: "SNAP Benefits", href: "/main/services/snap-benefits" },
-  { icon: "hoods", label: "Apartment Complaint", href: "/main/services/apartment-complaint" },
-  { icon: "globe", label: "Rent Increase Help", href: "/main/services/rent-increase-help" },
-  { icon: "news", label: "Voter Registration", href: "/main/services/voter-registration" },
-  { icon: "luggage", label: "Public Records Request", href: "/main/services/public-records-request" },
+  { icon: "families", label: "Child Care Assistance", href: "/main/child-care-assistance" },
+  { icon: "coffee", label: "SNAP Benefits", href: "/main/snap-benefits" },
+  { icon: "hoods", label: "Apartment Complaint", href: "/main/apartment-complaint" },
+  { icon: "globe", label: "Rent Increase Help", href: "/main/rent-increase-help" },
+  { icon: "news", label: "Voter Registration", href: "/main/voter-registration" },
+  { icon: "luggage", label: "Public Records Request", href: "/main/public-records-request" },
 ];
 
 const languagesConfig = [
@@ -50,7 +47,7 @@ const languagesConfig = [
 ];
 
 const utilityLinks = [
-  { label: "Submit Resource", href: "/submit" },
+  { label: "Submit a Resource", href: "/submit" },
   { label: "Resources", href: "/resources" },
   { label: "Reference", href: "/reference" },
   { label: "Login", href: "/login" },
@@ -92,59 +89,44 @@ const Ico = ({ id, size = 22 }: { id: string, size?: number }) => (
 );
 
 /* ─── SUB-MENU ITEM ─────────────────────────────────────────────────── */
-const SubItem = ({ icon, label, href }: { icon: string, label: string, href: string }) => {
-  const [h, setH] = useState(false);
-  return (
-    <li
-      onMouseEnter={() => setH(true)}
-      onMouseLeave={() => setH(false)}
-      className="md:w-[40%] float-none md:float-left list-none"
-      style={{
-        color: "#fff",
-        margin: ".125rem 1rem",
-        position: "relative",
-        border: h ? "2px solid #9bc730" : "2px solid transparent",
-        background: h ? "#072d00" : "transparent",
-        transition: "background .18s, border-color .18s",
-        cursor: "pointer",
-      }}
-    >
-      <span style={{
-        display: "block", position: "absolute",
-        left: "12px", top: "50%", transform: "translateY(-50%)",
-        color: h ? "#9bc730" : "rgba(255,255,255,0.88)",
-        transition: "color .18s", lineHeight: 1, pointerEvents: "none",
-      }}>
-        <Ico id={icon} size={26} />
-      </span>
-      <a href={href} style={{
-        display: "block", width: "100%",
-        padding: "10px 10px 10px 52px",
-        color: "#fff", fontSize: "1rem",
-        fontWeight: 400, textDecoration: "none",
-        fontFamily: '"Poppins",Verdana,sans-serif',
-        lineHeight: 1.4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-        transition: "color .18s",
-      }}>
-        {label}
-      </a>
-    </li>
-  );
-};
+const SubItem = ({ icon, label, href }: { icon: string, label: string, href: string }) => (
+  <motion.li
+    className="header-sub-item md:w-[40%] float-none md:float-left list-none"
+    style={{
+      color: "#fff",
+      margin: ".125rem 1rem",
+      position: "relative",
+      cursor: "pointer",
+      border: "2px solid transparent",
+      background: "transparent",
+    }}
+    whileHover={{ borderColor: "#9bc730", backgroundColor: "#072d00" }}
+    transition={{ duration: 0.18 }}
+  >
+    <span className="header-sub-item-icon block absolute left-3 top-1/2 -translate-y-1/2 leading-none pointer-events-none" style={{ color: "rgba(255,255,255,0.88)" }}>
+      <Ico id={icon} size={26} />
+    </span>
+    <a href={href} style={{
+      display: "block", width: "100%",
+      padding: "10px 10px 10px 52px",
+      color: "#fff", fontSize: "1rem",
+      fontWeight: 400, textDecoration: "none",
+      fontFamily: '"Poppins",Verdana,sans-serif',
+      lineHeight: 1.4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+    }}>
+      {label}
+    </a>
+  </motion.li>
+);
 
 /* ─── CTA PROMO CARD ────────────────────────────────────────────────── */
-const CtaCard = ({ bg, emoji, title, books }: any) => {
-  const [h, setH] = useState(false);
-  return (
-    <li className="hidden xl:block absolute right-0 top-[34px] w-auto max-w-[38%] h-[calc(100%-34px)] min-h-[220px] overflow-hidden list-none float-none border-none"
-      style={{
-        transform: h ? "scale(1.015)" : "scale(1)",
-        transition: "transform .25s cubic-bezier(0.34,1.56,0.64,1)",
-      }}
-      onMouseEnter={() => setH(true)}
-      onMouseLeave={() => setH(false)}
-    >
-      <a href="#" className="block h-full p-[7px_10px]">
+const CtaCard = ({ bg, emoji, title, books, href = "/main/services" }: any) => (
+  <motion.li
+    className="hidden xl:block absolute right-0 top-[34px] w-auto max-w-[38%] h-[calc(100%-34px)] min-h-[220px] overflow-hidden list-none float-none border-none"
+    whileHover={{ scale: 1.015 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  >
+      <a href={href} className="block h-full p-[7px_10px]">
         <div className="relative w-full h-full min-h-[210px] rounded-[3px] overflow-hidden" style={{ background: bg }}>
           {emoji && <div className="absolute inset-0 flex items-center justify-center text-[90px] opacity-[0.22]">{emoji}</div>}
           {books && (
@@ -171,28 +153,17 @@ const CtaCard = ({ bg, emoji, title, books }: any) => {
           </div>
         </div>
       </a>
-    </li>
-  );
-};
+    </motion.li>
+);
 
 /* ─── DROPDOWN PANELS ────────────────────────────────────────────────── */
 const ServicesPanel = () => (
   <ul className="list-none m-0 p-[2rem_0_2rem_0] xl:p-[2rem_38%_2rem_0] relative overflow-hidden xl:min-h-[255px]">
     {servicesItems.map(i => <SubItem key={i.label} {...i} />)}
     <CtaCard
+      href="/main/city-services"
       bg="radial-gradient(ellipse at 70% 35%, #558510 0%, #1a3a10 40%, #0a3c00 74%)"
       title={<><div className="text-[0.8rem] tracking-[0.07em] mb-1">LOCAL RESOURCES</div><div className="text-[1.15rem]">CITY SERVICES</div></>}
-    />
-    <li className="clear-both block p-0 m-0 border-none" />
-  </ul>
-);
-const LicensesPanel = () => (
-  <ul className="list-none m-0 p-[2rem_0_2rem_0] xl:p-[2rem_38%_2rem_0] relative overflow-hidden xl:min-h-[195px]">
-    {licensesItems.map(i => <SubItem key={i.label} {...i} />)}
-    <CtaCard
-      bg="radial-gradient(ellipse at 50% 40%, #0d1e3e 0%, #0a3c00 100%)"
-      emoji="📋"
-      title={<><div className="text-[0.8rem] tracking-[0.07em] mb-1">CITY PERMITS</div><div className="text-[1.05rem]">LICENSES & PERMITS</div></>}
     />
     <li className="clear-both block p-0 m-0 border-none" />
   </ul>
@@ -200,7 +171,9 @@ const LicensesPanel = () => (
 const SupportPanel = () => (
   <ul className="list-none m-0 p-[2rem_0_2rem_0] xl:p-[2rem_38%_2rem_0] relative overflow-hidden xl:min-h-[255px]">
     {supportItems.map(i => <SubItem key={i.label} {...i} />)}
-    <CtaCard books
+    <CtaCard
+      href="/main/support-resources"
+      books
       bg="linear-gradient(145deg,#1a4a1a 0%,#0a2a0a 100%)"
       title={<><div className="text-[0.72rem] tracking-[0.07em] mb-1">COMMUNITY</div><div className="text-[0.95rem]">SUPPORT & RESOURCES</div></>}
     />
@@ -209,48 +182,62 @@ const SupportPanel = () => (
 );
 
 /* ─── LANGUAGE PANEL ─────────────────────────────────────────────────── */
-const LangItem = ({ flag, label, code, changeLanguage }: any) => {
-  const [h, setH] = useState(false);
-  return (
-    <li
-      onMouseEnter={() => setH(true)}
-      onMouseLeave={() => setH(false)}
-      onClick={() => changeLanguage(code, label)}
-      className="md:w-[35%] float-none md:float-left list-none"
-      style={{
-        color: "#fff", margin: ".125rem 1rem", position: "relative",
-        border: h ? "2px solid #9bc730" : "2px solid transparent",
-        background: h ? "#072d00" : "transparent",
-        transition: "background .18s, border-color .18s", cursor: "pointer",
-      }}
-    >
-      <span className="block absolute left-[4px] top-[2px] text-[26px] w-[40px] leading-none">{flag}</span>
-      <span className="block p-[10px_10px_10px_56px] text-[#fff] text-[1rem] font-normal font-[Poppins] whitespace-nowrap transition-colors duration-200">
-        {label}
-      </span>
-    </li>
-  );
-};
+const LangItem = ({ flag, label, code, changeLanguage }: any) => (
+  <motion.li
+    onClick={() => changeLanguage(code, label)}
+    className="header-sub-item md:w-[35%] float-none md:float-left list-none"
+    style={{
+      color: "#fff", margin: ".125rem 1rem", position: "relative",
+      border: "2px solid transparent",
+      background: "transparent",
+      cursor: "pointer",
+    }}
+    whileHover={{ borderColor: "#9bc730", backgroundColor: "#072d00" }}
+    whileTap={{ scale: 0.98 }}
+    transition={{ duration: 0.18 }}
+  >
+    <span className="block absolute left-[4px] top-[2px] text-[26px] w-[40px] leading-none">{flag}</span>
+    <span className="block p-[10px_10px_10px_56px] text-[#fff] text-[1rem] font-normal font-[Poppins] whitespace-nowrap">
+      {label}
+    </span>
+  </motion.li>
+);
 
 export default function Header() {
+  const router = useRouter();
   const [open, setOpen] = useState<string | null>(null);
   const [search, setSearch] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [headerSearchQuery, setHeaderSearchQuery] = useState("");
+  const [compressed, setCompressed] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const timer = useRef<NodeJS.Timeout | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   // Translation
   const [currentLang, setCurrentLang] = useState("English");
   const [isLargeFont, setIsLargeFont] = useState(false);
   const googleScriptRef = useRef<HTMLScriptElement | null>(null);
 
+  // Scroll-based collapse: wide hysteresis prevents jitter (compress >100px, expand <25px)
   useEffect(() => {
-    const fn = () => setScrollY(window.scrollY);
+    const fn = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setCompressed((prev) => {
+          if (y > 100) return true;
+          if (y < 25) return false;
+          return prev;
+        });
+        rafRef.current = null;
+      });
+    };
     window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    return () => {
+      window.removeEventListener("scroll", fn);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
-
-  const compressed = scrollY > 30;
 
   useEffect(() => {
     const fn = (e: MouseEvent) => {
@@ -268,9 +255,8 @@ export default function Header() {
   const dLeave = () => { timer.current = setTimeout(() => setOpen(null), 140); };
 
   const menus = [
-    { key: "services", label: "City Services", Panel: ServicesPanel },
-    { key: "licenses", label: "Licenses & Permits", Panel: LicensesPanel },
-    { key: "support", label: "Support & Resources", Panel: SupportPanel },
+    { key: "services", label: "City Services", Panel: ServicesPanel, href: "/main/city-services" },
+    { key: "support", label: "Support & Resources", Panel: SupportPanel, href: "/main/support-resources" },
   ];
   const activeMenu = menus.find(m => m.key === open);
 
@@ -373,8 +359,6 @@ export default function Header() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,700;0,800&display=swap');
         
-        @keyframes dropIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
-
         .vs-util-link {
           color: rgba(255,255,255,0.82); font-size: 1.1rem; font-weight: 400;
           text-decoration: none; letter-spacing: 0.04em;
@@ -389,14 +373,17 @@ export default function Header() {
           font-weight: 200;
           color: #fff;
           text-decoration: none;
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
           padding: .125rem 0;
           border-bottom: 6px solid transparent;
-          transition: border-color .3s ease, font-size .2s ease, color .2s;
+          transition: border-color .3s ease, font-size .2s ease, color .2s, transform .2s;
           background: none; border-left: none; border-right: none; border-top: none;
           cursor: pointer; white-space: nowrap;
         }
-        .vs-nl.open, .vs-nl:hover { border-color: #9bc730; }
+        .vs-nl:hover { border-color: #9bc730; }
+        .vs-nl.open { border-color: #9bc730; }
+        .vs-nl:active { transform: scale(0.98); }
         .vs-nl.small { font-size: 1rem; }
 
         .vs-cta {
@@ -440,12 +427,15 @@ export default function Header() {
           transition: color .2s;
         }
         .vs-font-btn:hover { color: #9bc730; }
+        .header-sub-item:hover .header-sub-item-icon { color: #9bc730; }
       `}</style>
       <div id="google_translate_element" style={{ display: 'none' }} />
 
       <div ref={wrapRef} className="sticky top-0 z-[1000] transition-shadow duration-300 w-full" style={{
         boxShadow: compressed || open ? "0 4px 24px rgba(0,0,0,0.4)" : "none",
         fontFamily: '"Poppins", Verdana, sans-serif',
+        background: compressed ? "#447500" : "transparent",
+        transition: "background .2s ease",
       }}>
         {/* ── UTILITY BAR ── */}
         <div style={{
@@ -473,7 +463,7 @@ export default function Header() {
           <div className="absolute inset-0 bg-[#447500] z-0" />
           <div className="max-w-[90rem] mx-auto px-6 flex items-center h-full gap-0 relative z-10 transition-all duration-350">
             {/* LOGO */}
-            <a href="/" className="flex items-center flex-shrink-0 text-white no-underline mr-2 transition-transform duration-350 transform-root" style={{
+            <a href="/" className="flex items-center flex-shrink-0 text-white no-underline mr-2 transition-transform duration-350" style={{
               transform: compressed ? "scale(0.88)" : "scale(1)",
               transformOrigin: "left center",
             }}>
@@ -489,22 +479,33 @@ export default function Header() {
                   fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 0.88,
                   fontFamily: '"Poppins",Verdana,sans-serif',
                   transition: "font-size .35s",
-                }}>maple wood</div>
+                }}>Maplewood</div>
               </div>
             </a>
 
             {/* MAIN NAV Desktop */}
             <nav className="hidden lg:flex items-end flex-1 pl-4">
               <ul className="list-none p-0 m-0 flex items-end flex-nowrap gap-0">
-                {menus.map(({ key, label }) => (
+                {menus.map(({ key, label, href }) => (
                   <li key={key} className="inline-block pr-6">
-                    <button
-                      className={`vs-nl${open === key ? " open" : ""}${compressed ? " small" : ""}`}
-                      onMouseEnter={() => enter(key)}
-                      onMouseLeave={leave}
-                    >
-                      {label}
-                    </button>
+                    {key === "support" ? (
+                      <Link
+                        href="/resources"
+                        className={`vs-nl inline-flex items-center gap-1.5 no-underline${compressed ? " small" : ""}`}
+                      >
+                        {label}
+                      </Link>
+                    ) : (
+                      <span onMouseEnter={() => enter(key)} onMouseLeave={leave}>
+                        <Link
+                          href={href}
+                          className={`vs-nl inline-flex items-center gap-1.5 no-underline${open === key ? " open" : ""}${compressed ? " small" : ""}`}
+                        >
+                          {label}
+                          <ChevronDown className="w-5 h-5 transition-transform duration-200" style={{ transform: open === key ? "rotate(180deg)" : "rotate(0deg)" }} aria-hidden />
+                        </Link>
+                      </span>
+                    )}
                   </li>
                 ))}
                 <li className="inline-block pr-6">
@@ -552,19 +553,45 @@ export default function Header() {
         </div>
 
         {/* ── MOBILE MENU DROPDOWN ── */}
+        <AnimatePresence>
         {open === "mobile" && (
-          <div
+          <motion.div
+            key="mobile-menu"
             className="lg:hidden absolute top-full left-0 right-0 bg-[#0a3c00] z-[999]"
-            style={{ animation: "dropIn .2s ease" }}
+            variants={slideDownVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
-              {menus.map(({ key, label }) => (
-                <a key={key} href="#" className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none"
-                  onClick={(e) => { e.preventDefault(); setOpen(key); }}
-                >
-                  {label}
-                </a>
-              ))}
+              {menus.map(({ key, label }) => {
+                if (key === "support") {
+                  return (
+                    <Link
+                      key={key}
+                      href="/resources"
+                      className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none"
+                      onClick={() => setOpen(null)}
+                    >
+                      {label}
+                    </Link>
+                  );
+                }
+                const summaryHref = "/main/city-services";
+                return (
+                  <a
+                    key={key}
+                    href={summaryHref}
+                    className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpen(key);
+                    }}
+                  >
+                    {label}
+                  </a>
+                );
+              })}
               <a href="/login" className="text-[#9bc730] font-bold text-lg py-2">Resident Portal</a>
               <div className="flex gap-4 pt-2">
                 <button onClick={toggleLargeFont} className="text-white flex items-center gap-2">
@@ -575,38 +602,50 @@ export default function Header() {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
 
         {/* ── MAIN DROPDOWN (dark green) ── */}
+        <AnimatePresence>
         {open && open !== "lang" && open !== "mobile" && activeMenu && (
-          <div
+          <motion.div
+            key="main-dropdown"
             onMouseEnter={dEnter}
             onMouseLeave={dLeave}
             className="absolute top-[100%] left-0 right-0 bg-[#0a3c00] z-[999]"
-            style={{ animation: "dropIn .2s ease" }}
+            variants={slideDownVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
             <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#0a3c00] z-[-1]" />
             <div className="max-w-[90rem] mx-auto px-6 relative">
               {activeMenu.Panel && <activeMenu.Panel />}
             </div>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
 
         {/* ── LANGUAGE DROPDOWN ── */}
+        <AnimatePresence>
         {open === "lang" && (
-          <div
+          <motion.div
+            key="lang-dropdown"
             onMouseEnter={dEnter}
             onMouseLeave={dLeave}
             className="absolute top-[100%] left-0 right-0 bg-[#0a3c00] z-[1001] min-h-[240px]"
-            style={{ animation: "dropIn .2s ease" }}
+            variants={slideDownVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
             <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#0a3c00] z-[-1]" />
             <div className="max-w-[90rem] mx-auto px-6 relative">
               <div className="relative min-h-[240px]">
                 {/* CTA image */}
                 <div className="hidden xl:block absolute top-[34px] left-[1rem] w-[260px] bottom-[34px] min-h-[160px]">
-                  <a href="#" className="block h-full p-[7px_10px_7px_10px]">
+                  <a href="/main/services" className="block h-full p-[7px_10px_7px_10px]">
                     <div className="relative w-full h-full min-h-[160px] rounded-[3px] overflow-hidden"
                       style={{ background: "linear-gradient(150deg, #0d1e3e 0%, #142040 100%)" }}>
                       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 80%, rgba(255,140,60,0.5) 0%, rgba(200,80,20,0.3) 30%, transparent 65%)" }} />
@@ -636,28 +675,52 @@ export default function Header() {
                 </ul>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
 
         {/* ── SEARCH BAR ── */}
+        <AnimatePresence>
         {search && (
-          <div className="absolute top-[100%] left-0 right-0 bg-[#0a3c00] p-[20px_10%] z-[998]" style={{ animation: "dropIn .2s ease" }}>
+          <motion.div
+            key="search-bar"
+            className="absolute top-[100%] left-0 right-0 bg-[#0a3c00] p-[20px_10%] z-[998]"
+            variants={slideDownVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
             <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#0a3c00] z-[-1]" />
-            <div className="max-w-[830px] mx-auto my-[1rem] border-2 border-white relative pr-[62px]">
+            <form
+              className="max-w-[830px] mx-auto my-[1rem] border-2 border-white relative pr-[62px]"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (headerSearchQuery.trim()) {
+                  setSearch(false);
+                  setHeaderSearchQuery("");
+                  router.push(`/resources?search=${encodeURIComponent(headerSearchQuery.trim())}`);
+                }
+              }}
+            >
               <input
                 autoFocus
                 type="text"
-                placeholder="Search..."
+                placeholder="Search resources..."
+                value={headerSearchQuery}
+                onChange={(e) => setHeaderSearchQuery(e.target.value)}
                 className="w-full p-[0.6rem_0.9rem] bg-[#0a3c00] border-none text-white font-normal text-[16px] outline-none font-[Poppins]"
               />
               <button
+                type="submit"
                 className="absolute right-0 top-0 bottom-0 bg-[#0a3c00] border-none border-l-2 border-white p-[0.75rem_1.05rem] cursor-pointer text-[#9bc730] flex items-center transition-colors duration-200 hover:text-white"
+                aria-label="Search resources"
               >
                 <Ico id="search" size={20} />
               </button>
-            </div>
-          </div>
+            </form>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </>
   );
