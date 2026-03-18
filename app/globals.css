@@ -261,22 +261,22 @@
     @apply text-destructive text-sm mt-1;
   }
 
-  .seattle-section-header {
+  .maple-wood-section-header {
     @apply flex items-center justify-center text-center my-12 relative w-full overflow-hidden;
   }
 
-  .seattle-section-header::before,
-  .seattle-section-header::after {
+  .maple-wood-section-header::before,
+  .maple-wood-section-header::after {
     content: '';
     @apply block border-b border-gray-300 flex-1 mx-4 sm:mx-8;
   }
 
-  .seattle-section-header h2 {
+  .maple-wood-section-header h2 {
     @apply text-3xl md:text-4xl text-secondary m-0 px-2 uppercase tracking-widest break-words text-center;
     font-family: var(--font-playfair), serif;
   }
 
-  .seattle-section-header a {
+  .maple-wood-section-header a {
     @apply absolute right-0 text-sm font-semibold uppercase tracking-wider text-primary border-b-2 border-transparent hover:border-primary transition-colors pb-1 hidden md:block;
   }
 

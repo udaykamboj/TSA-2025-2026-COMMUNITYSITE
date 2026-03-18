@@ -113,8 +113,9 @@ export const organizations: Organization[] = [
   },
   {
     id: "org-2",
-    name: "Seattle Robotics Society",
-    description: "Local robotics club focused on education and community outreach.",
+    name: "Maple Wood Robotics Society",
+    description: "Supporting local robotics teams and STEM education.",
+    contactPerson: "contact@maplewoodrobotics.org",
     status: "pending",
     memberCount: 0,
     createdAt: "2026-02-28",

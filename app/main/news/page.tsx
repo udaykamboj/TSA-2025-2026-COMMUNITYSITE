@@ -4,7 +4,8 @@ import Footer from "@/components/layout/footer"
 import { newsConfig } from "@/lib/content/news-config"
 
 export const metadata = {
-  title: "Latest News | City Community Resource Hub",
+  title: "Latest News | Maple Wood Community Resource Hub",
+  description: "Stay updated with the latest news, announcements, and events in Maple Wood.",
 }
 
 export default function NewsIndexPage() {

@@ -489,7 +489,7 @@ export default function Header() {
                   fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 0.88,
                   fontFamily: '"Poppins",Verdana,sans-serif',
                   transition: "font-size .35s",
-                }}>seattle</div>
+                }}>maple wood</div>
               </div>
             </a>
 

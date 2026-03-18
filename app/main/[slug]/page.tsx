@@ -26,12 +26,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
   if (slug === "services") {
-    return { title: "Services | City Community Resource Hub" }
+    return { title: "Services | Maple Wood Community Resource Hub" }
   }
   const config = getPageBySlug(slug)
   if (!config) return {}
   return {
-    title: `${config.title} | City Community Resource Hub`,
+    title: `${config.title} | Maple Wood Community Resource Hub`,
   }
 }
 
