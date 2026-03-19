@@ -1,11 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useAuth } from '@/context/AuthContext'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabaseClient'
+
+function getRedirectPath(searchParams: URLSearchParams | null): string {
+  const redirect = searchParams?.get('redirect')
+  if (!redirect || typeof redirect !== 'string') return '/dashboard'
+  if (redirect.startsWith('/') && !redirect.startsWith('//')) return redirect
+  return '/dashboard'
+}
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -21,13 +28,15 @@ export default function LoginPage() {
 
   const { signIn, signUp, user } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const supabase = createClient()
+  const redirectPath = getRedirectPath(searchParams)
 
   useEffect(() => {
     if (user) {
-      router.push('/dashboard')
+      router.push(redirectPath)
     }
-  }, [user, router])
+  }, [user, router, redirectPath])
 
   if (user) {
     return null
@@ -73,9 +82,9 @@ export default function LoginPage() {
 
       setError(userFriendlyError)
     } else if (isSignUp) {
-      router.push('/dashboard')
+      router.push(redirectPath)
     } else {
-      router.push('/dashboard')
+      router.push(redirectPath)
     }
     setLoading(false)
   }
@@ -107,7 +116,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/dashboard`,
+        redirectTo: `${window.location.origin}${redirectPath}`,
       },
     })
     if (error) {
@@ -327,12 +336,12 @@ export default function LoginPage() {
                           // Create it if it doesn't exist yet
                           await signUp("demo@example.com", "demo123456")
                           await signIn("demo@example.com", "demo123456")
-                          router.push('/dashboard')
+                          router.push(redirectPath)
                         } else if (error) {
                           setError(error)
                           setLoading(false)
                         } else {
-                          router.push('/dashboard')
+                          router.push(redirectPath)
                         }
                       }}
                       disabled={loading}

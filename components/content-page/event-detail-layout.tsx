@@ -76,7 +76,7 @@ export default function EventDetailLayout({
                 {tags.map((tag) => (
                   <span
                     key={tag}
-                    className="bg-slate-100 text-slate-700 text-sm font-medium px-3 py-1 rounded"
+                    className="bg-slate-100 text-slate-700 text-sm font-medium px-3 py-1 rounded-md"
                   >
                     {tag}
                   </span>

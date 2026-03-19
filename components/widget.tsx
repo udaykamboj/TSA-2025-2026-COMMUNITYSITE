@@ -39,7 +39,7 @@ export default function Widget({
 }: WidgetProps) {
   return (
     <div className="flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-[540px] rounded-[20px] p-6 sm:p-8 text-slate-900 font-normal shadow-sm">
+      <div className="w-full max-w-[540px] rounded-lg p-6 sm:p-8 text-slate-900 font-normal">
         <div className="flex items-start justify-between mb-6">
           <h3 className="flex flex-col leading-tight">
             <span className="text-[1.75rem] font-bold">{date.split(',')[0] ?? 'Saturday'},</span>

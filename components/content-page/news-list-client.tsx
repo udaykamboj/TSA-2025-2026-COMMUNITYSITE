@@ -2,69 +2,68 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { ArrowRight } from "lucide-react"
 import { newsConfig } from "@/lib/content/news-config"
 import { staggerContainer, staggerItem } from "@/lib/animations"
 
 export function NewsListClient() {
   return (
     <motion.div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
     >
       {newsConfig.map((article) => (
-        <motion.div key={article.slug} variants={staggerItem}>
+        <motion.article key={article.slug} variants={staggerItem} whileHover={{ y: -4 }}>
           <Link
             href={`/main/news/${article.slug}`}
-            className="group block"
-            style={{ textDecoration: "none" }}
+            className="group block h-full no-underline text-inherit focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2"
           >
-            <motion.div
-              className="h-full flex flex-col border-2 transition-all duration-300 overflow-hidden"
-              style={{
-                backgroundColor: "hsla(0, 0%, 100%, 0.749)",
-                borderColor: "#ddd",
-                borderRadius: "8px",
-                boxShadow: "4px 4px 12px 0px rgba(0, 0, 0, 0.2)",
-              }}
-              whileHover={{ y: -4 }}
-            >
+            <div className="box-card !p-0 overflow-hidden flex flex-col h-full hover:border-[var(--primary)] transition-colors">
               {article.heroImage && (
-                <div className="w-full aspect-video overflow-hidden bg-slate-100">
+                <div className="relative w-full aspect-video overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={article.heroImage}
                     alt=""
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
               )}
-              <div className="p-4 flex flex-col flex-1">
-                <p className="text-slate-600 text-sm mb-2">{article.date}</p>
-                <h2 className="text-xl font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mb-2">
+              <div className="flex flex-col flex-1 p-6 md:p-8">
+                <time
+                  dateTime={article.date}
+                  className="font-poppins text-primary font-semibold tracking-widest uppercase text-sm mb-4"
+                >
+                  {article.date}
+                </time>
+                <h2 className="font-playfair font-bold text-2xl text-secondary leading-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">
                   {article.title}
                 </h2>
-                <p className="text-slate-700 text-sm flex-1 line-clamp-3">{article.excerpt}</p>
+                <p className="font-poppins text-gray-600 font-light mb-6 flex-1 line-clamp-3 leading-relaxed">
+                  {article.excerpt}
+                </p>
                 {article.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {article.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-slate-100 text-slate-700 text-xs font-medium px-2 py-0.5 rounded"
+                        className="bg-muted text-secondary border border-slate-200 px-3 py-1 rounded-none text-xs uppercase tracking-widest font-semibold font-poppins"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
-                <span className="text-blue-600 text-sm font-medium mt-3 inline-block">
-                  Read press release →
+                <span className="text-[var(--primary)] font-bold text-lg flex items-center gap-2 hover:underline">
+                  Read press release
+                  <ArrowRight className="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
                 </span>
               </div>
-            </motion.div>
+            </div>
           </Link>
-        </motion.div>
+        </motion.article>
       ))}
     </motion.div>
   )

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Calendar, MapPin } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export interface ResourceCardData {
   id: string
@@ -18,19 +19,22 @@ export interface ResourceCardData {
 interface ResourceCardProps {
   resource: ResourceCardData
   onClick: () => void
+  /** compact = smaller for carousel; default = full size for grid */
+  size?: "default" | "compact"
 }
 
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=800&fit=crop"
 
-export default function ResourceCard({ resource, onClick }: ResourceCardProps) {
+export default function ResourceCard({ resource, onClick, size = "default" }: ResourceCardProps) {
   const [imageError, setImageError] = useState(false)
   const imageUrl = imageError ? DEFAULT_IMAGE : (resource.image || DEFAULT_IMAGE)
+  const isCompact = size === "compact"
 
   return (
     <motion.button
       type="button"
       onClick={onClick}
-      className="group relative w-full aspect-[3/4] min-h-[280px] rounded-2xl overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2"
+      className={`group relative w-full aspect-[3/4] rounded-2xl overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 ${isCompact ? "min-h-[220px]" : "min-h-[280px]"}`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
@@ -53,14 +57,14 @@ export default function ResourceCard({ resource, onClick }: ResourceCardProps) {
       />
 
       {/* Content - layout from event card, visual weight from info card */}
-      <div className="relative z-10 flex flex-col h-full p-7 md:p-8">
+      <div className={cn("relative z-10 flex flex-col h-full", size === "compact" ? "p-5 md:p-6" : "p-7 md:p-8")}>
         {/* Spacer pushes all content to the bottom regardless of content length */}
         <div className="flex-1 min-h-0" aria-hidden />
         {/* Header & description - always at bottom */}
-        <h3 className="text-xl md:text-2xl font-extrabold text-white mb-3 drop-shadow-sm line-clamp-2 leading-tight">
+        <h3 className={cn("font-extrabold text-white mb-3 drop-shadow-sm line-clamp-2 leading-tight", size === "compact" ? "text-lg md:text-xl" : "text-xl md:text-2xl")}>
           {resource.name}
         </h3>
-        <p className="text-base md:text-lg font-medium text-white/90 line-clamp-2 leading-relaxed mb-4">
+        <p className={cn("font-medium text-white/90 line-clamp-2 leading-relaxed mb-4", size === "compact" ? "text-sm md:text-base" : "text-base md:text-lg")}>
           {resource.description}
         </p>
 

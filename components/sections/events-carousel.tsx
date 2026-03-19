@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef } from "react"
+import React, { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { upcomingEvents } from "@/lib/sample-data"
@@ -8,8 +8,42 @@ import SectionTitle from "@/components/section-title"
 import { MotionSection } from "@/components/ui/motion-section"
 import { staggerContainer, staggerItem } from "@/lib/animations"
 
+const DRAG_THRESHOLD = 5
+
 export default function EventsCarousel() {
   const listRef = useRef<HTMLOListElement | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const dragStartRef = useRef<{ x: number; scrollLeft: number } | null>(null)
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    const el = listRef.current
+    if (!el) return
+    dragStartRef.current = { x: e.clientX, scrollLeft: el.scrollLeft }
+    setIsDragging(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isDragging) return
+    const el = listRef.current
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!dragStartRef.current || !el) return
+      const dx = e.clientX - dragStartRef.current.x
+      el.scrollLeft = dragStartRef.current.scrollLeft - dx
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+      dragStartRef.current = null
+    }
+
+    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mouseup", handleMouseUp)
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseup", handleMouseUp)
+    }
+  }, [isDragging])
 
   const scrollBySlide = (direction: "next" | "prev") => {
     const el = listRef.current
@@ -53,9 +87,10 @@ export default function EventsCarousel() {
         {/* Navigation */}
 
         <motion.ol
-          className="carousel-slides flex gap-x-5 pl-0 pr-0 m-0 list-none overflow-x-auto scroll-smooth snap-x snap-mandatory items-start"
+          className={`carousel-slides flex gap-x-5 pl-0 pr-0 m-0 list-none overflow-x-auto scroll-smooth snap-x snap-mandatory items-start select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
           ref={listRef}
-          style={{ WebkitOverflowScrolling: "touch" }}
+          onMouseDown={handleMouseDown}
+          style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none" }}
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

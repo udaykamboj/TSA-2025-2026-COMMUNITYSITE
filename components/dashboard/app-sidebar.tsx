@@ -100,7 +100,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             {/* Logo */}
             <Link href="/dashboard" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-lg">M</span>
               </div>
               <span className="text-lg font-bold text-primary">Maplewood</span>
@@ -147,7 +147,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* Select Organization */}
         <div className="mt-3">
           <DropdownMenu>
-            <DropdownMenuTrigger className="w-full flex items-center justify-between px-3 py-2 bg-primary text-primary-foreground rounded text-sm font-semibold">
+            <DropdownMenuTrigger className="w-full flex items-center justify-between px-3 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold">
               <span>Select Organization</span>
               <IconChevronDown className="size-4" />
             </DropdownMenuTrigger>

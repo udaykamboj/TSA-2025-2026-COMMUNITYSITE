@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, use } from "react"
+import { useState } from "react"
 import { events, volunteerRoles } from "@/lib/mock-data"
 import { useAppStore } from "@/lib/store"
 import { useAuth } from "@/context/AuthContext"
@@ -26,11 +26,10 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
 interface EventDetailContentProps {
-  params: Promise<{ id: string }>
+  id: string
 }
 
-export function EventDetailContent({ params }: EventDetailContentProps) {
-  const { id } = use(params)
+export function EventDetailContent({ id }: EventDetailContentProps) {
   const router = useRouter()
   const { addApplication } = useAppStore()
   const { user } = useAuth()

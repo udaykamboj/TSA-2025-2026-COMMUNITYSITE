@@ -4,6 +4,7 @@ import { type Icon } from "@tabler/icons-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { cn } from '@/lib/utils'
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -28,16 +29,18 @@ export function NavMain({
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => {
-            const isActive = pathname === item.url || pathname.startsWith(item.url + "/")
+            // Only exact match for top-level items (e.g. /dashboard) so Dashboard isn't "always" green on subpages
+            const isActive = pathname === item.url || (item.url !== "/dashboard" && pathname.startsWith(item.url + "/"))
             return (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton 
                   asChild 
+                  isActive={isActive}
                   tooltip={item.title}
-                  className={isActive 
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold" 
-                    : "hover:bg-muted"
-                  }
+                  className={cn(
+                    "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                    isActive && "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground font-semibold"
+                  )}
                 >
                   <Link href={item.url}>
                     {item.icon && <item.icon className="size-4" />}

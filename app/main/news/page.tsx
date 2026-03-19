@@ -11,14 +11,16 @@ export default function NewsIndexPage() {
   return (
     <main className="min-h-screen flex flex-col">
       <Header />
-      <div className="flex-1 bg-white py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
-            Latest News
-          </h1>
-          <p className="text-slate-700 mb-10">
-            Press releases and updates from the city.
-          </p>
+      <div className="flex-1 bg-white">
+        <div className="container-page py-12 md:py-16 lg:py-20">
+          <header className="mb-12 md:mb-16">
+            <h1 className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl text-[var(--secondary)] tracking-tight mb-3">
+              Latest News
+            </h1>
+            <p className="font-poppins text-[var(--muted-foreground)] text-base sm:text-lg max-w-2xl leading-relaxed">
+              Press releases and updates from the city.
+            </p>
+          </header>
           <NewsListClient />
         </div>
       </div>

@@ -16,7 +16,7 @@ export default function CityServicesQuickLinks() {
   const summaries = Object.values(categorySummaries)
 
   return (
-    <section className="mb-10 rounded-xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-emerald-50/40 p-6 md:p-8">
+    <section className="mb-10 rounded-lg border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-emerald-50/40 p-6 md:p-8">
       <h2 className="text-xl font-bold text-slate-900 mb-2">
         City Services & Permits
       </h2>
@@ -41,9 +41,9 @@ export default function CityServicesQuickLinks() {
             <motion.div key={summary.slug} variants={staggerItem} whileHover={{ y: -4 }}>
             <Link
               href={href}
-              className="group flex flex-col rounded-xl border-2 border-slate-200 bg-white p-6 hover:border-[var(--primary)] hover:shadow-lg transition-all duration-300"
+              className="group flex flex-col rounded-lg border-2 border-slate-200 bg-white p-6 hover:border-[var(--primary)] hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-slate-100 text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors mb-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-slate-100 text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors mb-4">
                 <Icon className="h-7 w-7" strokeWidth={1.5} />
               </div>
               <h3 className="font-bold text-lg text-slate-900 group-hover:text-[var(--primary)] transition-colors mb-2">

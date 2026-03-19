@@ -11,14 +11,19 @@ import SectionTitle from "@/components/section-title"
 import { MotionSection } from "@/components/ui/motion-section"
 import { staggerContainer, staggerItem } from "@/lib/animations"
 
-const SCROLL_AMOUNT = 364 // ~card width + gap-6
+const SCROLL_AMOUNT = 304 // ~card width (280px) + gap-6 (24px)
+
+const DRAG_THRESHOLD = 5 // pixels moved to count as drag (prevents click when dragging)
 
 export default function ResourcesCarousel() {
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
   const carouselRef = useRef<HTMLDivElement>(null)
+  const dragStartRef = useRef<{ x: number; scrollLeft: number } | null>(null)
+  const hasDraggedRef = useRef(false)
 
   const updateScrollState = useCallback(() => {
     const el = carouselRef.current
@@ -49,7 +54,40 @@ export default function ResourcesCarousel() {
     el.scrollBy({ left: amount, behavior: "smooth" })
   }
 
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    const el = carouselRef.current
+    if (!el) return
+    hasDraggedRef.current = false
+    dragStartRef.current = { x: e.clientX, scrollLeft: el.scrollLeft }
+    setIsDragging(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isDragging) return
+    const el = carouselRef.current
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!dragStartRef.current || !el) return
+      const dx = e.clientX - dragStartRef.current.x
+      if (Math.abs(dx) > DRAG_THRESHOLD) hasDraggedRef.current = true
+      el.scrollLeft = dragStartRef.current.scrollLeft - dx
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+      dragStartRef.current = null
+    }
+
+    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mouseup", handleMouseUp)
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseup", handleMouseUp)
+    }
+  }, [isDragging])
+
   const handleCardClick = (resource: Resource) => {
+    if (hasDraggedRef.current) return
     setSelectedResource(resource)
     setModalOpen(true)
   }
@@ -101,7 +139,10 @@ export default function ResourcesCarousel() {
 
           <motion.div
             ref={carouselRef}
-            className="flex gap-6 overflow-x-auto pb-4 scroll-smooth scrollbar-hide"
+            onMouseDown={handleMouseDown}
+            className={`flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide select-none ${
+              isDragging ? "cursor-grabbing" : "cursor-grab"
+            }`}
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -113,7 +154,7 @@ export default function ResourcesCarousel() {
             viewport={{ once: true, margin: "-50px" }}
           >
             {allResources.map((resource) => (
-              <motion.div key={resource.id} variants={staggerItem} className="flex-shrink-0">
+              <motion.div key={resource.id} variants={staggerItem} className="flex-shrink-0 snap-start">
                 <ResourceCardWrapper
                   resource={resource}
                   onClick={() => handleCardClick(resource)}

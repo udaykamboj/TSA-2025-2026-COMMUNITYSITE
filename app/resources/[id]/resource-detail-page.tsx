@@ -466,7 +466,7 @@ export default function ResourceDetailPage() {
                     <p className="text-sm font-semibold text-foreground">Serves</p>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {resource.ageGroups.map((group) => (
-                        <span key={group} className="text-xs bg-teal-50 text-teal-700 px-2 py-1 rounded">
+                        <span key={group} className="text-xs bg-teal-50 text-teal-700 px-2 py-1 rounded-md">
                           {group}
                         </span>
                       ))}

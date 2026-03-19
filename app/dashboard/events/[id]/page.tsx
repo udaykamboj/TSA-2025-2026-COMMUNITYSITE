@@ -1,7 +1,8 @@
 import { EventDetailContent } from '@/components/dashboard/event-detail-content'
 
-export default function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params
     return (
-        <EventDetailContent params={params} />
+        <EventDetailContent id={id} />
     )
 }

@@ -120,7 +120,7 @@ export default function Hero({ selectedDate: selectedDateProp, onSelectDateClick
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="w-full max-w-md shadow-2xl rounded-[20px] bg-background/95 backdrop-blur-md overflow-hidden text-foreground">
+            <div className="w-full max-w-md shadow-2xl rounded-[20px] bg-background overflow-hidden text-foreground">
               <Widget {...widgetData} />
             </div>
           </motion.div>

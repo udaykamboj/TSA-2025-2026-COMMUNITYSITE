@@ -31,8 +31,8 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0rem;
-  /* Sharp corners */
+  --radius: 0.5rem;
+  /* Unified subtle radius for cards, buttons, inputs */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -202,8 +202,7 @@
 
   /* Unified border standard for all boxes */
   .box-card {
-    @apply bg-white p-6 md:p-10 shadow-sm border border-slate-200 transition-all duration-300;
-    border-radius: 0;
+    @apply bg-white p-6 md:p-10 shadow-sm border border-slate-200 rounded-lg transition-all duration-300;
   }
 
   .box-card:hover {
@@ -212,44 +211,40 @@
 
   /* Unified button styles */
   .box-button {
-    @apply bg-white text-secondary font-semibold px-8 py-4 hover:bg-secondary hover:text-white transition-all border border-secondary;
+    @apply bg-white text-secondary font-semibold px-8 py-4 hover:bg-secondary hover:text-white transition-all border border-secondary rounded-lg;
     font-family: var(--font-poppins), system-ui, sans-serif;
-    border-radius: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   .box-button-primary {
-    @apply bg-primary text-white font-semibold px-8 py-4 hover:bg-[#386109] transition-all;
+    @apply bg-primary text-white font-semibold px-8 py-4 hover:bg-[#386109] transition-all rounded-lg;
     font-family: var(--font-poppins), system-ui, sans-serif;
-    border-radius: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   /* Consistent "View All" button style */
   .view-all-btn {
-    @apply bg-white text-secondary font-semibold px-8 py-4 hover:bg-secondary hover:text-white transition-all inline-block border border-secondary;
+    @apply bg-white text-secondary font-semibold px-8 py-4 hover:bg-secondary hover:text-white transition-all inline-block border border-secondary rounded-lg;
     font-family: var(--font-poppins), system-ui, sans-serif;
-    border-radius: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   .box-input {
-    @apply bg-white text-secondary px-6 py-4 focus:ring-2 focus:ring-primary border border-slate-200;
+    @apply bg-white text-secondary px-6 py-4 focus:ring-2 focus:ring-primary border border-slate-200 rounded-lg;
     font-family: var(--font-poppins), system-ui, sans-serif;
-    border-radius: 0;
   }
 
   /* Unified form elements */
   .form-select {
-    @apply w-full px-6 py-4 text-secondary bg-white font-normal focus:ring-2 focus:ring-primary border border-slate-200 rounded-none;
+    @apply w-full px-6 py-4 text-secondary bg-white font-normal focus:ring-2 focus:ring-primary border border-slate-200 rounded-md;
     font-family: var(--font-poppins), system-ui, sans-serif;
   }
 
   .form-checkbox {
-    @apply border border-slate-200 text-primary rounded-none;
+    @apply border border-slate-200 text-primary rounded-md;
   }
 
   .form-label {
@@ -323,7 +318,7 @@
   }
 
   .tag-badge {
-    @apply inline-block bg-muted text-secondary px-3 py-1 text-xs font-semibold rounded-none tracking-widest uppercase;
+    @apply inline-block bg-muted text-secondary px-3 py-1 text-xs font-semibold rounded-md tracking-widest uppercase;
   }
 
   .container-page {

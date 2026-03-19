@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Menu, X, ChevronDown, Type } from "lucide-react"
 import { slideDownVariants } from "@/lib/animations"
+import { useAuth } from "@/context/AuthContext"
 
 /* ─── DATA & CATEGORIES ────────────────────────────────────────────── */
 const servicesItems = [
@@ -44,9 +45,10 @@ const languagesConfig = [
   { flag: "🇵🇰", code: "ur", label: "Urdu" },
 ];
 
-const utilityLinks = [
+const baseUtilityLinks = [
   { label: "Submit a Resource", href: "/submit" },
   { label: "Resources", href: "/resources" },
+  { label: "News", href: "/main/news" },
   { label: "Reference", href: "/reference" },
   { label: "Login", href: "/login" },
 ];
@@ -203,7 +205,16 @@ const LangItem = ({ flag, label, code, changeLanguage }: any) => (
 
 export default function Header() {
   const router = useRouter();
+  const { user, loading } = useAuth();
   const [open, setOpen] = useState<string | null>(null);
+
+  // Auth-aware Organizations link: go to dashboard when logged in, else login with redirect
+  const organizationsHref = user && !loading ? "/dashboard/organizations" : "/login?redirect=/dashboard/organizations";
+  const utilityLinks = [
+    ...baseUtilityLinks.slice(0, 3), // Submit, Resources, News
+    { label: "Organizations", href: organizationsHref },
+    ...baseUtilityLinks.slice(3), // Reference, Login
+  ];
   const [search, setSearch] = useState(false);
   const [headerSearchQuery, setHeaderSearchQuery] = useState("");
   const [compressed, setCompressed] = useState(false);
@@ -507,6 +518,24 @@ export default function Header() {
                   </li>
                 ))}
                 <li className="inline-block pr-6">
+                  <Link href="/main/news" className={`vs-nl inline-flex items-center gap-1.5 no-underline${compressed ? " small" : ""}`}>
+                    News
+                  </Link>
+                </li>
+                <li className="inline-block pr-6">
+                  <Link
+                    href={user && !loading ? "/dashboard/organizations" : "/login?redirect=/dashboard/organizations"}
+                    className={`vs-nl inline-flex items-center gap-1.5 no-underline${compressed ? " small" : ""}`}
+                  >
+                    Organizations
+                  </Link>
+                </li>
+                <li className="inline-block pr-6">
+                  <Link href="/reference" className={`vs-nl inline-flex items-center gap-1.5 no-underline${compressed ? " small" : ""}`}>
+                    Reference
+                  </Link>
+                </li>
+                <li className="inline-block pr-6">
                   <a href="/login" className={`vs-cta${compressed ? " small" : ""}`}>Resident Portal</a>
                 </li>
               </ul>
@@ -590,6 +619,15 @@ export default function Header() {
                   </a>
                 );
               })}
+              <Link href="/main/news" className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none" onClick={() => setOpen(null)}>
+                News
+              </Link>
+              <Link href={organizationsHref} className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none" onClick={() => setOpen(null)}>
+                Organizations
+              </Link>
+              <Link href="/reference" className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none" onClick={() => setOpen(null)}>
+                Reference
+              </Link>
               <a href="/login" className="text-[#9bc730] font-bold text-lg py-2">Resident Portal</a>
               <div className="flex gap-4 pt-2">
                 <button onClick={toggleLargeFont} className="text-white flex items-center gap-2">
