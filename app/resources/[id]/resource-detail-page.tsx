@@ -59,12 +59,12 @@ const resourcesData = {
   },
   "2": {
     id: "2",
-    name: "City Food Bank",
+    name: "Mill Creek Food Bank",
     category: "Food",
     description:
       "Emergency food assistance and nutrition programs providing fresh groceries and meal support for residents in need.",
     fullDescription:
-      "City Food Bank is the region's largest hunger relief organization, providing emergency food assistance to over 2,000 families monthly. We distribute fresh produce, proteins, and pantry staples through our network of partner agencies. Our mission is to end hunger and provide nutritional support to vulnerable populations.",
+      "Mill Creek Food Bank is the region's largest hunger relief organization, providing emergency food assistance to over 2,000 families monthly. We distribute fresh produce, proteins, and pantry staples through our network of partner agencies. Our mission is to end hunger and provide nutritional support to vulnerable populations.",
     address: "456 Oak Avenue",
     phone: "(206) 555-0101",
     email: "help@cityfoodbank.org",

@@ -120,7 +120,7 @@ export function AdminDashboardContent() {
               <IconBuilding className="size-4 text-primary" />
             </div>
             <p className="text-2xl font-bold text-secondary">{organizations.length}</p>
-            <p className="text-xs text-[#e87722]">{pendingOrgs.length} pending approval</p>
+            <p className="text-xs text-[#2E7D52]">{pendingOrgs.length} pending approval</p>
           </motion.div>
           <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
@@ -128,14 +128,14 @@ export function AdminDashboardContent() {
               <IconClipboardList className="size-4 text-primary" />
             </div>
             <p className="text-2xl font-bold text-secondary">{applications.length}</p>
-            <p className="text-xs text-[#e87722]">{pendingApps.length} pending review</p>
+            <p className="text-xs text-[#2E7D52]">{pendingApps.length} pending review</p>
           </motion.div>
           <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-muted-foreground">Pending Actions</span>
-              <IconShield className="size-4 text-[#e87722]" />
+              <IconShield className="size-4 text-[#2E7D52]" />
             </div>
-            <p className="text-2xl font-bold text-[#e87722]">{pendingOrgs.length + pendingApps.length}</p>
+            <p className="text-2xl font-bold text-[#2E7D52]">{pendingOrgs.length + pendingApps.length}</p>
             <p className="text-xs text-muted-foreground">Items needing attention</p>
           </motion.div>
         </motion.div>

@@ -64,7 +64,7 @@ export function ProfileContent() {
             </p>
           </div>
           {!editing ? (
-            <Button onClick={() => setEditing(true)} className="bg-primary hover:bg-[#386109] text-white">
+            <Button onClick={() => setEditing(true)} className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
               <IconEdit className="size-4 mr-2" />
               Edit Profile
             </Button>
@@ -73,7 +73,7 @@ export function ProfileContent() {
               <Button variant="outline" onClick={handleCancel}>
                 <IconX className="size-4 mr-2" />Cancel
               </Button>
-              <Button onClick={handleSave} className="bg-primary hover:bg-[#386109] text-white">
+              <Button onClick={handleSave} className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
                 <IconCheck className="size-4 mr-2" />Save Changes
               </Button>
             </div>

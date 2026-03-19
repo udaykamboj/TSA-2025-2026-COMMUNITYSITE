@@ -102,7 +102,7 @@ export function EventsContent() {
                 <h2 className="text-lg font-semibold text-secondary">Event Filters</h2>
                 <Button
                   onClick={clearFilters}
-                  className="bg-primary hover:bg-[#386109] text-white px-4 py-1.5 text-sm"
+                  className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white px-4 py-1.5 text-sm"
                 >
                   CLEAR FILTERS
                 </Button>
@@ -116,14 +116,14 @@ export function EventsContent() {
                     <label
                       key={program}
                       className={`flex items-center gap-3 p-2.5 border rounded cursor-pointer transition-colors ${filters.programs.includes(program)
-                          ? "border-[#e87722] bg-[#fff8f3]"
-                          : "border-gray-300 hover:border-[#e87722]"
+                          ? "border-[#2E7D52] bg-[#f1f8e9]"
+                          : "border-gray-300 hover:border-[#2E7D52]"
                         }`}
                     >
                       <Checkbox
                         checked={filters.programs.includes(program)}
                         onCheckedChange={() => toggleProgram(program)}
-                        className="border-gray-400 data-[state=checked]:bg-[#e87722] data-[state=checked]:border-[#e87722]"
+                        className="border-gray-400 data-[state=checked]:bg-[#2E7D52] data-[state=checked]:border-[#2E7D52]"
                       />
                       <span className="text-sm text-secondary">
                         {program}
@@ -253,7 +253,7 @@ export function EventsContent() {
                   {/* Volunteer Button */}
                   <div className="p-4 pt-0">
                     <Link href={`/dashboard/events/${event.id}`}>
-                      <Button className="w-full bg-primary hover:bg-[#386109] text-white font-semibold">
+                      <Button className="w-full bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white font-semibold">
                         VOLUNTEER
                       </Button>
                     </Link>

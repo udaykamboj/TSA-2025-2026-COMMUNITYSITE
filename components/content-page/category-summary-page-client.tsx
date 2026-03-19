@@ -450,7 +450,7 @@ export default function CategorySummaryPageClient({ summary, services }: Props) 
       <motion.section
         className="relative rounded-2xl overflow-hidden p-8 md:p-10"
         style={{
-          background: "linear-gradient(135deg, #0a3c00 0%, #1a5c10 50%, #0d4a05 100%)",
+          backgroundColor: "#2E7D52",
         }}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}

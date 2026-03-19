@@ -3,7 +3,7 @@ import type { NewsConfig } from "./types"
 export const newsConfig: NewsConfig[] = [
   {
     slug: "city-council-infrastructure",
-    title: "City Council Approves New Infrastructure Plan",
+    title: "Mill Creek Council Approves New Infrastructure Plan",
     date: "January 15, 2026",
     excerpt:
       "The city council has unanimously approved a comprehensive infrastructure improvement plan that will modernize key public facilities and improve transportation networks over the next five years. The plan includes over 40 miles of road resurfacing, structural upgrades for three aging bridges, two new multipurpose community centers in underserved neighborhoods, and major expansions to the riverfront trail and five parks. Funding is secured through federal grants and existing capital budgets with no new general tax increase.",
@@ -34,7 +34,7 @@ export const newsConfig: NewsConfig[] = [
   },
   {
     slug: "community-health-initiative",
-    title: "Community Health Initiative Launches Citywide",
+    title: "Community Health Initiative Launches Mill Creek-wide",
     date: "January 10, 2026",
     excerpt:
       "A new health and wellness program aims to improve access to healthcare for all residents through mobile clinics, free telemedicine visits, and monthly health fairs. The initiative brings basic exams, vaccinations, and screenings to libraries, community centers, and senior housing on a rotating schedule—no insurance or ID required for basic services. Same-day and next-day telemedicine slots are available in multiple languages, with referrals to primary and specialty care when needed. The program is funded by city funds, federal grants, and hospital community benefit commitments.",
@@ -68,7 +68,7 @@ export const newsConfig: NewsConfig[] = [
     title: "Free Job Training Program Opens Enrollment for 2026",
     date: "January 5, 2026",
     excerpt:
-      "City residents 18 and older can now sign up for tuition-free certification programs in healthcare (CNA, Medical Assistant, Pharmacy Technician), technology (IT Support, Data Analytics, Web Development), skilled trades (Electrical, Plumbing, HVAC, Construction), and business. Programs run from 6 weeks to 12 months with childcare vouchers and transportation assistance for eligible participants. Monthly info sessions are held virtually and in person; cohorts start quarterly and include job placement assistance upon completion. Apply online at workforce.city.gov or at any city community center.",
+      "Mill Creek residents 18 and older can now sign up for tuition-free certification programs in healthcare (CNA, Medical Assistant, Pharmacy Technician), technology (IT Support, Data Analytics, Web Development), skilled trades (Electrical, Plumbing, HVAC, Construction), and business. Programs run from 6 weeks to 12 months with childcare vouchers and transportation assistance for eligible participants. Monthly info sessions are held virtually and in person; cohorts start quarterly and include job placement assistance upon completion. Apply online at workforce.millcreek.gov or at any Mill Creek community center.",
     heroImage:
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop",
     tags: ["Employment", "Education"],

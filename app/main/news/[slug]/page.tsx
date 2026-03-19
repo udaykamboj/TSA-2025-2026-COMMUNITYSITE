@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
   const config = getNewsBySlug(slug)
   if (!config) return {}
   return {
-    title: `${config.title} | Maplewood Community Resource Hub`,
+    title: `${config.title} | Mill Creek Community Resource Hub`,
   }
 }
 

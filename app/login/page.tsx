@@ -329,23 +329,14 @@ export default function LoginPage() {
             </div>
 
             {!isSignUp && (
-              <div className="mt-8 pt-6 border-t border-gray-100">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wider text-gray-400">
-                    <span>Demo Credentials</span>
-                    <span className="h-px flex-1 ml-4 bg-gray-100"></span>
+              <div className="mt-8 pt-6 text-center text-sm text-gray-500">
+                <p className="mb-2">Demo Credentials</p>
+                <div className="flex justify-center gap-6">
+                  <div>
+                    <span className="font-medium text-gray-700">Volunteer:</span> demo@example.com (demo123456)
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 rounded-lg bg-gray-50 border border-gray-100">
-                      <p className="text-[10px] font-bold text-indigo-600 uppercase mb-1">Volunteer Access</p>
-                      <p className="text-sm font-medium text-gray-900">demo@example.com</p>
-                      <p className="text-xs text-gray-500 mt-0.5">Password: demo123456</p>
-                    </div>
-                    <div className="p-3 rounded-lg bg-gray-50 border border-gray-100">
-                      <p className="text-[10px] font-bold text-amber-600 uppercase mb-1">Admin Access</p>
-                      <p className="text-sm font-medium text-gray-900">admin@example.com</p>
-                      <p className="text-xs text-gray-500 mt-0.5">Password: admin123456</p>
-                    </div>
+                  <div>
+                    <span className="font-medium text-gray-700">Admin:</span> admin@example.com (admin123456)
                   </div>
                 </div>
               </div>

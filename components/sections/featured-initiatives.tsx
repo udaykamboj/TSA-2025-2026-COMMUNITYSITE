@@ -10,21 +10,21 @@ export default function FeaturedInitiatives() {
     return (
         <MotionSection className="bg-secondary">
             <div className="container-page pb-16">
-                <SectionTitle title="City Initiatives" linkText="All Initiatives" linkHref="/main/news" pbClass="pb-6" />
+                <SectionTitle title="Mill Creek Initiatives" linkText="All Initiatives" linkHref="/main/news" pbClass="pb-6" />
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 box-card !p-0 overflow-hidden border-none shadow-xl">
                     <div className="relative min-h-[300px] lg:min-h-[450px]">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&q=80&w=1000"
-                            alt="City skyline representing new initiatives"
+                            alt="Mill Creek skyline representing new initiatives"
                             className="absolute inset-0 w-full h-full object-cover"
                         />
                     </div>
                     <div className="p-8 md:p-14 flex flex-col justify-center bg-[var(--primary)] text-white">
                         <span className="text-sm font-bold uppercase tracking-widest text-blue-200 mb-4">Mayoral Initiative</span>
                         <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                            Building a Greener, More Sustainable City for Tomorrow
+                            Building a Greener, More Sustainable Mill Creek for Tomorrow
                         </h3>
                         <p className="text-blue-50 text-lg mb-10 leading-relaxed font-medium">
                             Our new comprehensive climate action plan commits to reducing carbon emissions by 40% over the next decade. Learn about the new zero-waste programs, expanded green spaces, and renewable energy grants available to residents.

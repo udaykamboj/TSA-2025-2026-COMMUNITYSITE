@@ -95,7 +95,7 @@ export function CalendarContent() {
             </p>
           </div>
           <Link href="/dashboard/events">
-            <Button className="bg-primary hover:bg-[#386109] text-white">
+            <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
               Find Events
             </Button>
           </Link>
@@ -164,7 +164,7 @@ export function CalendarContent() {
                   {day && (
                     <>
                       <div className={`text-sm mb-1 ${isToday
-                          ? "bg-[#e87722] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold"
+                          ? "bg-[#2E7D52] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold"
                           : "text-muted-foreground"
                         }`}>
                         {day}
@@ -200,7 +200,7 @@ export function CalendarContent() {
           {/* Legend */}
           <div className="px-6 py-3 border-t bg-[#f8fafc] flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded bg-[#fef3c7]" />
+              <div className="w-4 h-4 rounded bg-[#e8f5e9]" />
               <span className="text-sm text-muted-foreground">Available Events</span>
             </div>
             <div className="flex items-center gap-2">

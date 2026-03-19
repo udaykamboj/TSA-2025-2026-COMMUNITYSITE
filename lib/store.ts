@@ -139,7 +139,7 @@ export const useAppStore = create<AppState>()(
             notifications: [{
               id: `notif-welcome-${Date.now()}`,
               userEmail: email,
-              message: "Welcome to the Maplewood Community Volunteer System! Start by exploring events or completing your profile.",
+              message: "Welcome to the Mill Creek Community Volunteer System! Start by exploring events or completing your profile.",
               type: "info",
               read: false,
               createdAt: new Date().toISOString(),
@@ -370,8 +370,8 @@ export const useAppStore = create<AppState>()(
       // Admin
       allUsers: [
         defaultUser,
-        { id: "user-2", name: "Jane Smith", email: "jane@example.com", role: "user", volunteerSince: 2023, totalHours: 24 },
-        { id: "user-3", name: "Bob Johnson", email: "bob@example.com", role: "user", volunteerSince: 2024, totalHours: 12 },
+        { id: "user-2", name: "Person 2", email: "jane@example.com", role: "user", volunteerSince: 2023, totalHours: 24 },
+        { id: "user-3", name: "Person 3", email: "bob@example.com", role: "user", volunteerSince: 2024, totalHours: 12 },
       ],
       pendingOrganizations: () =>
         get().organizations.filter((o) => o.status === "pending"),

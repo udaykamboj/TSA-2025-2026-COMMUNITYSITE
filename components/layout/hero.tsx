@@ -87,7 +87,7 @@ export default function Hero({ selectedDate: selectedDateProp, onSelectDateClick
             transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
             <h1 className="mb-8 leading-tight text-white drop-shadow-xl !font-black !text-5xl lg:!text-6xl">
-              Find Local Services & Support on the Community Hub
+              Find your local support on the Mill Creek Community Hub
             </h1>
 
             <form onSubmit={handleSearch} className="mb-8 max-w-xl">

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 const highlights = [
   {
     id: 1,
-    title: "City Food Bank",
+    title: "Mill Creek Food Bank",
     category: "Food Assistance",
     shortDescription: "Emergency meals and groceries",
     description:

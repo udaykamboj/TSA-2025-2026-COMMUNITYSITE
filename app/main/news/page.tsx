@@ -3,8 +3,8 @@ import Footer from "@/components/layout/footer"
 import { NewsListClient } from "@/components/content-page/news-list-client"
 
 export const metadata = {
-  title: "Latest News | Maplewood Community Resource Hub",
-  description: "Stay updated with the latest news, announcements, and events in Maplewood.",
+  title: "Latest News | Mill Creek Community Resource Hub",
+  description: "Stay updated with the latest news, announcements, and events in Mill Creek.",
 }
 
 export default function NewsIndexPage() {

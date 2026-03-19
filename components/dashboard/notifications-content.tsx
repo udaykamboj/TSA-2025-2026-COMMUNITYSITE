@@ -42,7 +42,7 @@ export function NotificationsContent({ basePath = "/dashboard" }: NotificationsC
   const getIcon = (type: string) => {
     switch (type) {
       case "success": return <IconCircleCheck className="size-5 text-green-600" />
-      case "warning": return <IconAlertTriangle className="size-5 text-[#e87722]" />
+      case "warning": return <IconAlertTriangle className="size-5 text-[#2E7D52]" />
       case "error": return <IconCircleX className="size-5 text-red-600" />
       default: return <IconInfoCircle className="size-5 text-blue-600" />
     }

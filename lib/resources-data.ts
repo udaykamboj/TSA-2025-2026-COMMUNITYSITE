@@ -35,7 +35,7 @@ export const allResources: Resource[] = [
   },
   {
     id: "2",
-    name: "City Food Bank",
+    name: "Mill Creek Food Bank",
     category: "Food",
     description: "Emergency food assistance and nutrition programs for residents in need.",
     address: "456 Oak Avenue",

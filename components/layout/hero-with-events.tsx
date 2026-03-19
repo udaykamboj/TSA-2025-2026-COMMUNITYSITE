@@ -9,8 +9,11 @@ export default function HeroWithEvents() {
   const [isEventsOpen, setIsEventsOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState(() => new Date())
 
-  const handleSelectDate = (date: Date) => {
+  const handleConfirmDate = (date: Date) => {
     setSelectedDate(date)
+  }
+
+  const handleClose = () => {
     setIsEventsOpen(false)
   }
 
@@ -25,7 +28,7 @@ export default function HeroWithEvents() {
         {isEventsOpen && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/10"
-            onClick={() => setIsEventsOpen(false)}
+            onClick={handleClose}
             role="dialog"
             aria-modal="true"
             aria-label="Community Events Calendar"
@@ -44,8 +47,8 @@ export default function HeroWithEvents() {
             >
               <CalendarDatePickerModal
                 selectedDate={selectedDate}
-                onSelectDate={handleSelectDate}
-                onClose={() => setIsEventsOpen(false)}
+                onSelectDate={handleConfirmDate}
+                onClose={handleClose}
               />
             </motion.div>
           </motion.div>

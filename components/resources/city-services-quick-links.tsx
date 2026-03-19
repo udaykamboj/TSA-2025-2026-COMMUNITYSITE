@@ -18,7 +18,7 @@ export default function CityServicesQuickLinks() {
   return (
     <section className="mb-10 rounded-lg border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-emerald-50/40 p-6 md:p-8">
       <h2 className="text-xl font-bold text-slate-900 mb-2">
-        City Services & Permits
+        Mill Creek Services & Permits
       </h2>
       <p className="text-slate-600 mb-6 max-w-2xl">
         Find permits, licenses, city services, and support programs. Each category

@@ -33,18 +33,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
   if (slug === "services") {
-    return { title: "Services | Maplewood Community Resource Hub" }
+    return { title: "Services | Mill Creek Community Resource Hub" }
   }
   const categorySummary = getCategorySummaryBySlug(slug)
   if (categorySummary) {
     return {
-      title: `${categorySummary.title} | Maplewood Community Resource Hub`,
+      title: `${categorySummary.title} | Mill Creek Community Resource Hub`,
     }
   }
   const config = getPageBySlug(slug)
   if (!config) return {}
   return {
-    title: `${config.title} | Maplewood Community Resource Hub`,
+    title: `${config.title} | Mill Creek Community Resource Hub`,
   }
 }
 

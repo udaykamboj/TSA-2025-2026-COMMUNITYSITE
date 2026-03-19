@@ -101,12 +101,12 @@ export default function ResourcesPage() {
       <Header />
 
       <div className="flex-1">
-        {/* Green curved header - same contained width as City Services card below */}
+        {/* Green curved header - same contained width as Mill Creek Services card below */}
         <div className="w-full max-w-7xl mx-auto px-4 pt-4 pb-0">
           <motion.section
             className="relative rounded-2xl overflow-hidden px-6 py-10 md:px-10 md:py-12 mb-8"
             style={{
-              background: "linear-gradient(135deg, #0a3c00 0%, #1a5c10 50%, #0d4a05 100%)",
+              background: "linear-gradient(135deg, #1E3D30 0%, #1a5c10 50%, #0d4a05 100%)",
             }}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}

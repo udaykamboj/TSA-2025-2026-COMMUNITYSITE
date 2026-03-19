@@ -100,7 +100,7 @@ const SubItem = ({ icon, label, href }: { icon: string, label: string, href: str
       border: "2px solid transparent",
       background: "transparent",
     }}
-    whileHover={{ borderColor: "#9bc730", backgroundColor: "#072d00" }}
+    whileHover={{ borderColor: "#5dba73", backgroundColor: "#162e14" }}
     transition={{ duration: 0.18 }}
   >
     <span className="header-sub-item-icon block absolute left-3 top-1/2 -translate-y-1/2 leading-none pointer-events-none" style={{ color: "rgba(255,255,255,0.88)" }}>
@@ -133,13 +133,13 @@ const CtaCard = ({ bg, emoji, title, books, href = "/main/services" }: any) => (
             <div className="absolute inset-0 flex items-center justify-center gap-[7px]">
               {[0, 1, 2].map(i => (
                 <div key={i} className="w-[72px] h-[100px] rounded-[3px] flex flex-col items-center justify-end pb-[7px]" style={{
-                  background: ["linear-gradient(160deg,#3a7a28,#1a3a10)", "linear-gradient(160deg,#4a8c30,#2d5a1b)", "linear-gradient(160deg,#2d6020,#163b0e)"][i],
+                  background: ["linear-gradient(160deg,#2E7D52,#1E3D30)", "linear-gradient(160deg,#3a8d5e,#234f1e)", "linear-gradient(160deg,#267045,#162e14)"][i],
                   transform: i === 0 ? "rotate(-5deg) translateX(-4px)" : i === 2 ? "rotate(5deg) translateX(4px)" : "none",
                   boxShadow: "2px 3px 14px rgba(0,0,0,0.65)",
                   border: "1px solid rgba(255,255,255,0.08)",
                 }}>
                   <div className="text-center font-bold leading-tight" style={{ color: "rgba(255,255,255,0.88)" }}>
-                    <div className="text-[6px] tracking-[0.06em]">CITY</div>
+                    <div className="text-[6px] tracking-[0.06em]">MILL CREEK</div>
                     <div className="text-[8.5px] tracking-[0.02em]">services</div>
                   </div>
                 </div>
@@ -162,7 +162,7 @@ const ServicesPanel = () => (
     {servicesItems.map(i => <SubItem key={i.label} {...i} />)}
     <CtaCard
       href="/main/city-services"
-      bg="radial-gradient(ellipse at 70% 35%, #558510 0%, #1a3a10 40%, #0a3c00 74%)"
+      bg="radial-gradient(ellipse at 70% 35%, #2E7D52 0%, #1E3D30 40%, #162e14 74%)"
       title={<><div className="text-[0.8rem] tracking-[0.07em] mb-1">LOCAL RESOURCES</div><div className="text-[1.15rem]">CITY SERVICES</div></>}
     />
     <li className="clear-both block p-0 m-0 border-none" />
@@ -174,7 +174,7 @@ const SupportPanel = () => (
     <CtaCard
       href="/main/support-resources"
       books
-      bg="linear-gradient(145deg,#1a4a1a 0%,#0a2a0a 100%)"
+      bg="linear-gradient(145deg,#234f1e 0%,#162e14 100%)"
       title={<><div className="text-[0.72rem] tracking-[0.07em] mb-1">COMMUNITY</div><div className="text-[0.95rem]">SUPPORT & RESOURCES</div></>}
     />
     <li className="clear-both block p-0 m-0 border-none" />
@@ -192,7 +192,7 @@ const LangItem = ({ flag, label, code, changeLanguage }: any) => (
       background: "transparent",
       cursor: "pointer",
     }}
-    whileHover={{ borderColor: "#9bc730", backgroundColor: "#072d00" }}
+    whileHover={{ borderColor: "#5dba73", backgroundColor: "#162e14" }}
     whileTap={{ scale: 0.98 }}
     transition={{ duration: 0.18 }}
   >
@@ -211,10 +211,12 @@ export default function Header() {
   // Auth-aware Organizations link: go to dashboard when logged in, else login with redirect
   const organizationsHref = user && !loading ? "/dashboard/organizations" : "/login?redirect=/dashboard/organizations";
   const utilityLinks = [
-    ...baseUtilityLinks.slice(0, 3), // Submit, Resources, News
-    { label: "Organizations", href: organizationsHref },
-    ...baseUtilityLinks.slice(3), // Reference, Login
+    { label: "Reference", href: "/reference" },
+    { label: "Login", href: "/login" },
   ];
+  // On small screens the mobile dropdown already includes these routes,
+  // so we hide them from the utility bar to prevent duplicate nav entries.
+  const hideUtilityDuplicatesOnMobile = new Set(["Resources", "News", "Organizations"]);
   const [search, setSearch] = useState(false);
   const [headerSearchQuery, setHeaderSearchQuery] = useState("");
   const [compressed, setCompressed] = useState(false);
@@ -264,7 +266,7 @@ export default function Header() {
   const dLeave = () => { timer.current = setTimeout(() => setOpen(null), 140); };
 
   const menus = [
-    { key: "services", label: "City Services", Panel: ServicesPanel, href: "/main/services" },
+    { key: "services", label: "Mill Creek Services", Panel: ServicesPanel, href: "/main/services" },
     { key: "support", label: "Support & Resources", Panel: SupportPanel, href: "/main/support-resources" },
   ];
   const activeMenu = menus.find(m => m.key === open);
@@ -390,14 +392,14 @@ export default function Header() {
           background: none; border-left: none; border-right: none; border-top: none;
           cursor: pointer; white-space: nowrap;
         }
-        .vs-nl:hover { border-color: #9bc730; }
-        .vs-nl.open { border-color: #9bc730; }
+        .vs-nl:hover { border-color: #5dba73; }
+        .vs-nl.open { border-color: #5dba73; }
         .vs-nl:active { transform: scale(0.98); }
         .vs-nl.small { font-size: 1rem; }
 
         .vs-cta {
           color: #fff;
-          background: linear-gradient(to right, #fff 50%, #447500 50%);
+          background: linear-gradient(to right, #fff 50%, #2E7D52 50%);
           background-size: 200% 100%; background-position: 100% 0;
           padding: .6rem .75rem; text-transform: uppercase;
           border: 2px solid #fff; font-size: 1rem!important; font-weight: 600;
@@ -406,18 +408,18 @@ export default function Header() {
           transition: background-position .3s ease, color .3s ease;
           line-height: 1; display: inline-block; white-space: nowrap;
         }
-        .vs-cta:hover { color: #0a3c00; background-position: 0 0; }
+        .vs-cta:hover { color: #1E3D30; background-position: 0 0; }
         .vs-cta.small { font-size: .875rem!important; padding: .45rem .6rem; }
 
         .vs-globe {
           background: none; border: none;
-          border-right: 2px solid #8fac66;
+          border-right: 2px solid #4a9960;
           color: rgba(255,255,255,0.85); cursor: pointer;
           padding: .3rem .85rem; line-height: 1;
           display: flex; align-items: center;
           transition: color .2s;
         }
-        .vs-globe:hover, .vs-globe.open { color: #9bc730; }
+        .vs-globe:hover, .vs-globe.open { color: #5dba73; }
 
         .vs-search-btn {
           background: none; border: none; color: rgba(255,255,255,0.85);
@@ -425,30 +427,30 @@ export default function Header() {
           display: flex; align-items: center; position: relative; top: 2px;
           transition: color .2s;
         }
-        .vs-search-btn:hover { color: #9bc730; }
+        .vs-search-btn:hover { color: #5dba73; }
         
         .vs-font-btn {
           background: none; border: none;
-          border-right: 2px solid #8fac66;
+          border-right: 2px solid #4a9960;
           color: rgba(255,255,255,0.85); cursor: pointer;
           padding: .3rem .85rem; line-height: 1;
           display: flex; align-items: center;
           transition: color .2s;
         }
-        .vs-font-btn:hover { color: #9bc730; }
-        .header-sub-item:hover .header-sub-item-icon { color: #9bc730; }
+        .vs-font-btn:hover { color: #5dba73; }
+        .header-sub-item:hover .header-sub-item-icon { color: #5dba73; }
       `}</style>
       <div id="google_translate_element" style={{ display: 'none' }} />
 
       <div ref={wrapRef} className="sticky top-0 z-[1000] transition-shadow duration-300 w-full" style={{
         boxShadow: compressed || open ? "0 4px 24px rgba(0,0,0,0.4)" : "none",
         fontFamily: '"Poppins", Verdana, sans-serif',
-        background: compressed ? "#447500" : "transparent",
+        background: compressed ? "#2E7D52" : "transparent",
         transition: "background .2s ease",
       }}>
         {/* ── UTILITY BAR ── */}
         <div style={{
-          background: "rgba(0,40,0,0.55)",
+          background: "#1E3D30",
           overflow: "hidden",
           height: `${utilH}px`,
           opacity: compressed ? 0 : 1,
@@ -457,19 +459,25 @@ export default function Header() {
         }}>
           <div className="max-w-[90rem] mx-auto px-6 flex justify-end items-center h-[45px] gap-5">
             {utilityLinks.map(l => (
-              <a key={l.label} href={l.href} className="vs-util-link">{l.label}</a>
+              <a
+                key={l.label}
+                href={l.href}
+                className={`vs-util-link${hideUtilityDuplicatesOnMobile.has(l.label) ? " hidden lg:inline-flex" : ""}`}
+              >
+                {l.label}
+              </a>
             ))}
           </div>
         </div>
 
         {/* ── MAIN GREEN NAV BAR ── */}
         <div style={{
-          background: "#447500",
+          background: "#2E7D52",
           height: `${mainH}px`,
           transition: "height .35s cubic-bezier(0.4,0,0.2,1)",
           position: "relative",
         }}>
-          <div className="absolute inset-0 bg-[#447500] z-0" />
+          <div className="absolute inset-0 bg-[#2E7D52] z-0" />
           <div className="max-w-[90rem] mx-auto px-6 flex items-center h-full gap-0 relative z-10 transition-all duration-350">
             {/* LOGO */}
             <a href="/" className="flex items-center flex-shrink-0 text-white no-underline mr-2 transition-transform duration-350" style={{
@@ -478,17 +486,17 @@ export default function Header() {
             }}>
               <div className="leading-none">
                 <div style={{
-                  fontSize: compressed ? "0.52rem" : "0.6rem",
-                  letterSpacing: "0.28em", textTransform: "uppercase",
-                  fontWeight: 400, opacity: 0.8, marginBottom: "1px",
-                  transition: "font-size .35s",
-                }}>THE CITY OF</div>
-                <div style={{
                   fontSize: compressed ? "2rem" : "2.6rem",
                   fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 0.88,
                   fontFamily: '"Poppins",Verdana,sans-serif',
                   transition: "font-size .35s",
-                }}>Maplewood</div>
+                }}>MILL CREEK</div>
+                <div style={{
+                  fontSize: compressed ? "0.52rem" : "0.6rem",
+                  letterSpacing: "0.28em", textTransform: "uppercase",
+                  fontWeight: 400, opacity: 0.8, marginTop: "2px",
+                  transition: "font-size .35s",
+                }}>Community Hub</div>
               </div>
             </a>
 
@@ -530,11 +538,7 @@ export default function Header() {
                     Organizations
                   </Link>
                 </li>
-                <li className="inline-block pr-6">
-                  <Link href="/reference" className={`vs-nl inline-flex items-center gap-1.5 no-underline${compressed ? " small" : ""}`}>
-                    Reference
-                  </Link>
-                </li>
+
                 <li className="inline-block pr-6">
                   <a href="/login" className={`vs-cta${compressed ? " small" : ""}`}>Resident Portal</a>
                 </li>
@@ -584,7 +588,7 @@ export default function Header() {
         {open === "mobile" && (
           <motion.div
             key="mobile-menu"
-            className="lg:hidden absolute top-full left-0 right-0 bg-[#0a3c00] z-[999]"
+            className="lg:hidden absolute top-full left-0 right-0 bg-[#1E3D30] z-[999]"
             variants={slideDownVariants}
             initial="hidden"
             animate="visible"
@@ -597,7 +601,7 @@ export default function Header() {
                     <Link
                       key={key}
                       href="/resources"
-                      className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none"
+                      className="text-white text-lg py-2 border-b border-[#2E7D52] font-light text-decoration-none"
                       onClick={() => setOpen(null)}
                     >
                       {label}
@@ -609,7 +613,7 @@ export default function Header() {
                   <a
                     key={key}
                     href={summaryHref}
-                    className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none"
+                    className="text-white text-lg py-2 border-b border-[#2E7D52] font-light text-decoration-none"
                     onClick={(e) => {
                       e.preventDefault();
                       setOpen(key);
@@ -619,16 +623,14 @@ export default function Header() {
                   </a>
                 );
               })}
-              <Link href="/main/news" className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none" onClick={() => setOpen(null)}>
+              <Link href="/main/news" className="text-white text-lg py-2 border-b border-[#2E7D52] font-light text-decoration-none" onClick={() => setOpen(null)}>
                 News
               </Link>
-              <Link href={organizationsHref} className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none" onClick={() => setOpen(null)}>
+              <Link href={organizationsHref} className="text-white text-lg py-2 border-b border-[#2E7D52] font-light text-decoration-none" onClick={() => setOpen(null)}>
                 Organizations
               </Link>
-              <Link href="/reference" className="text-white text-lg py-2 border-b border-[#447500] font-light text-decoration-none" onClick={() => setOpen(null)}>
-                Reference
-              </Link>
-              <a href="/login" className="text-[#9bc730] font-bold text-lg py-2">Resident Portal</a>
+
+              <a href="/login" className="text-[#5dba73] font-bold text-lg py-2">Resident Portal</a>
               <div className="flex gap-4 pt-2">
                 <button onClick={toggleLargeFont} className="text-white flex items-center gap-2">
                   <Type size={20} /> Font Size
@@ -649,13 +651,13 @@ export default function Header() {
             key="main-dropdown"
             onMouseEnter={dEnter}
             onMouseLeave={dLeave}
-            className="absolute top-[100%] left-0 right-0 bg-[#0a3c00] z-[999]"
+            className="absolute top-[100%] left-0 right-0 bg-[#1E3D30] z-[999]"
             variants={slideDownVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#0a3c00] z-[-1]" />
+            <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#1E3D30] z-[-1]" />
             <div className="max-w-[90rem] mx-auto px-6 relative">
               {activeMenu.Panel && <activeMenu.Panel />}
             </div>
@@ -670,13 +672,13 @@ export default function Header() {
             key="lang-dropdown"
             onMouseEnter={dEnter}
             onMouseLeave={dLeave}
-            className="absolute top-[100%] left-0 right-0 bg-[#0a3c00] z-[1001] min-h-[240px]"
+            className="absolute top-[100%] left-0 right-0 bg-[#1E3D30] z-[1001] min-h-[240px]"
             variants={slideDownVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#0a3c00] z-[-1]" />
+            <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#1E3D30] z-[-1]" />
             <div className="max-w-[90rem] mx-auto px-6 relative">
               <div className="relative min-h-[240px]">
                 {/* CTA image */}
@@ -720,13 +722,13 @@ export default function Header() {
         {search && (
           <motion.div
             key="search-bar"
-            className="absolute top-[100%] left-0 right-0 bg-[#0a3c00] p-[20px_10%] z-[998]"
+            className="absolute top-[100%] left-0 right-0 bg-[#1E3D30] p-[20px_10%] z-[998]"
             variants={slideDownVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#0a3c00] z-[-1]" />
+            <div className="absolute inset-0 left-[-300%] w-[700%] bg-[#1E3D30] z-[-1]" />
             <form
               className="max-w-[830px] mx-auto my-[1rem] border-2 border-white relative pr-[62px]"
               onSubmit={(e) => {
@@ -744,11 +746,11 @@ export default function Header() {
                 placeholder="Search resources..."
                 value={headerSearchQuery}
                 onChange={(e) => setHeaderSearchQuery(e.target.value)}
-                className="w-full p-[0.6rem_0.9rem] bg-[#0a3c00] border-none text-white font-normal text-[16px] outline-none font-[Poppins]"
+                className="w-full p-[0.6rem_0.9rem] bg-[#1E3D30] border-none text-white font-normal text-[16px] outline-none font-[Poppins]"
               />
               <button
                 type="submit"
-                className="absolute right-0 top-0 bottom-0 bg-[#0a3c00] border-none border-l-2 border-white p-[0.75rem_1.05rem] cursor-pointer text-[#9bc730] flex items-center transition-colors duration-200 hover:text-white"
+                className="absolute right-0 top-0 bottom-0 bg-[#1E3D30] border-none border-l-2 border-white p-[0.75rem_1.05rem] cursor-pointer text-[#5dba73] flex items-center transition-colors duration-200 hover:text-white"
                 aria-label="Search resources"
               >
                 <Ico id="search" size={20} />

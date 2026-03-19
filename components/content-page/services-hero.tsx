@@ -22,7 +22,7 @@ export default function ServicesHero({ count }: { count: number }) {
     <motion.section
       className="relative rounded-2xl overflow-hidden p-8 md:p-10 mb-10"
       style={{
-        background: "linear-gradient(135deg, #0a3c00 0%, #1a5c10 50%, #0d4a05 100%)",
+        backgroundColor: "#2E7D52",
       }}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function ServicesHero({ count }: { count: number }) {
           {count} services to explore
         </div>
         <h1 className="text-3xl font-bold md:text-4xl mb-3 drop-shadow-sm">
-          City Services
+          Mill Creek Services
         </h1>
         <p className="text-lg text-white/90 max-w-2xl mb-6">
           Streets, parking, waste, housing, benefits, and more — find what you need for everyday city services.

@@ -2,7 +2,7 @@ import { NotificationsContent } from '@/components/dashboard/notifications-conte
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Notifications | Maplewood Community Resource Hub',
+  title: 'Notifications | Mill Creek Community Resource Hub',
   description: 'View your notifications',
 }
 

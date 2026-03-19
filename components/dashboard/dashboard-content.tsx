@@ -190,7 +190,7 @@ export function DashboardContent() {
           </div>
           <div className="flex items-center gap-3">
             <Link href="/dashboard/events">
-              <Button className="bg-primary hover:bg-[#386109] text-white">
+              <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
                 Find Events
               </Button>
             </Link>
@@ -260,7 +260,7 @@ export function DashboardContent() {
           <div className="bg-white rounded shadow-sm p-12 text-center">
             <p className="text-muted-foreground mb-4">You have no assigned volunteer roles yet.</p>
             <Link href="/dashboard/events">
-              <Button className="bg-primary hover:bg-[#386109] text-white">
+              <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
                 Find Events to Volunteer
               </Button>
             </Link>
@@ -351,7 +351,7 @@ export function DashboardContent() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-            <Button className="bg-primary hover:bg-[#386109] text-white" onClick={handleSaveEdit}>
+            <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white" onClick={handleSaveEdit}>
               Save Changes
             </Button>
           </DialogFooter>
@@ -414,7 +414,7 @@ export function DashboardContent() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setMessageDialogOpen(false)}>Cancel</Button>
-            <Button className="bg-primary hover:bg-[#386109] text-white" onClick={handleSendMessage}>
+            <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white" onClick={handleSendMessage}>
               <IconMail className="size-4 mr-2" />
               Send Message
             </Button>
@@ -461,7 +461,7 @@ export function DashboardContent() {
                     )}
                   </div>
                 ))}
-                <div className="mt-4 p-3 bg-[#fef3c7] rounded border border-[#fde68a]">
+                <div className="mt-4 p-3 bg-[#e8f5e9] rounded border border-[#fde68a]">
                   <p className="text-sm text-[#92400e]">
                     {Object.values(taskStates).filter(Boolean).length} of {Object.keys(taskStates).length} tasks completed.
                     {Object.values(taskStates).every(Boolean)
@@ -481,7 +481,7 @@ export function DashboardContent() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setTasksDialogOpen(false)}>Close</Button>
             {tasksRole && tasksRole.outstandingTasks.length > 0 && (
-              <Button className="bg-primary hover:bg-[#386109] text-white" onClick={handleSaveTasks}>
+              <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white" onClick={handleSaveTasks}>
                 Save Progress
               </Button>
             )}
@@ -505,7 +505,7 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
   return (
     <div className="bg-white border-b">
       {/* Orange Header */}
-      <div className="bg-[#e87722] text-white px-4 py-2">
+      <div className="bg-[#2E7D52] text-white px-4 py-2">
         <p className="font-bold text-sm">{role.eventName}</p>
         <p className="text-xs">{role.eventType}</p>
       </div>
@@ -516,7 +516,7 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
         <div className="space-y-2">
           <div>
             <span className="text-xs text-muted-foreground">Status: </span>
-            <span className={`text-sm font-semibold ${role.status === "PENDING" ? "text-[#e87722]" : "text-secondary"
+            <span className={`text-sm font-semibold ${role.status === "PENDING" ? "text-[#2E7D52]" : "text-secondary"
               }`}>
               {role.status}
             </span>
@@ -552,7 +552,7 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
           {role.hasMissingCertifications && (
             <button
               onClick={() => onReviewTasks(role)}
-              className="text-sm text-[#e87722] hover:underline block mt-2 text-left"
+              className="text-sm text-[#2E7D52] hover:underline block mt-2 text-left"
             >
               Review Outstanding Tasks
             </button>
@@ -601,7 +601,7 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
         <div className="space-y-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full text-primary border-primary hover:bg-primary hover:text-white text-sm flex items-center justify-center gap-1">
+              <Button variant="outline" className="w-full text-primary border-primary hover:bg-[#1B4A32] hover:border-[#1B4A32] hover:text-white text-sm flex items-center justify-center gap-1">
                 <IconExternalLink className="size-4" />
                 Maps
                 <IconChevronDown className="size-4" />
@@ -644,7 +644,7 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="w-full bg-primary hover:bg-[#386109] text-white text-sm flex items-center justify-center gap-1">
+              <Button className="w-full bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white text-sm flex items-center justify-center gap-1">
                 ROLE OPTIONS
                 <IconChevronDown className="size-4" />
               </Button>

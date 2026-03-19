@@ -7,7 +7,7 @@ export default function GovernmentUpdatesSection() {
   return (
     <section className="bg-slate-900 text-white py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-white mb-2">What's New From City Government?</h2>
+        <h2 className="text-3xl font-bold text-white mb-2">What's New From Mill Creek Government?</h2>
         <p className="text-gray-200 mb-12">Important updates and announcements you should know about</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

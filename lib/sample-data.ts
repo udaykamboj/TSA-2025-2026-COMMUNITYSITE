@@ -50,7 +50,7 @@ export const governmentUpdates = [
   {
     id: 1,
     title: "Winter Weather Preparedness",
-    subtitle: "City services ready for snow and ice",
+    subtitle: "Mill Creek services ready for snow and ice",
     description: "The city is fully prepared with salt, sand, and plow crews ready for winter conditions.",
     date: "Posted November 22, 2025",
     image: "/winter-weather-preparation.jpg",
@@ -142,7 +142,7 @@ export const communityStats = [
 export const highlightedResources = [
   {
     id: 1,
-    title: "City Food Bank",
+    title: "Mill Creek Food Bank",
     category: "Food Assistance",
     shortDescription: "Emergency meals and groceries",
     description:
@@ -246,7 +246,7 @@ export const featuredCarouselResources = [
   },
   {
     id: "2",
-    name: "City Food Bank",
+    name: "Mill Creek Food Bank",
     category: "Food",
     description:
       "Emergency food assistance and nutrition programs providing fresh groceries and meal support for residents in need.",

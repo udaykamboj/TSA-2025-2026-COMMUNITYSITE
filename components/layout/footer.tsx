@@ -23,22 +23,8 @@ export default function Footer() {
         { label: "Browse resources", href: "/resources" },
         { label: "Submit a resource", href: "/submit" },
         { label: "Featured services", href: "/main/services" },
-        { label: "Events", href: "/main/events/calendar" },
         { label: "Latest news", href: "/main/news" },
       ],
-    },
-    {
-      title: "Get Involved",
-      items: [
-        { label: "Volunteer", href: "/main/services" },
-        { label: "Partner with us", href: "/main/services" },
-        { label: "Donate", href: "/main/services" },
-        { label: "Careers", href: "/main/services" },
-      ],
-    },
-    {
-      title: "About",
-      items: ["Accessibility", "Privacy policy", "Terms of use", "Website feedback", "Help & FAQ"],
     },
   ]
 
@@ -48,7 +34,7 @@ export default function Footer() {
     <motion.footer
       className="text-white"
       style={{
-        background: "#0a3c00",
+        background: "#1E3D30",
         fontFamily: '"Poppins", Verdana, sans-serif',
       }}
       initial="hidden"
@@ -63,7 +49,7 @@ export default function Footer() {
               className="text-lg font-semibold tracking-wide uppercase"
               style={{ color: "#fff", letterSpacing: "0.04em" }}
             >
-              The City of Maplewood
+              Mill Creek Community Hub
             </h2>
             <p className="mt-2 hidden md:block" style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.9rem" }}>
               Connecting residents to local services and support through our Community Resource Hub.
@@ -72,12 +58,12 @@ export default function Footer() {
 
           {/* Desktop grid */}
           <div className="hidden md:block md:w-3/4">
-            <div className="grid grid-cols-3 gap-8">
+            <div className={`grid ${columns.length > 1 ? "grid-cols-2" : "grid-cols-1"} gap-8`}>
               {columns.map((col, i) => (
                 <ul key={i} className="space-y-2">
                   <li
                     className="text-sm font-semibold pb-2 uppercase tracking-wide"
-                    style={{ color: "#9bc730" }}
+                    style={{ color: "#5dba73" }}
                   >
                     {col.title}
                   </li>
@@ -85,7 +71,7 @@ export default function Footer() {
                     <li key={getLinkLabel(link)}>
                       <Link
                         href={getLinkHref(link)}
-                        className="text-sm font-normal transition-colors duration-200 text-white/88 hover:text-[#9bc730]"
+                        className="text-sm font-normal transition-colors duration-200 text-white/88 hover:text-[#5dba73]"
                       >
                         {getLinkLabel(link)}
                       </Link>
@@ -99,34 +85,43 @@ export default function Footer() {
           {/* Mobile accordion */}
           <div className="md:hidden w-full">
             <div className="space-y-2">
-              {columns.map((col, i) => (
-                <div key={i} className="pt-3" style={{ borderTop: "1px solid rgba(155,199,48,0.3)" }}>
-                  <button
-                    className="w-full flex items-center justify-between text-left text-sm font-medium py-2"
-                    style={{ color: "#fff" }}
-                    aria-expanded={openIndex === i}
-                    onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  >
-                    <span>{col.title}</span>
-                    <span style={{ color: "#9bc730" }}>{openIndex === i ? '−' : '+'}</span>
-                  </button>
-                  {openIndex === i && (
-                    <ul className="mt-2 space-y-1">
-                      {col.items.map((link) => (
-                        <li key={getLinkLabel(link)}>
-                          <Link
-                            href={getLinkHref(link)}
-                            className="block py-2 text-sm font-normal"
-                            style={{ color: "rgba(255,255,255,0.88)" }}
-                          >
-                            {getLinkLabel(link)}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
+              {columns.map((col, i) => {
+                const isAccordion = columns.length > 1;
+                return (
+                  <div key={i} className="pt-3" style={{ borderTop: "1px solid rgba(155,199,48,0.3)" }}>
+                    {isAccordion ? (
+                      <button
+                        className="w-full flex items-center justify-between text-left text-sm font-medium py-2"
+                        style={{ color: "#fff" }}
+                        aria-expanded={openIndex === i}
+                        onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                      >
+                        <span>{col.title}</span>
+                        <span style={{ color: "#5dba73" }}>{openIndex === i ? '−' : '+'}</span>
+                      </button>
+                    ) : (
+                      <div className="text-sm font-semibold pb-2 uppercase tracking-wide" style={{ color: "#5dba73" }}>
+                        {col.title}
+                      </div>
+                    )}
+                    {(!isAccordion || openIndex === i) && (
+                      <ul className="mt-2 space-y-1">
+                        {col.items.map((link) => (
+                          <li key={getLinkLabel(link)}>
+                            <Link
+                              href={getLinkHref(link)}
+                              className="block py-2 text-sm font-normal"
+                              style={{ color: "rgba(255,255,255,0.88)" }}
+                            >
+                              {getLinkLabel(link)}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -137,7 +132,7 @@ export default function Footer() {
           className="text-center text-sm"
           style={{ color: "rgba(255,255,255,0.75)" }}
         >
-          © The City of Maplewood · Community Resource Hub · 2026
+          &copy; Mill Creek Community Hub &middot; 2026
         </div>
       </div>
     </motion.footer>

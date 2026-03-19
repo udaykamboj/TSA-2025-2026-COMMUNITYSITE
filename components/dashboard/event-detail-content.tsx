@@ -62,7 +62,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
           <h3 className="text-lg font-semibold text-secondary">Event Not Found</h3>
           <p className="text-muted-foreground mt-1">The event you are looking for does not exist.</p>
           <Link href="/dashboard/events">
-            <Button className="mt-4 bg-primary hover:bg-[#386109]">Back to Events</Button>
+            <Button className="mt-4 bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217]">Back to Events</Button>
           </Link>
         </div>
       </div>
@@ -222,17 +222,17 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
               <div className="mt-6 space-y-2 text-sm">
                 <div>
                   <span className="text-muted-foreground">Set Up Date: </span>
-                  <span className="text-[#e87722]">{event.setupDate ?? "TBA"}</span>
+                  <span className="text-[#2E7D52]">{event.setupDate ?? "TBA"}</span>
                 </div>
                 <div>
                   <span className="text-muted-foreground">Event Dates: </span>
-                  <span className="text-[#e87722]">
+                  <span className="text-[#2E7D52]">
                     {new Date(event.startDate).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })} - {new Date(event.endDate).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })}
                   </span>
                 </div>
                 <div>
                   <span className="text-muted-foreground">Tear Down Date: </span>
-                  <span className="text-[#e87722]">{event.teardownDate ?? "TBA"}</span>
+                  <span className="text-[#2E7D52]">{event.teardownDate ?? "TBA"}</span>
                 </div>
               </div>
 
@@ -240,7 +240,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
               <div className="mt-6">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="w-full text-primary border-primary hover:bg-primary hover:text-white text-sm flex items-center justify-center gap-2">
+                    <Button variant="outline" className="w-full text-primary border-primary hover:bg-[#1B4A32] hover:border-[#1B4A32] hover:text-white text-sm flex items-center justify-center gap-2">
                       <IconExternalLink className="size-4" />
                       Open in Maps
                       <IconChevronDown className="size-4" />
@@ -345,7 +345,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
               <h3 className="text-sm font-bold text-secondary mb-2">Employer</h3>
               <p className="text-sm text-muted-foreground mb-2">
                 Your employer is listed as: <span className="text-primary">Full-time Student</span>{" "}
-                <button className="text-[#e87722] hover:underline">Edit</button>
+                <button className="text-[#2E7D52] hover:underline">Edit</button>
               </p>
               <label className="flex items-center gap-2">
                 <Checkbox
@@ -377,7 +377,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
                         />
                         <span className="text-sm text-secondary">{role.name}</span>
                       </label>
-                      <button className="text-primary hover:text-[#386109]">
+                      <button className="text-primary hover:text-[#246944]">
                         <IconArrowUp className="size-4" />
                       </button>
                     </div>
@@ -407,7 +407,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
                           <span className="text-sm text-secondary">{index + 1}. {role}</span>
                           <button
                             onClick={() => moveRoleUp(index)}
-                            className="ml-auto text-primary hover:text-[#386109]"
+                            className="ml-auto text-primary hover:text-[#246944]"
                             type="button"
                           >
                             <IconArrowUp className="size-4" />
@@ -428,7 +428,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
             <div className="mt-8 flex justify-end">
               <Button
                 onClick={handleNext}
-                className="bg-primary hover:bg-[#386109] text-white px-12 py-3 text-lg font-semibold"
+                className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white px-12 py-3 text-lg font-semibold"
               >
                 Next
               </Button>
@@ -491,7 +491,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
                   </Button>
                   <Button
                     onClick={handleConfirmSubmit}
-                    className="bg-primary hover:bg-[#386109] text-white px-8 py-2 font-semibold"
+                    className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white px-8 py-2 font-semibold"
                   >
                     Confirm & Submit
                   </Button>

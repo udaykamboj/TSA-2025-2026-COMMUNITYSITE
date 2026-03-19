@@ -2,7 +2,7 @@ import { AdminDashboardContent } from '@/components/dashboard/admin-dashboard-co
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Admin | Maplewood Community Resource Hub',
+  title: 'Admin | Mill Creek Community Resource Hub',
   description: 'Admin dashboard',
 }
 

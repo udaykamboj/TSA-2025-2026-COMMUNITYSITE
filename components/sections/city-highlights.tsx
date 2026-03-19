@@ -41,7 +41,7 @@ export default function CityHighlights() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
             >
-                <SectionTitle title="City Highlights" linkText="View all updates" linkHref="/main/news" />
+                <SectionTitle title="Mill Creek Highlights" linkText="View all updates" linkHref="/main/news" />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {highlights.map((item, idx) => (

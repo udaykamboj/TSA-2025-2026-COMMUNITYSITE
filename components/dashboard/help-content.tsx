@@ -164,14 +164,14 @@ export function HelpContent({ basePath = "/dashboard" }: HelpContentProps) {
           </p>
           <div className="flex gap-3">
             <Button
-              className="bg-primary hover:bg-[#386109] text-white"
-              onClick={() => window.location.href = "mailto:support@maplewood.org"}
+              className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white"
+              onClick={() => window.location.href = "mailto:support@millcreek.org"}
             >
               <IconMail className="size-4 mr-2" />
               Email Support
             </Button>
             <Button variant="outline" className="border-primary text-primary" asChild>
-              <a href="https://maplewood.org" target="_blank" rel="noopener noreferrer">
+              <a href="https://millcreek.org" target="_blank" rel="noopener noreferrer">
                 <IconExternalLink className="size-4 mr-2" />
                 Visit Website
               </a>

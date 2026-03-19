@@ -8,11 +8,11 @@ import FeaturedServices from "@/components/sections/featured-services"
 import LatestNewsSection from "@/components/sections/latest-news-section"
 
 export const metadata = {
-  title: "Maplewood Community Resource Hub - Find Local Services & Support",
+  title: "Mill Creek Community Resource Hub - Find your local support",
   description:
     "Discover local community resources, services, and support programs. Food assistance, housing, youth programs, healthcare, and more—all in one place.",
   openGraph: {
-    title: "Maplewood Community Resource Hub",
+    title: "Mill Creek Community Resource Hub",
     description:
       "Your gateway to community resources and services. Find support for food, housing, employment, healthcare, and more.",
     type: "website",

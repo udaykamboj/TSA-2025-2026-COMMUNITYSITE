@@ -436,7 +436,7 @@ export function OrganizationsContent() {
               </div>
 
               <div className="flex gap-3 pt-4 border-t">
-                <Button type="submit" className="bg-primary hover:bg-[#386109] text-white rounded px-6 py-2">
+                <Button type="submit" className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white rounded px-6 py-2">
                   Submit Organization
                 </Button>
                 <Button 
@@ -473,7 +473,7 @@ export function OrganizationsContent() {
         {/* Empty State */}
         {myOrgs.length === 0 && (
           <div className="bg-white rounded shadow-sm p-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 bg-[#fef3c7] rounded-lg flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-[#e8f5e9] rounded-lg flex items-center justify-center">
               <IconBuilding className="size-8 text-primary" />
             </div>
             <h2 className="text-xl font-bold text-secondary mb-2">No Organizations Yet</h2>
@@ -482,7 +482,7 @@ export function OrganizationsContent() {
             </p>
             <Dialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-primary hover:bg-[#386109] text-secondary font-semibold px-8">
+                <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-secondary font-semibold px-8">
                   Join Organization
                 </Button>
               </DialogTrigger>
@@ -508,7 +508,7 @@ export function OrganizationsContent() {
                   <Button variant="outline" onClick={() => setJoinDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button onClick={handleJoin} className="bg-primary hover:bg-[#386109]">
+                  <Button onClick={handleJoin} className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217]">
                     Join
                   </Button>
                 </DialogFooter>
@@ -583,7 +583,7 @@ export function OrganizationsContent() {
               <Button 
                 onClick={() => setShowCreateForm(true)}
                 variant="outline" 
-                className="border-primary text-secondary hover:bg-[#fef3c7]"
+                className="border-primary text-secondary hover:bg-[#e8f5e9]"
               >
                 Create New Organization
               </Button>
@@ -631,7 +631,7 @@ export function OrganizationsContent() {
           <div className="flex justify-center">
             <Dialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-primary hover:bg-[#386109] text-secondary font-semibold px-8">
+                <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-secondary font-semibold px-8">
                   Join Another Organization
                 </Button>
               </DialogTrigger>
@@ -657,7 +657,7 @@ export function OrganizationsContent() {
                   <Button variant="outline" onClick={() => setJoinDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button onClick={handleJoin} className="bg-primary hover:bg-[#386109]">
+                  <Button onClick={handleJoin} className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217]">
                     Join
                   </Button>
                 </DialogFooter>

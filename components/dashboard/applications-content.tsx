@@ -69,7 +69,7 @@ export function ApplicationsContent() {
             </p>
           </div>
           <Link href="/dashboard/events">
-            <Button className="bg-primary hover:bg-[#386109] text-white">
+            <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
               Find More Events
             </Button>
           </Link>
@@ -84,7 +84,7 @@ export function ApplicationsContent() {
               <IconClock className="size-4" />
               Pending
             </div>
-            <p className="text-2xl font-bold text-[#e87722]">{pendingApps.length}</p>
+            <p className="text-2xl font-bold text-[#2E7D52]">{pendingApps.length}</p>
           </div>
           <div className="bg-white rounded shadow-sm p-4">
             <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
@@ -109,9 +109,9 @@ export function ApplicationsContent() {
             ) : (
               <IconChevronRight className="size-4 text-secondary" />
             )}
-            <IconClock className="size-4 text-[#e87722]" />
+            <IconClock className="size-4 text-[#2E7D52]" />
             <span className="text-sm font-semibold text-secondary">Pending Applications</span>
-            <span className="ml-2 bg-[#e87722] text-white text-xs px-2 py-0.5 rounded">{pendingApps.length}</span>
+            <span className="ml-2 bg-[#2E7D52] text-white text-xs px-2 py-0.5 rounded">{pendingApps.length}</span>
           </CollapsibleTrigger>
           <CollapsibleContent>
             {pendingApps.length > 0 ? (
@@ -173,7 +173,7 @@ export function ApplicationsContent() {
           <div className="bg-white rounded shadow-sm p-12 text-center">
             <p className="text-muted-foreground mb-4">You have no volunteer applications yet.</p>
             <Link href="/dashboard/events">
-              <Button className="bg-primary hover:bg-[#386109] text-white">
+              <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
                 Find Events to Volunteer
               </Button>
             </Link>
@@ -202,7 +202,7 @@ function ApplicationCard({
   return (
     <div className="bg-white border-b">
       {/* Orange Header */}
-      <div className="bg-[#e87722] text-white px-4 py-2">
+      <div className="bg-[#2E7D52] text-white px-4 py-2">
         <p className="font-bold text-sm">{application.eventName}</p>
         <p className="text-xs">{application.eventType}</p>
       </div>
@@ -213,7 +213,7 @@ function ApplicationCard({
         <div className="space-y-2">
           <div>
             <span className="text-xs text-muted-foreground">Status: </span>
-            <span className={`text-sm font-semibold ${application.status === "PENDING" ? "text-[#e87722]" : "text-green-600"
+            <span className={`text-sm font-semibold ${application.status === "PENDING" ? "text-[#2E7D52]" : "text-green-600"
               }`}>
               {application.status}
             </span>
@@ -280,7 +280,7 @@ function ApplicationCard({
         <div className="space-y-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full text-primary border-primary hover:bg-primary hover:text-white text-sm flex items-center justify-center gap-1">
+              <Button variant="outline" className="w-full text-primary border-primary hover:bg-[#1B4A32] hover:border-[#1B4A32] hover:text-white text-sm flex items-center justify-center gap-1">
                 <IconExternalLink className="size-4" />
                 Maps
                 <IconChevronDown className="size-4" />
@@ -322,7 +322,7 @@ function ApplicationCard({
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="w-full bg-primary hover:bg-[#386109] text-white text-sm flex items-center justify-center gap-1">
+              <Button className="w-full bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white text-sm flex items-center justify-center gap-1">
                 ROLE OPTIONS
                 <IconChevronDown className="size-4" />
               </Button>

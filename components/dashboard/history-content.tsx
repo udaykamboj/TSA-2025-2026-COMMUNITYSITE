@@ -55,7 +55,7 @@ export function HistoryContent() {
               View your complete volunteer history and hours
             </p>
           </div>
-          <Button onClick={handlePrint} className="bg-primary hover:bg-[#386109] text-white">
+          <Button onClick={handlePrint} className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
             <IconPrinter className="size-4 mr-2" />
             Print History
           </Button>
@@ -162,7 +162,7 @@ export function HistoryContent() {
                 </SelectContent>
               </Select>
             </div>
-            <Button className="bg-primary hover:bg-[#386109] text-white">
+            <Button className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
               Search
             </Button>
           </div>
@@ -224,7 +224,7 @@ export function HistoryContent() {
                   : "Start volunteering to build your history"}
               </p>
               <Link href="/dashboard/events">
-                <Button className="mt-4 bg-primary hover:bg-[#386109] text-white">
+                <Button className="mt-4 bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white">
                   Find Events
                 </Button>
               </Link>
@@ -233,7 +233,7 @@ export function HistoryContent() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-[#fef3c7] rounded shadow-sm p-4">
+        <div className="bg-[#e8f5e9] rounded shadow-sm p-4">
           <p className="text-sm text-secondary">
             Did you know that you can increase the impact of your volunteer hours?
             Search below to find out if your employer will match your volunteer hours.
