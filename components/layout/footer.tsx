@@ -36,19 +36,21 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="relative overflow-hidden bg-[#1E3D30] px-4 text-[#0f1f19] sm:px-6"
-      style={{
-        backgroundImage: "url(/footer-bg.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center bottom",
-        backgroundRepeat: "no-repeat",
-        fontFamily: '"Poppins", Verdana, sans-serif',
-      }}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      className="relative overflow-hidden px-4 text-[#0f1f19] sm:px-6"
+      style={{ fontFamily: '"Poppins", Verdana, sans-serif' }}
+      initial="visible"
+      animate="visible"
       variants={animateFadeUp}
     >
+      <div
+        className="pointer-events-none absolute inset-0 bg-no-repeat"
+        style={{
+          backgroundImage: "url(/footer-bg.png)",
+          backgroundSize: "100% 100%",
+          backgroundPosition: "center bottom",
+        }}
+        aria-hidden
+      />
       <div className="relative z-10 mx-auto max-w-[90rem] px-6 py-10">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="md:w-1/4 md:max-w-md">
