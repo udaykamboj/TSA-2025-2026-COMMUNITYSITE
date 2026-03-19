@@ -106,7 +106,7 @@ export default function ResourcesPage() {
           <motion.section
             className="relative rounded-2xl overflow-hidden px-6 py-10 md:px-10 md:py-12 mb-8"
             style={{
-              background: "linear-gradient(135deg, #1E3D30 0%, #1a5c10 50%, #0d4a05 100%)",
+              background: "linear-gradient(135deg, #2E7D52 0%, #4cc388 100%)",
             }}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -120,11 +120,7 @@ export default function ResourcesPage() {
                 Search and filter community resources available to you—food, housing, health, education, and more.
               </p>
             </div>
-            {/* Decorative circle (small circle to the right) */}
-            <div
-              className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-emerald-400/20"
-              aria-hidden
-            />
+
           </motion.section>
         </div>
 

@@ -56,13 +56,28 @@ const serviceTypes = [
 
 const ageGroupOptions = ["Families", "Teens", "Seniors", "Children", "Young Adults"]
 
-export function OrganizationsContent() {
+import { useRouter } from "next/navigation"
+
+interface OrganizationsContentProps {
+  defaultShowCreateForm?: boolean
+}
+
+export function OrganizationsContent({ defaultShowCreateForm = false }: OrganizationsContentProps) {
   const { organizations, userOrganizations, joinOrganization, addOrganization } = useAppStore()
+  const router = useRouter()
   const [joinCode, setJoinCode] = useState("")
   const [joinDialogOpen, setJoinDialogOpen] = useState(false)
-  const [showCreateForm, setShowCreateForm] = useState(false)
+  const [showCreateForm, setShowCreateForm] = useState(defaultShowCreateForm)
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const handleBack = () => {
+    if (defaultShowCreateForm) {
+      router.push("/dashboard/organizations")
+    } else {
+      setShowCreateForm(false)
+    }
+  }
 
   const [formData, setFormData] = useState<OrgFormData>({
     orgName: "",
@@ -218,7 +233,7 @@ export function OrganizationsContent() {
             </div>
             <Button 
               variant="outline" 
-              onClick={() => setShowCreateForm(false)}
+              onClick={handleBack}
               className="border-primary text-primary"
             >
               Back to Organizations
@@ -439,10 +454,10 @@ export function OrganizationsContent() {
                 <Button type="submit" className="bg-[#1B4A32] hover:bg-[#133524] active:bg-[#0C2217] text-white rounded px-6 py-2">
                   Submit Organization
                 </Button>
-                <Button 
+                 <Button 
                   type="button" 
                   variant="outline"
-                  onClick={() => setShowCreateForm(false)} 
+                  onClick={handleBack} 
                   className="border border-slate-300 bg-white text-slate-900 rounded px-4 py-2"
                 >
                   Cancel

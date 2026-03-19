@@ -95,7 +95,7 @@ export interface ParticipationRecord {
 export const currentUser: User = {
   id: "user-1",
   name: "Person 1",
-  email: "uday@example.com",
+  email: "volunteer@example.com",
   role: "user",
   volunteerSince: 2022,
   totalHours: 48,

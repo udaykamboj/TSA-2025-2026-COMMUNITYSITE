@@ -194,7 +194,7 @@ export default function ServicesPageClient({ categories, services }: Props) {
                       )}
                       {cat.title}
                       <span className="text-sm font-normal text-slate-500">
-                        ({cat.slugs.length})
+                        ({cat.slugs.filter(slug => slugToService.get(slug)).length})
                       </span>
                     </span>
                     <ChevronDown className="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200 [[data-state=open]_&]:rotate-180" />

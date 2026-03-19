@@ -423,7 +423,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "volunteer-app-storage",
-      version: 2,
+      version: 3,
     }
   )
 )

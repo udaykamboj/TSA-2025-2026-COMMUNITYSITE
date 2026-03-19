@@ -58,14 +58,7 @@ export default function ContentPageLayout({
               <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                 {title}
               </h1>
-              {callToAction && (
-                <Link
-                  href={callToAction.href}
-                  className="inline-flex items-center justify-center rounded-full font-semibold text-white transition-colors hover:opacity-90 px-6 py-3 text-lg bg-primary"
-                >
-                  {callToAction.label}
-                </Link>
-              )}
+
             </motion.div>
             {heroImage && (
               <motion.div className="flex-shrink-0 w-full md:w-48 aspect-square rounded-lg overflow-hidden border border-slate-200 bg-slate-100" variants={staggerItem}>

@@ -21,7 +21,7 @@ export default function Footer() {
       title: "Explore",
       items: [
         { label: "Browse resources", href: "/resources" },
-        { label: "Submit a resource", href: "/submit" },
+        { label: "Submit a resource", href: "/dashboard/organizations/submit" },
         { label: "Featured services", href: "/main/services" },
         { label: "Latest news", href: "/main/news" },
       ],

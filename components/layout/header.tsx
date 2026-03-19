@@ -46,7 +46,7 @@ const languagesConfig = [
 ];
 
 const baseUtilityLinks = [
-  { label: "Submit a Resource", href: "/submit" },
+  { label: "Submit a Resource", href: "/dashboard/organizations" },
   { label: "Resources", href: "/resources" },
   { label: "News", href: "/main/news" },
   { label: "Reference", href: "/reference" },
@@ -209,7 +209,7 @@ export default function Header() {
   const [open, setOpen] = useState<string | null>(null);
 
   // Auth-aware Organizations link: go to dashboard when logged in, else login with redirect
-  const organizationsHref = user && !loading ? "/dashboard/organizations" : "/login?redirect=/dashboard/organizations";
+  const organizationsHref = user && !loading ? "/dashboard/organizations/submit" : "/login?redirect=/dashboard/organizations/submit";
   const utilityLinks = [
     { label: "Reference", href: "/reference" },
     { label: "Login", href: "/login" },
@@ -532,7 +532,7 @@ export default function Header() {
                 </li>
                 <li className="inline-block pr-6">
                   <Link
-                    href={user && !loading ? "/dashboard/organizations" : "/login?redirect=/dashboard/organizations"}
+                    href={organizationsHref}
                     className={`vs-nl inline-flex items-center gap-1.5 no-underline${compressed ? " small" : ""}`}
                   >
                     Organizations

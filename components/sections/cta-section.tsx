@@ -20,7 +20,7 @@ const stats = [
     label: "Add your organization so residents can discover your services",
     description: "Submit Resource",
     icon: "Building2",
-    link: "/dashboard/organizations",
+    link: "/dashboard/organizations/submit",
   },
   {
     number: "About This Hub",

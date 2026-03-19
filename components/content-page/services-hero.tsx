@@ -22,17 +22,14 @@ export default function ServicesHero({ count }: { count: number }) {
     <motion.section
       className="relative rounded-2xl overflow-hidden p-8 md:p-10 mb-10"
       style={{
-        backgroundColor: "#2E7D52",
+        background: "linear-gradient(135deg, #2E7D52 0%, #4cc388 100%)",
       }}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="relative z-10 text-white">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-semibold backdrop-blur-sm">
-          <Zap className="h-4 w-4" aria-hidden />
-          {count} services to explore
-        </div>
+
         <h1 className="text-3xl font-bold md:text-4xl mb-3 drop-shadow-sm">
           Mill Creek Services
         </h1>
@@ -57,11 +54,7 @@ export default function ServicesHero({ count }: { count: number }) {
           )}
         </div>
       </div>
-      {/* Decorative corner gradient */}
-      <div
-        className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-emerald-400/20"
-        aria-hidden
-      />
+
     </motion.section>
   )
 }

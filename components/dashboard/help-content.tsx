@@ -63,7 +63,7 @@ const quickLinks = [
   { label: "Search Events", href: "/dashboard/events", icon: IconSearch },
   { label: "My Applications", href: "/dashboard/applications", icon: IconClipboardList },
   { label: "Volunteer History", href: "/dashboard/history", icon: IconHistory },
-  { label: "Organizations", href: "/dashboard/organizations", icon: IconBuilding },
+  { label: "Organizations", href: "/dashboard/organizations/submit", icon: IconBuilding },
   { label: "Calendar", href: "/dashboard/calendar", icon: IconCalendar },
   { label: "Settings", href: "/dashboard/settings", icon: IconSettings },
 ]

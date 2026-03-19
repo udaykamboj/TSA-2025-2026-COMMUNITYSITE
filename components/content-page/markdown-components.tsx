@@ -99,22 +99,13 @@ export function MarkdownCard({
 }
 
 export function MarkdownButton({
-  href,
-  children,
+  href: _href,
+  children: _children,
 }: {
   href: string
   children: React.ReactNode
 }) {
-  return (
-    <div className="my-8">
-      <Link
-        href={href}
-        className="inline-flex items-center justify-center rounded-full font-bold text-white transition-colors hover:opacity-90 px-8 py-4 text-lg bg-primary"
-      >
-        {children}
-      </Link>
-    </div>
-  )
+  return null
 }
 
 export function MarkdownAlert({

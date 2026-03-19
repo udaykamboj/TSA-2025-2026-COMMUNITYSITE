@@ -65,7 +65,7 @@ const navMain = [
   },
   {
     title: "Organizations",
-    url: "/dashboard/organizations",
+    url: "/dashboard/organizations/submit",
     icon: IconBuilding,
   },
   {
@@ -179,7 +179,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               )}
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/organizations">Manage Organizations</Link>
+                <Link href="/dashboard/organizations/submit">Manage Organizations</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
