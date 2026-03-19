@@ -15,6 +15,8 @@ import {
   IconLogout,
   IconChevronDown,
   IconHome,
+  IconBell,
+  IconUser,
 } from "@tabler/icons-react"
 
 import { NavMain } from '@/components/dashboard/nav-main'
@@ -76,35 +78,33 @@ const navMain = [
 const navSecondary = [
   {
     title: "Settings",
-    url: "#",
+    url: "/dashboard/settings",
     icon: IconSettings,
   },
   {
     title: "Get Help",
-    url: "#",
+    url: "/dashboard/help",
     icon: IconHelp,
   },
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { organizations, userOrganizations } = useAppStore()
+  const { organizations, userOrganizations, notifications, userProfile } = useAppStore()
   const { user, signOut } = useAuth()
   const router = useRouter()
 
   const myOrgs = organizations.filter((org) => userOrganizations.includes(org.id))
+  const targetEmail = user?.email || "demo@example.com"
+  const unreadCount = notifications.filter((n) => n.userEmail === targetEmail && !n.read).length
 
   return (
     <Sidebar collapsible="none" className="bg-white border-r" {...props}>
       <SidebarHeader className="border-b p-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            {/* Logo */}
-            <Link href="/dashboard" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">M</span>
-              </div>
-              <span className="text-lg font-bold text-primary">Maplewood</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-bold text-primary">Dashboard</span>
+            </div>
           </SidebarMenuItem>
         </SidebarMenu>
 
@@ -114,23 +114,38 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuTrigger className="flex items-center gap-2 text-left hover:bg-gray-100 p-2 rounded-md transition-colors">
               <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                 <span className="text-primary-foreground font-semibold text-sm uppercase">
-                  {user?.email?.charAt(0) ?? "U"}
+                  {(userProfile.displayName || user?.email || "U").charAt(0)}
                 </span>
               </div>
               <div className="flex-1 overflow-hidden">
-                <p className="text-sm font-semibold text-secondary truncate">{user?.email ?? "Guest"}</p>
+                <p className="text-sm font-semibold text-secondary truncate">
+                  {userProfile.displayName || user?.email || "Guest"}
+                </p>
+                <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
               </div>
               <IconChevronDown className="size-4 text-muted-foreground" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-56">
               <DropdownMenuItem asChild>
-                <Link href="/dashboard">My Profile</Link>
+                <Link href="/dashboard/profile">
+                  <IconUser className="size-4 mr-2" />My Profile
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/applications">My Applications</Link>
+                <Link href="/dashboard/applications">
+                  <IconClipboardList className="size-4 mr-2" />My Applications
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/history">Volunteer History</Link>
+                <Link href="/dashboard/history">
+                  <IconHistory className="size-4 mr-2" />Volunteer History
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/settings">
+                  <IconSettings className="size-4 mr-2" />Settings
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -170,13 +185,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </DropdownMenu>
         </div>
 
-        {/* Home Link */}
-        <div className="mt-3 flex items-center gap-3 text-xs">
-          <Link href="/dashboard" className="text-primary hover:underline flex items-center gap-1">
-            <IconHome className="size-3" />
-            Home
-          </Link>
-        </div>
       </SidebarHeader>
 
       <SidebarContent className="p-2">
@@ -184,9 +192,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={navSecondary} className="mt-auto" />
       </SidebarContent>
 
-      <SidebarFooter className="border-t p-4">
+      <SidebarFooter className="border-t p-4 text-center">
         <div className="text-xs text-muted-foreground">
-          <p>Community Volunteer System</p>
+          <p>© 2026 Dashboard</p>
         </div>
       </SidebarFooter>
     </Sidebar>

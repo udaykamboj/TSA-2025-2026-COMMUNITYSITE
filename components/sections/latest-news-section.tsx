@@ -32,8 +32,8 @@ export default function LatestNewsSection() {
         <SectionTitle title="Latest News" linkText="See all news" linkHref="/main/news" />
 
         <div className="flex flex-col md:flex-row gap-12 items-stretch mt-12">
-          <div className="w-full md:w-1/2 flex-shrink-0">
-            <div className="w-full h-full overflow-hidden relative group">
+          <div className="w-full md:w-1/2 flex-shrink-0 p-4 md:p-0">
+            <div className="w-full h-full overflow-hidden rounded-lg shadow-sm relative group">
               <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/0 transition-colors duration-500 z-10" />
               <AnimatePresence mode="wait">
                 <motion.img

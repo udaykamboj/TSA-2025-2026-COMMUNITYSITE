@@ -66,7 +66,7 @@ const availableRoles = [
 ]
 
 export function DashboardContent() {
-  const { isAdmin, toggleRole, assignedRoles: allAssignedRoles, removeAssignedRole } = useAppStore()
+  const { assignedRoles: allAssignedRoles, removeAssignedRole, userProfile } = useAppStore()
   const { user } = useAuth()
 
   const targetEmail = user?.email || "demo@example.com"
@@ -182,21 +182,13 @@ export function DashboardContent() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-secondary">
-              Welcome back, {user?.email?.split("@")[0] ?? "Volunteer"}!
+              Welcome back, {userProfile.displayName || user?.email?.split("@")[0] || "Volunteer"}!
             </h1>
             <p className="text-sm text-muted-foreground">
               Here is an overview of your volunteer activities
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={toggleRole}
-              className="text-xs"
-            >
-              {isAdmin ? "Switch to User View" : "Switch to Admin View"}
-            </Button>
             <Link href="/dashboard/events">
               <Button className="bg-primary hover:bg-[#386109] text-white">
                 Find Events

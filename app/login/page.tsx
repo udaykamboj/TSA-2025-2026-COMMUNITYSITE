@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useAuth } from '@/context/AuthContext'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/dashboard/ui/button'
 import { createClient } from '@/lib/supabaseClient'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/footer'
 
 function getRedirectPath(searchParams: URLSearchParams | null): string {
   const redirect = searchParams?.get('redirect')
@@ -125,22 +127,31 @@ export default function LoginPage() {
     }
   }
 
+  const hasRedirectMessage = redirectPath !== '/dashboard' && searchParams?.has('redirect')
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <motion.div
-        className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">
-            {isSignUp ? 'Create Account' : 'Welcome Back'}
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            {isSignUp ? 'Sign up to access your dashboard' : 'Sign in to your account'}
-          </p>
-        </div>
+    <main className="min-h-screen flex flex-col w-full bg-gradient-to-br from-blue-50 to-indigo-100">
+      <Header />
+      <div className="flex-1 flex items-center justify-center p-4">
+        <motion.div
+          className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900">
+              {isSignUp ? 'Create Account' : 'Welcome Back'}
+            </h2>
+            <p className="mt-2 text-sm text-gray-600">
+              {isSignUp ? 'Sign up to access your dashboard' : 'Sign in to your account'}
+            </p>
+            {hasRedirectMessage && !isSignUp && (
+              <div className="mt-4 p-3 bg-amber-50 text-amber-800 rounded-md border border-amber-200 text-sm font-medium">
+                Please securely sign in to access this protected page.
+              </div>
+            )}
+          </div>
 
         {showForgotPassword ? (
           <form onSubmit={handleForgotPassword} className="space-y-6">
@@ -318,61 +329,23 @@ export default function LoginPage() {
             </div>
 
             {!isSignUp && (
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <div className="bg-blue-50 p-4 rounded-md">
-                  <h4 className="text-sm font-semibold text-blue-800 mb-2">Want to see the dashboard demo?</h4>
-                  <p className="text-xs text-blue-600 mb-3">
-                    Use our pre-configured demo account to explore the dashboard with populated mock data instead of starting from an empty account.
-                  </p>
-                  <div className="flex flex-col gap-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={async () => {
-                        setLoading(true)
-                        setError('')
-                        const { error } = await signIn("demo@example.com", "demo123456")
-                        if (error && error.includes('Invalid login credentials')) {
-                          // Create it if it doesn't exist yet
-                          await signUp("demo@example.com", "demo123456")
-                          await signIn("demo@example.com", "demo123456")
-                          router.push(redirectPath)
-                        } else if (error) {
-                          setError(error)
-                          setLoading(false)
-                        } else {
-                          router.push(redirectPath)
-                        }
-                      }}
-                      disabled={loading}
-                      className="w-full bg-blue-100 text-blue-800 hover:bg-blue-200"
-                    >
-                      Login as Demo User (demo@example.com)
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={async () => {
-                        setLoading(true)
-                        setError('')
-                        const { error } = await signIn("admin@example.com", "admin123456")
-                        if (error && error.includes('Invalid login credentials')) {
-                          // Create it if it doesn't exist yet
-                          await signUp("admin@example.com", "admin123456")
-                          await signIn("admin@example.com", "admin123456")
-                          router.push('/admin')
-                        } else if (error) {
-                          setError(error)
-                          setLoading(false)
-                        } else {
-                          router.push('/admin')
-                        }
-                      }}
-                      disabled={loading}
-                      className="w-full bg-indigo-100 text-indigo-800 hover:bg-indigo-200"
-                    >
-                      Login as Demo Admin (admin@example.com)
-                    </Button>
+              <div className="mt-8 pt-6 border-t border-gray-100">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wider text-gray-400">
+                    <span>Demo Credentials</span>
+                    <span className="h-px flex-1 ml-4 bg-gray-100"></span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-3 rounded-lg bg-gray-50 border border-gray-100">
+                      <p className="text-[10px] font-bold text-indigo-600 uppercase mb-1">Volunteer Access</p>
+                      <p className="text-sm font-medium text-gray-900">demo@example.com</p>
+                      <p className="text-xs text-gray-500 mt-0.5">Password: demo123456</p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-gray-50 border border-gray-100">
+                      <p className="text-[10px] font-bold text-amber-600 uppercase mb-1">Admin Access</p>
+                      <p className="text-sm font-medium text-gray-900">admin@example.com</p>
+                      <p className="text-xs text-gray-500 mt-0.5">Password: admin123456</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -380,6 +353,8 @@ export default function LoginPage() {
           </form>
         )}
       </motion.div>
-    </div>
+      </div>
+      <Footer />
+    </main>
   )
 }

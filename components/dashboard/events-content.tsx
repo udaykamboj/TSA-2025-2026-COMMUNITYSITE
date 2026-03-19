@@ -56,11 +56,11 @@ export function EventsContent() {
 
   // Get color for program header
   const getProgramHeaderColor = (program: string) => {
-    if (program.includes("Robotics Competition")) return "bg-[#e87722]"
-    if (program.includes("Tech Challenge")) return "bg-[#e87722]"
-    if (program.includes("Challenge")) return "bg-[#e87722]"
-    if (program.includes("Explore")) return "bg-[#009cde]"
-    return "bg-[#e87722]"
+    if (program.includes("Environmental")) return "bg-green-600"
+    if (program.includes("Food")) return "bg-blue-600"
+    if (program.includes("Education")) return "bg-amber-600"
+    if (program.includes("Digital")) return "bg-indigo-600"
+    return "bg-slate-600"
   }
 
   return (
@@ -126,9 +126,7 @@ export function EventsContent() {
                         className="border-gray-400 data-[state=checked]:bg-[#e87722] data-[state=checked]:border-[#e87722]"
                       />
                       <span className="text-sm text-secondary">
-                        <span className="italic">FIRST</span>
-                        <sup className="text-[10px]">®</sup>{" "}
-                        {program.replace("FIRST ", "")}
+                        {program}
                       </span>
                     </label>
                   ))}

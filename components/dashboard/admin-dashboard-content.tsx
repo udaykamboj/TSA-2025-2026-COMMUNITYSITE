@@ -24,8 +24,8 @@ export function AdminDashboardContent() {
     approveOrganization,
     rejectOrganization,
     updateApplicationStatus,
-    isAdmin,
-    toggleRole
+    addAssignedRole,
+    userProfile,
   } = useAppStore()
 
   const pendingOrgs = organizations.filter((o) => o.status === "pending")
@@ -42,8 +42,37 @@ export function AdminDashboardContent() {
   }
 
   const handleApproveApp = (id: string) => {
+    const app = applications.find((a) => a.id === id)
+    if (app) {
+      // Create an assigned role for the applicant
+      addAssignedRole({
+        id: `role-assigned-${Date.now()}`,
+        userEmail: app.userId === "user-1" ? "demo@example.com" : "demo@example.com",
+        eventName: app.eventName,
+        eventType: "Community Event",
+        role: app.roles[0] || "Volunteer",
+        status: "ASSIGNED",
+        daysAssigned: app.datesAvailable || [],
+        setupDate: "TBA",
+        eventStart: "TBA",
+        eventEnd: "TBA",
+        tearDown: "TBA",
+        location: "TBA",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        country: "USA",
+        website: "",
+        hasMissingCertifications: true,
+        outstandingTasks: [
+          { id: `task-${Date.now()}-1`, label: "Review event schedule", completed: false, link: "#" },
+          { id: `task-${Date.now()}-2`, label: "Complete online training", completed: false, link: "#" },
+        ],
+      })
+    }
     updateApplicationStatus(id, "assigned")
-    toast.success("Application approved!")
+    toast.success("Application approved and role assigned!")
   }
 
   const handleRejectApp = (id: string) => {
@@ -57,9 +86,7 @@ export function AdminDashboardContent() {
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-              <IconShield className="size-5 text-white" />
-            </div>
+
             <div>
               <h1 className="text-xl font-bold text-secondary">Admin Dashboard</h1>
               <p className="text-sm text-muted-foreground">
@@ -67,13 +94,7 @@ export function AdminDashboardContent() {
               </p>
             </div>
           </div>
-          <Button
-            onClick={toggleRole}
-            variant="outline"
-            className="border-primary text-primary"
-          >
-            {isAdmin ? "Switch to User View" : "Switch to Admin View"}
-          </Button>
+
         </div>
       </div>
 
@@ -124,7 +145,7 @@ export function AdminDashboardContent() {
           <div className="bg-white rounded shadow-sm">
             <div className="px-6 py-4 border-b flex items-center justify-between">
               <div>
-                <h2 className="font-bold text-secondary">Pending Organizations</h2>
+                <h2 className="text-lg font-bold text-secondary">Pending Organizations</h2>
                 <p className="text-sm text-muted-foreground">Review and approve new organizations</p>
               </div>
               <Link href="/admin/organizations" className="text-sm text-primary hover:underline flex items-center gap-1">
@@ -174,7 +195,7 @@ export function AdminDashboardContent() {
           <div className="bg-white rounded shadow-sm">
             <div className="px-6 py-4 border-b flex items-center justify-between">
               <div>
-                <h2 className="font-bold text-secondary">Pending Applications</h2>
+                <h2 className="text-lg font-bold text-secondary">Pending Applications</h2>
                 <p className="text-sm text-muted-foreground">Review volunteer applications</p>
               </div>
               <Link href="/admin/applications" className="text-sm text-primary hover:underline flex items-center gap-1">
@@ -234,7 +255,7 @@ export function AdminDashboardContent() {
         <div className="bg-white rounded shadow-sm">
           <div className="px-6 py-4 border-b flex items-center justify-between">
             <div>
-              <h2 className="font-bold text-secondary">Recent Users</h2>
+              <h2 className="text-lg font-bold text-secondary">Recent Users</h2>
               <p className="text-sm text-muted-foreground">Recently registered volunteers</p>
             </div>
             <Link href="/admin/users" className="text-sm text-primary hover:underline flex items-center gap-1">

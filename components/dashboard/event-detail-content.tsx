@@ -33,6 +33,8 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
   const router = useRouter()
   const { addApplication } = useAppStore()
   const { user } = useAuth()
+  const [step, setStep] = useState<1 | 2>(1)
+  const [draggedItemIndex, setDraggedItemIndex] = useState<number | null>(null)
   const [selectedDates, setSelectedDates] = useState<string[]>([])
   const [selectedRoles, setSelectedRoles] = useState<string[]>([])
   const [rolePreferences, setRolePreferences] = useState<string[]>([])
@@ -45,12 +47,12 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
 
   // Add fallback roles if none exist for this event
   const displayRoles = roles.length > 0 ? roles : [
-    { id: "role-1", eventId: id, name: "Field Assembly", description: "Help set up the competition field", spotsAvailable: 10, spotsFilled: 6 },
-    { id: "role-2", eventId: id, name: "Field Disassembly", description: "Help tear down the competition field", spotsAvailable: 10, spotsFilled: 4 },
-    { id: "role-3", eventId: id, name: "Judge", description: "Evaluate team presentations", spotsAvailable: 8, spotsFilled: 5 },
-    { id: "role-4", eventId: id, name: "Judge Advisor Assistant", description: "Support the judging process", spotsAvailable: 4, spotsFilled: 2 },
-    { id: "role-5", eventId: id, name: "Robot Inspector", description: "Verify robots meet competition specs", spotsAvailable: 6, spotsFilled: 3 },
-    { id: "role-6", eventId: id, name: "Field Resetter", description: "Reset field elements between matches", spotsAvailable: 12, spotsFilled: 8 },
+    { id: "role-1", eventId: id, name: "Site Setup", description: "Help set up the event area", spotsAvailable: 10, spotsFilled: 6 },
+    { id: "role-2", eventId: id, name: "Site Teardown", description: "Help clean up after the event", spotsAvailable: 10, spotsFilled: 4 },
+    { id: "role-3", eventId: id, name: "Greeter", description: "Welcome attendees and provide info", spotsAvailable: 8, spotsFilled: 5 },
+    { id: "role-4", eventId: id, name: "Activity Lead", description: "Lead specific group activities", spotsAvailable: 4, spotsFilled: 2 },
+    { id: "role-5", eventId: id, name: "Safety Officer", description: "Monitor safety and provide assistance", spotsAvailable: 6, spotsFilled: 3 },
+    { id: "role-6", eventId: id, name: "Logistics Assistant", description: "Help with various event logistics tasks", spotsAvailable: 12, spotsFilled: 8 },
   ]
 
   if (!event) {
@@ -124,7 +126,7 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
     setRolePreferences(newPreferences)
   }
 
-  const handleSubmit = () => {
+  const handleNext = () => {
     if (selectedDates.length === 0) {
       toast.error("Please select at least one date")
       return
@@ -133,7 +135,10 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
       toast.error("Please select at least one role")
       return
     }
+    setStep(2)
+  }
 
+  const handleConfirmSubmit = () => {
     addApplication({
       userId: user?.id ?? "user-1",
       eventId: event.id,
@@ -145,6 +150,35 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
 
     toast.success("Application submitted successfully!")
     router.push("/dashboard/applications")
+  }
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    setDraggedItemIndex(index)
+    e.dataTransfer.effectAllowed = "move"
+  }
+
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    e.preventDefault()
+  }
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    e.preventDefault()
+    if (draggedItemIndex === null || draggedItemIndex === index) return
+
+    const newPreferences = [...rolePreferences]
+    const draggedItem = newPreferences[draggedItemIndex]
+
+    // Remove the dragged item
+    newPreferences.splice(draggedItemIndex, 1)
+    // Insert it at the new position
+    newPreferences.splice(index, 0, draggedItem)
+
+    setDraggedItemIndex(index)
+    setRolePreferences(newPreferences)
+  }
+
+  const handleDragEnd = () => {
+    setDraggedItemIndex(null)
   }
 
   const getGoogleMapsUrl = () => {
@@ -258,9 +292,11 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
             </div>
           </div>
 
-          {/* Right Column - Application Form */}
+          {/* Right Column - Application Form or Confirmation */}
           <div className="bg-white rounded shadow-sm p-6">
-            {/* Dates Available */}
+            {step === 1 ? (
+              <>
+                {/* Dates Available */}
             <div className="mb-8">
               <h2 className="text-lg font-bold text-secondary mb-2">Dates Available</h2>
               <p className="text-sm text-muted-foreground mb-4">What days are you available?</p>
@@ -360,13 +396,19 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
                       {rolePreferences.map((role, index) => (
                         <div
                           key={role}
-                          className="flex items-center gap-2 p-2 bg-gray-50 rounded border cursor-move"
+                          draggable
+                          onDragStart={(e) => handleDragStart(e, index)}
+                          onDragEnter={(e) => handleDragEnter(e, index)}
+                          onDragOver={(e) => handleDragOver(e, index)}
+                          onDragEnd={handleDragEnd}
+                          className={`flex items-center gap-2 p-2 bg-gray-50 rounded border cursor-move transition-opacity ${draggedItemIndex === index ? 'opacity-50' : ''}`}
                         >
                           <IconGripVertical className="size-4 text-gray-400" />
                           <span className="text-sm text-secondary">{index + 1}. {role}</span>
                           <button
                             onClick={() => moveRoleUp(index)}
                             className="ml-auto text-primary hover:text-[#386109]"
+                            type="button"
                           >
                             <IconArrowUp className="size-4" />
                           </button>
@@ -385,12 +427,77 @@ export function EventDetailContent({ id }: EventDetailContentProps) {
             {/* Submit Button */}
             <div className="mt-8 flex justify-end">
               <Button
-                onClick={handleSubmit}
+                onClick={handleNext}
                 className="bg-primary hover:bg-[#386109] text-white px-12 py-3 text-lg font-semibold"
               >
                 Next
               </Button>
             </div>
+            </>
+            ) : (
+              <>
+                {/* Confirmation Screen */}
+                <h2 className="text-xl font-bold text-secondary mb-4">Confirm Your Signup</h2>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-sm font-bold text-secondary">Event</h3>
+                    <p className="text-sm text-muted-foreground">{event.name}</p>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-secondary">Selected Dates</h3>
+                    <ul className="list-disc list-inside text-sm text-muted-foreground">
+                      {selectedDates.map((date) => (
+                        <li key={date}>
+                          {new Date(date).toLocaleDateString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-secondary">Roles (In Order of Preference)</h3>
+                    <ol className="list-decimal list-inside text-sm text-muted-foreground">
+                      {rolePreferences.map((role) => (
+                        <li key={role}>{role}</li>
+                      ))}
+                    </ol>
+                  </div>
+                  {notes && (
+                    <div>
+                      <h3 className="text-sm font-bold text-secondary">Notes to Coordinator</h3>
+                      <p className="text-sm text-muted-foreground">{notes}</p>
+                    </div>
+                  )}
+                  {volunteeringWithEmployer && (
+                    <div>
+                      <h3 className="text-sm font-bold text-secondary">Employer details</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Volunteering with Full-time Student
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-8 flex justify-between">
+                  <Button
+                    variant="outline"
+                    onClick={() => setStep(1)}
+                    className="border-primary text-primary"
+                  >
+                    Back to Edit
+                  </Button>
+                  <Button
+                    onClick={handleConfirmSubmit}
+                    className="bg-primary hover:bg-[#386109] text-white px-8 py-2 font-semibold"
+                  >
+                    Confirm & Submit
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

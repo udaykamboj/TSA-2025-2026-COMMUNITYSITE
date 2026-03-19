@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
+import { useAppStore } from '@/lib/store'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import { AdminSidebar } from '@/components/dashboard/admin-sidebar'
@@ -20,6 +21,7 @@ export default function AdminLayout({
     const { user, loading } = useAuth()
     const router = useRouter()
     const pathname = usePathname()
+    const { initializeForUser } = useAppStore()
 
     useEffect(() => {
         if (!loading) {
@@ -27,9 +29,11 @@ export default function AdminLayout({
                 router.push(`/login?redirect=${pathname}`)
             } else if (user.email !== 'admin@example.com') {
                 router.push('/dashboard')
+            } else if (user.email) {
+                initializeForUser(user.email)
             }
         }
-    }, [user, loading, router, pathname])
+    }, [user, loading, router, pathname, initializeForUser])
 
     if (loading || !user || user.email !== 'admin@example.com') {
         return null // or a loading spinner

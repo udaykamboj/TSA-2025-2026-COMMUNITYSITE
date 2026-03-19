@@ -24,6 +24,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const supabase = createClient()
     const getSession = async () => {
       try {
+        // Check for mock session first
+        const mockSessionStr = localStorage.getItem('mock_session')
+        if (mockSessionStr) {
+          const mockSession = JSON.parse(mockSessionStr)
+          // If the mock session hasn't expired
+          if (mockSession.expires_at > Math.floor(Date.now() / 1000)) {
+            setSession(mockSession)
+            setUser(mockSession.user)
+            setLoading(false)
+            return
+          } else {
+            localStorage.removeItem('mock_session')
+          }
+        }
+
         const { data: { session } } = await supabase.auth.getSession()
         setSession(session)
         setUser(session?.user ?? null)
@@ -35,10 +50,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     getSession()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setSession(session)
-        setUser(session?.user ?? null)
-        setLoading(false)
+      async (event: string, session: Session | null) => {
+        // Only update from Supabase Auth if we don't have a mock session
+        if (!localStorage.getItem('mock_session')) {
+          setSession(session)
+          setUser(session?.user ?? null)
+          setLoading(false)
+        }
       }
     )
 
@@ -57,17 +75,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signIn = async (email: string, password: string) => {
-    // Local bypass for demo users
+    // Local bypass for demo users with password validation
     if (email === "demo@example.com" || email === "admin@example.com") {
-      setUser({ id: email, email, role: email === "demo@example.com" ? "authenticated" : "admin" } as unknown as User)
-      setSession({
-        access_token: "mock_token",
-        refresh_token: "mock_token",
+      const expectedPassword = email === "demo@example.com" ? "demo123456" : "admin123456";
+      
+      if (password !== expectedPassword) {
+        return { error: "Invalid login credentials" }
+      }
+
+      const role = email === "demo@example.com" ? "authenticated" : "admin";
+      const mockUser = { id: email, email, role } as unknown as User;
+      
+      const mockSession: Session = {
+        access_token: "mock_token_" + role,
+        refresh_token: "mock_refresh_token",
         expires_in: 3600,
         expires_at: Math.floor(Date.now() / 1000) + 3600,
         token_type: "bearer",
-        user: { id: email, email, role: email === "demo@example.com" ? "authenticated" : "admin" } as unknown as User
-      })
+        user: mockUser
+      } as unknown as Session;
+
+      setUser(mockUser)
+      setSession(mockSession)
+      localStorage.setItem('mock_session', JSON.stringify(mockSession))
       setLoading(false)
       return {}
     }
@@ -83,6 +113,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Clear both local mock state and Supabase session
     setUser(null)
     setSession(null)
+    localStorage.removeItem('mock_session')
     await createClient().auth.signOut()
   }
 

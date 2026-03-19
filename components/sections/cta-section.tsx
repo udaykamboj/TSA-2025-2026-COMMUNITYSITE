@@ -49,7 +49,7 @@ export default function CTASection() {
       >
         <SectionTitle title="How We Support the Community" linkText="Learn More" linkHref="/main/services" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-slate-200 bg-slate-200 shadow-sm mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-slate-200 bg-slate-200 shadow-sm mt-12 rounded-lg overflow-hidden">
           {stats.map((stat, idx) => {
             const IconComponent = iconMap[stat.icon]
             return (

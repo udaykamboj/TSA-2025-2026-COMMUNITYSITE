@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
+import { useAppStore } from '@/lib/store'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import { AppSidebar } from '@/components/dashboard/app-sidebar'
@@ -20,6 +21,7 @@ export default function DashboardLayout({
     const { user, loading } = useAuth()
     const router = useRouter()
     const pathname = usePathname()
+    const { initializeForUser } = useAppStore()
 
     useEffect(() => {
         if (!loading) {
@@ -27,13 +29,16 @@ export default function DashboardLayout({
                 router.push(`/login?redirect=${pathname}`)
             } else if (user.email === 'admin@example.com') {
                 router.push('/admin')
+            } else if (user.email) {
+                initializeForUser(user.email)
             }
         }
-    }, [user, loading, router, pathname])
+    }, [user, loading, router, pathname, initializeForUser])
 
     if (loading || !user || user.email === 'admin@example.com') {
         return null
     }
+
 
     return (
         <div className="dashboard-scope flex flex-col min-h-screen">

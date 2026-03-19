@@ -54,7 +54,7 @@ export default function PopularServices() {
 
         {/* Services Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 shadow-sm mt-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 shadow-sm mt-12 rounded-lg overflow-hidden"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

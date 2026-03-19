@@ -56,7 +56,7 @@ export default function BenefitProgramsSection() {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left info card */}
           <motion.aside
-            className="md:col-span-1 border border-slate-200 p-8 md:p-12 shadow-sm bg-white flex flex-col items-center text-center"
+            className="md:col-span-1 border border-slate-200 p-8 md:p-12 shadow-sm bg-white flex flex-col items-center text-center rounded-lg"
             variants={staggerItem}
             whileHover={{ y: -4 }}
           >
@@ -88,7 +88,7 @@ export default function BenefitProgramsSection() {
               {benefitPrograms.map((program) => (
                 <motion.div
                   key={program.id}
-                  className="bg-white border border-slate-200 overflow-hidden transition-all duration-300"
+                  className="bg-white border border-slate-200 overflow-hidden transition-all duration-300 rounded-lg"
                   variants={staggerItem}
                   whileHover={{ y: -2 }}
                 >
