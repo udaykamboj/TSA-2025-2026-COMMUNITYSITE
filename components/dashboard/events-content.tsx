@@ -56,17 +56,17 @@ export function EventsContent() {
 
   // Get color for program header
   const getProgramHeaderColor = (program: string) => {
-    if (program.includes("Robotics Competition")) return "bg-[#0066b2]"
+    if (program.includes("Robotics Competition")) return "bg-[#e87722]"
     if (program.includes("Tech Challenge")) return "bg-[#e87722]"
     if (program.includes("Challenge")) return "bg-[#e87722]"
     if (program.includes("Explore")) return "bg-[#009cde]"
-    return "bg-[#0066b2]"
+    return "bg-[#e87722]"
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Header Banner */}
-      <div className="relative h-16 bg-gradient-to-r from-[#1a3a5c] to-[#2d5a7b] overflow-hidden">
+      <div className="relative h-16 bg-gradient-to-r from-secondary to-primary overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDEwIDAgTCAwIDAgMCAxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] bg-repeat" />
         </div>
@@ -79,16 +79,16 @@ export function EventsContent() {
         {/* Back Link */}
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-1 text-[#0066b2] hover:underline text-sm mb-4"
+          className="inline-flex items-center gap-1 text-primary hover:underline text-sm mb-4"
         >
           <IconArrowLeft className="size-4" />
           Back to Dashboard
         </Link>
 
         {/* Info Text */}
-        <p className="text-sm text-[#4a5568] mb-6 text-center max-w-4xl mx-auto">
+        <p className="text-sm text-muted-foreground mb-6 text-center max-w-4xl mx-auto">
           {"Don't see an event in your area? Click here to "}
-          <Link href="#" className="text-[#0066b2] hover:underline">
+          <Link href="#" className="text-primary hover:underline">
             Apply to a Program
           </Link>
           {". This option will allow you to complete your volunteer registration information, youth protection screening, and indicate your interest in volunteering at local events. Check back often for new events!"}
@@ -99,10 +99,10 @@ export function EventsContent() {
           <div className="w-80 shrink-0">
             <div className="bg-white rounded shadow-sm">
               <div className="p-4 flex items-center justify-between border-b">
-                <h2 className="text-lg font-semibold text-[#1a3a5c]">Event Filters</h2>
+                <h2 className="text-lg font-semibold text-secondary">Event Filters</h2>
                 <Button
                   onClick={clearFilters}
-                  className="bg-[#0066b2] hover:bg-[#005091] text-white px-4 py-1.5 text-sm"
+                  className="bg-primary hover:bg-[#386109] text-white px-4 py-1.5 text-sm"
                 >
                   CLEAR FILTERS
                 </Button>
@@ -110,7 +110,7 @@ export function EventsContent() {
 
               {/* Programs Section */}
               <div className="p-4 border-b">
-                <h3 className="text-sm font-semibold text-[#1a3a5c] mb-3">Program(s)</h3>
+                <h3 className="text-sm font-semibold text-secondary mb-3">Program(s)</h3>
                 <div className="space-y-2">
                   {programs.map((program) => (
                     <label
@@ -125,7 +125,7 @@ export function EventsContent() {
                         onCheckedChange={() => toggleProgram(program)}
                         className="border-gray-400 data-[state=checked]:bg-[#e87722] data-[state=checked]:border-[#e87722]"
                       />
-                      <span className="text-sm text-[#1a3a5c]">
+                      <span className="text-sm text-secondary">
                         <span className="italic">FIRST</span>
                         <sup className="text-[10px]">®</sup>{" "}
                         {program.replace("FIRST ", "")}
@@ -137,10 +137,10 @@ export function EventsContent() {
 
               {/* Location Section */}
               <div className="p-4 border-b">
-                <h3 className="text-sm font-semibold text-[#1a3a5c] mb-3">Location</h3>
+                <h3 className="text-sm font-semibold text-secondary mb-3">Location</h3>
                 <div className="space-y-3">
                   <div>
-                    <Label className="text-xs text-[#4a5568] mb-1 block">Country</Label>
+                    <Label className="text-xs text-muted-foreground mb-1 block">Country</Label>
                     <Select
                       value={filters.country}
                       onValueChange={(value) => setFilters({ ...filters, country: value })}
@@ -155,7 +155,7 @@ export function EventsContent() {
                     </Select>
                   </div>
                   <div>
-                    <Label className="text-xs text-[#4a5568] mb-1 block">State</Label>
+                    <Label className="text-xs text-muted-foreground mb-1 block">State</Label>
                     <Select
                       value={filters.state}
                       onValueChange={(value) => setFilters({ ...filters, state: value })}
@@ -173,7 +173,7 @@ export function EventsContent() {
                     </Select>
                   </div>
                   <div>
-                    <Label className="text-xs text-[#4a5568] mb-1 block">Zip / Postal Code</Label>
+                    <Label className="text-xs text-muted-foreground mb-1 block">Zip / Postal Code</Label>
                     <Input
                       placeholder="Zip Code / Postal Code"
                       value={filters.zip}
@@ -186,10 +186,10 @@ export function EventsContent() {
 
               {/* Date Section */}
               <div className="p-4">
-                <h3 className="text-sm font-semibold text-[#1a3a5c] mb-3">Date</h3>
+                <h3 className="text-sm font-semibold text-secondary mb-3">Date</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <Label className="text-xs text-[#4a5568] mb-1 block">From</Label>
+                    <Label className="text-xs text-muted-foreground mb-1 block">From</Label>
                     <Input
                       type="date"
                       value={filters.fromDate}
@@ -198,7 +198,7 @@ export function EventsContent() {
                     />
                   </div>
                   <div>
-                    <Label className="text-xs text-[#4a5568] mb-1 block">To</Label>
+                    <Label className="text-xs text-muted-foreground mb-1 block">To</Label>
                     <Input
                       type="date"
                       value={filters.toDate}
@@ -213,7 +213,7 @@ export function EventsContent() {
 
           {/* Events Grid */}
           <div className="flex-1">
-            <p className="text-sm text-[#4a5568] mb-4">
+            <p className="text-sm text-muted-foreground mb-4">
               {filteredEvents.length} Event(s) located
             </p>
 
@@ -229,33 +229,33 @@ export function EventsContent() {
                   {/* Event Details */}
                   <div className="p-4 flex-1 space-y-3">
                     <div className="text-center">
-                      <p className="text-xs text-[#4a5568] font-semibold">EVENT LOCATION:</p>
-                      <p className="text-sm text-[#1a3a5c]">{event.location}</p>
-                      <p className="text-sm text-[#1a3a5c]">{event.city}, {event.state}</p>
+                      <p className="text-xs text-muted-foreground font-semibold">EVENT LOCATION:</p>
+                      <p className="text-sm text-secondary">{event.location}</p>
+                      <p className="text-sm text-secondary">{event.city}, {event.state}</p>
                     </div>
 
                     <div className="text-center">
-                      <p className="text-xs text-[#4a5568] font-semibold">EVENT DATE(S):</p>
-                      <p className="text-sm text-[#1a3a5c]">
+                      <p className="text-xs text-muted-foreground font-semibold">EVENT DATE(S):</p>
+                      <p className="text-sm text-secondary">
                         {new Date(event.startDate).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })} - {new Date(event.endDate).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })}
                       </p>
                     </div>
 
                     <div className="text-center">
-                      <p className="text-xs text-[#4a5568] font-semibold">SET UP DATE:</p>
-                      <p className="text-sm text-[#1a3a5c]">{event.setupDate ?? "TBA"}</p>
+                      <p className="text-xs text-muted-foreground font-semibold">SET UP DATE:</p>
+                      <p className="text-sm text-secondary">{event.setupDate ?? "TBA"}</p>
                     </div>
 
                     <div className="text-center">
-                      <p className="text-xs text-[#4a5568] font-semibold">TEAR DOWN DATE:</p>
-                      <p className="text-sm text-[#1a3a5c]">{event.teardownDate ?? "TBA"}</p>
+                      <p className="text-xs text-muted-foreground font-semibold">TEAR DOWN DATE:</p>
+                      <p className="text-sm text-secondary">{event.teardownDate ?? "TBA"}</p>
                     </div>
                   </div>
 
                   {/* Volunteer Button */}
                   <div className="p-4 pt-0">
                     <Link href={`/dashboard/events/${event.id}`}>
-                      <Button className="w-full bg-[#0066b2] hover:bg-[#005091] text-white font-semibold">
+                      <Button className="w-full bg-primary hover:bg-[#386109] text-white font-semibold">
                         VOLUNTEER
                       </Button>
                     </Link>
@@ -266,7 +266,7 @@ export function EventsContent() {
 
             {filteredEvents.length === 0 && (
               <div className="bg-white rounded shadow-sm p-12 text-center">
-                <p className="text-[#4a5568]">No events found matching your criteria.</p>
+                <p className="text-muted-foreground">No events found matching your criteria.</p>
                 <Button onClick={clearFilters} variant="outline" className="mt-4">
                   Clear Filters
                 </Button>

@@ -45,17 +45,17 @@ export function HistoryContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Header */}
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[#1a3a5c]">My Participation History</h1>
-            <p className="text-sm text-[#4a5568]">
+            <h1 className="text-xl font-bold text-secondary">My Participation History</h1>
+            <p className="text-sm text-muted-foreground">
               View your complete volunteer history and hours
             </p>
           </div>
-          <Button onClick={handlePrint} className="bg-[#0066b2] hover:bg-[#005091] text-white">
+          <Button onClick={handlePrint} className="bg-primary hover:bg-[#386109] text-white">
             <IconPrinter className="size-4 mr-2" />
             Print History
           </Button>
@@ -65,23 +65,23 @@ export function HistoryContent() {
       <div className="p-6 space-y-6">
         {/* Profile Summary */}
         <div className="bg-white rounded shadow-sm p-6">
-          <h2 className="text-lg font-bold text-[#1a3a5c] mb-4">Profile Summary</h2>
+          <h2 className="text-lg font-bold text-secondary mb-4">Profile Summary</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <p className="text-xs text-[#4a5568]">Name</p>
-              <p className="font-semibold text-[#1a3a5c]">{user?.email ?? "Guest"}</p>
+              <p className="text-xs text-muted-foreground">Name</p>
+              <p className="font-semibold text-secondary">{user?.email ?? "Guest"}</p>
             </div>
             <div>
-              <p className="text-xs text-[#4a5568]">Volunteer Since</p>
-              <p className="font-semibold text-[#1a3a5c]">{user?.created_at ? new Date(user.created_at).getFullYear() : "N/A"}</p>
+              <p className="text-xs text-muted-foreground">Volunteer Since</p>
+              <p className="font-semibold text-secondary">{user?.created_at ? new Date(user.created_at).getFullYear() : "N/A"}</p>
             </div>
             <div>
-              <p className="text-xs text-[#4a5568]">Current Season Total Hours</p>
-              <p className="font-semibold text-[#1a3a5c]">{totalHours}</p>
+              <p className="text-xs text-muted-foreground">Current Season Total Hours</p>
+              <p className="font-semibold text-secondary">{totalHours}</p>
             </div>
             <div>
-              <p className="text-xs text-[#4a5568]">Total Events</p>
-              <p className="font-semibold text-[#1a3a5c]">{totalEvents}</p>
+              <p className="text-xs text-muted-foreground">Total Events</p>
+              <p className="font-semibold text-secondary">{totalEvents}</p>
             </div>
           </div>
         </div>
@@ -89,34 +89,34 @@ export function HistoryContent() {
         {/* Stats Cards */}
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="bg-white rounded shadow-sm p-4">
-            <div className="flex items-center gap-2 text-[#4a5568] text-sm mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <IconClock className="size-4" />
               Total Hours
             </div>
-            <p className="text-2xl font-bold text-[#1a3a5c]">{totalHours}</p>
-            <p className="text-xs text-[#4a5568]">
+            <p className="text-2xl font-bold text-secondary">{totalHours}</p>
+            <p className="text-xs text-muted-foreground">
               Across {filteredHistory.length} volunteer roles
             </p>
           </div>
           <div className="bg-white rounded shadow-sm p-4">
-            <div className="flex items-center gap-2 text-[#4a5568] text-sm mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <IconCalendarEvent className="size-4" />
               Events Attended
             </div>
-            <p className="text-2xl font-bold text-[#1a3a5c]">{totalEvents}</p>
-            <p className="text-xs text-[#4a5568]">
+            <p className="text-2xl font-bold text-secondary">{totalEvents}</p>
+            <p className="text-xs text-muted-foreground">
               Unique events volunteered
             </p>
           </div>
           <div className="bg-white rounded shadow-sm p-4">
-            <div className="flex items-center gap-2 text-[#4a5568] text-sm mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <IconTrophy className="size-4" />
               Years Active
             </div>
-            <p className="text-2xl font-bold text-[#1a3a5c]">
+            <p className="text-2xl font-bold text-secondary">
               {new Date().getFullYear() - (user?.created_at ? new Date(user.created_at).getFullYear() : 2024)}
             </p>
-            <p className="text-xs text-[#4a5568]">
+            <p className="text-xs text-muted-foreground">
               Since {user?.created_at ? new Date(user.created_at).getFullYear() : 2024}
             </p>
           </div>
@@ -124,7 +124,7 @@ export function HistoryContent() {
 
         {/* Filters */}
         <div className="bg-white rounded shadow-sm p-6">
-          <h2 className="text-lg font-bold text-[#1a3a5c] mb-4">Filter History</h2>
+          <h2 className="text-lg font-bold text-secondary mb-4">Filter History</h2>
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <Select
@@ -162,7 +162,7 @@ export function HistoryContent() {
                 </SelectContent>
               </Select>
             </div>
-            <Button className="bg-[#0066b2] hover:bg-[#005091] text-white">
+            <Button className="bg-primary hover:bg-[#386109] text-white">
               Search
             </Button>
           </div>
@@ -171,8 +171,8 @@ export function HistoryContent() {
         {/* History Table */}
         <div className="bg-white rounded shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b">
-            <h2 className="text-lg font-bold text-[#1a3a5c]">Participation Records</h2>
-            <p className="text-sm text-[#4a5568]">
+            <h2 className="text-lg font-bold text-secondary">Participation Records</h2>
+            <p className="text-sm text-muted-foreground">
               {filteredHistory.length} record(s) found
             </p>
           </div>
@@ -182,49 +182,49 @@ export function HistoryContent() {
               <table className="w-full">
                 <thead className="bg-[#f8fafc] border-b">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-[#4a5568]">Program</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-[#4a5568]">Season</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-[#4a5568]">Event</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-[#4a5568]">Event Date</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-[#4a5568]">Role</th>
-                    <th className="px-4 py-3 text-right text-xs font-semibold text-[#4a5568]">Hours</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground">Program</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground">Season</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground">Event</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground">Event Date</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground">Role</th>
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-muted-foreground">Hours</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {filteredHistory.map((record) => (
                     <tr key={record.id} className="hover:bg-[#f8fafc]">
                       <td className="px-4 py-3">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#e8eef3] text-[#1a3a5c]">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-secondary">
                           {record.program}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-sm text-[#1a3a5c]">{record.season}</td>
-                      <td className="px-4 py-3 text-sm font-medium text-[#0066b2]">{record.event}</td>
-                      <td className="px-4 py-3 text-sm text-[#4a5568]">{record.eventDate}</td>
-                      <td className="px-4 py-3 text-sm text-[#1a3a5c]">{record.role}</td>
-                      <td className="px-4 py-3 text-sm font-bold text-[#1a3a5c] text-right">{record.hours}</td>
+                      <td className="px-4 py-3 text-sm text-secondary">{record.season}</td>
+                      <td className="px-4 py-3 text-sm font-medium text-primary">{record.event}</td>
+                      <td className="px-4 py-3 text-sm text-muted-foreground">{record.eventDate}</td>
+                      <td className="px-4 py-3 text-sm text-secondary">{record.role}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-secondary text-right">{record.hours}</td>
                     </tr>
                   ))}
                 </tbody>
                 <tfoot className="bg-[#f8fafc] border-t">
                   <tr>
-                    <td colSpan={5} className="px-4 py-3 text-sm font-bold text-[#1a3a5c]">Total Hours</td>
-                    <td className="px-4 py-3 text-sm font-bold text-[#0066b2] text-right">{totalHours}</td>
+                    <td colSpan={5} className="px-4 py-3 text-sm font-bold text-secondary">Total Hours</td>
+                    <td className="px-4 py-3 text-sm font-bold text-primary text-right">{totalHours}</td>
                   </tr>
                 </tfoot>
               </table>
             </div>
           ) : (
             <div className="p-12 text-center">
-              <IconHistory className="size-12 text-[#4a5568] mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-[#1a3a5c]">No Records Found</h3>
-              <p className="text-[#4a5568] max-w-sm mx-auto mt-1">
+              <IconHistory className="size-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-secondary">No Records Found</h3>
+              <p className="text-muted-foreground max-w-sm mx-auto mt-1">
                 {filterProgram || filterSeason
                   ? "Try adjusting your filters"
                   : "Start volunteering to build your history"}
               </p>
               <Link href="/dashboard/events">
-                <Button className="mt-4 bg-[#0066b2] hover:bg-[#005091] text-white">
+                <Button className="mt-4 bg-primary hover:bg-[#386109] text-white">
                   Find Events
                 </Button>
               </Link>
@@ -234,7 +234,7 @@ export function HistoryContent() {
 
         {/* Info Box */}
         <div className="bg-[#fef3c7] rounded shadow-sm p-4">
-          <p className="text-sm text-[#1a3a5c]">
+          <p className="text-sm text-secondary">
             Did you know that you can increase the impact of your volunteer hours?
             Search below to find out if your employer will match your volunteer hours.
           </p>

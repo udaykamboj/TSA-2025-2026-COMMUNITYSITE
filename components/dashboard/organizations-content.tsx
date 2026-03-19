@@ -206,20 +206,20 @@ export function OrganizationsContent() {
 
   if (showCreateForm) {
     return (
-      <div className="min-h-screen bg-[#e8eef3]">
+      <div className="min-h-screen bg-muted">
         {/* Header */}
         <div className="bg-white border-b px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xl font-bold text-[#1a3a5c]">Create Organization</h1>
-              <p className="text-sm text-[#4a5568]">
+              <h1 className="text-xl font-bold text-secondary">Create Organization</h1>
+              <p className="text-sm text-muted-foreground">
                 Register a new organization for volunteer management
               </p>
             </div>
             <Button 
               variant="outline" 
               onClick={() => setShowCreateForm(false)}
-              className="border-[#0066b2] text-[#0066b2]"
+              className="border-primary text-primary"
             >
               Back to Organizations
             </Button>
@@ -252,7 +252,7 @@ export function OrganizationsContent() {
                     name="orgName"
                     value={formData.orgName}
                     onChange={handleChange}
-                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-[#0066b2] hover:border-slate-400 rounded ${errors.orgName ? "border-red-600 bg-red-50" : ""}`}
+                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-primary hover:border-slate-400 rounded ${errors.orgName ? "border-red-600 bg-red-50" : ""}`}
                     placeholder="Name of the organization"
                   />
                   {errors.orgName && <p className="text-red-600 text-sm mt-1">{errors.orgName}</p>}
@@ -267,7 +267,7 @@ export function OrganizationsContent() {
                           type="checkbox"
                           checked={formData.serviceType.includes(type)}
                           onChange={() => handleServiceTypeChange(type)}
-                          className="w-4 h-4 border border-slate-300 focus:outline-none accent-[#0066b2]"
+                          className="w-4 h-4 border border-slate-300 focus:outline-none accent-primary"
                         />
                         <span className="text-sm text-slate-700">{type}</span>
                       </label>
@@ -283,7 +283,7 @@ export function OrganizationsContent() {
                     value={formData.description}
                     onChange={handleChange}
                     rows={5}
-                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm resize-none focus:outline-none focus:border-[#0066b2] rounded ${errors.description ? "border-red-600 bg-red-50" : ""}`}
+                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm resize-none focus:outline-none focus:border-primary rounded ${errors.description ? "border-red-600 bg-red-50" : ""}`}
                     placeholder="Describe your organization's mission, services, and how volunteers can contribute..."
                   />
                   {errors.description && <p className="text-red-600 text-sm mt-1">{errors.description}</p>}
@@ -302,7 +302,7 @@ export function OrganizationsContent() {
                       name="contactPerson"
                       value={formData.contactPerson}
                       onChange={handleChange}
-                      className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-[#0066b2] rounded ${errors.contactPerson ? "border-red-600 bg-red-50" : ""}`}
+                      className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-primary rounded ${errors.contactPerson ? "border-red-600 bg-red-50" : ""}`}
                       placeholder="Full name"
                     />
                     {errors.contactPerson && <p className="text-red-600 text-sm mt-1">{errors.contactPerson}</p>}
@@ -315,7 +315,7 @@ export function OrganizationsContent() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-[#0066b2] rounded ${errors.email ? "border-red-600 bg-red-50" : ""}`}
+                      className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-primary rounded ${errors.email ? "border-red-600 bg-red-50" : ""}`}
                       placeholder="email@example.com"
                     />
                     {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
@@ -328,7 +328,7 @@ export function OrganizationsContent() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-[#0066b2] rounded ${errors.phone ? "border-red-600 bg-red-50" : ""}`}
+                      className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-primary rounded ${errors.phone ? "border-red-600 bg-red-50" : ""}`}
                       placeholder="(555) 123-4567"
                     />
                     {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
@@ -341,7 +341,7 @@ export function OrganizationsContent() {
                       name="website"
                       value={formData.website}
                       onChange={handleChange}
-                      className="mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-[#0066b2] rounded"
+                      className="mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-primary rounded"
                       placeholder="www.example.com"
                     />
                   </div>
@@ -358,7 +358,7 @@ export function OrganizationsContent() {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-[#0066b2] rounded ${errors.address ? "border-red-600 bg-red-50" : ""}`}
+                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-primary rounded ${errors.address ? "border-red-600 bg-red-50" : ""}`}
                     placeholder="Full address"
                   />
                   {errors.address && <p className="text-red-600 text-sm mt-1">{errors.address}</p>}
@@ -371,7 +371,7 @@ export function OrganizationsContent() {
                     name="hours"
                     value={formData.hours}
                     onChange={handleChange}
-                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-[#0066b2] rounded ${errors.hours ? "border-red-600 bg-red-50" : ""}`}
+                    className={`mt-1 w-full border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-primary rounded ${errors.hours ? "border-red-600 bg-red-50" : ""}`}
                     placeholder="e.g., Mon-Fri 9am-5pm, Sat 10am-3pm"
                   />
                   {errors.hours && <p className="text-red-600 text-sm mt-1">{errors.hours}</p>}
@@ -386,7 +386,7 @@ export function OrganizationsContent() {
                           type="checkbox"
                           checked={formData.ageGroups.includes(ageGroup)}
                           onChange={() => handleAgeGroupChange(ageGroup)}
-                          className="w-4 h-4 border border-slate-300 focus:outline-none accent-[#0066b2]"
+                          className="w-4 h-4 border border-slate-300 focus:outline-none accent-primary"
                         />
                         <span className="text-sm text-slate-700">{ageGroup}</span>
                       </label>
@@ -401,7 +401,7 @@ export function OrganizationsContent() {
                     value={formData.eligibility}
                     onChange={handleChange}
                     rows={3}
-                    className="mt-1 w-full border border-slate-300 px-3 py-2 text-sm resize-none focus:outline-none focus:border-[#0066b2] rounded"
+                    className="mt-1 w-full border border-slate-300 px-3 py-2 text-sm resize-none focus:outline-none focus:border-primary rounded"
                     placeholder="Describe any eligibility requirements for volunteers..."
                   />
                 </div>
@@ -414,7 +414,7 @@ export function OrganizationsContent() {
                       checked={formData.isFree}
                       onChange={handleChange}
                       id="isFree"
-                      className="w-4 h-4 border border-slate-300 mt-1 flex-shrink-0 accent-[#0066b2]"
+                      className="w-4 h-4 border border-slate-300 mt-1 flex-shrink-0 accent-primary"
                     />
                     <span className="text-sm text-slate-700 font-normal">This organization provides free services</span>
                   </label>
@@ -428,7 +428,7 @@ export function OrganizationsContent() {
                     name="agree"
                     checked={formData.agree}
                     onChange={handleChange}
-                    className="w-4 h-4 border border-slate-300 mt-1 flex-shrink-0 accent-[#0066b2]"
+                    className="w-4 h-4 border border-slate-300 mt-1 flex-shrink-0 accent-primary"
                   />
                   <span className="text-sm text-slate-700 font-normal">I confirm that the information provided is accurate and that the organization operates legally in our jurisdiction. <span className="text-red-600">*</span></span>
                 </label>
@@ -436,7 +436,7 @@ export function OrganizationsContent() {
               </div>
 
               <div className="flex gap-3 pt-4 border-t">
-                <Button type="submit" className="bg-[#0066b2] hover:bg-[#005091] text-white rounded px-6 py-2">
+                <Button type="submit" className="bg-primary hover:bg-[#386109] text-white rounded px-6 py-2">
                   Submit Organization
                 </Button>
                 <Button 
@@ -456,13 +456,13 @@ export function OrganizationsContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Header */}
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[#1a3a5c]">Your Organizations</h1>
-            <p className="text-sm text-[#4a5568]">
+            <h1 className="text-xl font-bold text-secondary">Your Organizations</h1>
+            <p className="text-sm text-muted-foreground">
               Join an organization to get started
             </p>
           </div>
@@ -474,15 +474,15 @@ export function OrganizationsContent() {
         {myOrgs.length === 0 && (
           <div className="bg-white rounded shadow-sm p-12 text-center">
             <div className="w-16 h-16 mx-auto mb-4 bg-[#fef3c7] rounded-lg flex items-center justify-center">
-              <IconBuilding className="size-8 text-[#f59e0b]" />
+              <IconBuilding className="size-8 text-primary" />
             </div>
-            <h2 className="text-xl font-bold text-[#1a3a5c] mb-2">No Organizations Yet</h2>
-            <p className="text-[#4a5568] max-w-md mx-auto mb-6">
+            <h2 className="text-xl font-bold text-secondary mb-2">No Organizations Yet</h2>
+            <p className="text-muted-foreground max-w-md mx-auto mb-6">
               Join an organization with a code or create your own to get started with volunteer events.
             </p>
             <Dialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#1a3a5c] font-semibold px-8">
+                <Button className="bg-primary hover:bg-[#386109] text-secondary font-semibold px-8">
                   Join Organization
                 </Button>
               </DialogTrigger>
@@ -508,7 +508,7 @@ export function OrganizationsContent() {
                   <Button variant="outline" onClick={() => setJoinDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button onClick={handleJoin} className="bg-[#0066b2] hover:bg-[#005091]">
+                  <Button onClick={handleJoin} className="bg-primary hover:bg-[#386109]">
                     Join
                   </Button>
                 </DialogFooter>
@@ -521,29 +521,29 @@ export function OrganizationsContent() {
         <div className="grid grid-cols-2 gap-6">
           {/* After Joining Steps */}
           <div className="bg-white rounded shadow-sm p-6">
-            <h3 className="text-lg font-bold text-[#1a3a5c] mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 bg-[#0066b2] text-white rounded-full flex items-center justify-center text-sm">?</span>
+            <h3 className="text-lg font-bold text-secondary mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm">?</span>
               After Joining
             </h3>
-            <ol className="space-y-3 text-sm text-[#4a5568]">
+            <ol className="space-y-3 text-sm text-muted-foreground">
               <li className="flex gap-2">
-                <span className="font-bold text-[#0066b2]">1.</span>
+                <span className="font-bold text-primary">1.</span>
                 <span>If you were sent to your new dashboard</span>
               </li>
               <li className="flex gap-2">
-                <span className="font-bold text-[#0066b2]">2.</span>
+                <span className="font-bold text-primary">2.</span>
                 <span>Logout and log back in to see it</span>
               </li>
               <li className="flex gap-2">
-                <span className="font-bold text-[#0066b2]">3.</span>
+                <span className="font-bold text-primary">3.</span>
                 <span>If you were sent to your new dashboard</span>
               </li>
               <li className="flex gap-2">
-                <span className="font-bold text-[#0066b2]">4.</span>
+                <span className="font-bold text-primary">4.</span>
                 <span>You can go to your dashboard via the Organizations dropdown</span>
               </li>
               <li className="flex gap-2">
-                <span className="font-bold text-[#0066b2]">5.</span>
+                <span className="font-bold text-primary">5.</span>
                 <span>Connect what is email or what conditions</span>
               </li>
             </ol>
@@ -551,8 +551,8 @@ export function OrganizationsContent() {
 
           {/* Need Help Section */}
           <div className="bg-white rounded shadow-sm p-6">
-            <h3 className="text-lg font-bold text-[#1a3a5c] mb-4">Need Help?</h3>
-            <ul className="space-y-2 text-sm text-[#4a5568]">
+            <h3 className="text-lg font-bold text-secondary mb-4">Need Help?</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex gap-2">
                 <span>{"•"}</span>
                 <span>Ask your organization/school admin for their join code</span>
@@ -572,18 +572,18 @@ export function OrganizationsContent() {
         {/* Create Organization Section */}
         <div className="bg-white rounded shadow-sm p-6">
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 bg-[#0066b2] rounded flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 bg-primary rounded flex items-center justify-center shrink-0">
               <IconBuilding className="size-5 text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="text-lg font-bold text-[#1a3a5c] mb-1">Create Organization</h3>
-              <p className="text-sm text-[#4a5568] mb-4">
+              <h3 className="text-lg font-bold text-secondary mb-1">Create Organization</h3>
+              <p className="text-sm text-muted-foreground mb-4">
                 Want to start your own organization? Create one and get your unique code to share with members.
               </p>
               <Button 
                 onClick={() => setShowCreateForm(true)}
                 variant="outline" 
-                className="border-[#fbbf24] text-[#1a3a5c] hover:bg-[#fef3c7]"
+                className="border-primary text-secondary hover:bg-[#fef3c7]"
               >
                 Create New Organization
               </Button>
@@ -594,11 +594,11 @@ export function OrganizationsContent() {
         {/* My Organizations Grid */}
         {myOrgs.length > 0 && (
           <div>
-            <h2 className="text-lg font-bold text-[#1a3a5c] mb-4">My Organizations</h2>
+            <h2 className="text-lg font-bold text-secondary mb-4">My Organizations</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {myOrgs.map((org) => (
                 <div key={org.id} className="bg-white rounded shadow-sm overflow-hidden">
-                  <div className="bg-[#0066b2] text-white px-4 py-3">
+                  <div className="bg-primary text-white px-4 py-3">
                     <div className="flex items-center gap-2">
                       <IconBuilding className="size-5" />
                       <span className="font-bold">{org.name}</span>
@@ -606,16 +606,16 @@ export function OrganizationsContent() {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm text-[#4a5568]">{org.memberCount} members</span>
+                      <span className="text-sm text-muted-foreground">{org.memberCount} members</span>
                       {getStatusBadge(org.status)}
                     </div>
-                    <p className="text-sm text-[#4a5568] line-clamp-2 mb-3">
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
                       {org.description || "No description provided"}
                     </p>
                     {org.status === "approved" && (
                       <div className="pt-3 border-t">
-                        <p className="text-xs text-[#4a5568]">
-                          Organization Code: <span className="font-mono font-bold text-[#0066b2]">{org.code}</span>
+                        <p className="text-xs text-muted-foreground">
+                          Organization Code: <span className="font-mono font-bold text-primary">{org.code}</span>
                         </p>
                       </div>
                     )}
@@ -631,7 +631,7 @@ export function OrganizationsContent() {
           <div className="flex justify-center">
             <Dialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#1a3a5c] font-semibold px-8">
+                <Button className="bg-primary hover:bg-[#386109] text-secondary font-semibold px-8">
                   Join Another Organization
                 </Button>
               </DialogTrigger>
@@ -657,7 +657,7 @@ export function OrganizationsContent() {
                   <Button variant="outline" onClick={() => setJoinDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button onClick={handleJoin} className="bg-[#0066b2] hover:bg-[#005091]">
+                  <Button onClick={handleJoin} className="bg-primary hover:bg-[#386109]">
                     Join
                   </Button>
                 </DialogFooter>

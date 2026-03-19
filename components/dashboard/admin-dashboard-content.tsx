@@ -52,17 +52,17 @@ export function AdminDashboardContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Header */}
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#0066b2] rounded flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
               <IconShield className="size-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-[#1a3a5c]">Admin Dashboard</h1>
-              <p className="text-sm text-[#4a5568]">
+              <h1 className="text-xl font-bold text-secondary">Admin Dashboard</h1>
+              <p className="text-sm text-muted-foreground">
                 Manage users, organizations, and applications
               </p>
             </div>
@@ -70,7 +70,7 @@ export function AdminDashboardContent() {
           <Button
             onClick={toggleRole}
             variant="outline"
-            className="border-[#0066b2] text-[#0066b2]"
+            className="border-primary text-primary"
           >
             {isAdmin ? "Switch to User View" : "Switch to Admin View"}
           </Button>
@@ -87,35 +87,35 @@ export function AdminDashboardContent() {
         >
           <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-[#4a5568]">Total Users</span>
-              <IconUsers className="size-4 text-[#0066b2]" />
+              <span className="text-sm text-muted-foreground">Total Users</span>
+              <IconUsers className="size-4 text-primary" />
             </div>
-            <p className="text-2xl font-bold text-[#1a3a5c]">{allUsers.length}</p>
-            <p className="text-xs text-[#4a5568]">Registered volunteers</p>
+            <p className="text-2xl font-bold text-secondary">{allUsers.length}</p>
+            <p className="text-xs text-muted-foreground">Registered volunteers</p>
           </motion.div>
           <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-[#4a5568]">Organizations</span>
-              <IconBuilding className="size-4 text-[#0066b2]" />
+              <span className="text-sm text-muted-foreground">Organizations</span>
+              <IconBuilding className="size-4 text-primary" />
             </div>
-            <p className="text-2xl font-bold text-[#1a3a5c]">{organizations.length}</p>
+            <p className="text-2xl font-bold text-secondary">{organizations.length}</p>
             <p className="text-xs text-[#e87722]">{pendingOrgs.length} pending approval</p>
           </motion.div>
           <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-[#4a5568]">Applications</span>
-              <IconClipboardList className="size-4 text-[#0066b2]" />
+              <span className="text-sm text-muted-foreground">Applications</span>
+              <IconClipboardList className="size-4 text-primary" />
             </div>
-            <p className="text-2xl font-bold text-[#1a3a5c]">{applications.length}</p>
+            <p className="text-2xl font-bold text-secondary">{applications.length}</p>
             <p className="text-xs text-[#e87722]">{pendingApps.length} pending review</p>
           </motion.div>
           <motion.div className="bg-white rounded shadow-sm p-4" variants={staggerItem} whileHover={{ y: -4 }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-[#4a5568]">Pending Actions</span>
+              <span className="text-sm text-muted-foreground">Pending Actions</span>
               <IconShield className="size-4 text-[#e87722]" />
             </div>
             <p className="text-2xl font-bold text-[#e87722]">{pendingOrgs.length + pendingApps.length}</p>
-            <p className="text-xs text-[#4a5568]">Items needing attention</p>
+            <p className="text-xs text-muted-foreground">Items needing attention</p>
           </motion.div>
         </motion.div>
 
@@ -124,10 +124,10 @@ export function AdminDashboardContent() {
           <div className="bg-white rounded shadow-sm">
             <div className="px-6 py-4 border-b flex items-center justify-between">
               <div>
-                <h2 className="font-bold text-[#1a3a5c]">Pending Organizations</h2>
-                <p className="text-sm text-[#4a5568]">Review and approve new organizations</p>
+                <h2 className="font-bold text-secondary">Pending Organizations</h2>
+                <p className="text-sm text-muted-foreground">Review and approve new organizations</p>
               </div>
-              <Link href="/admin/organizations" className="text-sm text-[#0066b2] hover:underline flex items-center gap-1">
+              <Link href="/admin/organizations" className="text-sm text-primary hover:underline flex items-center gap-1">
                 View All <IconArrowRight className="size-4" />
               </Link>
             </div>
@@ -137,8 +137,8 @@ export function AdminDashboardContent() {
                   {pendingOrgs.slice(0, 3).map((org) => (
                     <div key={org.id} className="flex items-center justify-between p-3 border rounded">
                       <div>
-                        <h4 className="font-semibold text-[#1a3a5c]">{org.name}</h4>
-                        <p className="text-sm text-[#4a5568] line-clamp-1">
+                        <h4 className="font-semibold text-secondary">{org.name}</h4>
+                        <p className="text-sm text-muted-foreground line-clamp-1">
                           {org.description || "No description"}
                         </p>
                       </div>
@@ -163,7 +163,7 @@ export function AdminDashboardContent() {
                   ))}
                 </div>
               ) : (
-                <p className="text-center text-[#4a5568] py-8">
+                <p className="text-center text-muted-foreground py-8">
                   No pending organizations
                 </p>
               )}
@@ -174,10 +174,10 @@ export function AdminDashboardContent() {
           <div className="bg-white rounded shadow-sm">
             <div className="px-6 py-4 border-b flex items-center justify-between">
               <div>
-                <h2 className="font-bold text-[#1a3a5c]">Pending Applications</h2>
-                <p className="text-sm text-[#4a5568]">Review volunteer applications</p>
+                <h2 className="font-bold text-secondary">Pending Applications</h2>
+                <p className="text-sm text-muted-foreground">Review volunteer applications</p>
               </div>
-              <Link href="/admin/applications" className="text-sm text-[#0066b2] hover:underline flex items-center gap-1">
+              <Link href="/admin/applications" className="text-sm text-primary hover:underline flex items-center gap-1">
                 View All <IconArrowRight className="size-4" />
               </Link>
             </div>
@@ -187,15 +187,15 @@ export function AdminDashboardContent() {
                   {pendingApps.slice(0, 3).map((app) => (
                     <div key={app.id} className="flex items-center justify-between p-3 border rounded">
                       <div>
-                        <h4 className="font-semibold text-[#1a3a5c]">{app.eventName}</h4>
+                        <h4 className="font-semibold text-secondary">{app.eventName}</h4>
                         <div className="flex flex-wrap gap-1 mt-1">
                           {app.roles.slice(0, 2).map((role) => (
-                            <span key={role} className="text-xs bg-[#e8eef3] text-[#1a3a5c] px-2 py-0.5 rounded">
+                            <span key={role} className="text-xs bg-muted text-secondary px-2 py-0.5 rounded">
                               {role}
                             </span>
                           ))}
                           {app.roles.length > 2 && (
-                            <span className="text-xs bg-[#e8eef3] text-[#1a3a5c] px-2 py-0.5 rounded">
+                            <span className="text-xs bg-muted text-secondary px-2 py-0.5 rounded">
                               +{app.roles.length - 2}
                             </span>
                           )}
@@ -222,7 +222,7 @@ export function AdminDashboardContent() {
                   ))}
                 </div>
               ) : (
-                <p className="text-center text-[#4a5568] py-8">
+                <p className="text-center text-muted-foreground py-8">
                   No pending applications
                 </p>
               )}
@@ -234,10 +234,10 @@ export function AdminDashboardContent() {
         <div className="bg-white rounded shadow-sm">
           <div className="px-6 py-4 border-b flex items-center justify-between">
             <div>
-              <h2 className="font-bold text-[#1a3a5c]">Recent Users</h2>
-              <p className="text-sm text-[#4a5568]">Recently registered volunteers</p>
+              <h2 className="font-bold text-secondary">Recent Users</h2>
+              <p className="text-sm text-muted-foreground">Recently registered volunteers</p>
             </div>
-            <Link href="/admin/users" className="text-sm text-[#0066b2] hover:underline flex items-center gap-1">
+            <Link href="/admin/users" className="text-sm text-primary hover:underline flex items-center gap-1">
               View All <IconArrowRight className="size-4" />
             </Link>
           </div>
@@ -245,22 +245,22 @@ export function AdminDashboardContent() {
             {allUsers.slice(0, 5).map((user) => (
               <div key={user.id} className="flex items-center justify-between p-3 border rounded">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#0066b2] rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                     <span className="text-white font-semibold">{user.name.charAt(0)}</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[#1a3a5c]">{user.name}</h4>
-                    <p className="text-sm text-[#4a5568]">{user.email}</p>
+                    <h4 className="font-semibold text-secondary">{user.name}</h4>
+                    <p className="text-sm text-muted-foreground">{user.email}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <span className={`text-xs px-2 py-0.5 rounded ${user.role === "admin"
-                    ? "bg-[#0066b2] text-white"
-                    : "bg-[#e8eef3] text-[#1a3a5c]"
+                    ? "bg-primary text-white"
+                    : "bg-muted text-secondary"
                     }`}>
                     {user.role}
                   </span>
-                  <p className="text-xs text-[#4a5568] mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     {user.totalHours} hours
                   </p>
                 </div>

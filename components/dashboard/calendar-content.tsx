@@ -84,18 +84,18 @@ export function CalendarContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Header */}
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[#1a3a5c]">Calendar</h1>
-            <p className="text-sm text-[#4a5568]">
+            <h1 className="text-xl font-bold text-secondary">Calendar</h1>
+            <p className="text-sm text-muted-foreground">
               View and manage your volunteer events
             </p>
           </div>
           <Link href="/dashboard/events">
-            <Button className="bg-[#0066b2] hover:bg-[#005091] text-white">
+            <Button className="bg-primary hover:bg-[#386109] text-white">
               Find Events
             </Button>
           </Link>
@@ -106,7 +106,7 @@ export function CalendarContent() {
         <div className="bg-white rounded shadow-sm overflow-hidden">
           {/* Calendar Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b">
-            <h2 className="text-lg font-bold text-[#1a3a5c]">{monthYear}</h2>
+            <h2 className="text-lg font-bold text-secondary">{monthYear}</h2>
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
@@ -141,7 +141,7 @@ export function CalendarContent() {
             {weekDays.map((day) => (
               <div
                 key={day}
-                className="py-3 text-center text-sm font-semibold text-[#4a5568] border-b bg-[#f8fafc]"
+                className="py-3 text-center text-sm font-semibold text-muted-foreground border-b bg-[#f8fafc]"
               >
                 {day}
               </div>
@@ -165,7 +165,7 @@ export function CalendarContent() {
                     <>
                       <div className={`text-sm mb-1 ${isToday
                           ? "bg-[#e87722] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold"
-                          : "text-[#4a5568]"
+                          : "text-muted-foreground"
                         }`}>
                         {day}
                       </div>
@@ -174,18 +174,18 @@ export function CalendarContent() {
                           <Link
                             key={event.id}
                             href={`/dashboard/events/${event.id}`}
-                            className="block text-[#0066b2] hover:underline"
+                            className="block text-primary hover:underline"
                           >
                             <div className={`text-xs px-2 py-1 rounded truncate ${assignedEventIds.includes(event.id)
-                                ? "bg-[#fbbf24] text-[#1a3a5c] font-semibold"
-                                : "bg-[#fef3c7] text-[#1a3a5c]"
+                                ? "bg-primary text-primary-foreground font-semibold"
+                                : "bg-primary/10 text-secondary"
                               }`}>
                               {event.name}
                             </div>
                           </Link>
                         ))}
                         {eventsForDay.length > 3 && (
-                          <div className="text-xs text-[#4a5568] px-2">
+                          <div className="text-xs text-muted-foreground px-2">
                             +{eventsForDay.length - 3} more
                           </div>
                         )}
@@ -201,11 +201,11 @@ export function CalendarContent() {
           <div className="px-6 py-3 border-t bg-[#f8fafc] flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded bg-[#fef3c7]" />
-              <span className="text-sm text-[#4a5568]">Available Events</span>
+              <span className="text-sm text-muted-foreground">Available Events</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded bg-[#fbbf24]" />
-              <span className="text-sm text-[#4a5568]">Your Assigned Events</span>
+              <div className="w-4 h-4 rounded bg-primary" />
+              <span className="text-sm text-muted-foreground">Your Assigned Events</span>
             </div>
           </div>
         </div>
@@ -213,7 +213,7 @@ export function CalendarContent() {
         {/* Upcoming Events Sidebar */}
         <div className="mt-6 bg-white rounded shadow-sm">
           <div className="px-6 py-4 border-b">
-            <h3 className="font-bold text-[#1a3a5c]">Upcoming Events This Month</h3>
+            <h3 className="font-bold text-secondary">Upcoming Events This Month</h3>
           </div>
           <div className="p-4 space-y-3">
             {events
@@ -229,23 +229,23 @@ export function CalendarContent() {
                 <Link
                   key={event.id}
                   href={`/dashboard/events/${event.id}`}
-                  className="flex items-start gap-3 p-3 border rounded hover:border-[#0066b2] transition-colors"
+                  className="flex items-start gap-3 p-3 border rounded hover:border-primary transition-colors"
                 >
-                  <div className={`w-1 h-full self-stretch rounded ${assignedEventIds.includes(event.id) ? "bg-[#fbbf24]" : "bg-[#0066b2]"
+                  <div className={`w-1 h-full self-stretch rounded ${assignedEventIds.includes(event.id) ? "bg-primary" : "bg-secondary"
                     }`} />
                   <div className="flex-1">
-                    <h4 className="font-semibold text-sm text-[#1a3a5c]">{event.name}</h4>
-                    <div className="flex items-center gap-2 text-xs text-[#4a5568] mt-1">
+                    <h4 className="font-semibold text-sm text-secondary">{event.name}</h4>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1">
                       <IconCalendarEvent className="size-3" />
                       {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-[#4a5568]">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <IconMapPin className="size-3" />
                       {event.city}, {event.state}
                     </div>
                   </div>
                   {assignedEventIds.includes(event.id) && (
-                    <span className="text-xs bg-[#fbbf24] text-[#1a3a5c] px-2 py-0.5 rounded font-semibold">
+                    <span className="text-xs bg-primary text-secondary px-2 py-0.5 rounded font-semibold">
                       Assigned
                     </span>
                   )}
@@ -258,7 +258,7 @@ export function CalendarContent() {
                 eventDate.getFullYear() === currentDate.getFullYear()
               )
             }).length === 0 && (
-                <p className="text-sm text-[#4a5568] text-center py-4">
+                <p className="text-sm text-muted-foreground text-center py-4">
                   No events this month
                 </p>
               )}

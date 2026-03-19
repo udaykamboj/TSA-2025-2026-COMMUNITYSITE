@@ -100,10 +100,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             {/* Logo */}
             <Link href="/dashboard" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-[#0066b2] rounded flex items-center justify-center">
-                <span className="text-white font-bold text-lg">H</span>
+              <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">M</span>
               </div>
-              <span className="text-lg font-bold text-[#fbbf24]">HIVE</span>
+              <span className="text-lg font-bold text-primary">Maplewood</span>
             </Link>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -111,16 +111,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* User Info */}
         <div className="mt-4 flex items-center gap-3">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-2 text-left">
-              <div className="w-8 h-8 bg-[#0066b2] rounded-full flex items-center justify-center">
-                <span className="text-white font-semibold text-sm uppercase">
+            <DropdownMenuTrigger className="flex items-center gap-2 text-left hover:bg-gray-100 p-2 rounded-md transition-colors">
+              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                <span className="text-primary-foreground font-semibold text-sm uppercase">
                   {user?.email?.charAt(0) ?? "U"}
                 </span>
               </div>
               <div className="flex-1 overflow-hidden">
-                <p className="text-sm font-semibold text-[#1a3a5c] truncate">{user?.email ?? "Guest"}</p>
+                <p className="text-sm font-semibold text-secondary truncate">{user?.email ?? "Guest"}</p>
               </div>
-              <IconChevronDown className="size-4 text-[#4a5568]" />
+              <IconChevronDown className="size-4 text-muted-foreground" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-56">
               <DropdownMenuItem asChild>
@@ -147,7 +147,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* Select Organization */}
         <div className="mt-3">
           <DropdownMenu>
-            <DropdownMenuTrigger className="w-full flex items-center justify-between px-3 py-2 bg-[#fbbf24] rounded text-[#1a3a5c] text-sm font-semibold">
+            <DropdownMenuTrigger className="w-full flex items-center justify-between px-3 py-2 bg-primary text-primary-foreground rounded text-sm font-semibold">
               <span>Select Organization</span>
               <IconChevronDown className="size-4" />
             </DropdownMenuTrigger>
@@ -172,7 +172,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
         {/* Home Link */}
         <div className="mt-3 flex items-center gap-3 text-xs">
-          <Link href="/dashboard" className="text-[#0066b2] hover:underline flex items-center gap-1">
+          <Link href="/dashboard" className="text-primary hover:underline flex items-center gap-1">
             <IconHome className="size-3" />
             Home
           </Link>
@@ -185,8 +185,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter className="border-t p-4">
-        <div className="text-xs text-[#4a5568]">
-          <p>HIVE Volunteer System</p>
+        <div className="text-xs text-muted-foreground">
+          <p>Community Volunteer System</p>
         </div>
       </SidebarFooter>
     </Sidebar>

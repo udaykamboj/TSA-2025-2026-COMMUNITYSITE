@@ -56,12 +56,12 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
 
   if (!event) {
     return (
-      <div className="min-h-screen bg-[#e8eef3] p-6">
+      <div className="min-h-screen bg-muted p-6">
         <div className="bg-white rounded shadow-sm p-12 text-center">
-          <h3 className="text-lg font-semibold text-[#1a3a5c]">Event Not Found</h3>
-          <p className="text-[#4a5568] mt-1">The event you are looking for does not exist.</p>
+          <h3 className="text-lg font-semibold text-secondary">Event Not Found</h3>
+          <p className="text-muted-foreground mt-1">The event you are looking for does not exist.</p>
           <Link href="/dashboard/events">
-            <Button className="mt-4 bg-[#0066b2] hover:bg-[#005091]">Back to Events</Button>
+            <Button className="mt-4 bg-primary hover:bg-[#386109]">Back to Events</Button>
           </Link>
         </div>
       </div>
@@ -155,12 +155,12 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Back Link */}
       <div className="px-6 py-4">
         <Link
           href="/dashboard/events"
-          className="inline-flex items-center gap-1 text-[#0066b2] hover:underline text-sm"
+          className="inline-flex items-center gap-1 text-primary hover:underline text-sm"
         >
           <IconArrowLeft className="size-4" />
           Back to Event Search Results
@@ -172,33 +172,33 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
           {/* Left Column - Event Details */}
           <div className="space-y-4">
             <div className="bg-white rounded shadow-sm p-6">
-              <h1 className="text-xl font-bold text-[#1a3a5c] mb-2">{event.name}</h1>
-              <p className="text-sm text-[#4a5568] font-semibold mb-4">EVENT DETAILS:</p>
+              <h1 className="text-xl font-bold text-secondary mb-2">{event.name}</h1>
+              <p className="text-sm text-muted-foreground font-semibold mb-4">EVENT DETAILS:</p>
 
               <div className="space-y-3 text-sm">
                 <div>
-                  <span className="text-[#4a5568]">Program: </span>
-                  <span className="text-[#0066b2]">{event.program}</span>
+                  <span className="text-muted-foreground">Program: </span>
+                  <span className="text-primary">{event.program}</span>
                 </div>
                 <div>
-                  <span className="text-[#4a5568]">Type: </span>
-                  <span className="text-[#0066b2]">{event.type}</span>
+                  <span className="text-muted-foreground">Type: </span>
+                  <span className="text-primary">{event.type}</span>
                 </div>
               </div>
 
               <div className="mt-6 space-y-2 text-sm">
                 <div>
-                  <span className="text-[#4a5568]">Set Up Date: </span>
+                  <span className="text-muted-foreground">Set Up Date: </span>
                   <span className="text-[#e87722]">{event.setupDate ?? "TBA"}</span>
                 </div>
                 <div>
-                  <span className="text-[#4a5568]">Event Dates: </span>
+                  <span className="text-muted-foreground">Event Dates: </span>
                   <span className="text-[#e87722]">
                     {new Date(event.startDate).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })} - {new Date(event.endDate).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[#4a5568]">Tear Down Date: </span>
+                  <span className="text-muted-foreground">Tear Down Date: </span>
                   <span className="text-[#e87722]">{event.teardownDate ?? "TBA"}</span>
                 </div>
               </div>
@@ -207,7 +207,7 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
               <div className="mt-6">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="w-full text-[#0066b2] border-[#0066b2] hover:bg-[#0066b2] hover:text-white text-sm flex items-center justify-center gap-2">
+                    <Button variant="outline" className="w-full text-primary border-primary hover:bg-primary hover:text-white text-sm flex items-center justify-center gap-2">
                       <IconExternalLink className="size-4" />
                       Open in Maps
                       <IconChevronDown className="size-4" />
@@ -252,9 +252,9 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
 
               {/* Address */}
               <div className="mt-4">
-                <p className="font-bold text-sm text-[#1a3a5c]">{event.location}</p>
-                <p className="text-sm text-[#4a5568]">{event.address}</p>
-                <p className="text-sm text-[#4a5568]">{event.city}, {event.state} {event.zip}</p>
+                <p className="font-bold text-sm text-secondary">{event.location}</p>
+                <p className="text-sm text-muted-foreground">{event.address}</p>
+                <p className="text-sm text-muted-foreground">{event.city}, {event.state} {event.zip}</p>
               </div>
             </div>
           </div>
@@ -263,20 +263,20 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
           <div className="bg-white rounded shadow-sm p-6">
             {/* Dates Available */}
             <div className="mb-8">
-              <h2 className="text-lg font-bold text-[#1a3a5c] mb-2">Dates Available</h2>
-              <p className="text-sm text-[#4a5568] mb-4">What days are you available?</p>
+              <h2 className="text-lg font-bold text-secondary mb-2">Dates Available</h2>
+              <p className="text-sm text-muted-foreground mb-4">What days are you available?</p>
 
               <button
                 onClick={() => handleAllDatesToggle(!allDates)}
                 className={`w-48 py-2 px-4 border rounded text-sm font-medium transition-colors ${allDates
-                  ? "bg-[#0066b2] text-white border-[#0066b2]"
-                  : "bg-white text-[#1a3a5c] border-gray-300 hover:border-[#0066b2]"
+                  ? "bg-primary text-white border-primary"
+                  : "bg-white text-secondary border-gray-300 hover:border-primary"
                   }`}
               >
                 ALL DATES
               </button>
 
-              <p className="text-sm text-[#4a5568] mt-4 mb-3">OR Choose specific</p>
+              <p className="text-sm text-muted-foreground mt-4 mb-3">OR Choose specific</p>
 
               <div className="flex flex-wrap gap-2">
                 {eventDates.map((date, index) => (
@@ -284,8 +284,8 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
                     key={date}
                     onClick={() => handleDateToggle(date, !selectedDates.includes(date))}
                     className={`py-2 px-4 border rounded text-sm font-medium transition-colors ${selectedDates.includes(date)
-                      ? "bg-[#0066b2] text-white border-[#0066b2]"
-                      : "bg-white text-[#1a3a5c] border-gray-300 hover:border-[#0066b2]"
+                      ? "bg-primary text-white border-primary"
+                      : "bg-white text-secondary border-gray-300 hover:border-primary"
                       }`}
                   >
                     EVENT DAY {new Date(date).toLocaleDateString("en-US", { month: "numeric", day: "numeric", year: "numeric" })}
@@ -296,7 +296,7 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
 
             {/* Specific Availability */}
             <div className="mb-8">
-              <h3 className="text-sm font-bold text-[#1a3a5c] mb-2">Specific Availability Times / Details</h3>
+              <h3 className="text-sm font-bold text-secondary mb-2">Specific Availability Times / Details</h3>
               <Textarea
                 placeholder="Enter any time availability or notes to volunteer coordinator (optional)."
                 value={notes}
@@ -307,9 +307,9 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
 
             {/* Employer */}
             <div className="mb-8">
-              <h3 className="text-sm font-bold text-[#1a3a5c] mb-2">Employer</h3>
-              <p className="text-sm text-[#4a5568] mb-2">
-                Your employer is listed as: <span className="text-[#0066b2]">Full-time Student</span>{" "}
+              <h3 className="text-sm font-bold text-secondary mb-2">Employer</h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                Your employer is listed as: <span className="text-primary">Full-time Student</span>{" "}
                 <button className="text-[#e87722] hover:underline">Edit</button>
               </p>
               <label className="flex items-center gap-2">
@@ -318,15 +318,15 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
                   onCheckedChange={(checked) => setVolunteeringWithEmployer(checked === true)}
                   className="border-gray-400"
                 />
-                <span className="text-sm text-[#4a5568]">{"I'm volunteering with my employer."}</span>
+                <span className="text-sm text-muted-foreground">{"I'm volunteering with my employer."}</span>
               </label>
             </div>
 
             {/* Select Roles */}
             <div className="grid grid-cols-[1fr_300px] gap-8">
               <div>
-                <h3 className="text-sm font-bold text-[#1a3a5c] mb-2">Select Roles</h3>
-                <p className="text-sm text-[#4a5568] mb-4">Select up to 5 roles from the list below.</p>
+                <h3 className="text-sm font-bold text-secondary mb-2">Select Roles</h3>
+                <p className="text-sm text-muted-foreground mb-4">Select up to 5 roles from the list below.</p>
 
                 <div className="border rounded divide-y max-h-[300px] overflow-y-auto">
                   {displayRoles.map((role) => (
@@ -340,9 +340,9 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
                           onCheckedChange={(checked) => handleRoleToggle(role.name, checked === true)}
                           className="border-gray-400"
                         />
-                        <span className="text-sm text-[#1a3a5c]">{role.name}</span>
+                        <span className="text-sm text-secondary">{role.name}</span>
                       </label>
-                      <button className="text-[#0066b2] hover:text-[#005091]">
+                      <button className="text-primary hover:text-[#386109]">
                         <IconArrowUp className="size-4" />
                       </button>
                     </div>
@@ -352,8 +352,8 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
 
               {/* Role Preferences */}
               <div>
-                <h3 className="text-sm font-bold text-[#1a3a5c] mb-2">Role Preferences</h3>
-                <p className="text-sm text-[#4a5568] mb-4">Drag and drop to rearrange.</p>
+                <h3 className="text-sm font-bold text-secondary mb-2">Role Preferences</h3>
+                <p className="text-sm text-muted-foreground mb-4">Drag and drop to rearrange.</p>
 
                 <div className="border rounded min-h-[200px] p-2">
                   {rolePreferences.length > 0 ? (
@@ -364,10 +364,10 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
                           className="flex items-center gap-2 p-2 bg-gray-50 rounded border cursor-move"
                         >
                           <IconGripVertical className="size-4 text-gray-400" />
-                          <span className="text-sm text-[#1a3a5c]">{index + 1}. {role}</span>
+                          <span className="text-sm text-secondary">{index + 1}. {role}</span>
                           <button
                             onClick={() => moveRoleUp(index)}
-                            className="ml-auto text-[#0066b2] hover:text-[#005091]"
+                            className="ml-auto text-primary hover:text-[#386109]"
                           >
                             <IconArrowUp className="size-4" />
                           </button>
@@ -387,7 +387,7 @@ export function EventDetailContent({ params }: EventDetailContentProps) {
             <div className="mt-8 flex justify-end">
               <Button
                 onClick={handleSubmit}
-                className="bg-[#0066b2] hover:bg-[#005091] text-white px-12 py-3 text-lg font-semibold"
+                className="bg-primary hover:bg-[#386109] text-white px-12 py-3 text-lg font-semibold"
               >
                 Next
               </Button>

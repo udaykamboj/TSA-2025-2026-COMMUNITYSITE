@@ -176,15 +176,15 @@ export function DashboardContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Header */}
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[#1a3a5c]">
+            <h1 className="text-xl font-bold text-secondary">
               Welcome back, {user?.email?.split("@")[0] ?? "Volunteer"}!
             </h1>
-            <p className="text-sm text-[#4a5568]">
+            <p className="text-sm text-muted-foreground">
               Here is an overview of your volunteer activities
             </p>
           </div>
@@ -198,7 +198,7 @@ export function DashboardContent() {
               {isAdmin ? "Switch to User View" : "Switch to Admin View"}
             </Button>
             <Link href="/dashboard/events">
-              <Button className="bg-[#0066b2] hover:bg-[#005091] text-white">
+              <Button className="bg-primary hover:bg-[#386109] text-white">
                 Find Events
               </Button>
             </Link>
@@ -212,12 +212,12 @@ export function DashboardContent() {
           <Collapsible open={missingCertsOpen} onOpenChange={setMissingCertsOpen}>
             <CollapsibleTrigger className="flex items-center gap-2 w-full text-left bg-[#d1d5db] px-4 py-2 rounded-t">
               {missingCertsOpen ? (
-                <IconChevronDown className="size-4 text-[#1a3a5c]" />
+                <IconChevronDown className="size-4 text-secondary" />
               ) : (
-                <IconChevronRight className="size-4 text-[#1a3a5c]" />
+                <IconChevronRight className="size-4 text-secondary" />
               )}
               <IconAlertTriangle className="size-4 text-[#dc2626]" />
-              <span className="text-sm font-semibold text-[#1a3a5c]">Roles Missing Certifications</span>
+              <span className="text-sm font-semibold text-secondary">Roles Missing Certifications</span>
             </CollapsibleTrigger>
             <CollapsibleContent>
               <div className="space-y-0">
@@ -241,11 +241,11 @@ export function DashboardContent() {
         <Collapsible open={assignedRolesOpen} onOpenChange={setAssignedRolesOpen}>
           <CollapsibleTrigger className="flex items-center gap-2 w-full text-left bg-[#d1d5db] px-4 py-2 rounded-t">
             {assignedRolesOpen ? (
-              <IconChevronDown className="size-4 text-[#1a3a5c]" />
+              <IconChevronDown className="size-4 text-secondary" />
             ) : (
-              <IconChevronRight className="size-4 text-[#1a3a5c]" />
+              <IconChevronRight className="size-4 text-secondary" />
             )}
-            <span className="text-sm font-semibold text-[#1a3a5c]">Assigned Event Roles</span>
+            <span className="text-sm font-semibold text-secondary">Assigned Event Roles</span>
           </CollapsibleTrigger>
           <CollapsibleContent>
             <div className="space-y-0">
@@ -266,9 +266,9 @@ export function DashboardContent() {
 
         {assignedRoles.length === 0 && (
           <div className="bg-white rounded shadow-sm p-12 text-center">
-            <p className="text-[#4a5568] mb-4">You have no assigned volunteer roles yet.</p>
+            <p className="text-muted-foreground mb-4">You have no assigned volunteer roles yet.</p>
             <Link href="/dashboard/events">
-              <Button className="bg-[#0066b2] hover:bg-[#005091] text-white">
+              <Button className="bg-primary hover:bg-[#386109] text-white">
                 Find Events to Volunteer
               </Button>
             </Link>
@@ -280,14 +280,14 @@ export function DashboardContent() {
       <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle className="text-[#1a3a5c]">Edit Application</DialogTitle>
+            <DialogTitle className="text-secondary">Edit Application</DialogTitle>
             {editingRole && (
-              <p className="text-sm text-[#4a5568]">{editingRole.eventName}</p>
+              <p className="text-sm text-muted-foreground">{editingRole.eventName}</p>
             )}
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">Preferred Role <span className="text-red-600">*</span></Label>
+              <Label className="text-sm font-medium text-secondary">Preferred Role <span className="text-red-600">*</span></Label>
               <Select value={editForm.preferredRole} onValueChange={(v) => setEditForm((p) => ({ ...p, preferredRole: v }))}>
                 <SelectTrigger className="mt-1">
                   <SelectValue placeholder="Select a role" />
@@ -300,7 +300,7 @@ export function DashboardContent() {
               </Select>
             </div>
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">Alternate Role (Optional)</Label>
+              <Label className="text-sm font-medium text-secondary">Alternate Role (Optional)</Label>
               <Select value={editForm.alternateRole} onValueChange={(v) => setEditForm((p) => ({ ...p, alternateRole: v }))}>
                 <SelectTrigger className="mt-1">
                   <SelectValue placeholder="Select alternate role" />
@@ -314,7 +314,7 @@ export function DashboardContent() {
               </Select>
             </div>
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">Availability</Label>
+              <Label className="text-sm font-medium text-secondary">Availability</Label>
               <Input
                 className="mt-1"
                 placeholder="e.g., All day Saturday, Sunday morning only"
@@ -324,7 +324,7 @@ export function DashboardContent() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label className="text-sm font-medium text-[#1a3a5c]">Shirt Size</Label>
+                <Label className="text-sm font-medium text-secondary">Shirt Size</Label>
                 <Select value={editForm.shirtSize} onValueChange={(v) => setEditForm((p) => ({ ...p, shirtSize: v }))}>
                   <SelectTrigger className="mt-1">
                     <SelectValue placeholder="Select size" />
@@ -337,7 +337,7 @@ export function DashboardContent() {
                 </Select>
               </div>
               <div>
-                <Label className="text-sm font-medium text-[#1a3a5c]">Dietary Restrictions</Label>
+                <Label className="text-sm font-medium text-secondary">Dietary Restrictions</Label>
                 <Input
                   className="mt-1"
                   placeholder="None"
@@ -347,7 +347,7 @@ export function DashboardContent() {
               </div>
             </div>
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">Additional Notes</Label>
+              <Label className="text-sm font-medium text-secondary">Additional Notes</Label>
               <Textarea
                 className="mt-1"
                 rows={3}
@@ -359,7 +359,7 @@ export function DashboardContent() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-            <Button className="bg-[#0066b2] hover:bg-[#005091] text-white" onClick={handleSaveEdit}>
+            <Button className="bg-primary hover:bg-[#386109] text-white" onClick={handleSaveEdit}>
               Save Changes
             </Button>
           </DialogFooter>
@@ -370,17 +370,17 @@ export function DashboardContent() {
       <Dialog open={messageDialogOpen} onOpenChange={setMessageDialogOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle className="text-[#1a3a5c] flex items-center gap-2">
+            <DialogTitle className="text-secondary flex items-center gap-2">
               <IconMail className="size-5" />
               Message Coordinator
             </DialogTitle>
             {messagingRole && (
-              <p className="text-sm text-[#4a5568]">{messagingRole.eventName}</p>
+              <p className="text-sm text-muted-foreground">{messagingRole.eventName}</p>
             )}
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">To</Label>
+              <Label className="text-sm font-medium text-secondary">To</Label>
               <Input
                 className="mt-1 bg-[#f8fafc]"
                 value="Event Coordinator"
@@ -388,7 +388,7 @@ export function DashboardContent() {
               />
             </div>
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">Subject</Label>
+              <Label className="text-sm font-medium text-secondary">Subject</Label>
               <Input
                 className="mt-1"
                 value={messageForm.subject}
@@ -396,7 +396,7 @@ export function DashboardContent() {
               />
             </div>
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">Priority</Label>
+              <Label className="text-sm font-medium text-secondary">Priority</Label>
               <Select value={messageForm.priority} onValueChange={(v) => setMessageForm((p) => ({ ...p, priority: v }))}>
                 <SelectTrigger className="mt-1">
                   <SelectValue />
@@ -410,7 +410,7 @@ export function DashboardContent() {
               </Select>
             </div>
             <div>
-              <Label className="text-sm font-medium text-[#1a3a5c]">Message <span className="text-red-600">*</span></Label>
+              <Label className="text-sm font-medium text-secondary">Message <span className="text-red-600">*</span></Label>
               <Textarea
                 className="mt-1"
                 rows={5}
@@ -422,7 +422,7 @@ export function DashboardContent() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setMessageDialogOpen(false)}>Cancel</Button>
-            <Button className="bg-[#0066b2] hover:bg-[#005091] text-white" onClick={handleSendMessage}>
+            <Button className="bg-primary hover:bg-[#386109] text-white" onClick={handleSendMessage}>
               <IconMail className="size-4 mr-2" />
               Send Message
             </Button>
@@ -434,18 +434,18 @@ export function DashboardContent() {
       <Dialog open={tasksDialogOpen} onOpenChange={setTasksDialogOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle className="text-[#1a3a5c] flex items-center gap-2">
+            <DialogTitle className="text-secondary flex items-center gap-2">
               <IconChecklist className="size-5" />
               Outstanding Tasks
             </DialogTitle>
             {tasksRole && (
-              <p className="text-sm text-[#4a5568]">{tasksRole.eventName} - {tasksRole.role}</p>
+              <p className="text-sm text-muted-foreground">{tasksRole.eventName} - {tasksRole.role}</p>
             )}
           </DialogHeader>
           <div className="py-2">
             {tasksRole && tasksRole.outstandingTasks.length > 0 ? (
               <div className="space-y-1">
-                <p className="text-sm text-[#4a5568] mb-3">
+                <p className="text-sm text-muted-foreground mb-3">
                   Complete the following requirements before the event. Check items as you complete them.
                 </p>
                 {tasksRole.outstandingTasks.map((task) => (
@@ -457,15 +457,15 @@ export function DashboardContent() {
                     <Checkbox
                       checked={taskStates[task.id] || false}
                       onCheckedChange={() => handleToggleTask(task.id)}
-                      className="border-[#0066b2] data-[state=checked]:bg-[#0066b2]"
+                      className="border-primary data-[state=checked]:bg-primary"
                     />
-                    <span className={`flex-1 text-sm ${taskStates[task.id] ? "line-through text-[#4a5568]" : "text-[#1a3a5c]"}`}>
+                    <span className={`flex-1 text-sm ${taskStates[task.id] ? "line-through text-muted-foreground" : "text-secondary"}`}>
                       {task.label}
                     </span>
                     {taskStates[task.id] ? (
                       <IconCheck className="size-4 text-green-600" />
                     ) : (
-                      <a href={task.link} className="text-xs text-[#0066b2] hover:underline">Start</a>
+                      <a href={task.link} className="text-xs text-primary hover:underline">Start</a>
                     )}
                   </div>
                 ))}
@@ -481,15 +481,15 @@ export function DashboardContent() {
             ) : (
               <div className="text-center py-8">
                 <IconCheck className="size-12 text-green-600 mx-auto mb-2" />
-                <p className="text-[#1a3a5c] font-semibold">All tasks completed!</p>
-                <p className="text-sm text-[#4a5568]">You are all set for this event.</p>
+                <p className="text-secondary font-semibold">All tasks completed!</p>
+                <p className="text-sm text-muted-foreground">You are all set for this event.</p>
               </div>
             )}
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setTasksDialogOpen(false)}>Close</Button>
             {tasksRole && tasksRole.outstandingTasks.length > 0 && (
-              <Button className="bg-[#0066b2] hover:bg-[#005091] text-white" onClick={handleSaveTasks}>
+              <Button className="bg-primary hover:bg-[#386109] text-white" onClick={handleSaveTasks}>
                 Save Progress
               </Button>
             )}
@@ -523,36 +523,36 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
         {/* Status Column */}
         <div className="space-y-2">
           <div>
-            <span className="text-xs text-[#4a5568]">Status: </span>
-            <span className={`text-sm font-semibold ${role.status === "PENDING" ? "text-[#e87722]" : "text-[#1a3a5c]"
+            <span className="text-xs text-muted-foreground">Status: </span>
+            <span className={`text-sm font-semibold ${role.status === "PENDING" ? "text-[#e87722]" : "text-secondary"
               }`}>
               {role.status}
             </span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Role: </span>
-            <span className="text-sm text-[#0066b2]">{role.role}</span>
+            <span className="text-xs text-muted-foreground">Role: </span>
+            <span className="text-sm text-primary">{role.role}</span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Days Assigned:</span>
+            <span className="text-xs text-muted-foreground">Days Assigned:</span>
             {role.daysAssigned.length > 0 ? (
               role.daysAssigned.map((day, i) => (
-                <p key={i} className="text-sm text-[#0066b2]">{day}</p>
+                <p key={i} className="text-sm text-primary">{day}</p>
               ))
             ) : (
-              <p className="text-sm text-[#4a5568]">-</p>
+              <p className="text-sm text-muted-foreground">-</p>
             )}
           </div>
           {(role as any).additionalRoles?.map((ar: any, i: number) => (
             <div key={i}>
               <div>
-                <span className="text-xs text-[#4a5568]">Role: </span>
-                <span className="text-sm text-[#0066b2]">{ar.role}</span>
+                <span className="text-xs text-muted-foreground">Role: </span>
+                <span className="text-sm text-primary">{ar.role}</span>
               </div>
               <div>
-                <span className="text-xs text-[#4a5568]">Days Assigned:</span>
+                <span className="text-xs text-muted-foreground">Days Assigned:</span>
                 {ar.days.map((day: string, j: number) => (
-                  <p key={j} className="text-sm text-[#0066b2]">{day}</p>
+                  <p key={j} className="text-sm text-primary">{day}</p>
                 ))}
               </div>
             </div>
@@ -570,35 +570,35 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
         {/* Dates Column */}
         <div className="space-y-2">
           <div>
-            <span className="text-xs text-[#4a5568]">Setup Date: </span>
-            <span className="text-sm text-[#1a3a5c]">{role.setupDate}</span>
+            <span className="text-xs text-muted-foreground">Setup Date: </span>
+            <span className="text-sm text-secondary">{role.setupDate}</span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Event Start: </span>
-            <span className="text-sm text-[#1a3a5c]">{role.eventStart}</span>
+            <span className="text-xs text-muted-foreground">Event Start: </span>
+            <span className="text-sm text-secondary">{role.eventStart}</span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Event End: </span>
-            <span className="text-sm text-[#1a3a5c]">{role.eventEnd}</span>
+            <span className="text-xs text-muted-foreground">Event End: </span>
+            <span className="text-sm text-secondary">{role.eventEnd}</span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Tear Down: </span>
-            <span className="text-sm text-[#1a3a5c]">{role.tearDown}</span>
+            <span className="text-xs text-muted-foreground">Tear Down: </span>
+            <span className="text-sm text-secondary">{role.tearDown}</span>
           </div>
         </div>
 
         {/* Location Column */}
         <div className="space-y-1">
           <div>
-            <span className="text-xs text-[#4a5568]">Location: </span>
-            <span className="text-sm text-[#0066b2]">{role.location}</span>
+            <span className="text-xs text-muted-foreground">Location: </span>
+            <span className="text-sm text-primary">{role.location}</span>
           </div>
-          <p className="text-sm text-[#1a3a5c] pl-12">{role.address}</p>
-          <p className="text-sm text-[#1a3a5c] pl-12">{role.city}, {role.state} {role.zip} {role.country}</p>
+          <p className="text-sm text-secondary pl-12">{role.address}</p>
+          <p className="text-sm text-secondary pl-12">{role.city}, {role.state} {role.zip} {role.country}</p>
           {role.website && (
             <div>
-              <span className="text-xs text-[#4a5568]">Website: </span>
-              <a href={role.website} target="_blank" rel="noopener noreferrer" className="text-sm text-[#0066b2] hover:underline">
+              <span className="text-xs text-muted-foreground">Website: </span>
+              <a href={role.website} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
                 {role.website}
               </a>
             </div>
@@ -609,7 +609,7 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
         <div className="space-y-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full text-[#0066b2] border-[#0066b2] hover:bg-[#0066b2] hover:text-white text-sm flex items-center justify-center gap-1">
+              <Button variant="outline" className="w-full text-primary border-primary hover:bg-primary hover:text-white text-sm flex items-center justify-center gap-1">
                 <IconExternalLink className="size-4" />
                 Maps
                 <IconChevronDown className="size-4" />
@@ -652,7 +652,7 @@ function EventRoleCard({ role, onWithdraw, onEdit, onMessage, onReviewTasks, get
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="w-full bg-[#0066b2] hover:bg-[#005091] text-white text-sm flex items-center justify-center gap-1">
+              <Button className="w-full bg-primary hover:bg-[#386109] text-white text-sm flex items-center justify-center gap-1">
                 ROLE OPTIONS
                 <IconChevronDown className="size-4" />
               </Button>

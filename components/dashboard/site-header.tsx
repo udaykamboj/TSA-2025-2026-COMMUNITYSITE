@@ -18,10 +18,10 @@ export function SiteHeader() {
 
         {/* Logo for mobile */}
         <Link href="/dashboard" className="flex items-center gap-2 sm:hidden">
-          <div className="w-6 h-6 bg-[#0066b2] rounded flex items-center justify-center">
-            <span className="text-white font-bold text-sm">H</span>
+          <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">M</span>
           </div>
-          <span className="text-sm font-bold text-[#fbbf24]">HIVE</span>
+          <span className="text-sm font-bold text-primary">Maplewood</span>
         </Link>
 
         {/* Spacer */}
@@ -29,18 +29,18 @@ export function SiteHeader() {
 
         {/* Search */}
         <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <IconSearch className="size-5 text-[#4a5568]" />
+          <IconSearch className="size-5 text-muted-foreground" />
         </button>
 
         {/* Notifications */}
         <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative">
-          <IconBell className="size-5 text-[#4a5568]" />
+          <IconBell className="size-5 text-muted-foreground" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
         </button>
 
         {/* User Avatar */}
-        <div className="w-8 h-8 bg-[#0066b2] rounded-full flex items-center justify-center ml-2">
-          <span className="text-white font-semibold text-sm uppercase">
+        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center ml-2">
+          <span className="text-primary-foreground font-semibold text-sm uppercase">
             {user?.email?.charAt(0) ?? "U"}
           </span>
         </div>

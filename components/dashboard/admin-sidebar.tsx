@@ -86,10 +86,10 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
                     <SidebarMenuItem>
                         {/* Logo */}
                         <Link href="/admin" className="flex items-center gap-2">
-                            <div className="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center">
-                                <span className="text-white font-bold text-lg">A</span>
+                            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                                <span className="text-primary-foreground font-bold text-lg">A</span>
                             </div>
-                            <span className="text-lg font-bold text-indigo-700">HIVE ADMIN</span>
+                            <span className="text-lg font-bold text-primary">Admin</span>
                         </Link>
                     </SidebarMenuItem>
                 </SidebarMenu>
@@ -98,16 +98,16 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
                 <div className="mt-4 flex items-center gap-3">
                     <DropdownMenu>
                         <DropdownMenuTrigger className="flex items-center gap-2 text-left w-full hover:bg-gray-100 p-2 rounded-md transition-colors">
-                            <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                                <span className="text-white font-semibold text-sm uppercase">
+                            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                <span className="text-primary-foreground font-semibold text-sm uppercase">
                                     {user?.email?.charAt(0) ?? "A"}
                                 </span>
                             </div>
                             <div className="flex-1 overflow-hidden">
-                                <p className="text-sm font-semibold text-indigo-900 truncate">{user?.email ?? "Admin"}</p>
-                                <p className="text-xs text-indigo-600">Administrator</p>
+                                <p className="text-sm font-semibold text-secondary truncate">{user?.email ?? "Admin"}</p>
+                                <p className="text-xs text-primary">Administrator</p>
                             </div>
-                            <IconChevronDown className="size-4 text-indigo-400" />
+                            <IconChevronDown className="size-4 text-muted-foreground" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start" className="w-56">
                             <DropdownMenuItem asChild>
@@ -132,8 +132,8 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
             </SidebarContent>
 
             <SidebarFooter className="border-t p-4">
-                <div className="text-xs text-indigo-600">
-                    <p>HIVE Admin Portal</p>
+                <div className="text-xs text-muted-foreground">
+                    <p>Admin Portal</p>
                 </div>
             </SidebarFooter>
         </Sidebar>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useAuth } from '@/context/AuthContext'
@@ -23,8 +23,13 @@ export default function LoginPage() {
   const router = useRouter()
   const supabase = createClient()
 
+  useEffect(() => {
+    if (user) {
+      router.push('/dashboard')
+    }
+  }, [user, router])
+
   if (user) {
-    router.push('/dashboard')
     return null
   }
 

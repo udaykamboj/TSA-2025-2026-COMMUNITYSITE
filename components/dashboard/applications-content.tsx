@@ -58,18 +58,18 @@ export function ApplicationsContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e8eef3]">
+    <div className="min-h-screen bg-muted">
       {/* Header */}
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[#1a3a5c]">My Applications</h1>
-            <p className="text-sm text-[#4a5568]">
+            <h1 className="text-xl font-bold text-secondary">My Applications</h1>
+            <p className="text-sm text-muted-foreground">
               Track the status of your volunteer applications
             </p>
           </div>
           <Link href="/dashboard/events">
-            <Button className="bg-[#0066b2] hover:bg-[#005091] text-white">
+            <Button className="bg-primary hover:bg-[#386109] text-white">
               Find More Events
             </Button>
           </Link>
@@ -80,22 +80,22 @@ export function ApplicationsContent() {
       <div className="px-6 py-4">
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="bg-white rounded shadow-sm p-4">
-            <div className="flex items-center gap-2 text-[#4a5568] text-sm mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <IconClock className="size-4" />
               Pending
             </div>
             <p className="text-2xl font-bold text-[#e87722]">{pendingApps.length}</p>
           </div>
           <div className="bg-white rounded shadow-sm p-4">
-            <div className="flex items-center gap-2 text-[#4a5568] text-sm mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <IconCheck className="size-4" />
               Assigned
             </div>
             <p className="text-2xl font-bold text-green-600">{assignedApps.length}</p>
           </div>
           <div className="bg-white rounded shadow-sm p-4">
-            <div className="text-[#4a5568] text-sm mb-1">Total Applications</div>
-            <p className="text-2xl font-bold text-[#1a3a5c]">{detailedApplications.length}</p>
+            <div className="text-muted-foreground text-sm mb-1">Total Applications</div>
+            <p className="text-2xl font-bold text-secondary">{detailedApplications.length}</p>
           </div>
         </div>
       </div>
@@ -105,12 +105,12 @@ export function ApplicationsContent() {
         <Collapsible open={pendingOpen} onOpenChange={setPendingOpen}>
           <CollapsibleTrigger className="flex items-center gap-2 w-full text-left bg-[#d1d5db] px-4 py-2 rounded-t">
             {pendingOpen ? (
-              <IconChevronDown className="size-4 text-[#1a3a5c]" />
+              <IconChevronDown className="size-4 text-secondary" />
             ) : (
-              <IconChevronRight className="size-4 text-[#1a3a5c]" />
+              <IconChevronRight className="size-4 text-secondary" />
             )}
             <IconClock className="size-4 text-[#e87722]" />
-            <span className="text-sm font-semibold text-[#1a3a5c]">Pending Applications</span>
+            <span className="text-sm font-semibold text-secondary">Pending Applications</span>
             <span className="ml-2 bg-[#e87722] text-white text-xs px-2 py-0.5 rounded">{pendingApps.length}</span>
           </CollapsibleTrigger>
           <CollapsibleContent>
@@ -128,7 +128,7 @@ export function ApplicationsContent() {
                 ))}
               </div>
             ) : (
-              <div className="bg-white p-8 text-center text-[#4a5568]">
+              <div className="bg-white p-8 text-center text-muted-foreground">
                 No pending applications
               </div>
             )}
@@ -139,12 +139,12 @@ export function ApplicationsContent() {
         <Collapsible open={assignedOpen} onOpenChange={setAssignedOpen}>
           <CollapsibleTrigger className="flex items-center gap-2 w-full text-left bg-[#d1d5db] px-4 py-2 rounded-t">
             {assignedOpen ? (
-              <IconChevronDown className="size-4 text-[#1a3a5c]" />
+              <IconChevronDown className="size-4 text-secondary" />
             ) : (
-              <IconChevronRight className="size-4 text-[#1a3a5c]" />
+              <IconChevronRight className="size-4 text-secondary" />
             )}
             <IconCheck className="size-4 text-green-600" />
-            <span className="text-sm font-semibold text-[#1a3a5c]">Assigned Event Roles</span>
+            <span className="text-sm font-semibold text-secondary">Assigned Event Roles</span>
             <span className="ml-2 bg-green-600 text-white text-xs px-2 py-0.5 rounded">{assignedApps.length}</span>
           </CollapsibleTrigger>
           <CollapsibleContent>
@@ -162,7 +162,7 @@ export function ApplicationsContent() {
                 ))}
               </div>
             ) : (
-              <div className="bg-white p-8 text-center text-[#4a5568]">
+              <div className="bg-white p-8 text-center text-muted-foreground">
                 No assigned roles yet
               </div>
             )}
@@ -171,9 +171,9 @@ export function ApplicationsContent() {
 
         {detailedApplications.length === 0 && (
           <div className="bg-white rounded shadow-sm p-12 text-center">
-            <p className="text-[#4a5568] mb-4">You have no volunteer applications yet.</p>
+            <p className="text-muted-foreground mb-4">You have no volunteer applications yet.</p>
             <Link href="/dashboard/events">
-              <Button className="bg-[#0066b2] hover:bg-[#005091] text-white">
+              <Button className="bg-primary hover:bg-[#386109] text-white">
                 Find Events to Volunteer
               </Button>
             </Link>
@@ -212,7 +212,7 @@ function ApplicationCard({
         {/* Status Column */}
         <div className="space-y-2">
           <div>
-            <span className="text-xs text-[#4a5568]">Status: </span>
+            <span className="text-xs text-muted-foreground">Status: </span>
             <span className={`text-sm font-semibold ${application.status === "PENDING" ? "text-[#e87722]" : "text-green-600"
               }`}>
               {application.status}
@@ -221,17 +221,17 @@ function ApplicationCard({
           {application.roles.map((role, i) => (
             <div key={i}>
               <div>
-                <span className="text-xs text-[#4a5568]">Role: </span>
-                <span className="text-sm text-[#0066b2]">{role.name}</span>
+                <span className="text-xs text-muted-foreground">Role: </span>
+                <span className="text-sm text-primary">{role.name}</span>
               </div>
               <div>
-                <span className="text-xs text-[#4a5568]">Days Assigned:</span>
+                <span className="text-xs text-muted-foreground">Days Assigned:</span>
                 {role.days.length > 0 ? (
                   role.days.map((day, j) => (
-                    <p key={j} className="text-sm text-[#0066b2]">{day}</p>
+                    <p key={j} className="text-sm text-primary">{day}</p>
                   ))
                 ) : (
-                  <p className="text-sm text-[#4a5568]">-</p>
+                  <p className="text-sm text-muted-foreground">-</p>
                 )}
               </div>
             </div>
@@ -241,35 +241,35 @@ function ApplicationCard({
         {/* Dates Column */}
         <div className="space-y-2">
           <div>
-            <span className="text-xs text-[#4a5568]">Setup Date: </span>
-            <span className="text-sm text-[#1a3a5c]">{application.setupDate}</span>
+            <span className="text-xs text-muted-foreground">Setup Date: </span>
+            <span className="text-sm text-secondary">{application.setupDate}</span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Event Start: </span>
-            <span className="text-sm text-[#1a3a5c]">{application.eventStart}</span>
+            <span className="text-xs text-muted-foreground">Event Start: </span>
+            <span className="text-sm text-secondary">{application.eventStart}</span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Event End: </span>
-            <span className="text-sm text-[#1a3a5c]">{application.eventEnd}</span>
+            <span className="text-xs text-muted-foreground">Event End: </span>
+            <span className="text-sm text-secondary">{application.eventEnd}</span>
           </div>
           <div>
-            <span className="text-xs text-[#4a5568]">Tear Down: </span>
-            <span className="text-sm text-[#1a3a5c]">{application.tearDown}</span>
+            <span className="text-xs text-muted-foreground">Tear Down: </span>
+            <span className="text-sm text-secondary">{application.tearDown}</span>
           </div>
         </div>
 
         {/* Location Column */}
         <div className="space-y-1">
           <div>
-            <span className="text-xs text-[#4a5568]">Location: </span>
-            <span className="text-sm text-[#0066b2]">{application.location}</span>
+            <span className="text-xs text-muted-foreground">Location: </span>
+            <span className="text-sm text-primary">{application.location}</span>
           </div>
-          <p className="text-sm text-[#1a3a5c] pl-12">{application.address}</p>
-          <p className="text-sm text-[#1a3a5c] pl-12">{application.city}, {application.state} {application.zip} {application.country}</p>
+          <p className="text-sm text-secondary pl-12">{application.address}</p>
+          <p className="text-sm text-secondary pl-12">{application.city}, {application.state} {application.zip} {application.country}</p>
           {application.website && (
             <div>
-              <span className="text-xs text-[#4a5568]">Website: </span>
-              <a href={application.website} target="_blank" rel="noopener noreferrer" className="text-sm text-[#0066b2] hover:underline">
+              <span className="text-xs text-muted-foreground">Website: </span>
+              <a href={application.website} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
                 {application.website}
               </a>
             </div>
@@ -280,7 +280,7 @@ function ApplicationCard({
         <div className="space-y-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full text-[#0066b2] border-[#0066b2] hover:bg-[#0066b2] hover:text-white text-sm flex items-center justify-center gap-1">
+              <Button variant="outline" className="w-full text-primary border-primary hover:bg-primary hover:text-white text-sm flex items-center justify-center gap-1">
                 <IconExternalLink className="size-4" />
                 Maps
                 <IconChevronDown className="size-4" />
@@ -322,7 +322,7 @@ function ApplicationCard({
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="w-full bg-[#0066b2] hover:bg-[#005091] text-white text-sm flex items-center justify-center gap-1">
+              <Button className="w-full bg-primary hover:bg-[#386109] text-white text-sm flex items-center justify-center gap-1">
                 ROLE OPTIONS
                 <IconChevronDown className="size-4" />
               </Button>

@@ -35,8 +35,8 @@ export function NavMain({
                   asChild 
                   tooltip={item.title}
                   className={isActive 
-                    ? "bg-[#fbbf24] text-[#1a3a5c] hover:bg-[#f59e0b] font-semibold" 
-                    : "hover:bg-[#f8fafc]"
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold" 
+                    : "hover:bg-muted"
                   }
                 >
                   <Link href={item.url}>

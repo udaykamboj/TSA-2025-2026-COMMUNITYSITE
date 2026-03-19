@@ -3,6 +3,8 @@
 import { useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/footer'
 import { AppSidebar } from '@/components/dashboard/app-sidebar'
 import { SiteHeader } from '@/components/dashboard/site-header'
 import {
@@ -34,8 +36,10 @@ export default function DashboardLayout({
     }
 
     return (
-        <div className="dashboard-scope">
+        <div className="dashboard-scope flex flex-col min-h-screen">
+            <Header />
             <SidebarProvider
+                className="flex-1 min-h-0"
                 style={
                     {
                         "--sidebar-width": "280px",
@@ -48,6 +52,7 @@ export default function DashboardLayout({
                     {children}
                 </SidebarInset>
             </SidebarProvider>
+            <Footer />
         </div>
     )
 }
