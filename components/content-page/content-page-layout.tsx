@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
 import { motion } from "framer-motion"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
@@ -44,9 +45,10 @@ export default function ContentPageLayout({
           <motion.div variants={staggerItem}>
             <Link
               href={breadcrumb.href}
-              className="inline-block text-blue-600 hover:text-blue-700 text-sm font-medium mb-4"
+              className="inline-flex items-center gap-2 text-base font-semibold text-secondary hover:text-primary transition-colors mb-6"
             >
-              ← {breadcrumb.label}
+              <ArrowLeft className="size-5 flex-shrink-0" />
+              {breadcrumb.label}
             </Link>
           </motion.div>
 

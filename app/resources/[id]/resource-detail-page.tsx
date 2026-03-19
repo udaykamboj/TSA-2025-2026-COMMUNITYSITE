@@ -7,7 +7,6 @@ import {
   ArrowLeft,
   Clock,
   ExternalLink,
-  Globe,
   Heart,
   Mail,
   MapPin,
@@ -38,7 +37,7 @@ const resourcesData = {
     isFree: true,
     ageGroups: ["Teens", "Families"],
     featured: true,
-    image: "/placeholder.svg?key=resource1",
+    image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=800&fit=crop",
     impactStats: [
       { label: "Youth Served", value: "500+", icon: "👥" },
       { label: "Programs Offered", value: "25+", icon: "🎯" },
@@ -76,7 +75,7 @@ const resourcesData = {
     isFree: true,
     ageGroups: ["Families", "Seniors"],
     featured: true,
-    image: "/placeholder.svg?key=resource2",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=800&fit=crop",
     impactStats: [
       { label: "Meals Distributed", value: "2M+", icon: "🍽️" },
       { label: "Families Served", value: "2K+", icon: "👨‍👩‍👧‍👦" },
@@ -115,7 +114,7 @@ const resourcesData = {
     isFree: false,
     ageGroups: ["Teens", "Families", "Seniors"],
     featured: true,
-    image: "/placeholder.svg?key=resource3",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=800&fit=crop",
     impactStats: [
       { label: "Clients Served", value: "1.5K+", icon: "💭" },
       { label: "Therapists", value: "20", icon: "👨‍⚕️" },
@@ -152,7 +151,7 @@ const resourcesData = {
     isFree: false,
     ageGroups: ["Seniors"],
     featured: false,
-    image: "/placeholder.svg?key=resource4",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=800&fit=crop",
     impactStats: [
       { label: "Seniors Housed", value: "500+", icon: "🏠" },
       { label: "Apartments", value: "150", icon: "🏢" },
@@ -189,7 +188,7 @@ const resourcesData = {
     isFree: true,
     ageGroups: ["Teens"],
     featured: false,
-    image: "/placeholder.svg?key=resource5",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=800&fit=crop",
     impactStats: [
       { label: "Scholarships Awarded", value: "$5M+", icon: "💰" },
       { label: "Students Supported", value: "2K+", icon: "📚" },
@@ -226,7 +225,7 @@ const resourcesData = {
     isFree: true,
     ageGroups: ["Families", "Seniors"],
     featured: false,
-    image: "/placeholder.svg?key=resource6",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=800&fit=crop",
     impactStats: [
       { label: "Calls Answered", value: "10K+/mo", icon: "📞" },
       { label: "Financial Assistance", value: "$2M+/year", icon: "💵" },
@@ -312,7 +311,7 @@ export default function ResourceDetailPage() {
               {/* Hero Image */}
               <div className="mb-8 rounded-lg overflow-hidden shadow-md h-96 bg-gray-200">
                 <img
-                  src={resource.image || "/placeholder.svg"}
+                  src={resource.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=800&fit=crop"}
                   alt={resource.name}
                   className="w-full h-full object-cover"
                 />
@@ -429,23 +428,6 @@ export default function ResourceDetailPage() {
                     <p className="text-sm font-semibold text-foreground">Email</p>
                     <a href={`mailto:${resource.email}`} className="text-sm text-teal-600 hover:underline break-all">
                       {resource.email}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Website */}
-                <div className="flex items-start gap-3">
-                  <Globe className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Website</p>
-                    <a
-                      href={resource.website.startsWith("http") ? resource.website : `https://${resource.website}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-teal-600 hover:underline flex items-center gap-1"
-                    >
-                      Visit
-                      <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
                 </div>

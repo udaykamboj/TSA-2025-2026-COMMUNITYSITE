@@ -112,18 +112,6 @@ export default function ResourceDetailModal({
               <p className="text-slate-700">{resource.hours}</p>
             </div>
           </div>
-
-          <div className="pt-2">
-            <a
-              href={resource.website.startsWith("http") ? resource.website : `https://${resource.website}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full rounded-full bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white font-semibold py-3"
-            >
-              Visit Website
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
         </div>
       </DialogContent>
     </Dialog>
