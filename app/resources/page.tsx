@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import Header from "@/components/layout/header"
@@ -16,7 +16,7 @@ import { staggerContainer, staggerItem } from "@/lib/animations"
 
 type Resource = (typeof allResources)[number]
 
-export default function ResourcesPage() {
+function ResourcesContent() {
   const searchParams = useSearchParams()
   const initialSearch = searchParams.get("search") ?? ""
   const [searchTerm, setSearchTerm] = useState(initialSearch)
@@ -215,5 +215,17 @@ export default function ResourcesPage() {
 
       <Footer />
     </div>
+  )
+}
+
+export default function ResourcesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-xl font-semibold text-slate-600">Loading...</div>
+      </div>
+    }>
+      <ResourcesContent />
+    </Suspense>
   )
 }

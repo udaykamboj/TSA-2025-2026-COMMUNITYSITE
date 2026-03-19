@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useAuth } from '@/context/AuthContext'
@@ -16,7 +16,7 @@ function getRedirectPath(searchParams: URLSearchParams | null): string {
   return '/dashboard'
 }
 
-export default function LoginPage() {
+function LoginContent() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSignUp, setIsSignUp] = useState(false)
@@ -347,5 +347,17 @@ export default function LoginPage() {
       </div>
       <Footer />
     </main>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="text-xl font-semibold text-gray-600">Loading...</div>
+      </div>
+    }>
+      <LoginContent />
+    </Suspense>
   )
 }
