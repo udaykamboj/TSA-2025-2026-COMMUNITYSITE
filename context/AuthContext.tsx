@@ -15,6 +15,16 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
+function networkAuthErrorMessage(err: unknown): string {
+  const msg = err instanceof Error ? err.message : String(err)
+  if (msg === 'Failed to fetch' || msg.includes('NetworkError') || msg.includes('Load failed')) {
+    return (
+      'Cannot reach Supabase (network error). Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local, restart the dev server, and confirm you use the project anon/publishable key from the Supabase dashboard.'
+    )
+  }
+  return msg
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
@@ -42,6 +52,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { data: { session } } = await supabase.auth.getSession()
         setSession(session)
         setUser(session?.user ?? null)
+      } catch (e) {
+        console.error('[Auth] getSession', e)
       } finally {
         setLoading(false)
       }
@@ -50,12 +62,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     getSession()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event: string, session: Session | null) => {
-        // Only update from Supabase Auth if we don't have a mock session
-        if (!localStorage.getItem('mock_session')) {
-          setSession(session)
-          setUser(session?.user ?? null)
-          setLoading(false)
+      async (_event: string, session: Session | null) => {
+        try {
+          if (!localStorage.getItem('mock_session')) {
+            setSession(session)
+            setUser(session?.user ?? null)
+            setLoading(false)
+          }
+        } catch (e) {
+          console.error('[Auth] onAuthStateChange', e)
         }
       }
     )
@@ -64,14 +79,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await createClient().auth.signUp({
-      email,
-      password,
-    })
-    if (error) {
-      return { error: error.message }
+    try {
+      const { error } = await createClient().auth.signUp({
+        email,
+        password,
+      })
+      if (error) {
+        return { error: error.message }
+      }
+      return {}
+    } catch (e) {
+      return { error: networkAuthErrorMessage(e) }
     }
-    return {}
   }
 
   const signIn = async (email: string, password: string) => {
@@ -102,11 +121,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return {}
     }
 
-    const { error } = await createClient().auth.signInWithPassword({
-      email,
-      password,
-    })
-    return { error: error?.message }
+    try {
+      const { error } = await createClient().auth.signInWithPassword({
+        email,
+        password,
+      })
+      return { error: error?.message }
+    } catch (e) {
+      return { error: networkAuthErrorMessage(e) }
+    }
   }
 
   const signOut = async () => {
