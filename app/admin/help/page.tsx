@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'Admin help center',
 }
 
-export default function AdminHelpPage() {
+export default async function AdminHelpPage({
+  params,
+  searchParams,
+}: PageProps<"/admin/help">) {
+  await Promise.all([params, searchParams])
   return <HelpContent basePath="/admin" />
 }

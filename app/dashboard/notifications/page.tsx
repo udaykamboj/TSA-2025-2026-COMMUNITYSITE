@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'View your notifications',
 }
 
-export default function NotificationsPage() {
+export default async function NotificationsPage({
+  params,
+  searchParams,
+}: PageProps<"/dashboard/notifications">) {
+  await Promise.all([params, searchParams])
   return <NotificationsContent basePath="/dashboard" />
 }

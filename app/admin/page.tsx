@@ -6,8 +6,10 @@ export const metadata: Metadata = {
   description: 'Admin dashboard',
 }
 
-export default function AdminPage() {
-    return (
-        <AdminDashboardContent />
-    )
+export default async function AdminPage({
+  params,
+  searchParams,
+}: PageProps<"/admin">) {
+  await Promise.all([params, searchParams])
+  return <AdminDashboardContent />
 }

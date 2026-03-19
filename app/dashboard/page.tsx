@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   description: 'Your volunteer dashboard',
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage({
+  params,
+  searchParams,
+}: PageProps<"/dashboard">) {
+  await Promise.all([params, searchParams])
   return (
     <DashboardContent />
   )

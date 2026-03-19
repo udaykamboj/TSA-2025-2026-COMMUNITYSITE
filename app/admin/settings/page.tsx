@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'Admin account settings',
 }
 
-export default function AdminSettingsPage() {
+export default async function AdminSettingsPage({
+  params,
+  searchParams,
+}: PageProps<"/admin/settings">) {
+  await Promise.all([params, searchParams])
   return <SettingsContent />
 }

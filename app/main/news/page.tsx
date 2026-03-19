@@ -7,7 +7,11 @@ export const metadata = {
   description: "Stay updated with the latest news, announcements, and events in Mill Creek.",
 }
 
-export default function NewsIndexPage() {
+export default async function NewsIndexPage({
+  params,
+  searchParams,
+}: PageProps<"/main/news">) {
+  await Promise.all([params, searchParams])
   return (
     <main className="min-h-screen flex flex-col">
       <Header />
