@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'Admin notifications',
 }
 
-export default function AdminNotificationsPage() {
+export default async function AdminNotificationsPage({
+  params,
+  searchParams,
+}: PageProps<"/admin/notifications">) {
+  await Promise.all([params, searchParams])
   return <NotificationsContent basePath="/admin" />
 }

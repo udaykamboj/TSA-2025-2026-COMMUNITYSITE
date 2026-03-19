@@ -17,10 +17,6 @@ import ServicesPageClient from "@/components/content-page/services-page-client"
 import CategorySummaryPageClient from "@/components/content-page/category-summary-page-client"
 import ServicesHero from "@/components/content-page/services-hero"
 
-interface PageProps {
-  params: Promise<{ slug: string }>
-}
-
 export async function generateStaticParams() {
   const contentSlugs = getContentPageSlugs()
   return [
@@ -30,7 +26,8 @@ export async function generateStaticParams() {
   ]
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params, searchParams }: PageProps<"/main/[slug]">) {
+  await searchParams
   const { slug } = await params
   if (slug === "services") {
     return { title: "Services | Mill Creek Community Resource Hub" }
@@ -48,7 +45,11 @@ export async function generateMetadata({ params }: PageProps) {
   }
 }
 
-export default async function MainSlugPage({ params }: PageProps) {
+export default async function MainSlugPage({
+  params,
+  searchParams,
+}: PageProps<"/main/[slug]">) {
+  await searchParams
   const { slug } = await params
 
   // Redirect support-resources to unified resources page

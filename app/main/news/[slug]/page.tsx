@@ -4,15 +4,15 @@ import { readNewsContent } from "@/lib/content/read-news-content"
 import { extractHeadings } from "@/lib/content/extract-headings"
 import NewsArticleLayout from "@/components/content-page/news-article-layout"
 
-interface PageProps {
-  params: Promise<{ slug: string }>
-}
-
 export async function generateStaticParams() {
   return getNewsSlugs().map((slug) => ({ slug }))
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: PageProps<"/main/news/[slug]">) {
+  await searchParams
   const { slug } = await params
   const config = getNewsBySlug(slug)
   if (!config) return {}
@@ -21,7 +21,11 @@ export async function generateMetadata({ params }: PageProps) {
   }
 }
 
-export default async function NewsSlugPage({ params }: PageProps) {
+export default async function NewsSlugPage({
+  params,
+  searchParams,
+}: PageProps<"/main/news/[slug]">) {
+  await searchParams
   const { slug } = await params
 
   const config = getNewsBySlug(slug)

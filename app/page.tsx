@@ -19,7 +19,11 @@ export const metadata = {
   },
 }
 
-export default function Home() {
+export default async function Home({
+  params,
+  searchParams,
+}: PageProps<"/">) {
+  await Promise.all([params, searchParams])
   return (
     <main className="w-full">
       <Header />

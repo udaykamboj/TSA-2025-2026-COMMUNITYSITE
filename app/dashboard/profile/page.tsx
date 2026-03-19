@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'Manage your volunteer profile',
 }
 
-export default function ProfilePage() {
+export default async function ProfilePage({
+  params,
+  searchParams,
+}: PageProps<"/dashboard/profile">) {
+  await Promise.all([params, searchParams])
   return <ProfileContent />
 }
